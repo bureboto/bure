@@ -1,7 +1,8 @@
 export type Piece = {
   id: string;
   year: number;
-  // fecha completa tomada del nombre de archivo (AÑO_MES_DÍA_Etiqueta.jpg)
+  // fecha tomada del nombre de archivo (AÑO_MES_DÍA_Etiqueta.jpg); si el
+  // archivo no trae mes/día, solo se muestra el año.
   dateLabel: string;
   file: string;
   width: number;
@@ -11,7 +12,8 @@ export type Piece = {
 };
 
 // Datos generados a partir de las fotografías en Assets/Images (public/archive).
-// Convención de nombre: AÑO_MES_DÍA_Etiqueta.jpg — el pie de foto muestra solo la fecha.
+// Convención de nombre: AÑO_MES_DÍA_Etiqueta.jpg — el pie de foto muestra la fecha
+// completa, o solo el año cuando el archivo no trae mes/día.
 export const pieces: Piece[] = [
   { id: "p001", year: 2026, dateLabel: "16.08.2026", file: "/archive/2026_08_16_Sketch.jpg", width: 1136, height: 2030, ratio: 1.7870 },
   { id: "p002", year: 2026, dateLabel: "07.08.2026", file: "/archive/2026_08_07_Flowers.jpg", width: 1404, height: 1378, ratio: 0.9815 },
@@ -110,6 +112,36 @@ export const pieces: Piece[] = [
   { id: "p095", year: 2021, dateLabel: "23.02.2021", file: "/archive/2021_02_23_Textura.jpg", width: 1614, height: 2022, ratio: 1.2528 },
   { id: "p096", year: 2021, dateLabel: "21.02.2021", file: "/archive/2021_02_21_Hofmann.jpg", width: 1616, height: 2026, ratio: 1.2537 },
   { id: "p097", year: 2021, dateLabel: "29.01.2021", file: "/archive/2021_01_29_T-Shirt.jpg", width: 1612, height: 2020, ratio: 1.2531 },
+  { id: "p098", year: 2019, dateLabel: "26.11.2019", file: "/archive/2019_11_26_CanvaAzotea.jpg", width: 1000, height: 1000, ratio: 1.0000 },
+  { id: "p099", year: 2019, dateLabel: "21.10.2019", file: "/archive/2019_10_21_MOSCancun.jpg", width: 960, height: 718, ratio: 0.7479 },
+  { id: "p100", year: 2019, dateLabel: "09.09.2019", file: "/archive/2019_09_09_Muro.jpg", width: 540, height: 960, ratio: 1.7778 },
+  { id: "p101", year: 2019, dateLabel: "30.08.2019", file: "/archive/2019_08_30_Baston.jpg", width: 1200, height: 1200, ratio: 1.0000 },
+  { id: "p102", year: 2019, dateLabel: "24.08.2019", file: "/archive/2019_08_24_Camion.jpg", width: 2048, height: 2048, ratio: 1.0000 },
+  { id: "p103", year: 2019, dateLabel: "2019", file: "/archive/2019_IMG_1272-okkk.jpg", width: 3024, height: 3024, ratio: 1.0000 },
+  { id: "p104", year: 2019, dateLabel: "2019", file: "/archive/2019_muro_B6F66456-4843-4137-A041-16FDD2B96B54.jpg", width: 1201, height: 1201, ratio: 1.0000 },
+  { id: "p105", year: 2018, dateLabel: "23.12.2018", file: "/archive/2018_12_23_Socceramic-1.jpg", width: 960, height: 960, ratio: 1.0000 },
+  { id: "p106", year: 2018, dateLabel: "23.12.2018", file: "/archive/2018_12_23_Socceramic.jpg", width: 960, height: 960, ratio: 1.0000 },
+  { id: "p107", year: 2018, dateLabel: "21.11.2018", file: "/archive/2018_11_21_Drop.jpg", width: 851, height: 315, ratio: 0.3702 },
+  { id: "p108", year: 2018, dateLabel: "23.09.2018", file: "/archive/2018_09_23_Fortuna.jpg", width: 1200, height: 1200, ratio: 1.0000 },
+  { id: "p109", year: 2018, dateLabel: "2018", file: "/archive/2018-Hood.jpg", width: 2200, height: 2200, ratio: 1.0000 },
+  { id: "p110", year: 2018, dateLabel: "2018", file: "/archive/2018_Abstract-1.jpg", width: 1200, height: 1200, ratio: 1.0000 },
+  { id: "p111", year: 2018, dateLabel: "2018", file: "/archive/2018_Abstract-2.jpg", width: 1125, height: 2000, ratio: 1.7778 },
+  { id: "p112", year: 2018, dateLabel: "2018", file: "/archive/2018_Abstract.jpg", width: 1200, height: 1200, ratio: 1.0000 },
+  { id: "p113", year: 2018, dateLabel: "2018", file: "/archive/2018_Hood.jpg", width: 2200, height: 2200, ratio: 1.0000 },
+  { id: "p114", year: 2017, dateLabel: "25.09.2017", file: "/archive/2017_09_25_Esquimo.jpg", width: 1200, height: 1200, ratio: 1.0000 },
+  { id: "p115", year: 2017, dateLabel: "12.09.2017", file: "/archive/2017_09_12_Boring.jpg", width: 808, height: 808, ratio: 1.0000 },
+  { id: "p116", year: 2017, dateLabel: "09.09.2017", file: "/archive/2017_09_09_Painting.jpg", width: 747, height: 550, ratio: 0.7363 },
+  { id: "p117", year: 2017, dateLabel: "06.08.2017", file: "/archive/2017_08_06_Azotea.jpg", width: 960, height: 1280, ratio: 1.3333 },
+  { id: "p118", year: 2017, dateLabel: "27.05.2017", file: "/archive/2017_05_27_Scientist.jpg", width: 2048, height: 2048, ratio: 1.0000 },
+  { id: "p119", year: 2016, dateLabel: "18.06.2016", file: "/archive/2016_06_18_Herickov.jpg", width: 2048, height: 2048, ratio: 1.0000 },
+  { id: "p120", year: 2016, dateLabel: "12.06.2016", file: "/archive/2016_06_12_Herickov.jpg", width: 2048, height: 1365, ratio: 0.6665 },
+  { id: "p121", year: 2016, dateLabel: "21.01.2016", file: "/archive/2016_01_21_BDM.jpg", width: 808, height: 808, ratio: 1.0000 },
+  { id: "p122", year: 2015, dateLabel: "19.08.2015", file: "/archive/2015_08_19_RayoFat.jpg", width: 1200, height: 800, ratio: 0.6667 },
+  { id: "p123", year: 2015, dateLabel: "11.08.2015", file: "/archive/2015_08_11_L9.jpg", width: 1200, height: 717, ratio: 0.5975 },
+  { id: "p124", year: 2015, dateLabel: "06.07.2015", file: "/archive/2015_07_06_Burguer.jpg", width: 808, height: 808, ratio: 1.0000 },
+  { id: "p125", year: 2015, dateLabel: "11.06.2015", file: "/archive/2015_06_11_Herickov.jpg", width: 2048, height: 1365, ratio: 0.6665 },
+  { id: "p126", year: 2015, dateLabel: "03.06.2015", file: "/archive/2015_06_03_Metra.jpg", width: 1340, height: 3126, ratio: 2.3328 },
+  { id: "p127", year: 2015, dateLabel: "26.04.2015", file: "/archive/2015_04_26_Paint.jpg", width: 2048, height: 1365, ratio: 0.6665 },
 ];
 
 export function getPiece(id: string) {
