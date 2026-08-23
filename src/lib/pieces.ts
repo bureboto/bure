@@ -11,13 +11,16 @@ export type Piece = {
   ratio: number;
   // true cuando el archivo es un video (se reproduce como fondo del card)
   video?: boolean;
+  // 2 = ocupa el ancho de dos columnas en el masonry de Archive
+  span?: number;
 };
 
 // Datos generados a partir de las fotografías (y video) en Assets/Images (public/archive).
 // Convención de nombre: AÑO_MES_DÍA_Etiqueta.ext — el pie de foto muestra la fecha
 // completa, o solo el año cuando el archivo no trae mes/día.
+// Los anchos dobles (span: 2) vienen de src/lib/wide-pieces.json.
 export const pieces: Piece[] = [
-  { id: "p001", year: 2026, dateLabel: "07.08.2026", file: "/archive/2026_08_07_Flowers.jpg", width: 1404, height: 1378, ratio: 0.9815 },
+  { id: "p001", year: 2026, dateLabel: "07.08.2026", file: "/archive/2026_08_07_Flowers.jpg", width: 1404, height: 1378, ratio: 0.9815, span: 2 },
   { id: "p002", year: 2026, dateLabel: "02.08.2026", file: "/archive/2026_08_02_Crome.jpg", width: 1398, height: 1762, ratio: 1.2604 },
   { id: "p003", year: 2026, dateLabel: "23.07.2026", file: "/archive/2026_07_23_Chilling.mp4", width: 720, height: 1280, ratio: 1.7778, video: true },
   { id: "p004", year: 2026, dateLabel: "19.05.2026", file: "/archive/2026_05_19_Texcoco.jpg", width: 1406, height: 1760, ratio: 1.2518 },
