@@ -1,4 +1,4 @@
 {
-  "_comment": "Nombres de archivo (dentro de public/archive) que deben ocupar 2 columnas en el masonry de Archive. Se preserva entre regeneraciones de pieces.ts.",
-  "files": ["2026_08_07_Flowers.jpg"]
+  "_comment": "Nombres de archivo (dentro de public/archive) que deben ocupar 2 columnas en el masonry de Archive (Order). Vacía = función deshabilitada por ahora.",
+  "files": []
 }
