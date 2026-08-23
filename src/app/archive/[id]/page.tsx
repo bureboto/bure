@@ -26,14 +26,28 @@ export default async function ArchiveDetailPage({
           className="relative w-full max-w-2xl bg-black overflow-hidden"
           style={{ aspectRatio: `${piece.width} / ${piece.height}` }}
         >
-          <Image
-            src={piece.file}
-            alt=""
-            fill
-            sizes="(max-width: 760px) 100vw, 50vw"
-            className="object-cover"
-            priority
-          />
+          {piece.video ? (
+            <video
+              src={piece.file}
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls={false}
+              disablePictureInPicture
+              controlsList="nodownload noplaybackrate nofullscreen"
+            />
+          ) : (
+            <Image
+              src={piece.file}
+              alt=""
+              fill
+              sizes="(max-width: 760px) 100vw, 50vw"
+              className="object-cover"
+              priority
+            />
+          )}
         </div>
       </div>
     </div>
