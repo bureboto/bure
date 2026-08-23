@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Piece } from "@/lib/pieces";
 
 export default function PieceCard({ piece }: { piece: Piece }) {
-  const isColor = piece.year === 2025;
+  const isColor = piece.year === 2026;
 
   return (
     <Link href={`/archive/${piece.id}`} className="block group">
