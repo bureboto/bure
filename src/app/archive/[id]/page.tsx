@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getPiece, pieces } from "@/lib/pieces";
 
@@ -14,33 +15,25 @@ export default async function ArchiveDetailPage({
   const piece = getPiece(id);
   if (!piece) notFound();
 
-  const bio =
-    "Artista multidisciplinario que comenzó a sus 15 años explorando el graffiti.";
-
   return (
     <div className="px-5 flex-1">
       <div className="max-w-[1440px] mx-auto py-6">
-        <div className="flex flex-wrap justify-between gap-8 mb-8">
-          <div className="max-w-md">
-            <div className="flex items-center gap-3 text-xs text-black/60 mb-2">
-              <span>{piece.year}</span>
-              <span>{piece.place}</span>
-              {piece.ft && <span>ft. {piece.ft}</span>}
-            </div>
-            <p className="text-2xl">
-              {piece.place}
-              {piece.year ? `, ${piece.year}` : ""}
-            </p>
-          </div>
-          <p className="max-w-sm text-sm text-black/60">{bio}</p>
+        <div className="mb-8">
+          <div className="text-xs text-black/60">{piece.dateLabel}</div>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
-          <div
-            className="w-full bg-black"
-            style={{ aspectRatio: `1 / ${piece.ratio}` }}
+        <div
+          className="relative w-full max-w-2xl bg-black overflow-hidden"
+          style={{ aspectRatio: `${piece.width} / ${piece.height}` }}
+        >
+          <Image
+            src={piece.file}
+            alt=""
+            fill
+            sizes="(max-width: 760px) 100vw, 50vw"
+            className="object-cover"
+            priority
           />
-          <div className="w-full bg-black" style={{ aspectRatio: "1 / 0.51" }} />
         </div>
       </div>
     </div>

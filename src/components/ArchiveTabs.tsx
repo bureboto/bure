@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { pieces, piecesByYearDesc } from "@/lib/pieces";
-import PieceCard from "@/components/PieceCard";
+import Masonry from "@/components/Masonry";
 
 type Mode = "random" | "order";
 
@@ -23,7 +23,7 @@ export default function ArchiveTabs() {
   useEffect(() => {
     setRandomPieces(shuffle(pieces));
   }, []);
-  const grouped = useMemo(() => piecesByYearDesc(), []);
+  const grouped = piecesByYearDesc();
 
   return (
     <div className="px-5 flex-1">
@@ -31,34 +31,28 @@ export default function ArchiveTabs() {
         <div className="flex items-center gap-6 py-6 text-sm">
           <button
             onClick={() => setMode("random")}
-            className={mode === "random" ? "font-medium" : "text-black/50 hover:text-black transition-colors"}
+            className={mode === "random" ? "font-medium underline underline-offset-4" : "text-black/50 hover:text-black transition-colors"}
           >
             Random
           </button>
           <button
             onClick={() => setMode("order")}
-            className={mode === "order" ? "font-medium" : "text-black/50 hover:text-black transition-colors"}
+            className={mode === "order" ? "font-medium underline underline-offset-4" : "text-black/50 hover:text-black transition-colors"}
           >
             Order
           </button>
         </div>
+      </div>
 
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-[28px] pb-12 box-border">
         {mode === "random" ? (
-          <div className="columns-1 sm:columns-2 lg:columns-4 gap-6">
-            {randomPieces.map((p) => (
-              <PieceCard key={p.id} piece={p} showYear={false} />
-            ))}
-          </div>
+          <Masonry pieces={randomPieces} />
         ) : (
-          <div className="flex flex-col gap-12 pb-12">
+          <div className="flex flex-col gap-12">
             {grouped.map(({ year, items }) => (
               <div key={year}>
-                <h2 className="text-2xl font-medium mb-4">{year}</h2>
-                <div className="columns-1 sm:columns-2 lg:columns-4 gap-6">
-                  {items.map((p) => (
-                    <PieceCard key={p.id} piece={p} showYear={true} />
-                  ))}
-                </div>
+                <h2 className="text-2xl font-medium mb-4 max-w-[1440px] mx-auto">{year}</h2>
+                <Masonry pieces={items} />
               </div>
             ))}
           </div>
