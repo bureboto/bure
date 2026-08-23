@@ -46,7 +46,7 @@ export default function ArchiveTabs() {
 
       <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-[28px] pb-12 box-border">
         {mode === "random" ? (
-          <Masonry pieces={randomPieces} />
+          <Masonry pieces={randomPieces} respectSpan={false} />
         ) : (
           <div className="flex flex-col gap-12">
             {grouped.map(({ year, items }) => (

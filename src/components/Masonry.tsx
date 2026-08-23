@@ -19,7 +19,12 @@ type Placed = { piece: Piece; x: number; y: number; width: number; height: numbe
 // Recorre las piezas en orden y les va asignando columnas con un cursor
 // secuencial (izquierda a derecha, salta de fila al llegar al final) —
 // así el orden de lectura se mantiene en Z aun con anchos variables.
-function layout(pieces: Piece[], cols: number, containerWidth: number): { placed: Placed[]; height: number } {
+function layout(
+  pieces: Piece[],
+  cols: number,
+  containerWidth: number,
+  respectSpan: boolean
+): { placed: Placed[]; height: number } {
   if (containerWidth <= 0 || cols <= 0) return { placed: [], height: 0 };
 
   const colWidth = (containerWidth - GAP * (cols - 1)) / cols;
@@ -28,7 +33,7 @@ function layout(pieces: Piece[], cols: number, containerWidth: number): { placed
   const placed: Placed[] = [];
 
   for (const piece of pieces) {
-    const span = Math.min(piece.span ?? 1, cols);
+    const span = respectSpan ? Math.min(piece.span ?? 1, cols) : 1;
     if (cursor + span > cols) cursor = 0;
 
     const targetCols = Array.from({ length: span }, (_, i) => cursor + i);
@@ -47,7 +52,13 @@ function layout(pieces: Piece[], cols: number, containerWidth: number): { placed
   return { placed, height: Math.max(...colHeights) - GAP };
 }
 
-export default function Masonry({ pieces }: { pieces: Piece[] }) {
+export default function Masonry({
+  pieces,
+  respectSpan = true,
+}: {
+  pieces: Piece[];
+  respectSpan?: boolean;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [cols, setCols] = useState(4);
@@ -69,7 +80,7 @@ export default function Masonry({ pieces }: { pieces: Piece[] }) {
     };
   }, []);
 
-  const { placed, height } = layout(pieces, cols, containerWidth);
+  const { placed, height } = layout(pieces, cols, containerWidth, respectSpan);
 
   return (
     <div ref={containerRef} className="relative w-full" style={{ height }}>
