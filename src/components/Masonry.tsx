@@ -6,6 +6,27 @@ import PieceCard from "@/components/PieceCard";
 
 const GAP = 24;
 
+// Estimación de la altura del bloque de texto (fecha + caption + padding)
+// bajo la imagen, para que el masonry no encime las filas. No es exacta
+// (no medimos el DOM real), pero es suficiente para texto de una o pocas
+// líneas a este tamaño de letra (text-xs, ~12px).
+const DATE_LINE_HEIGHT = 16;
+const CAPTION_LINE_HEIGHT = 16;
+const TEXT_TOP_MARGIN = 8; // mt-2
+const CAPTION_TOP_MARGIN = 4; // mt-1
+const BOTTOM_PADDING = 32; // pb-8 (2rem)
+const AVG_CHAR_WIDTH = 5.7; // ancho promedio de un caracter en text-xs
+
+function textBlockHeight(piece: Piece, width: number) {
+  let height = TEXT_TOP_MARGIN + DATE_LINE_HEIGHT;
+  if (piece.caption) {
+    const charsPerLine = Math.max(1, Math.floor(width / AVG_CHAR_WIDTH));
+    const lines = Math.max(1, Math.ceil(piece.caption.length / charsPerLine));
+    height += CAPTION_TOP_MARGIN + lines * CAPTION_LINE_HEIGHT;
+  }
+  return height + BOTTOM_PADDING;
+}
+
 function columnCountForWidth(width: number) {
   if (width <= 520) return 1;
   if (width <= 760) return 2;
@@ -39,7 +60,7 @@ function layout(
     const targetCols = Array.from({ length: span }, (_, i) => cursor + i);
     const width = colWidth * span + GAP * (span - 1);
     const y = Math.max(...targetCols.map((c) => colHeights[c]));
-    const height = width * piece.ratio;
+    const height = width * piece.ratio + textBlockHeight(piece, width);
 
     placed.push({ piece, x: targetCols[0] * (colWidth + GAP), y, width, height });
 

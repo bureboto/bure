@@ -13,6 +13,8 @@ export type Piece = {
   video?: boolean;
   // 2 = ocupa el ancho de dos columnas en el masonry de Archive
   span?: number;
+  // texto descriptivo debajo de la fecha; viene de Assets/Bure_WEB.rtf.
+  caption?: string;
 };
 
 // Datos generados a partir de las fotografías (y video) en Assets/Images (public/archive).
@@ -20,19 +22,19 @@ export type Piece = {
 // completa, o solo el año cuando el archivo no trae mes/día.
 // Los anchos dobles (span: 2) vienen de src/lib/wide-pieces.json.
 export const pieces: Piece[] = [
-  { id: "p001", year: 2026, dateLabel: "07.08.2026", file: "/archive/2026_08_07_Flowers.jpg", width: 1404, height: 1378, ratio: 0.9815 },
-  { id: "p002", year: 2026, dateLabel: "02.08.2026", file: "/archive/2026_08_02_Crome.jpg", width: 1398, height: 1762, ratio: 1.2604 },
-  { id: "p003", year: 2026, dateLabel: "23.07.2026", file: "/archive/2026_07_23_Chilling.mp4", width: 720, height: 1280, ratio: 1.7778, video: true },
-  { id: "p004", year: 2026, dateLabel: "19.05.2026", file: "/archive/2026_05_19_Texcoco.jpg", width: 1406, height: 1760, ratio: 1.2518 },
-  { id: "p005", year: 2026, dateLabel: "10.05.2026", file: "/archive/2026_05_10_Mirror.jpg", width: 1394, height: 1754, ratio: 1.2582 },
+  { id: "p001", year: 2026, dateLabel: "07.08.2026", file: "/archive/2026_08_07_Flowers.jpg", width: 1404, height: 1378, ratio: 0.9815, caption: "Exploracion de floreros, sus formas simétricamente orgánicas. Usé una pluma y unos marcatextos que tenía a la mano." },
+  { id: "p002", year: 2026, dateLabel: "02.08.2026", file: "/archive/2026_08_02_Crome.jpg", width: 1398, height: 1762, ratio: 1.2604, caption: "La energía de la onda | Canva 1.0m x 1.5m, Acrilico sobre tela. La fotografía es un estudio que me trae muy buenos recuerdos, buenos momentos con buenos amigos, en un estudio de diseño." },
+  { id: "p003", year: 2026, dateLabel: "23.07.2026", file: "/archive/2026_07_23_Chilling.mp4", width: 720, height: 1280, ratio: 1.7778, video: true, caption: "En Julio de este año, fui a Guadalajara, México, como casi siempre, mínimo una vez al año a visitar a mi buen amigo LickThePaper. Siempre buenos momentos, solo de chill, una buena pinta, un buen taco, y un buen rato en su estudio." },
+  { id: "p004", year: 2026, dateLabel: "19.05.2026", file: "/archive/2026_05_19_Texcoco.jpg", width: 1406, height: 1760, ratio: 1.2518, caption: "Arte sobre una Chevy y un muro de fondo, primero pinte el muro y a los dias el del carro me contacto por IG para que le pintara su carro, me dijo que vio el muro, le gusto y quería algo muy similar en su vehículo." },
+  { id: "p005", year: 2026, dateLabel: "10.05.2026", file: "/archive/2026_05_10_Mirror.jpg", width: 1394, height: 1754, ratio: 1.2582, caption: "Cristal con textura en MDF negro, 0.80m x 1.20m" },
   { id: "p006", year: 2026, dateLabel: "17.04.2026", file: "/archive/2026_04_17_Croche.jpg", width: 1404, height: 1754, ratio: 1.2493 },
-  { id: "p007", year: 2026, dateLabel: "14.04.2026", file: "/archive/2026_04_14_Phone.jpg", width: 1398, height: 1750, ratio: 1.2518 },
-  { id: "p008", year: 2026, dateLabel: "09.04.2026", file: "/archive/2026_04_09_Machine.jpg", width: 1208, height: 1512, ratio: 1.2517 },
+  { id: "p007", year: 2026, dateLabel: "14.04.2026", file: "/archive/2026_04_14_Phone.jpg", width: 1398, height: 1750, ratio: 1.2518, caption: "Ft. Phone." },
+  { id: "p008", year: 2026, dateLabel: "09.04.2026", file: "/archive/2026_04_09_Machine.jpg", width: 1208, height: 1512, ratio: 1.2517, caption: "Maquina de coser customizada." },
   { id: "p009", year: 2026, dateLabel: "25.03.2026", file: "/archive/2026_03_25_Flowers.jpg", width: 1396, height: 1442, ratio: 1.0330 },
   { id: "p010", year: 2026, dateLabel: "25.03.2026", file: "/archive/2026_03_25__Flowers.jpg", width: 1138, height: 2024, ratio: 1.7786 },
   { id: "p011", year: 2026, dateLabel: "12.03.2026", file: "/archive/2026_03_12_Chocolate.jpg", width: 1400, height: 1878, ratio: 1.3414 },
   { id: "p012", year: 2026, dateLabel: "08.02.2026", file: "/archive/2026_02_08_Izta.jpg", width: 1404, height: 1872, ratio: 1.3333 },
-  { id: "p013", year: 2026, dateLabel: "01.02.2026", file: "/archive/2026_02_01_Iztaccihuatl.mp4", width: 720, height: 1280, ratio: 1.7778, video: true },
+  { id: "p013", year: 2026, dateLabel: "01.02.2026", file: "/archive/2026_02_01_Iztaccihuatl.mp4", width: 720, height: 1280, ratio: 1.7778, video: true, caption: "Observando el paisaje, a las faldas del Iztaccihuatl, detenido enmedio del camino, viendo como todo respira, como todo se mueve." },
   { id: "p014", year: 2026, dateLabel: "26.01.2026", file: "/archive/2026_01_26_Screenshot-2026-08-22at5.23.56p.m..jpg", width: 1404, height: 1870, ratio: 1.3319 },
   { id: "p015", year: 2026, dateLabel: "05.01.2026", file: "/archive/2026_01_05_Screenshot2026-08-22at52950pm.jpg", width: 1406, height: 1754, ratio: 1.2475 },
   { id: "p016", year: 2025, dateLabel: "21.12.2025", file: "/archive/2025_12_21_Hers-1.jpg", width: 1400, height: 1870, ratio: 1.3357 },

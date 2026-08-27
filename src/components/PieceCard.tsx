@@ -37,7 +37,12 @@ export default function PieceCard({ piece }: { piece: Piece }) {
           />
         )}
       </div>
-      <div className="mt-2 text-xs text-black/60">{piece.dateLabel}</div>
+      <div className="mt-2 pb-8">
+        <div className="text-xs text-black/60">{piece.dateLabel}</div>
+        {piece.caption && (
+          <div className="text-xs text-black/60 mt-1">{piece.caption}</div>
+        )}
+      </div>
     </div>
   );
 }
