@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { pieces, piecesByYearDesc } from "@/lib/pieces";
+import { yearIntros } from "@/lib/year-intros";
 import Masonry from "@/components/Masonry";
 
 type Mode = "random" | "order";
@@ -49,12 +50,21 @@ export default function ArchiveTabs() {
           <Masonry pieces={randomPieces} respectSpan={false} />
         ) : (
           <div className="flex flex-col gap-12">
-            {grouped.map(({ year, items }) => (
-              <div key={year}>
-                <h2 className="text-2xl font-medium mb-4 max-w-[1440px] mx-auto">{year}</h2>
-                <Masonry pieces={items} />
-              </div>
-            ))}
+            {grouped.map(({ year, items }) => {
+              const intro = yearIntros[year];
+              return (
+                <div key={year}>
+                  <h2 className="text-2xl font-medium mb-4">{year}</h2>
+                  {intro && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                      <p className="text-sm text-black/70">{intro[0]}</p>
+                      <p className="text-sm text-black/70">{intro[1]}</p>
+                    </div>
+                  )}
+                  <Masonry pieces={items} />
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
