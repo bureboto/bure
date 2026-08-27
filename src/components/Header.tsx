@@ -13,8 +13,8 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full px-5 pt-5">
-      <div className="flex items-center justify-between h-[60px] max-w-[1440px] mx-auto">
+    <header className="w-full px-[28px] pt-5">
+      <div className="flex items-center justify-between h-[60px]">
         <Link href="/" aria-label="Bure">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.svg" alt="Bure" width={77} height={20} />

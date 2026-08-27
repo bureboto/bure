@@ -27,8 +27,8 @@ export default function ArchiveTabs() {
   const grouped = piecesByYearDesc();
 
   return (
-    <div className="px-5 flex-1">
-      <div className="max-w-[1440px] mx-auto">
+    <div className="flex-1">
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-[28px] box-border">
         <div className="flex items-center gap-6 py-6 text-sm">
           <button
             onClick={() => setMode("random")}
