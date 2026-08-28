@@ -66,7 +66,6 @@ export const pieces: Piece[] = [
   { id: "p050", year: 2023, dateLabel: "07.09.2023", file: "/archive/2023_09_07_Graffiti.jpg", width: 1398, height: 1754, ratio: 1.2546 },
   { id: "p051", year: 2023, dateLabel: "18.08.2023", file: "/archive/2023_08_18_motion.mp4", width: 720, height: 1280, ratio: 1.7778, video: true },
   { id: "p052", year: 2023, dateLabel: "11.08.2023", file: "/archive/2023_08_11_Paris-1.mp4", width: 720, height: 1280, ratio: 1.7778, video: true },
-  { id: "p053", year: 2023, dateLabel: "11.08.2023", file: "/archive/2023_08_11_Paris.jpg", width: 1398, height: 1752, ratio: 1.2532 },
   { id: "p054", year: 2023, dateLabel: "27.07.2023", file: "/archive/2023_07_27_Card.mp4", width: 720, height: 1280, ratio: 1.7778, video: true },
   { id: "p055", year: 2023, dateLabel: "23.07.2023", file: "/archive/2023_07_23_Espacio.jpg", width: 1402, height: 1746, ratio: 1.2454 },
   { id: "p056", year: 2023, dateLabel: "14.03.2023", file: "/archive/2023_03_14_Art-1.jpg", width: 1400, height: 1750, ratio: 1.2500 },
