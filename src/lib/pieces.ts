@@ -31,7 +31,7 @@ export const pieces: Piece[] = [
   { id: "p007", year: 2026, dateLabel: "14.04.2026", file: "/archive/2026_04_14_Phone.jpg", width: 1398, height: 1750, ratio: 1.2518, caption: "Ft. Phone." },
   { id: "p008", year: 2026, dateLabel: "09.04.2026", file: "/archive/2026_04_09_Machine.jpg", width: 1208, height: 1512, ratio: 1.2517, caption: "Maquina de coser customizada." },
   { id: "p009", year: 2026, dateLabel: "25.03.2026", file: "/archive/2026_03_25_Flowers.jpg", width: 1396, height: 1442, ratio: 1.0330 },
-  { id: "p010", year: 2026, dateLabel: "25.03.2026", file: "/archive/2026_03_25__Flowers.jpg", width: 1138, height: 2024, ratio: 1.7786 },
+  { id: "p010", year: 2026, dateLabel: "25.03.2026", file: "/archive/2026_03_25__Flowers.mp4", width: 1138, height: 2024, ratio: 1.7786, video: true },
   { id: "p011", year: 2026, dateLabel: "12.03.2026", file: "/archive/2026_03_12_Chocolate.jpg", width: 1400, height: 1878, ratio: 1.3414 },
   { id: "p012", year: 2026, dateLabel: "08.02.2026", file: "/archive/2026_02_08_Izta.jpg", width: 1404, height: 1872, ratio: 1.3333 },
   { id: "p013", year: 2026, dateLabel: "01.02.2026", file: "/archive/2026_02_01_Iztaccihuatl.mp4", width: 720, height: 1280, ratio: 1.7778, video: true, caption: "Observando el paisaje, a las faldas del Iztaccihuatl, detenido enmedio del camino, viendo como todo respira, como todo se mueve." },
