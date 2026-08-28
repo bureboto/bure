@@ -39,7 +39,7 @@ export const pieces: Piece[] = [
   { id: "p015", year: 2026, dateLabel: "05.01.2026", file: "/archive/2026_01_05_Screenshot2026-08-22at52950pm.jpg", width: 1406, height: 1754, ratio: 1.2475 },
   { id: "p016", year: 2025, dateLabel: "21.12.2025", file: "/archive/2025_12_21_Hers.gif", width: 1400, height: 1870, ratio: 1.3357 },
   { id: "p018", year: 2025, dateLabel: "01.12.2025", file: "/archive/2025_12_01_Pinky.mp4", width: 1136, height: 2022, ratio: 1.7799, video: true },
-  { id: "p019", year: 2025, dateLabel: "19.11.2025", file: "/archive/2025_11_19_Low.jpg", width: 1398, height: 1748, ratio: 1.2504 },
+  { id: "p019", year: 2025, dateLabel: "19.11.2025", file: "/archive/2025_11_19_Low.mp4", width: 1398, height: 1748, ratio: 1.2504, video: true },
   { id: "p020", year: 2025, dateLabel: "14.11.2025", file: "/archive/2025_11_14_Drawing.jpg", width: 1124, height: 2026, ratio: 1.8025 },
   { id: "p021", year: 2025, dateLabel: "12.11.2025", file: "/archive/2025_11_12_Motion.mp4", width: 1140, height: 2026, ratio: 1.7772, video: true },
   { id: "p022", year: 2025, dateLabel: "29.08.2025", file: "/archive/2025_08_29_Vermont-1.jpg", width: 1212, height: 1518, ratio: 1.2525 },
