@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function DesignHeader() {
   return (
-    <header className="w-full px-[28px] pt-5">
+    <header className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 pt-5">
       <div className="flex items-center justify-between h-[60px]">
         <Link href="/home" aria-label="Bure">
           {/* eslint-disable-next-line @next/next/no-img-element */}
