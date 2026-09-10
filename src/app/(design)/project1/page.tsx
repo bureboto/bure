@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
+import ContentGrid from "@/components/ContentGrid";
 
 const musho = (file: string) => `/design/musho/${file}`;
 
@@ -18,7 +19,7 @@ const blocks: Block[] = [
 
 export default function Project1() {
   return (
-    <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 pb-16 flex flex-col gap-10">
+    <ContentGrid className="pb-16 flex flex-col gap-10">
       <div className="flex flex-col gap-4 pt-6">
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
           ← Volver
@@ -55,6 +56,6 @@ export default function Project1() {
           </div>
         ))}
       </div>
-    </div>
+    </ContentGrid>
   );
 }

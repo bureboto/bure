@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ContentGrid from "@/components/ContentGrid";
 
 const timeline = [
   {
@@ -81,7 +82,7 @@ const projects = [
 
 export default function DesignHome() {
   return (
-    <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 pb-16 flex flex-col gap-16">
+    <ContentGrid className="pb-16 flex flex-col gap-16">
       {/* Bio / hero */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-10 pt-6">
         <div className="flex flex-col gap-6">
@@ -192,6 +193,6 @@ export default function DesignHome() {
           ))}
         </div>
       </section>
-    </div>
+    </ContentGrid>
   );
 }
