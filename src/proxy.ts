@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const DESIGN_HOST = "design.bure.art";
-const DESIGN_PATHS = ["/home", "/project1", "/project2", "/project3"];
+const DESIGN_PATHS = [
+  "/home",
+  "/project1",
+  "/project2",
+  "/project3",
+  "/project4",
+  "/project5",
+  "/project6",
+];
 
 export function proxy(request: NextRequest) {
   const hostname = request.headers.get("host") ?? "";
