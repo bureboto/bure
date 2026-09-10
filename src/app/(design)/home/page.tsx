@@ -168,7 +168,7 @@ export default function DesignHome() {
       {/* Projects */}
       <section className="flex flex-col gap-8">
         <h2 className="text-2xl">Proyectos</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
           {projects.map((project) => (
             <Link key={project.href} href={project.href} className="flex flex-col gap-3 group">
               <div className="w-full aspect-[4/3] bg-black transition-opacity group-hover:opacity-80" />
