@@ -36,10 +36,11 @@ const timeline = [
 const projects = [
   {
     href: "/project1",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
+    name: "Musho.ai",
+    date: "2024",
+    cover: "/design/musho/12_Cover_Musho.gif",
     description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
+      "Musho is an AI-powered design assistant, turning your prompts into websites, social media posts, slides, and more — effortlessly.",
   },
   {
     href: "/project2",
@@ -171,7 +172,16 @@ export default function DesignHome() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
           {projects.map((project) => (
             <Link key={project.href} href={project.href} className="flex flex-col gap-3 group">
-              <div className="w-full aspect-[4/3] bg-black transition-opacity group-hover:opacity-80" />
+              {project.cover ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={project.cover}
+                  alt={project.name}
+                  className="w-full aspect-[4/3] object-cover transition-opacity group-hover:opacity-80"
+                />
+              ) : (
+                <div className="w-full aspect-[4/3] bg-black transition-opacity group-hover:opacity-80" />
+              )}
               <div>
                 <p className="font-bold">
                   {project.name}. {project.date}.
