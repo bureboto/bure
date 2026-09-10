@@ -1,19 +1,20 @@
 import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 
-const assets = [
-  "1_Musho.gif",
-  "2_Musho.mp4",
-  "3_Musho.png",
-  "4_Musho.png",
-  "5_Musho.png",
-  "6_Musho.mp4",
-  "7_Musho.jpg",
-  "8_Musho.jpg",
-  "9_Musho.jpg",
-  "10_Musho.jpg",
-  "11_Musho.jpg",
-].map((file) => `/design/musho/${file}`);
+const musho = (file: string) => `/design/musho/${file}`;
+
+type Block =
+  | { type: "full"; src: string; caption?: string }
+  | { type: "grid"; items: string[]; caption?: string };
+
+const blocks: Block[] = [
+  { type: "full", src: musho("1_Musho.gif") },
+  { type: "full", src: musho("2_Musho.mp4"), caption: "Detalle de la imagen" },
+  { type: "grid", items: [musho("3_Musho.png"), musho("4_Musho.png"), musho("5_Musho.png")], caption: "Detalle de la imagen" },
+  { type: "full", src: musho("6_Musho.mp4"), caption: "Detalle de la imagen" },
+  { type: "grid", items: [musho("7_Musho.jpg"), musho("8_Musho.jpg"), musho("9_Musho.jpg")] },
+  { type: "grid", items: [musho("10_Musho.jpg"), musho("11_Musho.jpg")], caption: "Detalle de la imagen" },
+];
 
 export default function Project1() {
   return (
@@ -34,9 +35,24 @@ export default function Project1() {
         <p className="text-sm text-black/60">Diseño en colaboración con Sjord and Musho team.</p>
       </div>
 
-      <div className="flex flex-col gap-10">
-        {assets.map((src) => (
-          <ProjectMedia key={src} src={src} alt="Musho.ai" />
+      <div className="flex flex-col gap-4">
+        {blocks.map((block, i) => (
+          <div key={i} className="flex flex-col gap-3">
+            {block.type === "full" ? (
+              <ProjectMedia src={block.src} alt="Musho.ai" />
+            ) : (
+              <div
+                className={`grid grid-cols-1 gap-4 ${
+                  block.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+                }`}
+              >
+                {block.items.map((src) => (
+                  <ProjectMedia key={src} src={src} alt="Musho.ai" />
+                ))}
+              </div>
+            )}
+            {block.caption && <p className="text-sm text-black/50">{block.caption}</p>}
+          </div>
         ))}
       </div>
     </div>
