@@ -70,7 +70,11 @@ export default function Project7() {
         </div>
       </div>
 
-      <ProjectMedia src={sg("1_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
+      <div className="grid grid-cols-1 md:grid-cols-6">
+        <div className="md:col-start-2 md:col-span-4">
+          <ProjectMedia src={sg("1_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
