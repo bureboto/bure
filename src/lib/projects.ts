@@ -33,10 +33,11 @@ export const projects: Project[] = [
   },
   {
     href: "/project4",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
+    name: "c3r0",
+    date: "Julio, 2026",
+    cover: "/design/cero/Cover_Cer0_03.jpg",
     description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
+      "c3r0 es el primer mocktail bar en San José del Cabo, Baja California, México. Branding fresco, orgánico y con vibe tropical.",
   },
   {
     href: "/project5",
