@@ -49,9 +49,10 @@ export const projects: Project[] = [
   },
   {
     href: "/project6",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
+    name: "Nouns | Devconnect ARG",
+    date: "Noviembre, 2025",
+    cover: "/design/nouns/7_Cover_Nous_ARG.jpg",
     description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
+      "Ilustración y muralismo para el espacio de Nouns en Devconnect Argentina: gráficas, señalética y piezas para la comunidad durante todo el evento.",
   },
 ];
