@@ -5,12 +5,24 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={project.href} className="flex flex-col gap-3 group">
       {project.cover ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={project.cover}
-          alt={project.name}
-          className="w-full aspect-video object-cover transition-opacity group-hover:opacity-80"
-        />
+        project.cover.endsWith(".mp4") ? (
+          <video
+            src={project.cover}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls={false}
+            className="w-full aspect-video object-cover transition-opacity group-hover:opacity-80"
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.cover}
+            alt={project.name}
+            className="w-full aspect-video object-cover transition-opacity group-hover:opacity-80"
+          />
+        )
       ) : (
         <div className="w-full aspect-video bg-black transition-opacity group-hover:opacity-80" />
       )}
