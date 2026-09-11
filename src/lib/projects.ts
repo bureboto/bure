@@ -25,10 +25,11 @@ export const projects: Project[] = [
   },
   {
     href: "/project3",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
+    name: "Espacio",
+    date: "Marzo, 2026",
+    cover: "/design/espacio/4_Cover_Espacio.mp4",
     description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
+      "Espacio es una media company que hace contenido y difusión sobre finanzas y tecnologías emergentes, empezó como Espacio Cripto y evolucionó a Espacio.",
   },
   {
     href: "/project4",
