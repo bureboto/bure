@@ -9,10 +9,10 @@ export default function ProjectCard({ project }: { project: Project }) {
         <img
           src={project.cover}
           alt={project.name}
-          className="w-full aspect-[4/3] object-cover transition-opacity group-hover:opacity-80"
+          className="w-full aspect-video object-cover transition-opacity group-hover:opacity-80"
         />
       ) : (
-        <div className="w-full aspect-[4/3] bg-black transition-opacity group-hover:opacity-80" />
+        <div className="w-full aspect-video bg-black transition-opacity group-hover:opacity-80" />
       )}
       <div>
         <p className="font-bold">
