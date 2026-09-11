@@ -63,4 +63,12 @@ export const projects: Project[] = [
     description:
       "Ilustración y activación para el stand de Nouns en ETHGlobal Singapore: mural, gráficas de gran formato y experiencia para la comunidad.",
   },
+  {
+    href: "/project8",
+    name: "Linea 16 – Sin limite",
+    date: "Julio, 2017",
+    cover: "/design/linea16/1_Linea16_SinLimite.jpg",
+    description:
+      "Linea 16 es una liga de batallas escritas que concentra a los mejores exponentes de hip hop de habla hispana, con identidad urbana y desgastada en amarillo y negro.",
+  },
 ];
