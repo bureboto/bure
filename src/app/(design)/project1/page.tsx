@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
+import OtherProjects from "@/components/OtherProjects";
 
 const musho = (file: string) => `/design/musho/${file}`;
 
@@ -56,6 +57,8 @@ export default function Project1() {
           </div>
         ))}
       </div>
+
+      <OtherProjects currentHref="/project1" />
     </ContentGrid>
   );
 }

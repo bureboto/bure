@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { projects } from "@/lib/projects";
+import ProjectCard from "@/components/ProjectCard";
 
 const timeline = [
   {
@@ -30,52 +31,6 @@ const timeline = [
     years: "2013-2015",
     description:
       "Mi primer acercamiento al diseño profesional. Empecé haciendo branding y diseño web, justo donde empezó a tomar fuerza como disciplina.",
-  },
-];
-
-const projects = [
-  {
-    href: "/project1",
-    name: "Musho.ai",
-    date: "2024",
-    cover: "/design/musho/12_Cover_Musho.gif",
-    description:
-      "Musho is an AI-powered design assistant, turning your prompts into websites, social media posts, slides, and more — effortlessly.",
-  },
-  {
-    href: "/project2",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
-    description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
-  },
-  {
-    href: "/project3",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
-    description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
-  },
-  {
-    href: "/project4",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
-    description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
-  },
-  {
-    href: "/project5",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
-    description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
-  },
-  {
-    href: "/project6",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
-    description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
   },
 ];
 
@@ -171,24 +126,7 @@ export default function DesignHome() {
         <h2 className="text-2xl">Proyectos</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
           {projects.map((project) => (
-            <Link key={project.href} href={project.href} className="flex flex-col gap-3 group">
-              {project.cover ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={project.cover}
-                  alt={project.name}
-                  className="w-full aspect-[4/3] object-cover transition-opacity group-hover:opacity-80"
-                />
-              ) : (
-                <div className="w-full aspect-[4/3] bg-black transition-opacity group-hover:opacity-80" />
-              )}
-              <div>
-                <p className="font-bold">
-                  {project.name}. {project.date}.
-                </p>
-                <p className="text-sm text-black/70">{project.description}</p>
-              </div>
-            </Link>
+            <ProjectCard key={project.href} project={project} />
           ))}
         </div>
       </section>
