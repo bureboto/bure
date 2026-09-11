@@ -11,6 +11,7 @@ type Block =
   | { type: "split"; left: string; right: string };
 
 const introBlocks: Block[] = [
+  { type: "full", src: espacio("4_Cover_Espacio.mp4") },
   { type: "grid", items: [espacio("1_Espacio.jpg"), espacio("2_Espacio.jpg"), espacio("3_Espacio.jpg")] },
   { type: "split", left: espacio("7_Espacio.jpg"), right: espacio("8_Espacio.jpg") },
   { type: "full", src: espacio("9_Espacio.jpg") },
