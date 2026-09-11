@@ -41,10 +41,11 @@ export const projects: Project[] = [
   },
   {
     href: "/project5",
-    name: "Nombre del proyecto",
-    date: "Febrero 2026",
+    name: "El Prado",
+    date: "Marzo, 2025",
+    cover: "/design/prado/1_Cover_Prado.jpg",
     description:
-      "Robotos NFTs es un proyecto se arte que surgio en el 2021 en el boom del arte digital NFT, fué creado por Pablo Stanley y otros colaboradores, es una colección de 10,000 personajes unicos.",
+      "Plásticos El Prado es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, con distribución en todo México.",
   },
   {
     href: "/project6",
