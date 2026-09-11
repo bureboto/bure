@@ -67,7 +67,7 @@ export const projects: Project[] = [
     href: "/project8",
     name: "Linea 16 – Sin limite",
     date: "Julio, 2017",
-    cover: "/design/linea16/1_Linea16_SinLimite.jpg",
+    cover: "/design/linea16/13_Linea16_SinLimite.mp4",
     description:
       "Linea 16 es una liga de batallas escritas que concentra a los mejores exponentes de hip hop de habla hispana, con identidad urbana y desgastada en amarillo y negro.",
   },
