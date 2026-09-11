@@ -10,14 +10,14 @@ type Block =
   | { type: "grid"; items: string[] };
 
 const introBlocks: Block[] = [
-  { type: "full", src: prado("11_Prado.jpg") },
+  { type: "full", src: prado("12_Prado.png") },
   { type: "grid", items: [prado("2_Prado.jpg"), prado("3_Prado.jpg"), prado("6_Prado.jpg")] },
 ];
 
 const gridBlock: Block = {
   type: "grid",
   items: [
-    prado("5_Prado.jpg"),
+    prado("11_Prado.jpg"),
     prado("8_Prado.jpg"),
     prado("4_Prado.jpg"),
     prado("10_Prado.jpg"),
