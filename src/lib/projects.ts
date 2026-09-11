@@ -55,4 +55,12 @@ export const projects: Project[] = [
     description:
       "Ilustración y muralismo para el espacio de Nouns en Devconnect Argentina: gráficas, señalética y piezas para la comunidad durante todo el evento.",
   },
+  {
+    href: "/project7",
+    name: "Nouns | Devconnect Singapore",
+    date: "Septiembre, 2024",
+    cover: "/design/singapore/1_Singapore.jpg",
+    description:
+      "Ilustración y activación para el stand de Nouns en ETHGlobal Singapore: mural, gráficas de gran formato y experiencia para la comunidad.",
+  },
 ];
