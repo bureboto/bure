@@ -21,7 +21,7 @@ const blocksMid: Block[] = [
   { type: "full", src: l16("5_Linea16_SinLimite.jpg") },
   {
     type: "grid",
-    items: [l16("6_Linea16_SinLimite.mp4"), null, null, l16("7_Linea16_SinLimite.mp4")],
+    items: [l16("6_Linea16_SinLimite.mp4"), l16("7_Linea16_SinLimite.mp4")],
   },
   { type: "full", src: l16("8_Linea16_SinLimite.gif") },
   { type: "grid", items: [l16("9_Linea16_SinLimite.gif"), l16("10_Linea16_SinLimite.jpg")] },
