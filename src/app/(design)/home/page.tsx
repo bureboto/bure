@@ -152,11 +152,11 @@ export default function DesignHome() {
       </section>
 
       {/* Timeline */}
-      <section className="overflow-x-auto">
-        <div className="flex min-w-max border-t border-black/20 pt-6 gap-16">
+      <section className="overflow-x-auto -mr-[28px] pt-2">
+        <div className="flex min-w-max border-t border-black/20 pt-8 gap-16">
           {timeline.map((item) => (
             <div key={item.company} className="w-72 flex flex-col gap-3 relative">
-              <span className="absolute -top-[31px] left-0 w-2 h-2 rounded-full bg-black" />
+              <span className="absolute -top-[35px] left-0 w-2 h-2 rounded-full bg-black" />
               <h3 className="text-lg">
                 {item.company} <span className="text-sm text-black/60">({item.years})</span>
               </h3>
