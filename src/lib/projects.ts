@@ -8,12 +8,12 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    href: "/project1",
-    name: "Musho.ai",
-    date: "2024",
-    cover: "/design/musho/12_Cover_Musho.gif",
+    href: "/project10",
+    name: "Bando",
+    date: "2024 – 2025",
+    cover: "/design/bando/8_Bando.mp4",
     description:
-      "Musho is an AI-powered design assistant, turning your prompts into websites, social media posts, slides, and more — effortlessly.",
+      "Bando es una fintech que busca conectar la blockchain con la banca tradicional, conectando servicios y la bolsa de valores a usuarios finales.",
   },
   {
     href: "/project2",
@@ -30,6 +30,14 @@ export const projects: Project[] = [
     cover: "/design/espacio/4_Cover_Espacio.mp4",
     description:
       "Espacio es una media company que hace contenido y difusión sobre finanzas y tecnologías emergentes, empezó como Espacio Cripto y evolucionó a Espacio.",
+  },
+  {
+    href: "/project1",
+    name: "Musho.ai",
+    date: "2024",
+    cover: "/design/musho/12_Cover_Musho.gif",
+    description:
+      "Musho is an AI-powered design assistant, turning your prompts into websites, social media posts, slides, and more — effortlessly.",
   },
   {
     href: "/project4",
@@ -78,13 +86,5 @@ export const projects: Project[] = [
     cover: "/design/linea16-sinsalida/1_Cover_Linea16_SinLimite.jpg",
     description:
       "Rebranding de Linea 16 con un nuevo logotipo tipo escudo deportivo y la línea visual para su evento Callejón Sin Salida, en tonos rojo y negro con texturas urbanas.",
-  },
-  {
-    href: "/project10",
-    name: "Bando",
-    date: "2024 – 2025",
-    cover: "/design/bando/8_Bando.mp4",
-    description:
-      "Bando es una fintech que busca conectar la blockchain con la banca tradicional, conectando servicios y la bolsa de valores a usuarios finales.",
   },
 ];
