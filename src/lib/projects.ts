@@ -79,4 +79,12 @@ export const projects: Project[] = [
     description:
       "Rebranding de Linea 16 con un nuevo logotipo tipo escudo deportivo y la línea visual para su evento Callejón Sin Salida, en tonos rojo y negro con texturas urbanas.",
   },
+  {
+    href: "/project10",
+    name: "Bando",
+    date: "2024 – 2025",
+    cover: "/design/bando/8_Bando.mp4",
+    description:
+      "Bando es una fintech que busca conectar la blockchain con la banca tradicional, conectando servicios y la bolsa de valores a usuarios finales.",
+  },
 ];
