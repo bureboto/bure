@@ -95,4 +95,12 @@ export const projects: Project[] = [
     description:
       "Branding, landing page y materiales de venta para IDF, el curso de Espacio Cripto para aprender a invertir en criptomonedas desde cero.",
   },
+  {
+    href: "/project12",
+    name: "The Base Night Show",
+    date: "Septiembre, 2025",
+    cover: "/design/base/0_Cover_BNS.jpg",
+    description:
+      "Branding e ilustración para The Base Night Show, un espacio de conversación creado con Espacio para la colaboración de Base en LATAM.",
+  },
 ];
