@@ -52,8 +52,12 @@ function MediaBlock({ block }: { block: Block }) {
   if (block.type === "split") {
     return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="md:col-span-2">
-          <ProjectMedia src={block.left} alt="Linea 16 – Sin Salida" />
+        <div className="md:col-span-2 h-full min-h-0">
+          <ProjectMedia
+            src={block.left}
+            alt="Linea 16 – Sin Salida"
+            className="w-full h-full object-cover"
+          />
         </div>
         <div className="md:col-span-1 flex flex-col gap-4">
           {block.right.map((src) => (
