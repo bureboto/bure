@@ -13,6 +13,7 @@ const DESIGN_PATHS = [
   "/project8",
   "/project9",
   "/project10",
+  "/project11",
 ];
 
 export function proxy(request: NextRequest) {

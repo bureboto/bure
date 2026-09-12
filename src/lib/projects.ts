@@ -87,4 +87,12 @@ export const projects: Project[] = [
     description:
       "Rebranding de Linea 16 con un nuevo logotipo tipo escudo deportivo y la línea visual para su evento Callejón Sin Salida, en tonos rojo y negro con texturas urbanas.",
   },
+  {
+    href: "/project11",
+    name: "IDF – Inversionista del Futuro",
+    date: "2025",
+    cover: "/design/idf/6_IDF.jpg",
+    description:
+      "Branding, landing page y materiales de venta para IDF, el curso de Espacio Cripto para aprender a invertir en criptomonedas desde cero.",
+  },
 ];
