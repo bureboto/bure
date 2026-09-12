@@ -38,7 +38,6 @@ const blocksBottom: Block[] = [
       l16("11_Linea16_SinLimite.jpg"),
       l16("12_Linea16_SinLimite.jpg"),
       l16("13_Linea16_SinLimite.jpg"),
-      l16("14_Linea16_SinLimite.jpg"),
     ],
   },
 ];
