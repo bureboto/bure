@@ -91,7 +91,7 @@ export const projects: Project[] = [
     href: "/project11",
     name: "IDF – Inversionista del Futuro",
     date: "2025",
-    cover: "/design/idf/6_IDF.jpg",
+    cover: "/design/idf/9_IDF.jpg",
     description:
       "Branding, landing page y materiales de venta para IDF, el curso de Espacio Cripto para aprender a invertir en criptomonedas desde cero.",
   },
