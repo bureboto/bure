@@ -71,4 +71,12 @@ export const projects: Project[] = [
     description:
       "Linea 16 es una liga de batallas escritas que concentra a los mejores exponentes de hip hop de habla hispana, con identidad urbana y desgastada en amarillo y negro.",
   },
+  {
+    href: "/project9",
+    name: "Linea 16 – Sin Salida",
+    date: "Julio, 2017",
+    cover: "/design/linea16-sinsalida/1_Cover_Linea16_SinLimite.jpg",
+    description:
+      "Rebranding de Linea 16 con un nuevo logotipo tipo escudo deportivo y la línea visual para su evento Callejón Sin Salida, en tonos rojo y negro con texturas urbanas.",
+  },
 ];
