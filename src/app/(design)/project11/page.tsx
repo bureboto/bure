@@ -90,7 +90,7 @@ export default function Project11() {
 
       <EdgeRow items={[idf("10_IDF.jpg"), idf("11_IDF.jpg"), idf("12_IDF.jpg")]} />
 
-      <FullRow src={idf("11_IDF.jpg")} />
+      <FullRow src={idf("16_IDF.jpg")} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
