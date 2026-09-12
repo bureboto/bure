@@ -12,11 +12,7 @@ type Block =
 
 const blocksIntro: Block[] = [{ type: "full", src: l16("1_Cover_Linea16_SinLimite.jpg") }];
 
-const blocksTop: Block[] = [
-  { type: "grid", items: [l16("2_Linea16_SinLimite.jpg"), l16("3_Linea16_SinLimite.jpg")] },
-  { type: "full", src: l16("4_Linea16_SinLimite.jpg") },
-  { type: "full", src: l16("5_Linea16_SinLimite.gif") },
-];
+const blocksTop: Block[] = [{ type: "full", src: l16("5_Linea16_SinLimite.gif") }];
 
 const blocksMid: Block[] = [
   {
@@ -116,6 +112,14 @@ export default function Project9() {
         {blocksIntro.map((block, i) => (
           <MediaBlock key={i} block={block} />
         ))}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <ProjectMedia src={l16("2_Linea16_SinLimite.jpg")} alt="Linea 16 – Sin Salida" />
+        <div className="flex flex-col gap-4">
+          <ProjectMedia src={l16("3_Linea16_SinLimite.jpg")} alt="Linea 16 – Sin Salida" />
+          <ProjectMedia src={l16("4_Linea16_SinLimite.jpg")} alt="Linea 16 – Sin Salida" />
+        </div>
       </div>
 
       <div className="flex flex-col gap-4">
