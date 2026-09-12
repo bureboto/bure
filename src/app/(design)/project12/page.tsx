@@ -51,7 +51,23 @@ export default function Project12() {
         </div>
       </div>
 
-      <EdgeRow items={[bns("4_BNS.png"), bns("5_BNS.mp4"), bns("7_BNS.gif")]} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <ProjectMedia src={bns("4_BNS.png")} alt="The Base Night Show" />
+        <div className="h-full min-h-0">
+          <ProjectMedia
+            src={bns("5_BNS.mp4")}
+            alt="The Base Night Show"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="h-full min-h-0">
+          <ProjectMedia
+            src={bns("7_BNS.gif")}
+            alt="The Base Night Show"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
