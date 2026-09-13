@@ -33,7 +33,9 @@ function EdgeRow({ items }: { items: string[] }) {
   );
 }
 
-const socialGrid = Array.from({ length: 12 }, (_, i) => robotos(`${17 + i}_Robotos.mp4`));
+const socialGrid = [16, 20, 21, 22, 23, 24, 25, 26, 27, 29, 30, 28].map((n) =>
+  robotos(`${n}_Robotos.mp4`)
+);
 
 export default function Project13() {
   return (
@@ -146,7 +148,7 @@ export default function Project13() {
         <p className="text-sm text-black/70">Sistema de diseño para Social Media.</p>
       </div>
 
-      <EdgeRow items={[robotos("15_Robotos.mp4"), robotos("16_Robotos.mp4")]} />
+      <EdgeRow items={[robotos("15_Robotos.mp4"), robotos("14_Robotos.mp4")]} />
 
       <div className="flex flex-col gap-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
