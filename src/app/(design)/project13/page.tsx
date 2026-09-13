@@ -95,7 +95,7 @@ export default function Project13() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <EdgeRow items={[robotos("4_Robotos.mp4"), robotos("5_Robotos.mp4")]} />
+        <EdgeRow items={[robotos("18_Robotos.mp4"), robotos("17_Robotos.mp4")]} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70 text-sm">
           <p>Contenido para el anuncio de Robopets</p>
           <p>La colección en un billboard en NY.</p>
@@ -103,14 +103,12 @@ export default function Project13() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <EdgeRow
-          items={[
-            robotos("11_Robotos.mp4"),
-            robotos("12_Robotos.mp4"),
-            robotos("13_Robotos.mp4"),
-            robotos("14_Robotos.mp4"),
-          ]}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
+          <ProjectMedia src={robotos("2_Robotos.mp4")} alt="Robotos" />
+          <ProjectMedia src={robotos("3_Robotos.mp4")} alt="Robotos" />
+          <ProjectMedia src={robotos("4_Robotos.mp4")} alt="Robotos" />
+          <ProjectMedia src={robotos("5_Robotos.mp4")} alt="Robotos" />
+        </div>
         <p className="text-sm text-black/70">
           Los personajes salieron de la pantalla y junto con el equipo, los plasmamos en pared.
         </p>
