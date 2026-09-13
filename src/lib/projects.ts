@@ -107,7 +107,7 @@ export const projects: Project[] = [
     href: "/project13",
     name: "Robotos",
     date: "2021–2024",
-    cover: "/design/robotos/1_Robotos.webp",
+    cover: "/design/robotos/0_Cover_Robotos.jpg",
     description:
       "Robotos NFTs es una colección de 10,000 personajes únicos creada por Pablo Stanley. Sistemas de diseño, ilustración y motion para la marca y su colección derivada Robopets.",
   },
