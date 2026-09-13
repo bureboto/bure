@@ -177,13 +177,11 @@ export default function Project13() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <EdgeRow items={[robotos("29_Robotos.mp4"), robotos("30_Robotos.mp4")]} />
+        <EdgeRow items={[robotos("11_Robotos.mp4"), robotos("12_Robotos.mp4")]} />
         <p className="text-sm text-black/70">
           Sistema de diseño para trajes y fondos intercambiables
         </p>
       </div>
-
-      <FullRow src={robotos("31_Robotos.mp4")} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
