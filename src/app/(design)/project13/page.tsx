@@ -64,9 +64,11 @@ export default function Project13() {
 
       <ProjectMedia src={robotos("1_Robotos.webp")} alt="Robotos" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <ProjectMedia src={robotos("2_Robotos.mp4")} alt="Robotos" />
-        <ProjectMedia src={robotos("3_Robotos.mp4")} alt="Robotos" />
+      <div className="grid grid-cols-1 md:grid-cols-6">
+        <div className="md:col-start-2 md:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <ProjectMedia src={robotos("19_Robotos.mp4")} alt="Robotos" />
+          <ProjectMedia src={robotos("31_Robotos.mp4")} alt="Robotos" />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
