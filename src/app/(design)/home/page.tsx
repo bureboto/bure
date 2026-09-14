@@ -78,7 +78,6 @@ export default function DesignHome() {
             >
               linkedin.com/in/bureboto
             </a>
-            <p>Formación – Universidad Insurgentes (2010-2013)</p>
           </div>
         </div>
 
@@ -127,7 +126,7 @@ export default function DesignHome() {
             <div key={item.company} className="w-72 flex flex-col gap-3 relative">
               <span className="absolute -top-[35px] left-0 w-2 h-2 rounded-full bg-black" />
               <h3 className="text-lg">
-                {item.company} <span className="text-sm text-black/60">({item.years})</span>
+                <span className="text-sm text-black/60">({item.years})</span> {item.company}
               </h3>
               <p className="text-sm text-black/70">{item.description}</p>
             </div>
