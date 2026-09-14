@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import DesignHeader from "@/components/DesignHeader";
+import FloatingHeader from "@/components/FloatingHeader";
 
 export const metadata: Metadata = {
   title: "Bure Design",
@@ -13,6 +14,7 @@ export default function DesignLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-white text-black">
         <DesignHeader />
         <main className="flex-1 flex flex-col">{children}</main>
+        <FloatingHeader />
       </body>
     </html>
   );
