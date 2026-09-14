@@ -41,7 +41,7 @@ const blocksBottom: Block[] = [
 function MediaBlock({ block }: { block: Block }) {
   if (block.type === "full") {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-6">
+      <div className="grid items-center grid-cols-1 md:grid-cols-6">
         <div className="md:col-start-2 md:col-span-4">
           <ProjectMedia src={block.src} alt="Linea 16 – Sin Salida" />
         </div>
@@ -51,7 +51,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   if (block.type === "split") {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2 h-full min-h-0">
           <ProjectMedia
             src={block.left}
@@ -70,7 +70,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   return (
     <div
-      className={`grid grid-cols-1 gap-4 ${
+      className={`grid items-center grid-cols-1 gap-4 ${
         block.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
       }`}
     >
@@ -118,7 +118,7 @@ export default function Project9() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-4">
         <ProjectMedia src={l16("2_Linea16_SinLimite.jpg")} alt="Linea 16 – Sin Salida" />
         <div className="flex flex-col gap-4">
           <ProjectMedia src={l16("3_Linea16_SinLimite.jpg")} alt="Linea 16 – Sin Salida" />

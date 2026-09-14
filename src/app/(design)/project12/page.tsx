@@ -8,7 +8,7 @@ const bns = (file: string) => `/design/base/${file}`;
 function EdgeRow({ items }: { items: string[] }) {
   return (
     <div
-      className={`grid grid-cols-1 gap-4 ${
+      className={`grid items-center grid-cols-1 gap-4 ${
         items.length === 2 ? "md:grid-cols-2" : items.length === 3 ? "md:grid-cols-3" : "md:grid-cols-4"
       }`}
     >
@@ -51,7 +51,7 @@ export default function Project12() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-3 gap-4">
         <ProjectMedia src={bns("4_BNS.png")} alt="The Base Night Show" />
         <div className="h-full min-h-0">
           <ProjectMedia
@@ -87,7 +87,7 @@ export default function Project12() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-4">
         <ProjectMedia src={bns("6_BNS.mp4")} alt="The Base Night Show" />
         <div className="flex flex-col gap-4">
           <ProjectMedia src={bns("9_BNS.mp4")} alt="The Base Night Show" />

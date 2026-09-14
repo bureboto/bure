@@ -35,7 +35,7 @@ const blocksMid: Block[] = [
 function MediaBlock({ block }: { block: Block }) {
   if (block.type === "full") {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-6">
+      <div className="grid items-center grid-cols-1 md:grid-cols-6">
         <div className="md:col-start-2 md:col-span-4">
           <ProjectMedia src={block.src} alt="Linea 16 – Sin limite" />
         </div>
@@ -45,7 +45,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   if (block.type === "split") {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2">
           <ProjectMedia src={block.left} alt="Linea 16 – Sin limite" />
         </div>
@@ -60,7 +60,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   return (
     <div
-      className={`grid grid-cols-1 gap-4 ${
+      className={`grid items-center grid-cols-1 gap-4 ${
         block.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-2 md:grid-rows-2"
       }`}
     >

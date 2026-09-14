@@ -7,7 +7,7 @@ const robotos = (file: string) => `/design/robotos/${file}`;
 
 function FullRow({ src }: { src: string }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-6">
+    <div className="grid items-center grid-cols-1 md:grid-cols-6">
       <div className="md:col-start-2 md:col-span-4">
         <ProjectMedia src={src} alt="Robotos" />
       </div>
@@ -18,7 +18,7 @@ function FullRow({ src }: { src: string }) {
 function EdgeRow({ items }: { items: string[] }) {
   return (
     <div
-      className={`grid grid-cols-1 gap-4 ${
+      className={`grid items-center grid-cols-1 gap-4 ${
         items.length === 2
           ? "md:grid-cols-2"
           : items.length === 3
@@ -66,8 +66,8 @@ export default function Project13() {
 
       <ProjectMedia src={robotos("1_Robotos.webp")} alt="Robotos" />
 
-      <div className="grid grid-cols-1 md:grid-cols-6">
-        <div className="md:col-start-2 md:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-6">
+        <div className="md:col-start-2 md:col-span-4 grid items-center grid-cols-1 md:grid-cols-2 gap-4">
           <ProjectMedia src={robotos("19_Robotos.mp4")} alt="Robotos" />
           <ProjectMedia src={robotos("31_Robotos.mp4")} alt="Robotos" />
         </div>
@@ -105,7 +105,7 @@ export default function Project13() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-0">
+        <div className="grid items-center grid-cols-1 md:grid-cols-4 gap-0">
           <ProjectMedia src={robotos("2_Robotos.mp4")} alt="Robotos" />
           <ProjectMedia src={robotos("3_Robotos.mp4")} alt="Robotos" />
           <ProjectMedia src={robotos("4_Robotos.mp4")} alt="Robotos" />
@@ -151,7 +151,7 @@ export default function Project13() {
       <EdgeRow items={[robotos("15_Robotos.mp4"), robotos("14_Robotos.mp4")]} />
 
       <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid items-center grid-cols-2 md:grid-cols-4 gap-4">
           {socialGrid.map((src) => (
             <ProjectMedia key={src} src={src} alt="Robotos" />
           ))}

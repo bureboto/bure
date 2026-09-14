@@ -46,7 +46,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   if (block.type === "split") {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2">
           <ProjectMedia src={block.left} alt="Bando" />
         </div>
@@ -61,7 +61,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   if (block.type === "matchHeight") {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-4">
         <div className="h-full min-h-0">
           <ProjectMedia src={block.cover} alt="Bando" className="w-full h-full object-cover" />
         </div>
@@ -71,7 +71,7 @@ function MediaBlock({ block }: { block: Block }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-4">
       {block.items.map((src) => (
         <ProjectMedia key={src} src={src} alt="Bando" />
       ))}
