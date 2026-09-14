@@ -8,7 +8,16 @@ const gandum = (file: string) => `/design/gandum/${file}`;
 type Block =
   | { type: "full"; src: string; caption?: string }
   | { type: "grid"; items: string[]; caption?: string }
-  | { type: "split"; left: string; right: string; caption?: string; noGap?: boolean; matchHeight?: boolean };
+  | {
+      type: "split";
+      left: string;
+      right: string;
+      caption?: string;
+      noGap?: boolean;
+      matchHeight?: boolean;
+      equal?: boolean;
+    }
+  | { type: "stackSplit"; stack: string[]; right: string; caption?: string };
 
 const blocks: Block[] = [
   {
@@ -19,13 +28,16 @@ const blocks: Block[] = [
     noGap: true,
     matchHeight: true,
   },
-  { type: "split", left: gandum("3_Gandum.jpg"), right: gandum("10_Gandum.jpg"), caption: "Detalle de la imagen" },
-  { type: "full", src: gandum("4_Gandum.jpg") },
+  {
+    type: "stackSplit",
+    stack: [gandum("3_Gandum.jpg"), gandum("4_Gandum.jpg")],
+    right: gandum("5_Gandum.mp4"),
+  },
+  { type: "split", left: gandum("6_Gandum.mp4"), right: gandum("7_Gandum.mp4"), matchHeight: true, equal: true },
+  { type: "split", left: gandum("9_Gandum.mp4"), right: gandum("10_Gandum.mp4"), matchHeight: true, equal: true },
   { type: "full", src: gandum("8_Gandum.jpg"), caption: "Detalle de la imagen" },
   { type: "grid", items: [gandum("11_Gandum.jpg"), gandum("12_Gandum.jpg"), gandum("13_Gandum.jpg")] },
   { type: "full", src: gandum("14_Gandum.jpg"), caption: "Detalle de la imagen" },
-  { type: "grid", items: [gandum("5_Gandum.mp4"), gandum("6_Gandum.mp4")] },
-  { type: "grid", items: [gandum("7_Gandum.mp4"), gandum("9_Gandum.mp4")], caption: "Detalle de la imagen" },
 ];
 
 export default function Project2() {
@@ -57,16 +69,36 @@ export default function Project2() {
           <div key={i} className="flex flex-col gap-3">
             {block.type === "full" && <ProjectMedia src={block.src} alt="Gandum" />}
             {block.type === "split" && (
-              <div className={`grid grid-cols-1 md:grid-cols-3 ${block.noGap ? "gap-0" : "gap-4"}`}>
-                <div className="md:col-span-2">
+              <div
+                className={`grid grid-cols-1 ${block.equal ? "md:grid-cols-2" : "md:grid-cols-3"} ${
+                  block.noGap ? "gap-0" : "gap-4"
+                }`}
+              >
+                <div className={block.equal ? "" : "md:col-span-2"}>
                   <ProjectMedia src={block.left} alt="Gandum" />
                 </div>
-                <div className={`md:col-span-1 ${block.matchHeight ? "h-full min-h-0" : ""}`}>
+                <div
+                  className={`${block.equal ? "" : "md:col-span-1"} ${
+                    block.matchHeight ? "h-full min-h-0" : ""
+                  }`}
+                >
                   <ProjectMedia
                     src={block.right}
                     alt="Gandum"
                     className={block.matchHeight ? "w-full h-full object-cover" : undefined}
                   />
+                </div>
+              </div>
+            )}
+            {block.type === "stackSplit" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-4">
+                  {block.stack.map((src) => (
+                    <ProjectMedia key={src} src={src} alt="Gandum" />
+                  ))}
+                </div>
+                <div className="h-full min-h-0">
+                  <ProjectMedia src={block.right} alt="Gandum" className="w-full h-full object-cover" />
                 </div>
               </div>
             )}
