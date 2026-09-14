@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
 
@@ -101,8 +102,16 @@ export default function DesignHome() {
           </a>
         </div>
 
-        <div className="flex md:justify-end items-start">
-          <div className="w-40 h-40 md:w-48 md:h-48 rounded-full bg-black" />
+        <div className="flex items-center justify-center">
+          <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden">
+            <Image
+              src="/design/profile/pfp-bure.jpg"
+              alt="Bure"
+              width={192}
+              height={192}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </section>
 
