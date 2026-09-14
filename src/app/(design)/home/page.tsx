@@ -38,6 +38,11 @@ const timeline = [
     years: "2010-2013",
     description: "Cursé la licenciatura en Diseño Gráfico en la Ciudad de México.",
   },
+  {
+    company: "Nací :)",
+    years: "1992",
+    description: "",
+  },
 ];
 
 export default function DesignHome() {
@@ -120,7 +125,7 @@ export default function DesignHome() {
       </section>
 
       {/* Timeline */}
-      <section className="overflow-x-auto -mr-[28px] pt-2">
+      <section className="overflow-x-auto scrollbar-hidden -mr-[28px] pt-2">
         <div className="flex min-w-max border-t border-black/20 pt-8 gap-16">
           {timeline.map((item) => (
             <div key={item.company} className="w-72 flex flex-col gap-3 relative">
