@@ -31,7 +31,8 @@ export default function ProjectCard({ project }: { project: Project }) {
           <p className="font-bold">
             {project.name}. {project.date}.
           </p>
-          <div className="flex flex-wrap justify-end gap-2 shrink-0">
+          {/* Tags hidden for now — kept in data for future catalog/filtering */}
+          <div className="hidden flex-wrap justify-end gap-2 shrink-0">
             {project.tags.map((tag) => (
               <span
                 key={tag}
