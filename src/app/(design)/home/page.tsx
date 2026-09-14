@@ -25,13 +25,18 @@ const timeline = [
     company: "INE (Instituto Nacional Electoral)",
     years: "2015-2018",
     description:
-      "Lideré un equipo de diseño interno, para las elecciones nacionales de México en el 2018.",
+      "Estuve como UX/UI en el equipo que dio un rediseño al sitio web principal, posterior lideré un equipo de diseño interno, para las elecciones nacionales de México en el 2018.",
   },
   {
     company: "Despacho de diseño",
     years: "2013-2015",
     description:
-      "Mi primer acercamiento al diseño profesional. Empecé haciendo branding y diseño web, justo donde empezó a tomar fuerza como disciplina.",
+      "Mi primer acercamiento al diseño profesional. Empecé haciendo branding y diseño web, justo aquí es donde el UX/UI empezó a tomar fuerza en mi carrera.",
+  },
+  {
+    company: "Universidad Insurgentes",
+    years: "2010-2013",
+    description: "Cursé la licenciatura en Diseño Gráfico en la Ciudad de México.",
   },
 ];
 
@@ -61,7 +66,7 @@ export default function DesignHome() {
             </div>
             <div className="flex flex-col gap-1 text-black/70">
               <span>Español (Nativo)</span>
-              <span>Ingles (Avanzado)</span>
+              <span>Inglés (B1)</span>
             </div>
           </div>
           <div className="text-sm text-black/70">
