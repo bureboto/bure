@@ -1,4 +1,6 @@
 import Link from "next/link";
+import CVLink from "@/components/CVLink";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export default function HeaderContent() {
   return (
@@ -8,14 +10,8 @@ export default function HeaderContent() {
         <img src="/logo.svg" alt="Bure" width={77} height={20} />
       </Link>
       <div className="flex items-center gap-4">
-        <a
-          href="/cv.pdf"
-          target="_blank"
-          rel="noreferrer"
-          className="text-sm border border-black/20 rounded-full px-4 py-1.5 hover:bg-black hover:text-white transition-colors"
-        >
-          Descargar CV
-        </a>
+        <LanguageToggle />
+        <CVLink className="text-sm border border-black/20 rounded-full px-4 py-1.5 hover:bg-black hover:text-white transition-colors" />
         <a
           href="https://www.linkedin.com/in/bureboto/"
           target="_blank"

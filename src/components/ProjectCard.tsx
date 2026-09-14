@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const { language } = useLanguage();
+
   return (
     <Link href={project.href} className="flex flex-col gap-3 group">
       {project.cover ? (
@@ -43,7 +48,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
         </div>
-        <p className="text-sm text-black/70">{project.description}</p>
+        <p className="text-sm text-black/70">{project.description[language]}</p>
       </div>
     </Link>
   );
