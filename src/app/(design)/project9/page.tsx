@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const l16 = (file: string) => `/design/linea16-sinsalida/${file}`;
 
@@ -82,32 +85,36 @@ function MediaBlock({ block }: { block: Block }) {
 }
 
 export default function Project9() {
+  const { language } = useLanguage();
+  const isEs = language === "es";
+
   return (
     <ContentGrid className="pb-16 flex flex-col gap-10">
       <div className="flex flex-col gap-4 pt-6">
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
-          ← Volver
+          {isEs ? "← Volver" : "← Back"}
         </Link>
         <div className="flex items-baseline gap-3 flex-wrap">
           <h1 className="text-2xl">Linea 16 – Sin Salida</h1>
-          <span className="text-sm text-black/60">Julio, 2017 · Brand</span>
+          <span className="text-sm text-black/60">{isEs ? "Julio, 2017 · Brand" : "July, 2017 · Brand"}</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
           <div>
             <p>
-              Linea 16 es una liga de batallas escritas, concentra a los mejores escritores de
-              hip-hop de habla hispana.
+              {isEs
+                ? "Linea 16 es una liga de batallas escritas, concentra a los mejores escritores de hip-hop de habla hispana."
+                : "Linea 16 is a written battle rap league, bringing together the best Spanish-speaking hip-hop writers."}
             </p>
             <p className="mt-4">
-              La idea original de Linea 16 fue darle una dimensión más teatral a las batallas,
-              incorporando elementos que en su momento fueron novedosos —y que después se
-              convirtieron en estándar—, como establecer un round a capela, otro con beat y un
-              tercero libre, en el que los participantes tienen total libertad creativa.
+              {isEs
+                ? "La idea original de Linea 16 fue darle una dimensión más teatral a las batallas, incorporando elementos que en su momento fueron novedosos —y que después se convirtieron en estándar—, como establecer un round a capela, otro con beat y un tercero libre, en el que los participantes tienen total libertad creativa."
+                : "Linea 16's original idea was to give battles a more theatrical dimension, incorporating elements that were novel at the time — and later became standard — like setting up an a capella round, another with a beat, and a third free round, where participants have total creative freedom."}
             </p>
           </div>
           <p>
-            A esto se sumó la intención de dotar a los enfrentamientos de una narrativa que
-            trascendiera la tarima, dándole un componente dramático a cada batalla.
+            {isEs
+              ? "A esto se sumó la intención de dotar a los enfrentamientos de una narrativa que trascendiera la tarima, dándole un componente dramático a cada batalla."
+              : "Added to this was the intention of giving the battles a narrative that transcended the stage, giving each battle a dramatic component."}
           </p>
         </div>
       </div>
@@ -135,18 +142,16 @@ export default function Project9() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
           <p>
-            El proyecto llegó a mí en la búsqueda de evolucionar su marca, buscaban un logotipo
-            nuevo que proyectará a las batallas escritas como un deporte de alto rendimiento, así
-            que exploramos por el estilo de los logotipos de básquetbol, jugando con ángulos
-            afilados y alto contraste.
+            {isEs
+              ? "El proyecto llegó a mí en la búsqueda de evolucionar su marca, buscaban un logotipo nuevo que proyectará a las batallas escritas como un deporte de alto rendimiento, así que exploramos por el estilo de los logotipos de básquetbol, jugando con ángulos afilados y alto contraste."
+              : "The project came to me in the search to evolve their brand — they wanted a new logo that would project written battles as a high-performance sport, so we explored basketball-style logos, playing with sharp angles and high contrast."}
           </p>
         </div>
         <div>
           <p>
-            De igual forma ya tenían en puerta el siguiente evento, así que una vez terminado el
-            logotipo, se diseñó la línea visual del evento. Apuntamos por un estilo urbano,
-            rojizo, usando las texturas de la calle, las paredes y grafitos con las texturas del
-            aerosol.
+            {isEs
+              ? "De igual forma ya tenían en puerta el siguiente evento, así que una vez terminado el logotipo, se diseñó la línea visual del evento. Apuntamos por un estilo urbano, rojizo, usando las texturas de la calle, las paredes y grafitos con las texturas del aerosol."
+              : "They also already had their next event coming up, so once the logo was finished, we designed the event's visual line. We went for an urban, reddish style, using street textures, walls, and graffiti with spray-paint textures."}
           </p>
         </div>
       </div>
@@ -160,16 +165,16 @@ export default function Project9() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
           <p>
-            Moodboards, para tener referencias de otros eventos de este tipo que se hayan
-            realizado, principalmente busqué referencias en acomodo de información de Red Bull
-            Batalla de los Gallos.
+            {isEs
+              ? "Moodboards, para tener referencias de otros eventos de este tipo que se hayan realizado, principalmente busqué referencias en acomodo de información de Red Bull Batalla de los Gallos."
+              : "Moodboards, to have references from other events of this kind that had taken place — I mainly looked for references in how Red Bull Batalla de los Gallos organized their information."}
           </p>
         </div>
         <div>
           <p>
-            Con el tema del hip-hop y el graffiti me sentía muy cómodo, ya que era un ámbito muy
-            cercano a mí, en esos años hacía graffiti y el hip-hop era de la música que más
-            escuchaba.
+            {isEs
+              ? "Con el tema del hip-hop y el graffiti me sentía muy cómodo, ya que era un ámbito muy cercano a mí, en esos años hacía graffiti y el hip-hop era de la música que más escuchaba."
+              : "I felt very comfortable with the hip-hop and graffiti theme, since it was a world very close to me — in those years I did graffiti and hip-hop was the music I listened to most."}
           </p>
         </div>
       </div>
@@ -182,20 +187,21 @@ export default function Project9() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
-          <h2 className="font-bold text-black mb-2">Resultado</h2>
+          <h2 className="font-bold text-black mb-2">{isEs ? "Resultado" : "Result"}</h2>
           <p>
-            Se obtuvo brand kit, materiales para redes sociales, impresos y propuestas de merch.
+            {isEs
+              ? "Se obtuvo brand kit, materiales para redes sociales, impresos y propuestas de merch."
+              : "We produced a brand kit, materials for social media, printed pieces, and merch proposals."}
           </p>
         </div>
         <div>
           <p>
-            En esos años fue mi primer proyecto grande, de un gran impacto a nivel nacional e
-            internacional en el ámbito del hip-hop, puedo decir que fue el proyecto que me dio
-            mucha seguridad para confiar en lo que hacía, ya que el equipo de Linea 16 me dio
-            toda la confianza de hacerlo.
+            {isEs
+              ? "En esos años fue mi primer proyecto grande, de un gran impacto a nivel nacional e internacional en el ámbito del hip-hop, puedo decir que fue el proyecto que me dio mucha seguridad para confiar en lo que hacía, ya que el equipo de Linea 16 me dio toda la confianza de hacerlo."
+              : "Back in those years this was my first big project, with a huge impact nationally and internationally within the hip-hop scene — I can say it was the project that gave me a lot of confidence to trust what I was doing, since the Linea 16 team gave me all the confidence to do it."}
           </p>
           <p className="mt-4">
-            Youtube channel (
+            {isEs ? "Canal de Youtube (" : "Youtube channel ("}
             <a
               href="https://www.youtube.com/@lineadieciseis"
               target="_blank"

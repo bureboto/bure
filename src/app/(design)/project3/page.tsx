@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const espacio = (file: string) => `/design/espacio/${file}`;
 
@@ -48,21 +51,23 @@ function MediaBlock({ block }: { block: Block }) {
 }
 
 export default function Project3() {
+  const { language } = useLanguage();
+  const isEs = language === "es";
+
   return (
     <ContentGrid className="pb-16 flex flex-col gap-10">
       <div className="flex flex-col gap-4 pt-6">
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
-          ← Volver
+          {isEs ? "← Volver" : "← Back"}
         </Link>
         <div className="flex items-baseline gap-3 flex-wrap">
           <h1 className="text-2xl">Espacio</h1>
-          <span className="text-sm text-black/60">Marzo, 2026 · Brand / UI / Motion</span>
+          <span className="text-sm text-black/60">{isEs ? "Marzo, 2026 · Brand / UI / Motion" : "March, 2026 · Brand / UI / Motion"}</span>
         </div>
         <p className="max-w-2xl text-black/70">
-          Espacio es una media company que hace contenido y difusión sobre finanzas y
-          tecnologías emergentes, empezó como Espacio Cripto y evolucionó a Espacio. Cuenta
-          con una gran comunidad hispanohablante que empezó en el mundo cripto y ha
-          ampliando sus horizontes.
+          {isEs
+            ? "Espacio es una media company que hace contenido y difusión sobre finanzas y tecnologías emergentes, empezó como Espacio Cripto y evolucionó a Espacio. Cuenta con una gran comunidad hispanohablante que empezó en el mundo cripto y ha ampliando sus horizontes."
+            : "Espacio is a media company that creates and distributes content about finance and emerging technologies. It started out as Espacio Cripto and evolved into Espacio. It has a large Spanish-speaking community that started in the crypto world and has since broadened its horizons."}
         </p>
       </div>
 
@@ -74,26 +79,30 @@ export default function Project3() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
-          <h2 className="font-bold text-black mb-2">Mi aporte</h2>
+          <h2 className="font-bold text-black mb-2">{isEs ? "Mi aporte" : "My contribution"}</h2>
           <p>
-            Lideré el proyecto del rebranding de la marca, la marca se llamaba Espacio
-            Cripto y evolucionó al tal punto que solo debía llamarse Espacio, ampliando sus
-            horizontes.
+            {isEs
+              ? "Lideré el proyecto del rebranding de la marca, la marca se llamaba Espacio Cripto y evolucionó al tal punto que solo debía llamarse Espacio, ampliando sus horizontes."
+              : "I led the brand's rebranding project. The brand was called Espacio Cripto and evolved to the point where it only needed to be called Espacio, broadening its horizons."}
           </p>
           <p className="mt-4">
-            Espacio cripto ya era una marca posicionada dentro del ámbito tecnológico y
-            cripto, por lo que la evolución de marca debía de mantener su esencia y probar
-            de mantener consistente la curva de adopción del re-name.
+            {isEs
+              ? "Espacio cripto ya era una marca posicionada dentro del ámbito tecnológico y cripto, por lo que la evolución de marca debía de mantener su esencia y probar de mantener consistente la curva de adopción del re-name."
+              : "Espacio Cripto was already a well-positioned brand within the tech and crypto space, so the brand's evolution had to keep its essence and try to keep the adoption curve of the rename consistent."}
           </p>
         </div>
         <div>
-          <h2 className="font-bold text-black mb-2">Colaboradores</h2>
+          <h2 className="font-bold text-black mb-2">{isEs ? "Colaboradores" : "Collaborators"}</h2>
           <p>
-            El principal objetivo de esto fue ampliar los horizontes y posicionamiento de la
-            marca, crear un sistema visual el cual pueda ser escalable a todos los soportes
-            donde tuviera presencia la marca.
+            {isEs
+              ? "El principal objetivo de esto fue ampliar los horizontes y posicionamiento de la marca, crear un sistema visual el cual pueda ser escalable a todos los soportes donde tuviera presencia la marca."
+              : "The main objective was to broaden the brand's horizons and positioning, creating a visual system that could scale across every touchpoint where the brand had a presence."}
           </p>
-          <p className="mt-4">Todo esto lo lleve de la mano con Alo y Lalo, fundadores del proyecto.</p>
+          <p className="mt-4">
+            {isEs
+              ? "Todo esto lo lleve de la mano con Alo y Lalo, fundadores del proyecto."
+              : "I carried all of this out hand in hand with Alo and Lalo, the project's founders."}
+          </p>
         </div>
       </div>
 
@@ -105,42 +114,37 @@ export default function Project3() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
-          <h2 className="font-bold text-black mb-2">Proceso</h2>
+          <h2 className="font-bold text-black mb-2">{isEs ? "Proceso" : "Process"}</h2>
           <p>
-            Se hizo una recopilación de todas las piezas de contenido que emanaba la marca,
-            fueron depurando y acotando por prioridades y usos, de ahí se fueron definiendo
-            fonts, paleta de colores e iconos para partir a diseñar el sistema visual, esto
-            fue aplicando tanto para físico como digital, aplicativos y motion graphics.
+            {isEs
+              ? "Se hizo una recopilación de todas las piezas de contenido que emanaba la marca, fueron depurando y acotando por prioridades y usos, de ahí se fueron definiendo fonts, paleta de colores e iconos para partir a diseñar el sistema visual, esto fue aplicando tanto para físico como digital, aplicativos y motion graphics."
+              : "We compiled all the content pieces the brand had produced, refining and narrowing them down by priority and use. From there we defined fonts, color palette, and icons to start designing the visual system, applying it to both physical and digital, apps, and motion graphics."}
           </p>
         </div>
         <div>
           <p>
-            Espacio ya es una marca muy posicionada en su nicho, ya tenía un camino
-            recorrido, por lo que buscabamos actualizar los contenidos ya generados por
-            ahora con el nuevo brand hecho para dominar la curva de adopción y no dar la
-            sensación de que era una cosa totalmente diferente a lo que estaba acostumbrado
-            al público.
+            {isEs
+              ? "Espacio ya es una marca muy posicionada en su nicho, ya tenía un camino recorrido, por lo que buscabamos actualizar los contenidos ya generados por ahora con el nuevo brand hecho para dominar la curva de adopción y no dar la sensación de que era una cosa totalmente diferente a lo que estaba acostumbrado al público."
+              : "Espacio is already a well-positioned brand in its niche, with a track record behind it, so we sought to update the content already produced with the new brand in a way that mastered the adoption curve without feeling like a completely different thing than what the audience was used to."}
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
-          <h2 className="font-bold text-black mb-2">Resultado</h2>
+          <h2 className="font-bold text-black mb-2">{isEs ? "Resultado" : "Result"}</h2>
           <p>
-            Se entregó un brand kit, con la definición básica de fonts, paleta de colores,
-            plantillas para contenido on/off line, UI Kit, motion graphics y aplicaciones
-            para merch física.
+            {isEs
+              ? "Se entregó un brand kit, con la definición básica de fonts, paleta de colores, plantillas para contenido on/off line, UI Kit, motion graphics y aplicaciones para merch física."
+              : "We delivered a brand kit with the basic definition of fonts, color palette, templates for on/off-line content, a UI Kit, motion graphics, and applications for physical merch."}
           </p>
         </div>
         <div>
-          <h2 className="font-bold text-black mb-2">Aprendizaje</h2>
+          <h2 className="font-bold text-black mb-2">{isEs ? "Aprendizaje" : "Learnings"}</h2>
           <p>
-            Llevar un re-branding de principio a fin, entender el origen de una marca, saber
-            cual ha sido su evolución y a donde apunta, fue una gran experiencia, desde el
-            recopilar información, buscar referencias, descartar todo lo que ibas
-            encontrando hasta llegar a lo que estabas buscando, fue muy enriquecedor. Sin
-            duda ha sido uno de mis proyectos favoritos.
+            {isEs
+              ? "Llevar un re-branding de principio a fin, entender el origen de una marca, saber cual ha sido su evolución y a donde apunta, fue una gran experiencia, desde el recopilar información, buscar referencias, descartar todo lo que ibas encontrando hasta llegar a lo que estabas buscando, fue muy enriquecedor. Sin duda ha sido uno de mis proyectos favoritos."
+              : "Carrying a rebranding from start to finish, understanding a brand's origin, knowing its evolution and where it's headed, was a great experience — from gathering information to searching for references, discarding everything along the way until reaching what I was looking for, it was very enriching. Without a doubt one of my favorite projects."}
           </p>
           <p className="mt-4">
             WEB (

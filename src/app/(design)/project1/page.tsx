@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const musho = (file: string) => `/design/musho/${file}`;
 
@@ -18,12 +21,19 @@ const blocks: Block[] = [
   { type: "grid", items: [musho("10_Musho.jpg"), musho("11_Musho.jpg")], caption: "Detalle de la imagen" },
 ];
 
+const captionEn: Record<string, string> = {
+  "Detalle de la imagen": "Image detail",
+};
+
 export default function Project1() {
+  const { language } = useLanguage();
+  const isEs = language === "es";
+
   return (
     <ContentGrid className="pb-16 flex flex-col gap-10">
       <div className="flex flex-col gap-4 pt-6">
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
-          ← Volver
+          {isEs ? "← Volver" : "← Back"}
         </Link>
         <div className="flex items-baseline gap-3 flex-wrap">
           <h1 className="text-2xl">Musho.ai</h1>
@@ -34,7 +44,9 @@ export default function Project1() {
           media posts, slides, and more — effortlessly. Tell Musho your vision and bring it to
           reality to fast-track your creative process.
         </p>
-        <p className="text-sm text-black/60">Diseño en colaboración con Sjord and Musho team.</p>
+        <p className="text-sm text-black/60">
+          {isEs ? "Diseño en colaboración con Sjord and Musho team." : "Design in collaboration with Sjord and the Musho team."}
+        </p>
       </div>
 
       <div className="flex flex-col gap-4">
@@ -53,7 +65,9 @@ export default function Project1() {
                 ))}
               </div>
             )}
-            {block.caption && <p className="text-sm text-black/50">{block.caption}</p>}
+            {block.caption && (
+              <p className="text-sm text-black/50">{isEs ? block.caption : captionEn[block.caption] ?? block.caption}</p>
+            )}
           </div>
         ))}
       </div>
