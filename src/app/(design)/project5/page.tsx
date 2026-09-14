@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const prado = (file: string) => `/design/prado/${file}`;
 
@@ -41,23 +44,28 @@ function MediaBlock({ block }: { block: Block }) {
 }
 
 export default function Project5() {
+  const { language } = useLanguage();
+  const isEs = language === "es";
+
   return (
     <ContentGrid className="pb-16 flex flex-col gap-10">
       <div className="flex flex-col gap-4 pt-6">
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
-          ← Volver
+          {isEs ? "← Volver" : "← Back"}
         </Link>
         <div className="flex items-baseline gap-3 flex-wrap">
           <h1 className="text-2xl">El Prado</h1>
-          <span className="text-sm text-black/60">Marzo, 2025 · Brand</span>
+          <span className="text-sm text-black/60">{isEs ? "Marzo, 2025 · Brand" : "March, 2025 · Brand"}</span>
         </div>
         <p className="max-w-2xl text-black/70">
-          Plásticos El Prado, es una empresa dedicada a la venta de artículos de limpieza y
-          empaque para hogar y oficina, hacen distribución en todo México. Su principal
-          punto de venta es online.
+          {isEs
+            ? "Plásticos El Prado, es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, hacen distribución en todo México. Su principal punto de venta es online."
+            : "Plásticos El Prado is a company dedicated to selling cleaning and packaging products for home and office, distributing across all of Mexico. Its main sales channel is online."}
         </p>
         <p className="text-black/70">
-          Tuve el proyecto de llevar el re-branding de marca para llamarse El Prado.
+          {isEs
+            ? "Tuve el proyecto de llevar el re-branding de marca para llamarse El Prado."
+            : "I took on the project of leading the brand's rebranding to be called El Prado."}
         </p>
       </div>
 
@@ -70,29 +78,43 @@ export default function Project5() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
           <p>
-            La marca llevaba varios ya varios años posicionada como una empresa lider en la
-            venta y distribución de productos para la limpieza y empaque en todo México,
-            pero su nombre tenia el tema, la palabra &quot;Plásticos&quot; y ellos
-            comenzaban a tener más de plásticos, productos ecológicos, de papel y otros
-            lejos del plástico, entonces decidieron hacer una actualización a su nombre,
-            dejando de la lado el &quot;Plásticos&quot; y solo llamarse &quot;El
-            Prado&quot; conservando su esencia y ampliando los horizontes.
+            {isEs ? (
+              <>
+                La marca llevaba varios ya varios años posicionada como una empresa lider en la
+                venta y distribución de productos para la limpieza y empaque en todo México, pero
+                su nombre tenia el tema, la palabra &quot;Plásticos&quot; y ellos comenzaban a
+                tener más de plásticos, productos ecológicos, de papel y otros lejos del plástico,
+                entonces decidieron hacer una actualización a su nombre, dejando de la lado el
+                &quot;Plásticos&quot; y solo llamarse &quot;El Prado&quot; conservando su esencia y
+                ampliando los horizontes.
+              </>
+            ) : (
+              <>
+                The brand had already spent several years positioned as a leading company in the
+                sale and distribution of cleaning and packaging products across Mexico, but its
+                name carried the word &quot;Plásticos&quot; while they were moving beyond
+                plastics into eco-friendly, paper, and other non-plastic products. So they decided
+                to update their name, dropping &quot;Plásticos&quot; and simply calling themselves
+                &quot;El Prado,&quot; keeping their essence while broadening their horizons.
+              </>
+            )}
           </p>
           <p className="mt-4">
-            Partiendo de esta actualización de nombre, se buscaba tener un re branding, de
-            inicio ya se sabía que se quería contar con un iso que se diferenciará y tener
-            diferentes aplicaciones del logotipo, on/off line.
+            {isEs
+              ? "Partiendo de esta actualización de nombre, se buscaba tener un re branding, de inicio ya se sabía que se quería contar con un iso que se diferenciará y tener diferentes aplicaciones del logotipo, on/off line."
+              : "Building on this name update, they wanted a rebranding — from the start it was clear they wanted a distinctive isotype and different applications of the logo, on and off line."}
           </p>
         </div>
         <div>
           <p>
-            Parte de este branding era el diseño de etiquetas para empaques de los
-            productos, no se habían diseñado antes y se deben de crear considerando las
-            especificaciones legales que cada producto requería.
+            {isEs
+              ? "Parte de este branding era el diseño de etiquetas para empaques de los productos, no se habían diseñado antes y se deben de crear considerando las especificaciones legales que cada producto requería."
+              : "Part of this branding involved designing labels for product packaging, which had never been designed before and had to be created considering the legal specifications each product required."}
           </p>
           <p className="mt-4">
-            Parte del proyecto era presentar propuestas para aplicaciones físicas como
-            uniformes, impresos y brandeo de vehículos.
+            {isEs
+              ? "Parte del proyecto era presentar propuestas para aplicaciones físicas como uniformes, impresos y brandeo de vehículos."
+              : "Part of the project was presenting proposals for physical applications like uniforms, printed materials, and vehicle branding."}
           </p>
         </div>
       </div>
@@ -101,23 +123,23 @@ export default function Project5() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
-          <h2 className="font-bold text-black mb-2">Proceso</h2>
+          <h2 className="font-bold text-black mb-2">{isEs ? "Proceso" : "Process"}</h2>
           <p>
-            El proyecto lo fui dividiendo por fases, Diseño de logotipo y su brand kit
-            básico, luego aplicaciones derivadas del brand kit como papelería, social media
-            y actualizaciones de catálogos y por último hice la creación de etiquetas y
-            empaques para sus productos.
+            {isEs
+              ? "El proyecto lo fui dividiendo por fases, Diseño de logotipo y su brand kit básico, luego aplicaciones derivadas del brand kit como papelería, social media y actualizaciones de catálogos y por último hice la creación de etiquetas y empaques para sus productos."
+              : "I divided the project into phases: logo design and its basic brand kit, then applications derived from the brand kit like stationery, social media, and catalog updates, and finally the creation of labels and packaging for their products."}
           </p>
           <p className="mt-4">
-            Decidí desarrollarlo por fases, ya que era un proyecto grande y se necesitaba
-            diseñar los cimientos para ir construyendo hacia arriba, con unas bases sólidas.
+            {isEs
+              ? "Decidí desarrollarlo por fases, ya que era un proyecto grande y se necesitaba diseñar los cimientos para ir construyendo hacia arriba, con unas bases sólidas."
+              : "I decided to develop it in phases, since it was a large project and needed a foundation designed first, so we could build upward on solid ground."}
           </p>
         </div>
         <div>
           <p>
-            Realmente no hubo cambios grandes, pero me gustaría mencionar como este tipo de
-            brandings suele tener un gran impacto en el founder, para tener la apertura de
-            recibir lo nuevo, y soltar el logo y nombre anterior.
+            {isEs
+              ? "Realmente no hubo cambios grandes, pero me gustaría mencionar como este tipo de brandings suele tener un gran impacto en el founder, para tener la apertura de recibir lo nuevo, y soltar el logo y nombre anterior."
+              : "There weren't really any big changes, but I'd like to mention how this kind of branding tends to have a big impact on the founder — being open to receiving the new and letting go of the previous logo and name."}
           </p>
         </div>
       </div>
@@ -127,28 +149,26 @@ export default function Project5() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
           <p>
-            Se diseñó Brand Kit, papelería interna y a clientes, diseño de uniformes y
-            vehículos, diseño de nuevos catálogos, diseño de empaques y etiquetas de
-            productos, plantillas para social media.
+            {isEs
+              ? "Se diseñó Brand Kit, papelería interna y a clientes, diseño de uniformes y vehículos, diseño de nuevos catálogos, diseño de empaques y etiquetas de productos, plantillas para social media."
+              : "We designed a Brand Kit, internal and client-facing stationery, uniform and vehicle design, new catalog design, packaging and product label design, and social media templates."}
           </p>
         </div>
         <div>
           <p>
-            Me llevo de aprendizaje de conocer como el founder de una empresa logró
-            identificar la necesidad de actualizar algo en su marca, algo tan esencial como
-            su nombre, y a su vez actuar rápido y brincar a la evolución.
+            {isEs
+              ? "Me llevo de aprendizaje de conocer como el founder de una empresa logró identificar la necesidad de actualizar algo en su marca, algo tan esencial como su nombre, y a su vez actuar rápido y brincar a la evolución."
+              : "I took away a learning from seeing how a company's founder managed to identify the need to update something in their brand — something as essential as its name — and at the same time act fast and jump into the evolution."}
           </p>
           <p className="mt-4">
-            Fueron muchas horas trabajando en este proyecto, me ayudó mucho a crear pequeños
-            sistemas de diseño de escalar entre si, partiendo de un catálogo que luego
-            podría ser replicable a una etiqueta, un empaque o simple post en redes
-            sociales.
+            {isEs
+              ? "Fueron muchas horas trabajando en este proyecto, me ayudó mucho a crear pequeños sistemas de diseño de escalar entre si, partiendo de un catálogo que luego podría ser replicable a una etiqueta, un empaque o simple post en redes sociales."
+              : "It took many hours working on this project, and it really helped me create small design systems that scale into each other, starting from a catalog that could then be replicated into a label, a package, or a simple social media post."}
           </p>
           <p className="mt-4">
-            En este proyecto trabajé muy de cerca con el founder de la empresa y muy guia en
-            el uso de herramientas de diseño, principalmente Figma, ayudando a validar mis
-            pequeños sistemas de diseño que iba construyendo internamente en nuestros
-            archivos.
+            {isEs
+              ? "En este proyecto trabajé muy de cerca con el founder de la empresa y muy guia en el uso de herramientas de diseño, principalmente Figma, ayudando a validar mis pequeños sistemas de diseño que iba construyendo internamente en nuestros archivos."
+              : "On this project I worked very closely with the company's founder, guiding them through the use of design tools, mainly Figma, helping validate the small design systems I was building internally in our files."}
           </p>
           <p className="mt-4">
             WEB (
