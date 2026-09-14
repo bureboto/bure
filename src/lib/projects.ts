@@ -4,6 +4,7 @@ export type Project = {
   date: string;
   cover?: string;
   description: string;
+  tags: string[];
 };
 
 export const projects: Project[] = [
@@ -14,6 +15,7 @@ export const projects: Project[] = [
     cover: "/design/bando/8_Bando.mp4",
     description:
       "Bando es una fintech que busca conectar la blockchain con la banca tradicional, conectando servicios y la bolsa de valores a usuarios finales.",
+    tags: ["Brand", "Design System", "UX/UI"],
   },
   {
     href: "/project2",
@@ -22,6 +24,7 @@ export const projects: Project[] = [
     cover: "/design/gandum/1_Gandum.jpg",
     description:
       "Gandum es un festival que conecta la música electrónica y la cultura, la primera edición se realiza en Coffs Harbour, Australia en octubre del 2026.",
+    tags: ["Brand"],
   },
   {
     href: "/project3",
@@ -30,6 +33,7 @@ export const projects: Project[] = [
     cover: "/design/espacio/4_Cover_Espacio.mp4",
     description:
       "Espacio es una media company que hace contenido y difusión sobre finanzas y tecnologías emergentes, empezó como Espacio Cripto y evolucionó a Espacio.",
+    tags: ["Brand", "UI", "Motion"],
   },
   {
     href: "/project1",
@@ -38,6 +42,7 @@ export const projects: Project[] = [
     cover: "/design/musho/12_Cover_Musho.gif",
     description:
       "Musho is an AI-powered design assistant, turning your prompts into websites, social media posts, slides, and more — effortlessly.",
+    tags: ["Brand", "Motion"],
   },
   {
     href: "/project4",
@@ -46,6 +51,7 @@ export const projects: Project[] = [
     cover: "/design/cero/Cover_Cer0_03.jpg",
     description:
       "c3r0 es el primer mocktail bar en San José del Cabo, Baja California, México. Branding fresco, orgánico y con vibe tropical.",
+    tags: ["Brand"],
   },
   {
     href: "/project5",
@@ -54,6 +60,7 @@ export const projects: Project[] = [
     cover: "/design/prado/1_Cover_Prado.jpg",
     description:
       "Plásticos El Prado es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, con distribución en todo México.",
+    tags: ["Brand"],
   },
   {
     href: "/project6",
@@ -62,6 +69,7 @@ export const projects: Project[] = [
     cover: "/design/nouns/7_Cover_Nous_ARG.jpg",
     description:
       "Ilustración y muralismo para el espacio de Nouns en Devconnect Argentina: gráficas, señalética y piezas para la comunidad durante todo el evento.",
+    tags: ["Brand"],
   },
   {
     href: "/project7",
@@ -70,6 +78,7 @@ export const projects: Project[] = [
     cover: "/design/singapore/1_Singapore.jpg",
     description:
       "Ilustración y activación para el stand de Nouns en ETHGlobal Singapore: mural, gráficas de gran formato y experiencia para la comunidad.",
+    tags: ["Brand"],
   },
   {
     href: "/project8",
@@ -78,6 +87,7 @@ export const projects: Project[] = [
     cover: "/design/linea16/13_Linea16_SinLimite.mp4",
     description:
       "Linea 16 es una liga de batallas escritas que concentra a los mejores exponentes de hip hop de habla hispana, con identidad urbana y desgastada en amarillo y negro.",
+    tags: ["Brand"],
   },
   {
     href: "/project9",
@@ -86,6 +96,7 @@ export const projects: Project[] = [
     cover: "/design/linea16-sinsalida/1_Cover_Linea16_SinLimite.jpg",
     description:
       "Rebranding de Linea 16 con un nuevo logotipo tipo escudo deportivo y la línea visual para su evento Callejón Sin Salida, en tonos rojo y negro con texturas urbanas.",
+    tags: ["Brand"],
   },
   {
     href: "/project11",
@@ -94,6 +105,7 @@ export const projects: Project[] = [
     cover: "/design/idf/9_IDF.jpg",
     description:
       "Branding, landing page y materiales de venta para IDF, el curso de Espacio Cripto para aprender a invertir en criptomonedas desde cero.",
+    tags: ["Brand", "UI"],
   },
   {
     href: "/project12",
@@ -102,6 +114,7 @@ export const projects: Project[] = [
     cover: "/design/base/0_Cover_BNS.jpg",
     description:
       "Branding e ilustración para The Base Night Show, un espacio de conversación creado con Espacio para la colaboración de Base en LATAM.",
+    tags: ["Brand", "Ilustración"],
   },
   {
     href: "/project13",
@@ -110,5 +123,6 @@ export const projects: Project[] = [
     cover: "/design/robotos/0_Cover_Robotos.jpg",
     description:
       "Robotos NFTs es una colección de 10,000 personajes únicos creada por Pablo Stanley. Sistemas de diseño, ilustración y motion para la marca y su colección derivada Robopets.",
+    tags: ["Brand", "Ilustración"],
   },
 ];

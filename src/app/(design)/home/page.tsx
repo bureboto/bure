@@ -38,6 +38,11 @@ const timeline = [
     years: "2010-2013",
     description: "Cursé la licenciatura en Diseño Gráfico en la Ciudad de México.",
   },
+  {
+    company: "Nací :)",
+    years: "1992",
+    description: "",
+  },
 ];
 
 export default function DesignHome() {
