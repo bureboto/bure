@@ -8,7 +8,8 @@ const bando = (file: string) => `/design/bando/${file}`;
 type Block =
   | { type: "full"; src: string }
   | { type: "grid"; items: string[] }
-  | { type: "split"; left: string; right: string[] };
+  | { type: "split"; left: string; right: string[] }
+  | { type: "matchHeight"; cover: string; reference: string };
 
 const blockHero: Block = { type: "split", left: bando("1_Bando.jpg"), right: [bando("2_Bando.jpg")] };
 
@@ -18,7 +19,7 @@ const blocksMid: Block[] = [
 
 const blocksLower: Block[] = [
   { type: "full", src: bando("8_Bando.mp4") },
-  { type: "grid", items: [bando("4_Bando.jpg"), bando("5_Bando.jpg")] },
+  { type: "matchHeight", cover: bando("4_Bando.jpg"), reference: bando("5_Bando.jpg") },
   { type: "full", src: bando("6_Bando.jpg") },
   {
     type: "grid",
@@ -49,6 +50,17 @@ function MediaBlock({ block }: { block: Block }) {
             <ProjectMedia key={src} src={src} alt="Bando" />
           ))}
         </div>
+      </div>
+    );
+  }
+
+  if (block.type === "matchHeight") {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="h-full min-h-0">
+          <ProjectMedia src={block.cover} alt="Bando" className="w-full h-full object-cover" />
+        </div>
+        <ProjectMedia src={block.reference} alt="Bando" />
       </div>
     );
   }
