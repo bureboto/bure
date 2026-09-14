@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { projects } from "@/lib/projects";
 import ProjectCard from "@/components/ProjectCard";
+import { useLanguage } from "@/lib/LanguageContext";
 
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
@@ -14,6 +15,7 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export default function OtherProjects({ currentHref, count = 2 }: { currentHref: string; count?: number }) {
+  const { language } = useLanguage();
   const pool = projects.filter((project) => project.href !== currentHref);
   // orden estable en el server; se elige al azar en el cliente tras montar
   // para evitar mismatches de hidratación
@@ -28,7 +30,7 @@ export default function OtherProjects({ currentHref, count = 2 }: { currentHref:
 
   return (
     <section className="flex flex-col gap-8 pt-10 border-t border-black/20">
-      <h2 className="text-2xl">Other projects</h2>
+      <h2 className="text-2xl">{language === "es" ? "Otros proyectos" : "Other projects"}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
         {others.map((project) => (
           <ProjectCard key={project.href} project={project} />
