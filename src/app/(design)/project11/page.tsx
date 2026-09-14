@@ -7,7 +7,7 @@ const idf = (file: string) => `/design/idf/${file}`;
 
 function FullRow({ src }: { src: string }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-6">
+    <div className="grid items-center grid-cols-1 md:grid-cols-6">
       <div className="md:col-start-2 md:col-span-4">
         <ProjectMedia src={src} alt="Inversionista del futuro" />
       </div>
@@ -18,7 +18,7 @@ function FullRow({ src }: { src: string }) {
 function EdgeRow({ items }: { items: string[] }) {
   return (
     <div
-      className={`grid grid-cols-1 gap-4 ${
+      className={`grid items-center grid-cols-1 gap-4 ${
         items.length === 2 ? "md:grid-cols-2" : items.length === 3 ? "md:grid-cols-3" : "md:grid-cols-4"
       }`}
     >

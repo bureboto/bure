@@ -31,7 +31,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   return (
     <div
-      className={`grid grid-cols-1 gap-4 ${
+      className={`grid items-center grid-cols-1 gap-4 ${
         block.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
       }`}
     >

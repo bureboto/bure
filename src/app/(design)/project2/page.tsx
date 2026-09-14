@@ -34,10 +34,10 @@ const blocks: Block[] = [
     right: gandum("5_Gandum.mp4"),
   },
   { type: "split", left: gandum("6_Gandum.mp4"), right: gandum("7_Gandum.mp4"), matchHeight: true, equal: true },
-  { type: "split", left: gandum("9_Gandum.mp4"), right: gandum("10_Gandum.mp4"), matchHeight: true, equal: true },
-  { type: "full", src: gandum("8_Gandum.jpg"), caption: "Detalle de la imagen" },
-  { type: "grid", items: [gandum("11_Gandum.jpg"), gandum("12_Gandum.jpg"), gandum("13_Gandum.jpg")] },
-  { type: "full", src: gandum("14_Gandum.jpg"), caption: "Detalle de la imagen" },
+  { type: "split", left: gandum("8_Gandum.jpg"), right: gandum("9_Gandum.mp4"), equal: true },
+  { type: "full", src: gandum("10_Gandum.jpg"), caption: "Detalle de la imagen" },
+  { type: "split", left: gandum("11_Gandum.jpg"), right: gandum("12_Gandum.jpg"), equal: true },
+  { type: "split", left: gandum("12_Gandum.jpg"), right: gandum("14_Gandum.jpg"), equal: true },
 ];
 
 export default function Project2() {
@@ -70,7 +70,7 @@ export default function Project2() {
             {block.type === "full" && <ProjectMedia src={block.src} alt="Gandum" />}
             {block.type === "split" && (
               <div
-                className={`grid grid-cols-1 ${block.equal ? "md:grid-cols-2" : "md:grid-cols-3"} ${
+                className={`grid items-center grid-cols-1 ${block.equal ? "md:grid-cols-2" : "md:grid-cols-3"} ${
                   block.noGap ? "gap-0" : "gap-4"
                 }`}
               >
@@ -91,7 +91,7 @@ export default function Project2() {
               </div>
             )}
             {block.type === "stackSplit" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-4">
                   {block.stack.map((src) => (
                     <ProjectMedia key={src} src={src} alt="Gandum" />
@@ -104,7 +104,7 @@ export default function Project2() {
             )}
             {block.type === "grid" && (
               <div
-                className={`grid grid-cols-1 gap-4 ${
+                className={`grid items-center grid-cols-1 gap-4 ${
                   block.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
                 }`}
               >

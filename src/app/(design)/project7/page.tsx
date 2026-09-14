@@ -21,7 +21,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   if (block.type === "split") {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-3 gap-4">
         <div className="md:col-span-2">
           <ProjectMedia src={block.left} alt="Nouns | Devconnect Singapore" />
         </div>
@@ -34,7 +34,7 @@ function MediaBlock({ block }: { block: Block }) {
 
   return (
     <div
-      className={`grid grid-cols-1 gap-4 ${
+      className={`grid items-center grid-cols-1 gap-4 ${
         block.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
       }`}
     >
@@ -70,7 +70,7 @@ export default function Project7() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-6">
+      <div className="grid items-center grid-cols-1 md:grid-cols-6">
         <div className="md:col-start-2 md:col-span-4">
           <ProjectMedia src={sg("1_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
         </div>
@@ -137,7 +137,7 @@ export default function Project7() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-4">
         <ProjectMedia src={sg("6_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
         <ProjectMedia src={sg("7_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
       </div>
