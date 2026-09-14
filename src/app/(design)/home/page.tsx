@@ -125,8 +125,9 @@ export default function DesignHome() {
           {timeline.map((item) => (
             <div key={item.company} className="w-72 flex flex-col gap-3 relative">
               <span className="absolute -top-[35px] left-0 w-2 h-2 rounded-full bg-black" />
-              <h3 className="text-lg">
-                <span className="text-sm text-black/60">({item.years})</span> {item.company}
+              <h3 className="text-lg flex flex-col">
+                <span className="text-sm text-black/60">{item.years}</span>
+                {item.company}
               </h3>
               <p className="text-sm text-black/70">{item.description}</p>
             </div>
