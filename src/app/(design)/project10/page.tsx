@@ -17,9 +17,8 @@ const blocksMid: Block[] = [
 ];
 
 const blocksLower: Block[] = [
-  { type: "full", src: bando("4_Bando.jpg") },
-  { type: "full", src: bando("5_Bando.jpg") },
   { type: "full", src: bando("8_Bando.mp4") },
+  { type: "grid", items: [bando("4_Bando.jpg"), bando("5_Bando.jpg")] },
   { type: "full", src: bando("6_Bando.jpg") },
   {
     type: "grid",
