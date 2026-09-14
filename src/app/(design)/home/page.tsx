@@ -57,7 +57,7 @@ export default function DesignHome() {
             Diseñador de marca y producto, con más de 10 años construyendo sistemas de
             identidad que escalan — desde el logo hasta la última pantalla.
           </p>
-          <div className="flex flex-col md:flex-row gap-6 text-sm">
+          <div className="grid grid-cols-2 gap-6 text-sm">
             <div className="flex flex-col gap-1">
               <span>t. 56 5232 0560</span>
               <a href="mailto:bureboto@gmail.com" className="underline underline-offset-4">
