@@ -116,22 +116,16 @@ export default function ElPulsoDeLasDivisas() {
         </Link>
         <div className="flex flex-col gap-2">
           <span className="text-sm text-black/60">Propuesta de diseño</span>
-          <h1 className="text-2xl md:text-3xl">El Pulso de las Divisas — Rebrand 2026</h1>
+          <h1 className="text-[2.5rem]">El Pulso de las Divisas — Rebrand 2026</h1>
         </div>
       </div>
 
       <div className="flex flex-col gap-16">
         {phases.map((phase) => (
           <div key={phase.number} className="flex flex-col gap-6 border-t border-black/20 pt-8">
-            <div className="flex items-baseline justify-between gap-4 flex-wrap">
-              <h2 className="text-xl">
-                {phase.number}: {phase.title}
-              </h2>
-              <div className="text-sm text-black/60 text-right">
-                <div>{phase.investment}</div>
-                <div>{phase.time}</div>
-              </div>
-            </div>
+            <h2 className="text-[2rem]">
+              {phase.number}: {phase.title}
+            </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
               {phase.sections.map((section, i) => (
@@ -153,12 +147,16 @@ export default function ElPulsoDeLasDivisas() {
                 {phase.deliverables}
               </p>
             )}
+
+            <p className="text-sm text-black/60">
+              {phase.investment} — {phase.time}
+            </p>
           </div>
         ))}
       </div>
 
       <div className="flex flex-col gap-4 border-t border-black/20 pt-8">
-        <h2 className="text-xl">Resumen de inversión y tiempos</h2>
+        <h2 className="text-[2rem]">Resumen de inversión y tiempos</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm border-collapse">
             <thead>
@@ -200,7 +198,7 @@ export default function ElPulsoDeLasDivisas() {
       </div>
 
       <div className="flex flex-col gap-4 border-t border-black/20 pt-8">
-        <h2 className="text-xl">Condiciones generales</h2>
+        <h2 className="text-[2rem]">Condiciones generales</h2>
         <ul className="flex flex-col gap-2 text-black/70 list-disc pl-4 max-w-3xl">
           {conditions.map((condition, i) => (
             <li key={i}>{condition}</li>
