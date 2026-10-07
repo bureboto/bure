@@ -1,5 +1,7 @@
 import Link from "next/link";
 import ContentGrid from "@/components/ContentGrid";
+import ProjectCard from "@/components/ProjectCard";
+import { projects } from "@/lib/projects";
 
 type Phase = {
   number: string;
@@ -206,12 +208,14 @@ export default function ElPulsoDeLasDivisas() {
         </ul>
       </div>
 
-      <div className="flex flex-col gap-2 border-t border-black/20 pt-8">
-        <p className="text-black/70">¿Lo cocinamos?</p>
-        <a href="mailto:bureboto@gmail.com" className="underline underline-offset-4 w-fit">
-          bureboto@gmail.com
-        </a>
-      </div>
+      <section className="flex flex-col gap-8 pt-10 border-t border-black/20">
+        <h2 className="text-2xl">Proyectos</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+          {projects.slice(0, 3).map((project) => (
+            <ProjectCard key={project.href} project={project} />
+          ))}
+        </div>
+      </section>
     </ContentGrid>
   );
 }
