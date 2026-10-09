@@ -63,7 +63,7 @@ export default function Project13() {
           </p>
           <p>
             {isEs
-              ? "El arte fue realizado por Pablo Stanley, cabezas, cuerpos, ojos, bocas… el algoritmo se encargo de colocarlos de forma aleatoria para lograr que cada personaje fuera único."
+              ? "Al ser los Robopets mascotas de los Robotos, el reto era darles una identidad compartida entre sí, pero que cada pet también tuviera rasgos únicos. La solución: cada Robopet tendría por lo menos un rasgo del Roboto — ya sea su color de cuerpo, ojos, casco u otro, logrando así una conexión real entre cada Roboto y su mascota. Siempre tuvimos en mente que estos elementos serían la base para crear mundos y contenidos para la marca."
               : "The art was created by Pablo Stanley — heads, bodies, eyes, mouths… the algorithm took care of placing them randomly so every character came out unique."}
           </p>
         </div>
