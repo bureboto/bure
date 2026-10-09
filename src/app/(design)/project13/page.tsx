@@ -113,8 +113,7 @@ export default function Project13() {
           </p>
           <p className="mt-4">
             {isEs
-              ? "Tuvimos muchas juntas para definir qué rasgos funcionaban y cuáles no. 
-              La comunidad fue una parte importante del proceso, y Pablo y yo nos inspiramos de ahí. "
+              ? "Tuvimos muchas juntas para definir qué rasgos funcionaban y cuáles no. La comunidad fue una parte importante del proceso, y Pablo y yo nos inspiramos de ahí."
               : "On Robopets my role was to keep track of the new assets being added to the collection and make sure they matched their Roboto. It was a lot of fun having the brainstorming sessions, sketching, and final vectorization of all the new elements — very satisfying to see all the new Robopets owners keeping their Robotos company"}
           </p>
         </div>
@@ -154,20 +153,13 @@ export default function Project13() {
           <h2 className="font-bold text-black mb-2">{isEs ? "Colaboradores" : "Collaborators"}</h2>
           <p>
             {isEs
-              ? "En ese periodo fuimos una de las principales colecciones de NFTs a nivel mundial, 
-              uno de los logros más tops del cual me sentí muy orgulloso fue ver uno de nuestros 
-            Robotos en un comercial de X (antes Twitter) cuando se implementaban los PFP de las colecciones de NFTs, 
-            codeandonos con colecciones como Bored Apes, Cryptopunks, Cool Cats, entre otros."
+              ? "En ese periodo fuimos una de las principales colecciones de NFTs a nivel mundial, uno de los logros más tops del cual me sentí muy orgulloso fue ver uno de nuestros Robotos en un comercial de X (antes Twitter) cuando se implementaban los PFP de las colecciones de NFTs, codeandonos con colecciones como Bored Apes, Cryptopunks, Cool Cats, entre otros."
               : "I worked very closely with Pablo Stanley, the project's creator, as well as with Mariana Pedroza, Viri, Rojo, Zack, Gabs, Sjoerd, Niklas, and others."}
           </p>
         </div>
         <p>
           {isEs
-            ? "Gracias a este proyecto logré ampliar mi panorama a nivel profesional y personal, 
-            tuve oportunidades de salir de México y conocer países como Francia (donde por cierto, 
-          montamos una galería de arte express, una experiencia increíble). También desarrollé mi 
-          skill de crear sistemas de diseño ampliamente escalables mas allá de una interfaz WEB, 
-          fue un buen reto para mi, salir más allá de las UI, botones, cards y esas cosas."
+            ? "Gracias a este proyecto logré ampliar mi panorama a nivel profesional y personal, tuve oportunidades de salir de México y conocer países como Francia (donde por cierto, montamos una galería de arte express, una experiencia increíble). También desarrollé mi skill de crear sistemas de diseño ampliamente escalables mas allá de una interfaz WEB, fue un buen reto para mi, salir más allá de las UI, botones, cards y esas cosas."
             : "We were in the middle of the NFT boom, so there was a sense of urgency in every aspect — what we made one day already felt old the next, and at the same time it was challenging to learn new technologies and try to implement them into our product. This was where I started to see the potential of AI."}
         </p>
       </div>
@@ -202,17 +194,13 @@ export default function Project13() {
           <h2 className="font-bold text-black mb-2">{isEs ? "Yo en Robotos" : "Result"}</h2>
           <p>
             {isEs
-              ? "Además de la colección de los Robopets mi participación en el proyecto 
-              fue encaminada a temas de branding, creando visuales y dando guías de uso. 
-            Jugué con mis skills de motions graphics e hice pequeños sistemas de diseño."
+              ? "Además de la colección de los Robopets mi participación en el proyecto fue encaminada a temas de branding, creando visuales y dando guías de uso. Jugué con mis skills de motions graphics e hice pequeños sistemas de diseño."
               : "My involvement over those couple of years left behind a new NFT collection, close to 9,000 new items, as well as an amplified visual line for on/off-line media, and a wide repertoire of animations and illustrations."}
           </p>
 
           <p>
             {isEs
-              ? "Mi participación durante ese par de años dejó una colección nueva de NFTs (Robopets), 
-              cerca de 9,000 items creados, una línea visual amplificada para medios on/off line y 
-            un amplio repertorio de animaciones e ilustraciones."
+              ? "Mi participación durante ese par de años dejó una colección nueva de NFTs (Robopets), cerca de 9,000 items creados, una línea visual amplificada para medios on/off line y un amplio repertorio de animaciones e ilustraciones."
               : "My involvement over those couple of years left behind a new NFT collection, close to 9,000 new items, as well as an amplified visual line for on/off-line media, and a wide repertoire of animations and illustrations."}
           </p>
   
@@ -222,16 +210,6 @@ export default function Project13() {
           <p>
             {isEs
               ? "Trabajé muy de cerca con Pablo Stanley, creador del proyecto. Así como con Mariana Pedroza, Viri, Rojo, Zack, Gabs, Sjoerd, Niklas y otros."
-              : "Thanks to this project I was able to broaden my horizons professionally and personally — I had opportunities to leave Mexico and visit other countries like France (where, by the way, we set up an express art gallery, an incredible experience). I also developed my skill in creating widely scalable design systems — it was a good challenge for me, going beyond UI, buttons, cards, and those kinds of things."}
-          </p>
-          <br/>
-          <br/>
-          <p>
-            {isEs
-              ? "X (https://x.com/robotosNFT)
-              WEB (https://www.robotos.art/)
-            Open Sea Robotos (https://opensea.io/es/collection/robotos-official)
-            Open Sea Robopets (https://opensea.io/es/collection/robopets)"
               : "Thanks to this project I was able to broaden my horizons professionally and personally — I had opportunities to leave Mexico and visit other countries like France (where, by the way, we set up an express art gallery, an incredible experience). I also developed my skill in creating widely scalable design systems — it was a good challenge for me, going beyond UI, buttons, cards, and those kinds of things."}
           </p>
           <p className="mt-4">
