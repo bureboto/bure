@@ -132,7 +132,7 @@ export default function Project13() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-[0.1rem]">
         <EdgeRow items={[robotos("18_Robotos.mp4"), robotos("17_Robotos.mp4")]} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70 text-sm">
           <p>{isEs ? "Contenido para el anuncio de Robopets" : "Content for the Robopets announcement"}</p>
@@ -140,7 +140,7 @@ export default function Project13() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-[0.1rem]">
         <div className="grid items-center grid-cols-1 md:grid-cols-4 gap-0">
           <ProjectMedia src={robotos("2_Robotos.mp4")} alt="Robotos" />
           <ProjectMedia src={robotos("3_Robotos.mp4")} alt="Robotos" />
@@ -187,14 +187,18 @@ export default function Project13() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-[0.1rem]">
         <FullRow src={robotos("8_Robotos.gif")} />
-        <p className="text-sm text-black/70">{isEs ? "Sistema de diseño para Social Media." : "Design system for Social Media."}</p>
+        <div className="grid grid-cols-1 md:grid-cols-6">
+          <p className="md:col-start-2 md:col-span-4 text-sm text-black/70">
+            {isEs ? "Sistema de diseño para Social Media." : "Design system for Social Media."}
+          </p>
+        </div>
       </div>
 
       <EdgeRow items={[robotos("15_Robotos.mp4"), robotos("14_Robotos.mp4")]} />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-[0.1rem]">
         <div className="grid items-center grid-cols-2 md:grid-cols-4 gap-4">
           {socialGrid.map((src) => (
             <ProjectMedia key={src} src={src} alt="Robotos" />
@@ -205,18 +209,20 @@ export default function Project13() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-[0.1rem]">
         <EdgeRow items={[robotos("11_Robotos.mp4"), robotos("12_Robotos.mp4")]} />
         <p className="text-sm text-black/70">
           {isEs ? "Sistema de diseño para trajes y fondos intercambiables" : "Design system for interchangeable outfits and backgrounds"}
         </p>
       </div>
 
-      <p className="text-black/70">
-        {isEs
-          ? "Gracias a este proyecto logré ampliar mi panorama a nivel profesional y personal, tuve oportunidades de salir de México y conocer países como Francia (donde por cierto, montamos una galería de arte express, una experiencia increíble). También desarrollé mi skill de crear sistemas de diseño ampliamente escalables más allá de una interfaz WEB, fue un buen reto para mi, salir más allá de las UI, botones, cards y esas cosas."
-          : "Thanks to this project, I grew a lot both professionally and personally. I got to travel outside Mexico and visit places like France (where, by the way, we set up an express art gallery — such an incredible experience). I also leveled up my skill at building design systems that scale way beyond a web interface — a great challenge for me, going beyond UI, buttons, cards, and that kind of stuff."}
-      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
+        <p>
+          {isEs
+            ? "Gracias a este proyecto logré ampliar mi panorama a nivel profesional y personal, tuve oportunidades de salir de México y conocer países como Francia (donde por cierto, montamos una galería de arte express, una experiencia increíble). También desarrollé mi skill de crear sistemas de diseño ampliamente escalables más allá de una interfaz WEB, fue un buen reto para mi, salir más allá de las UI, botones, cards y esas cosas."
+            : "Thanks to this project, I grew a lot both professionally and personally. I got to travel outside Mexico and visit places like France (where, by the way, we set up an express art gallery — such an incredible experience). I also leveled up my skill at building design systems that scale way beyond a web interface — a great challenge for me, going beyond UI, buttons, cards, and that kind of stuff."}
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
         <div>
