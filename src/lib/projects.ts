@@ -141,7 +141,7 @@ export const projects: Project[] = [
     tags: ["Brand", "Ilustración"],
   },
   {
-    href: "/project13",
+    href: "/robopets",
     name: "Robotos",
     date: "2021–2024",
     cover: "/design/robotos/0_Cover_Robotos.jpg",

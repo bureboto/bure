@@ -15,7 +15,7 @@ const DESIGN_PATHS = [
   "/project10",
   "/project11",
   "/project12",
-  "/project13",
+  "/robopets",
   "/elpulsodelasdivisas",
 ];
 
