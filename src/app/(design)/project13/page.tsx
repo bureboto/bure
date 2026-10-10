@@ -134,7 +134,7 @@ export default function Project13() {
 
       <div className="flex flex-col gap-[0.1rem]">
         <EdgeRow items={[robotos("18_Robotos.mp4"), robotos("17_Robotos.mp4")]} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70 text-[0.85rem]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-[0.1rem] text-black/70 text-[0.85rem]">
           <p>{isEs ? "Contenido para el anuncio de Robopets" : "Content for the Robopets announcement"}</p>
           <p>{isEs ? "La colección en un billboard en NY." : "The collection on a billboard in NY."}</p>
         </div>
