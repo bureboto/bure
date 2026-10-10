@@ -132,15 +132,15 @@ export default function Project13() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-[0.1rem]">
+      <div className="flex flex-col gap-[0.5rem]">
         <EdgeRow items={[robotos("18_Robotos.mp4"), robotos("17_Robotos.mp4")]} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70 text-[0.85rem]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-[0.1rem] text-black/70 text-[0.85rem]">
           <p>{isEs ? "Contenido para el anuncio de Robopets" : "Content for the Robopets announcement"}</p>
           <p>{isEs ? "La colección en un billboard en NY." : "The collection on a billboard in NY."}</p>
         </div>
       </div>
 
-      <div className="flex flex-col gap-[0.1rem]">
+      <div className="flex flex-col gap-[0.5rem]">
         <div className="grid items-center grid-cols-1 md:grid-cols-4 gap-0">
           <ProjectMedia src={robotos("2_Robotos.mp4")} alt="Robotos" />
           <ProjectMedia src={robotos("3_Robotos.mp4")} alt="Robotos" />
@@ -187,7 +187,7 @@ export default function Project13() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-[0.1rem]">
+      <div className="flex flex-col gap-[0.5rem]">
         <FullRow src={robotos("8_Robotos.gif")} />
         <div className="grid grid-cols-1 md:grid-cols-6">
           <p className="md:col-start-2 md:col-span-4 text-[0.85rem] text-black/70">
@@ -198,7 +198,7 @@ export default function Project13() {
 
       <EdgeRow items={[robotos("15_Robotos.mp4"), robotos("14_Robotos.mp4")]} />
 
-      <div className="flex flex-col gap-[0.1rem]">
+      <div className="flex flex-col gap-[0.5rem]">
         <div className="grid items-center grid-cols-2 md:grid-cols-4 gap-4">
           {socialGrid.map((src) => (
             <ProjectMedia key={src} src={src} alt="Robotos" />
@@ -209,7 +209,7 @@ export default function Project13() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-[0.1rem]">
+      <div className="flex flex-col gap-[0.5rem]">
         <EdgeRow items={[robotos("11_Robotos.mp4"), robotos("12_Robotos.mp4")]} />
         <p className="text-[0.85rem] text-black/70">
           {isEs ? "Sistema de diseño para trajes y fondos intercambiables" : "Design system for interchangeable outfits and backgrounds"}
