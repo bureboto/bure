@@ -12,7 +12,7 @@ export default function CVLink({ className }: { className?: string }) {
       target="_blank"
       rel="noreferrer"
       aria-label={isSpanish ? "Descargar CV" : "Download CV"}
-      className={className}
+      className={`inline-flex items-center gap-1.5 ${className ?? ""}`}
     >
       <svg
         width="16"
@@ -31,6 +31,7 @@ export default function CVLink({ className }: { className?: string }) {
           strokeLinejoin="round"
         />
       </svg>
+      <span className="sm:hidden">CV</span>
       <span className="hidden sm:inline">{isSpanish ? "Descargar CV" : "Download CV"}</span>
     </a>
   );
