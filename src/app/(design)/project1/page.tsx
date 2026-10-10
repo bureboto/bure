@@ -51,7 +51,7 @@ export default function Project1() {
 
       <div className="flex flex-col gap-4">
         {blocks.map((block, i) => (
-          <div key={i} className="flex flex-col gap-3">
+          <div key={i} className="flex flex-col gap-[0.1rem]">
             {block.type === "full" ? (
               <ProjectMedia src={block.src} alt="Musho.ai" />
             ) : (
@@ -66,7 +66,7 @@ export default function Project1() {
               </div>
             )}
             {block.caption && (
-              <p className="text-sm text-black/50">{isEs ? block.caption : captionEn[block.caption] ?? block.caption}</p>
+              <p className="text-[0.85rem] text-black/50">{isEs ? block.caption : captionEn[block.caption] ?? block.caption}</p>
             )}
           </div>
         ))}
