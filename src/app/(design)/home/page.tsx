@@ -82,12 +82,6 @@ export default function DesignHome() {
               ? "Diseñador de marca y producto, con más de 10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla."
               : "Brand & Product Designer — more than 10 years building scalable identity systems, from the logo to the last screen."}
           </p>
-          <div className="text-sm">
-            <div className="flex flex-col gap-1 text-black/70">
-              <span>{isEs ? "Español (Nativo)" : "Spanish (Native)"}</span>
-              <span>{isEs ? "Inglés (B2)" : "English (B2)"}</span>
-            </div>
-          </div>
         </div>
 
         <div className="flex flex-col gap-4 text-black/70">
