@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import ContentGrid from "@/components/ContentGrid";
 
 const days = [2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 16, 17, 18, 19];
+const START_DATE = new Date(2026, 10, 2); // 2 nov 2026
+const END_DATE = new Date(2026, 10, 19); // 19 nov 2026
 
 const weeks = [
   { label: "Semana 1", range: "2–6 nov", span: 5 },
@@ -16,7 +21,6 @@ type Row = {
   label: string;
   barFrom?: number;
   barTo?: number;
-  dot?: number;
   color?: "gray" | "green";
 };
 
@@ -30,18 +34,17 @@ const sections: Section[] = [
   {
     heading: "Dirección visual",
     date: "3 nov",
-    rows: [{ label: "Moodboard de dirección visual", barFrom: 2, barTo: 3, dot: 3, color: "gray" }],
+    rows: [{ label: "Moodboard de dirección visual", barFrom: 2, barTo: 3, color: "gray" }],
   },
   {
     heading: "Rediseño de logo",
     date: "6 nov",
     rows: [
-      { label: "Presentación de propuesta inicial", barFrom: 3, barTo: 6, dot: 6, color: "gray" },
+      { label: "Presentación de propuesta inicial", barFrom: 3, barTo: 6, color: "gray" },
       {
         label: "Ronda de feedback y ajustes (en caso de necesitarlo) + aprobación de logo",
         barFrom: 6,
         barTo: 11,
-        dot: 11,
         color: "gray",
       },
     ],
@@ -59,7 +62,6 @@ const sections: Section[] = [
         label: "4 mockups: redes, YouTube/podcast, firma y miniatura",
         barFrom: 6,
         barTo: 17,
-        dot: 17,
         color: "gray",
       },
     ],
@@ -72,7 +74,6 @@ const sections: Section[] = [
         label: "Brand kit PDF + exportables AI / SVG / PNG — Revisión final y entrega",
         barFrom: 17,
         barTo: 19,
-        dot: 19,
         color: "green",
       },
     ],
@@ -90,7 +91,53 @@ function dayIndex(day: number) {
   return days.indexOf(day);
 }
 
+const gridCols = `260px repeat(${days.length}, minmax(28px, 1fr))`;
+
+// Flatten everything into rows that share one continuous grid so the
+// milestone/today lines can span the full chart height via gridRow.
+type GridRow =
+  | { kind: "weeks" }
+  | { kind: "days" }
+  | { kind: "heading"; text: string; date: string }
+  | { kind: "item"; row: Row };
+
+const gridRows: GridRow[] = [
+  { kind: "weeks" },
+  { kind: "days" },
+  ...sections.flatMap((section) => [
+    { kind: "heading" as const, text: section.heading, date: section.date },
+    ...section.rows.map((row) => ({ kind: "item" as const, row })),
+  ]),
+];
+
+function useProgress() {
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setNow(new Date());
+    const id = setInterval(() => setNow(new Date()), 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  if (!now) return { fraction: 0, todayDay: null as number | null };
+
+  const total = END_DATE.getTime() - START_DATE.getTime();
+  const elapsed = now.getTime() - START_DATE.getTime();
+  const fraction = Math.min(1, Math.max(0, elapsed / total));
+
+  const todayDay =
+    now >= START_DATE && now <= END_DATE && now.getFullYear() === 2026 && now.getMonth() === 10
+      ? now.getDate()
+      : null;
+
+  return { fraction, todayDay };
+}
+
 export default function Timeline() {
+  const { fraction, todayDay } = useProgress();
+  const totalRows = gridRows.length;
+
   return (
     <ContentGrid className="pb-24 flex flex-col gap-10">
       <div className="flex flex-col gap-4 pt-6">
@@ -112,85 +159,126 @@ export default function Timeline() {
 
       <div className="overflow-x-auto">
         <div className="min-w-[860px]">
-          {/* Week headers */}
-          <div
-            className="grid gap-x-1"
-            style={{ gridTemplateColumns: `260px repeat(${days.length}, minmax(28px, 1fr))` }}
-          >
+          {/* Progress bar: fills left to right as today's date advances through the range */}
+          <div className="grid gap-x-1 mb-2" style={{ gridTemplateColumns: gridCols }}>
             <div />
-            {weeks.map((week) => (
+            <div
+              className="h-1 rounded-full bg-black/10 relative overflow-hidden"
+              style={{ gridColumn: `2 / ${days.length + 2}` }}
+            >
               <div
-                key={week.label}
-                className="border-l border-black/20 pl-2 text-sm pb-1"
-                style={{ gridColumn: `span ${week.span}` }}
-              >
-                <div className="font-bold">{week.label}</div>
-                <div className="text-black/60">{week.range}</div>
-              </div>
-            ))}
+                className="absolute inset-y-0 left-0 bg-[#4fd98a] rounded-full transition-[width] duration-1000"
+                style={{ width: `${fraction * 100}%` }}
+              />
+            </div>
           </div>
 
-          {/* Day numbers */}
-          <div
-            className="grid gap-x-1 border-b border-black/20 pb-2 mb-4"
-            style={{ gridTemplateColumns: `260px repeat(${days.length}, minmax(28px, 1fr))` }}
-          >
-            <div />
-            {days.map((day) => (
+          <div className="relative grid gap-x-1" style={{ gridTemplateColumns: gridCols }}>
+            {/* Milestone vertical guide lines */}
+            {[...milestoneDays].map((day) => (
               <div
-                key={day}
-                className={`flex items-center justify-center text-xs ${
-                  day === offDay ? "text-black/30" : "text-black/70"
-                }`}
-              >
-                {milestoneDays.has(day) ? (
-                  <span className="w-5 h-5 rounded-full bg-[#9fe6c0] flex items-center justify-center">
-                    {day}
-                  </span>
-                ) : (
-                  day
-                )}
-              </div>
+                key={`line-${day}`}
+                className="w-px bg-black/15 justify-self-center"
+                style={{ gridColumnStart: dayIndex(day) + 2, gridRow: `1 / ${totalRows + 1}` }}
+              />
             ))}
-          </div>
+            {/* Today indicator line */}
+            {todayDay !== null && days.includes(todayDay) && (
+              <div
+                className="w-0.5 bg-[#4fd98a] justify-self-center"
+                style={{ gridColumnStart: dayIndex(todayDay) + 2, gridRow: `1 / ${totalRows + 1}` }}
+              />
+            )}
 
-          {/* Sections */}
-          <div className="flex flex-col gap-6">
-            {sections.map((section) => (
-              <div key={section.heading} className="flex flex-col gap-2">
-                <h2 className="font-bold">
-                  {section.heading} <span className="font-normal text-black/60">({section.date})</span>
-                </h2>
-                <div className="flex flex-col gap-2">
-                  {section.rows.map((row) => (
+            {gridRows.map((gridRow, rowIndex) => {
+              const r = rowIndex + 1;
+
+              if (gridRow.kind === "weeks") {
+                return (
+                  <div key="weeks" className="contents">
+                    {weeks.map((week, i) => (
+                      <div
+                        key={week.label}
+                        className="relative border-l border-black/20 pl-2 text-sm pb-1"
+                        style={{
+                          gridRow: r,
+                          gridColumn: `span ${week.span}`,
+                          gridColumnStart: i === 0 ? 2 : undefined,
+                        }}
+                      >
+                        <div className="font-bold">{week.label}</div>
+                        <div className="text-black/60">{week.range}</div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              }
+
+              if (gridRow.kind === "days") {
+                return (
+                  <div key="days" className="contents">
+                    {days.map((day) => (
+                      <div
+                        key={day}
+                        className={`relative flex items-center justify-center text-xs pb-2 border-b border-black/20 ${
+                          day === offDay ? "text-black/30" : "text-black/70"
+                        }`}
+                        style={{ gridRow: r, gridColumn: dayIndex(day) + 2 }}
+                      >
+                        {milestoneDays.has(day) ? (
+                          <span className="w-5 h-5 rounded-full bg-[#9fe6c0] flex items-center justify-center">
+                            {day}
+                          </span>
+                        ) : (
+                          day
+                        )}
+                      </div>
+                    ))}
+                    <div style={{ gridRow: r, gridColumn: 1 }} className="border-b border-black/20" />
+                  </div>
+                );
+              }
+
+              if (gridRow.kind === "heading") {
+                return (
+                  <h2
+                    key={`heading-${gridRow.text}`}
+                    className="font-bold pt-6"
+                    style={{ gridRow: r, gridColumn: 1 }}
+                  >
+                    {gridRow.text} <span className="font-normal text-black/60">({gridRow.date})</span>
+                  </h2>
+                );
+              }
+
+              const { row } = gridRow;
+              const hasBar = row.barFrom !== undefined && row.barTo !== undefined;
+
+              return (
+                <div key={row.label} className="contents">
+                  <div className="text-sm text-black/70 pr-4 py-1.5" style={{ gridRow: r, gridColumn: 1 }}>
+                    {row.label}
+                  </div>
+                  {hasBar && (
                     <div
-                      key={row.label}
-                      className="grid gap-x-1 items-center"
-                      style={{ gridTemplateColumns: `260px repeat(${days.length}, minmax(28px, 1fr))` }}
+                      className="relative flex items-center"
+                      style={{
+                        gridRow: r,
+                        gridColumnStart: dayIndex(row.barFrom!) + 2,
+                        gridColumnEnd: dayIndex(row.barTo!) + 3,
+                      }}
                     >
-                      <div className="text-sm text-black/70 pr-4">{row.label}</div>
-                      {row.barFrom !== undefined && row.barTo !== undefined && (
-                        <div
-                          className={`h-2 rounded-full ${
-                            row.color === "green" ? "bg-[#9fe6c0]" : "bg-black/10"
-                          }`}
-                          style={{
-                            gridColumnStart: dayIndex(row.barFrom) + 2,
-                            gridColumnEnd: dayIndex(row.barTo) + 3,
-                          }}
-                        />
-                      )}
-                      {row.dot !== undefined && (
-                        <div
-                          className="w-2.5 h-2.5 rounded-full bg-black justify-self-center"
-                          style={{ gridColumnStart: dayIndex(row.dot) + 2 }}
-                        />
-                      )}
+                      <div
+                        className={`h-2 rounded-full w-full ${
+                          row.color === "green" ? "bg-[#9fe6c0]" : "bg-black/10"
+                        }`}
+                      />
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-black" />
                     </div>
-                  ))}
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
