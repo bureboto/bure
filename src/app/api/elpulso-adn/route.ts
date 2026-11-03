@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   const payload = JSON.stringify({ answers: body, updatedAt: new Date().toISOString() });
 
   await put(PATHNAME, payload, {
-    access: "public",
+    access: "private",
     contentType: "application/json",
     allowOverwrite: true,
   });
@@ -24,7 +24,10 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   try {
     const blob = await head(PATHNAME);
-    const res = await fetch(blob.url, { cache: "no-store" });
+    const res = await fetch(blob.downloadUrl, {
+      cache: "no-store",
+      headers: { Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}` },
+    });
     const data = await res.json();
     return NextResponse.json(data);
   } catch {
