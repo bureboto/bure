@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import CVLink from "@/components/CVLink";
 import LanguageToggle from "@/components/LanguageToggle";
 
 export default function HeaderContent() {
+  const pathname = usePathname();
+  const showCV = !pathname.startsWith("/elpulsodelasdivisas");
+
   return (
     <div className="flex items-center justify-between h-[60px]">
       <Link href="/home" aria-label="Bure">
@@ -11,7 +17,9 @@ export default function HeaderContent() {
       </Link>
       <div className="flex items-center gap-4">
         <LanguageToggle />
-        <CVLink className="text-sm border border-black/20 rounded-full px-4 py-1.5 hover:bg-black hover:text-white transition-colors" />
+        {showCV && (
+          <CVLink className="text-sm border border-black/20 rounded-full px-4 py-1.5 hover:bg-black hover:text-white transition-colors" />
+        )}
         <a
           href="https://www.linkedin.com/in/bureboto/"
           target="_blank"
