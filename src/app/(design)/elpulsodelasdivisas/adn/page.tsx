@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ContentGrid from "@/components/ContentGrid";
 
 type Field = { label: string };
@@ -101,6 +101,7 @@ function AnswerBox({ id, value, onChange }: { id: string; value: string; onChang
 export default function AdnDeMarca() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [saved, setSaved] = useState(false);
+  const saveTimeout = useRef<number | null>(null);
 
   useEffect(() => {
     try {
@@ -112,18 +113,48 @@ export default function AdnDeMarca() {
     } catch {
       // ignore unreadable/corrupt storage
     }
+
+    fetch("/api/elpulso-adn")
+      .then((res) => res.json())
+      .then((data: { answers?: Record<string, string> }) => {
+        if (data.answers && Object.keys(data.answers).length > 0) {
+          setAnswers(data.answers);
+        }
+      })
+      .catch(() => {
+        // ignore network errors, localStorage already loaded above
+      });
   }, []);
+
+  const saveToServer = (next: Record<string, string>) => {
+    if (saveTimeout.current) {
+      window.clearTimeout(saveTimeout.current);
+    }
+    saveTimeout.current = window.setTimeout(() => {
+      fetch("/api/elpulso-adn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(next),
+      })
+        .then(() => {
+          setSaved(true);
+          window.setTimeout(() => setSaved(false), 1500);
+        })
+        .catch(() => {
+          // ignore network errors; localStorage still has the latest value
+        });
+    }, 1000);
+  };
 
   const update = (id: string, value: string) => {
     setAnswers((prev) => {
       const next = { ...prev, [id]: value };
       try {
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-        setSaved(true);
-        window.setTimeout(() => setSaved(false), 1500);
       } catch {
         // ignore storage write failures (private mode, quota, etc.)
       }
+      saveToServer(next);
       return next;
     });
   };
@@ -165,7 +196,7 @@ export default function AdnDeMarca() {
       </div>
 
       <p className="text-xs text-black/40 -mt-8">
-        Tus respuestas se guardan automáticamente en este navegador.
+        Tus respuestas se guardan automáticamente.
         <span className={`ml-2 transition-opacity ${saved ? "opacity-100" : "opacity-0"}`}>Guardado ✓</span>
       </p>
 
