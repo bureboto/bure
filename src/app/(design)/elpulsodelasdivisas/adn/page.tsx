@@ -77,6 +77,7 @@ const summaryGrid = [
     { label: "Promesa", value: "Análisis de opinion para anticiparse al mercado" },
     { label: "Nuestro vehiculo", value: "Podcast en youtube que abre nuestro mercado" },
   ],
+  [{ label: "Valores", value: "Rigor,\nClaridad,\nIndependencia" }],
 ];
 
 const STORAGE_KEY = "elpulso-adn-respuestas";
@@ -204,20 +205,10 @@ export default function AdnDeMarca() {
       <div className="flex flex-col gap-4 text-black">
         <h2 className="text-[24px] font-bold">En resumen</h2>
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="flex flex-row md:flex-col gap-6 md:gap-6 md:w-40 shrink-0">
+          <div className="flex flex-row md:flex-col gap-6 md:w-40 shrink-0">
             <div className="border border-black rounded flex flex-col gap-2 p-2 flex-1 md:flex-none">
               <p className="text-[16px] font-bold">En resumen</p>
               <p className="text-[21px] font-light">Análisis de opinion para anticiparse al mercado</p>
-            </div>
-            <div className="border border-black rounded flex flex-col gap-2 p-2 flex-1 md:flex-none">
-              <p className="text-[16px] font-bold">Valores</p>
-              <p className="text-[21px] font-light">
-                Rigor,
-                <br />
-                Claridad,
-                <br />
-                Independencia
-              </p>
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-8">
@@ -237,22 +228,25 @@ export default function AdnDeMarca() {
 
       <hr className="border-black/20" />
 
-      {sections.map((section) => (
-        <div key={section.title} className="flex flex-col md:flex-row gap-10">
-          <div className="flex flex-col gap-4 justify-center md:w-56 shrink-0 text-black">
-            <p className="text-[24px] font-bold">{section.title}</p>
-            <p className="text-[18px]">{section.subtitle}</p>
-          </div>
-          <div className="flex-1 flex flex-col gap-4">
-            {section.fields.map((field) => {
-              const id = fieldId(section.title, field.label);
-              return (
-                <div key={field.label} className="flex flex-col gap-2">
-                  <p className="text-[16px] font-bold text-black">{field.label}</p>
-                  <AnswerBox id={id} value={answers[id] ?? ""} onChange={(v) => update(id, v)} />
-                </div>
-              );
-            })}
+      {sections.map((section, i) => (
+        <div key={section.title} className="flex flex-col gap-10">
+          {i > 0 && <hr className="border-black/10" />}
+          <div className="flex flex-col md:flex-row gap-10">
+            <div className="flex flex-col gap-4 md:w-56 shrink-0 text-black">
+              <p className="text-[24px] font-bold">{section.title}</p>
+              <p className="text-[18px]">{section.subtitle}</p>
+            </div>
+            <div className="flex-1 flex flex-col gap-4">
+              {section.fields.map((field) => {
+                const id = fieldId(section.title, field.label);
+                return (
+                  <div key={field.label} className="flex flex-col gap-2">
+                    <p className="text-[16px] font-bold text-black">{field.label}</p>
+                    <AnswerBox id={id} value={answers[id] ?? ""} onChange={(v) => update(id, v)} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       ))}
