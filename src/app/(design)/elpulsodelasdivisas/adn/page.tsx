@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ContentGrid from "@/components/ContentGrid";
 
@@ -169,12 +168,6 @@ export default function AdnDeMarca() {
   return (
     <ContentGrid className="pb-24 flex flex-col gap-12">
       <div className="flex flex-col gap-4 pt-6">
-        <Link
-          href="/elpulsodelasdivisas"
-          className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit"
-        >
-          ← Volver
-        </Link>
         <div className="flex items-baseline gap-[10px] flex-wrap">
           <h1 className="text-[48px] font-bold leading-none">El Pulso</h1>
           <span className="text-[32px] text-black/80">/</span>
