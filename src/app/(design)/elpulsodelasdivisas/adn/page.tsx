@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ContentGrid from "@/components/ContentGrid";
 
@@ -64,20 +63,26 @@ const sections: Section[] = [
   },
 ];
 
+const summaryHighlight = { label: "En resumen", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué ofrecemos?" };
+
 const summaryGrid = [
   [
-    { label: "Proposito", value: "Análisis de opinion para anticiparse al mercado" },
-    { label: "Nuestro publico", value: "CFO, tesoreros, inversionistas" },
-    { label: "Buscamos", value: "Análisis de opinion para anticiparse al mercado" },
-    { label: "Personalidad", value: "Directo, seguro\ny analítico" },
+    { label: "Proposito", section: "Qué ofrecemos", field: "¿Qué idea defiende?" },
+    { label: "Nuestro publico", section: "A quién le hablamos", field: "¿A quién le hablamos?" },
+    {
+      label: "Buscamos",
+      section: "A quién le hablamos",
+      field: "¿Qué necesita de nosotros que no encuentra en otro lado?",
+    },
+    { label: "Personalidad", section: "Nuestro carácter", field: "Nuestra personalidad" },
   ],
   [
-    { label: "Voz", value: "Como un colega experto, no como un vendedor" },
-    { label: "Diferencial", value: "Lo que decimos que otros no" },
-    { label: "Promesa", value: "Análisis de opinion para anticiparse al mercado" },
-    { label: "Nuestro vehiculo", value: "Podcast en youtube que abre nuestro mercado" },
+    { label: "Voz", section: "Nuestro carácter", field: "Si El Pulso fuera una persona, ¿cómo hablaría?" },
+    { label: "Diferencial", section: "Nuestro lugar en el mercado", field: "¿Qué decimos que otras marcas no?" },
+    { label: "Promesa", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué prometemos?" },
+    { label: "Nuestro vehiculo", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Cuál es nuestro vehículo?" },
   ],
-  [{ label: "Valores", value: "Rigor,\nClaridad,\nIndependencia" }],
+  [{ label: "Valores", section: "Nuestro carácter", field: "Nuestros valores" }],
 ];
 
 const STORAGE_KEY = "elpulso-adn-respuestas";
@@ -163,12 +168,6 @@ export default function AdnDeMarca() {
   return (
     <ContentGrid className="pb-24 flex flex-col gap-12">
       <div className="flex flex-col gap-4 pt-6">
-        <Link
-          href="/elpulsodelasdivisas"
-          className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit"
-        >
-          ← Volver
-        </Link>
         <div className="flex items-baseline gap-[10px] flex-wrap">
           <h1 className="text-[48px] font-bold leading-none">El Pulso</h1>
           <span className="text-[32px] text-black/80">/</span>
@@ -207,8 +206,10 @@ export default function AdnDeMarca() {
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex flex-row md:flex-col gap-6 md:w-40 shrink-0">
             <div className="border border-black rounded flex flex-col gap-2 p-2 flex-1 md:flex-none">
-              <p className="text-[16px] font-bold">En resumen</p>
-              <p className="text-[21px] font-light">Análisis de opinion para anticiparse al mercado</p>
+              <p className="text-[16px] font-bold">{summaryHighlight.label}</p>
+              <p className="text-[21px] font-light">
+                {answers[fieldId(summaryHighlight.section, summaryHighlight.field)] || "..."}
+              </p>
             </div>
           </div>
           <div className="flex-1 flex flex-col gap-8">
@@ -217,7 +218,9 @@ export default function AdnDeMarca() {
                 {row.map((item) => (
                   <div key={item.label} className="flex flex-col gap-2">
                     <p className="text-[16px] font-bold">{item.label}</p>
-                    <p className="text-[15px] font-light whitespace-pre-line">{item.value}</p>
+                    <p className="text-[15px] font-light whitespace-pre-line">
+                      {answers[fieldId(item.section, item.field)] || "..."}
+                    </p>
                   </div>
                 ))}
               </div>
