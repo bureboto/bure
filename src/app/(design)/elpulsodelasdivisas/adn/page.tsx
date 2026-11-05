@@ -65,17 +65,13 @@ const sections: Section[] = [
 
 const summaryHighlight = { label: "El Pulso", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué ofrecemos?" };
 
-const summaryGrid = [
-  [
-    { label: "Valores", section: "Nuestro carácter", field: "Nuestros valores" },
-    { label: "Publico", section: "A quién le hablamos", field: "¿A quién le hablamos?" },
-    { label: "Personalidad", section: "Nuestro carácter", field: "Nuestra personalidad" },
-  ],
-  [
-    { label: "Voz", section: "Nuestro carácter", field: "Si El Pulso fuera una persona, ¿cómo hablaría?" },
-    { label: "Diferencial", section: "Nuestro lugar en el mercado", field: "¿Qué decimos que otras marcas no?" },
-    { label: "Promesa", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué prometemos?" },
-  ],
+const summaryInsights = [
+  { label: "Valores", section: "Nuestro carácter", field: "Nuestros valores" },
+  { label: "Publico", section: "A quién le hablamos", field: "¿A quién le hablamos?" },
+  { label: "Personalidad", section: "Nuestro carácter", field: "Nuestra personalidad" },
+  { label: "Voz", section: "Nuestro carácter", field: "Si El Pulso fuera una persona, ¿cómo hablaría?" },
+  { label: "Diferencial", section: "Nuestro lugar en el mercado", field: "¿Qué decimos que otras marcas no?" },
+  { label: "Promesa", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué prometemos?" },
 ];
 
 const SUMMARY_WORD_LIMIT = 16;
@@ -204,8 +200,8 @@ export default function AdnDeMarca() {
       {/* En resumen */}
       <div className="flex flex-col gap-4 text-black">
         <h2 className="text-[24px] font-bold">En resumen</h2>
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="flex flex-col gap-2 md:w-40 shrink-0 border-b md:border-b-0 md:border-r border-black/20 pb-4 md:pb-0 md:pr-4">
+        <div className="grid grid-cols-1 md:grid-cols-[160px_1fr] gap-6">
+          <div className="flex flex-col gap-2 border-b md:border-b-0 md:border-r border-black/20 pb-4 md:pb-0 md:pr-4">
             <p className="text-[16px] font-bold">{summaryHighlight.label}</p>
             <p className="text-[21px] font-light">
               {(() => {
@@ -214,20 +210,16 @@ export default function AdnDeMarca() {
               })()}
             </p>
           </div>
-          <div className="flex-1 flex flex-col gap-8">
-            {summaryGrid.map((row, i) => (
-              <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-6">
-                {row.map((item) => (
-                  <div key={item.label} className="flex flex-col gap-2">
-                    <p className="text-[16px] font-bold">{item.label}</p>
-                    <p className="text-[15px] font-light whitespace-pre-line">
-                      {(() => {
-                        const value = answers[fieldId(item.section, item.field)];
-                        return value ? summarize(value) : "...";
-                      })()}
-                    </p>
-                  </div>
-                ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
+            {summaryInsights.map((item) => (
+              <div key={item.label} className="flex flex-col gap-2">
+                <p className="text-[16px] font-bold">{item.label}</p>
+                <p className="text-[15px] font-light whitespace-pre-line">
+                  {(() => {
+                    const value = answers[fieldId(item.section, item.field)];
+                    return value ? summarize(value) : "...";
+                  })()}
+                </p>
               </div>
             ))}
           </div>
