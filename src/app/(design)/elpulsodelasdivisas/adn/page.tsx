@@ -205,7 +205,7 @@ export default function AdnDeMarca() {
       <div className="flex flex-col gap-4 text-black">
         <h2 className="text-[36px] font-bold">En resumen</h2>
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="flex flex-col gap-2 md:w-40 shrink-0 border-b md:border-b-0 md:border-r border-black/20 pb-4 md:pb-0 md:pr-4">
+          <div className="flex flex-col gap-2 md:w-1/2 shrink-0 border-b md:border-b-0 md:border-r border-black/20 pb-4 md:pb-0 md:pr-4">
             <p className="text-[16px] font-bold">{summaryHighlight.label}</p>
             <p className="text-[28px] font-light">
               {(() => {
@@ -214,7 +214,7 @@ export default function AdnDeMarca() {
               })()}
             </p>
           </div>
-          <div className="flex-1 flex flex-col gap-8">
+          <div className="md:w-1/2 flex flex-col gap-8">
             {summaryGrid.map((row, i) => (
               <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-6">
                 {row.map((item) => (
