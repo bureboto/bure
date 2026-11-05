@@ -207,11 +207,8 @@ export default function AdnDeMarca() {
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex flex-col gap-2 md:w-1/2 shrink-0 border-b md:border-b-0 md:border-r border-black/20 pb-4 md:pb-0 md:pr-4">
             <p className="text-[16px] font-bold">{summaryHighlight.label}</p>
-            <p className="text-[28px] font-light">
-              {(() => {
-                const value = answers[fieldId(summaryHighlight.section, summaryHighlight.field)];
-                return value ? summarize(value) : "...";
-              })()}
+            <p className="text-[28px] font-light whitespace-pre-line">
+              {answers[fieldId(summaryHighlight.section, summaryHighlight.field)] || "..."}
             </p>
           </div>
           <div className="md:w-1/2 flex flex-col gap-8">
@@ -240,7 +237,7 @@ export default function AdnDeMarca() {
         <div key={section.title} className="flex flex-col gap-10">
           {i > 0 && <hr className="border-black/10" />}
           <div className="flex flex-col md:flex-row gap-10">
-            <div className="flex-1 flex flex-col gap-2 justify-center text-black">
+            <div className="flex-1 flex flex-col gap-2 text-black">
               <p className="text-[36px] font-bold">{section.title}</p>
               <p className="text-[18px]">{section.subtitle}</p>
             </div>
