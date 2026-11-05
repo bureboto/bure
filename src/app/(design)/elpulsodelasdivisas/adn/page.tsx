@@ -63,32 +63,33 @@ const sections: Section[] = [
   },
 ];
 
-const summaryHighlight = { label: "En resumen", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué ofrecemos?" };
+const summaryHighlight = { label: "El Pulso", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué ofrecemos?" };
 
 const summaryGrid = [
   [
-    { label: "Proposito", section: "Qué ofrecemos", field: "¿Qué idea defiende?" },
-    { label: "Nuestro publico", section: "A quién le hablamos", field: "¿A quién le hablamos?" },
-    {
-      label: "Buscamos",
-      section: "A quién le hablamos",
-      field: "¿Qué necesita de nosotros que no encuentra en otro lado?",
-    },
+    { label: "Valores", section: "Nuestro carácter", field: "Nuestros valores" },
+    { label: "Publico", section: "A quién le hablamos", field: "¿A quién le hablamos?" },
     { label: "Personalidad", section: "Nuestro carácter", field: "Nuestra personalidad" },
   ],
   [
     { label: "Voz", section: "Nuestro carácter", field: "Si El Pulso fuera una persona, ¿cómo hablaría?" },
     { label: "Diferencial", section: "Nuestro lugar en el mercado", field: "¿Qué decimos que otras marcas no?" },
     { label: "Promesa", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Qué prometemos?" },
-    { label: "Nuestro vehiculo", section: "Lo que ofrecemos y hacia dónde vamos", field: "¿Cuál es nuestro vehículo?" },
   ],
-  [{ label: "Valores", section: "Nuestro carácter", field: "Nuestros valores" }],
 ];
+
+const SUMMARY_WORD_LIMIT = 16;
 
 const STORAGE_KEY = "elpulso-adn-respuestas";
 
 function fieldId(sectionTitle: string, label: string) {
   return `${sectionTitle}::${label}`;
+}
+
+function summarize(text: string) {
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  if (words.length <= SUMMARY_WORD_LIMIT) return text;
+  return `${words.slice(0, SUMMARY_WORD_LIMIT).join(" ")}…`;
 }
 
 function AnswerBox({ id, value, onChange }: { id: string; value: string; onChange: (v: string) => void }) {
@@ -204,22 +205,26 @@ export default function AdnDeMarca() {
       <div className="flex flex-col gap-4 text-black">
         <h2 className="text-[24px] font-bold">En resumen</h2>
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="flex flex-row md:flex-col gap-6 md:w-40 shrink-0">
-            <div className="border border-black rounded flex flex-col gap-2 p-2 flex-1 md:flex-none">
-              <p className="text-[16px] font-bold">{summaryHighlight.label}</p>
-              <p className="text-[21px] font-light">
-                {answers[fieldId(summaryHighlight.section, summaryHighlight.field)] || "..."}
-              </p>
-            </div>
+          <div className="flex flex-col gap-2 md:w-40 shrink-0 border-b md:border-b-0 md:border-r border-black/20 pb-4 md:pb-0 md:pr-4">
+            <p className="text-[16px] font-bold">{summaryHighlight.label}</p>
+            <p className="text-[21px] font-light">
+              {(() => {
+                const value = answers[fieldId(summaryHighlight.section, summaryHighlight.field)];
+                return value ? summarize(value) : "...";
+              })()}
+            </p>
           </div>
           <div className="flex-1 flex flex-col gap-8">
             {summaryGrid.map((row, i) => (
-              <div key={i} className="grid grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-6">
+              <div key={i} className="grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-6">
                 {row.map((item) => (
                   <div key={item.label} className="flex flex-col gap-2">
                     <p className="text-[16px] font-bold">{item.label}</p>
                     <p className="text-[15px] font-light whitespace-pre-line">
-                      {answers[fieldId(item.section, item.field)] || "..."}
+                      {(() => {
+                        const value = answers[fieldId(item.section, item.field)];
+                        return value ? summarize(value) : "...";
+                      })()}
                     </p>
                   </div>
                 ))}
