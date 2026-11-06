@@ -108,6 +108,8 @@ export default function Project10() {
         </div>
       </div>
 
+      <Figure src={bando("Welcome.jpg")} alt="Bando welcome screen" aspect="aspect-[1200/700]" />
+
       {/* Context */}
       <div className="flex flex-col gap-10 border-t border-black/20 pt-16 md:flex-row">
         <div className="flex-1">
