@@ -5,6 +5,7 @@ import FloatingHeader from "@/components/FloatingHeader";
 import { LanguageProvider } from "@/lib/LanguageContext";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://design.bure.art"),
   title: "Bure Design",
   description: "Bure — Trabajo de diseño.",
 };
