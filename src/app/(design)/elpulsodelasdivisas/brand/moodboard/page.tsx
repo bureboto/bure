@@ -233,9 +233,9 @@ export default function Moodboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[348px]">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {sections.map((section) => (
-          <div key={section.title} className="relative w-full h-full bg-[#f5f5f5] rounded">
+          <div key={section.title} className="relative w-full aspect-square rounded">
             <Image src={section.image} alt={section.title} fill className="object-contain" />
           </div>
         ))}
@@ -267,7 +267,7 @@ export default function Moodboard() {
                 ))}
               </div>
             </div>
-            <div className="flex-1 relative w-full h-[304px] bg-[#f5f5f5] rounded">
+            <div className="flex-1 relative w-full h-[304px] rounded">
               <Image src={section.image} alt={section.title} fill className="object-contain" />
             </div>
           </div>
