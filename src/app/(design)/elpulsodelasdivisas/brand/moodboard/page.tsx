@@ -1,3 +1,4 @@
+import Image from "next/image";
 import ContentGrid from "@/components/ContentGrid";
 import BrandTabs from "@/components/BrandTabs";
 
@@ -6,11 +7,13 @@ type Subsection = { label: string; body: string };
 type MoodSection = {
   title: string;
   subsections: Subsection[];
+  image: string;
 };
 
 const sections: MoodSection[] = [
   {
     title: "Color",
+    image: "/design/elpulsodelasdivisas/moodboard/color.jpg",
     subsections: [
       { label: "Principio", body: "Sobrio, nunca apagado." },
       {
@@ -33,6 +36,7 @@ const sections: MoodSection[] = [
   },
   {
     title: "Tipografía",
+    image: "/design/elpulsodelasdivisas/moodboard/tipografia.jpg",
     subsections: [
       { label: "Principio", body: "Se lee a la primera." },
       {
@@ -55,6 +59,7 @@ const sections: MoodSection[] = [
   },
   {
     title: "Iconos",
+    image: "/design/elpulsodelasdivisas/moodboard/iconos.jpg",
     subsections: [
       { label: "Principio", body: "Un trazo, una idea." },
       {
@@ -77,6 +82,7 @@ const sections: MoodSection[] = [
   },
   {
     title: "Gráficos",
+    image: "/design/elpulsodelasdivisas/moodboard/graficos.jpg",
     subsections: [
       { label: "Principio", body: "Las cifras mandan." },
       {
@@ -99,6 +105,7 @@ const sections: MoodSection[] = [
   },
   {
     title: "Web",
+    image: "/design/elpulsodelasdivisas/moodboard/web.jpg",
     subsections: [
       { label: "Principio", body: "Puerta de entrada, no un destino." },
       {
@@ -121,6 +128,7 @@ const sections: MoodSection[] = [
   },
   {
     title: "Composiciones",
+    image: "/design/elpulsodelasdivisas/moodboard/composiciones.jpg",
     subsections: [
       { label: "Principio", body: "Orden con actitud." },
       {
@@ -143,6 +151,7 @@ const sections: MoodSection[] = [
   },
   {
     title: "Autores",
+    image: "/design/elpulsodelasdivisas/moodboard/autores.jpg",
     subsections: [
       { label: "Principio", body: "Serenidad que inspira confianza." },
       {
@@ -153,6 +162,7 @@ const sections: MoodSection[] = [
   },
   {
     title: "Fotografías",
+    image: "/design/elpulsodelasdivisas/moodboard/fotografias.jpg",
     subsections: [
       { label: "Principio", body: "Contexto real, nunca decoración." },
       {
@@ -257,8 +267,8 @@ export default function Moodboard() {
                 ))}
               </div>
             </div>
-            <div className="flex-1">
-              <ImagePlaceholder className="w-full h-[304px]" />
+            <div className="flex-1 relative w-full h-[304px]">
+              <Image src={section.image} alt={section.title} fill className="object-cover rounded" />
             </div>
           </div>
         </div>
