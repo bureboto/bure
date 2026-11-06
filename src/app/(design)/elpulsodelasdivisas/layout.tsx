@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "El Pulso / Branding — Bure",
+  title: "El Pulso / Branding",
   description: "Branding para El Pulso de las Divisas, por Bure.",
   openGraph: {
     title: "El Pulso / Branding",
