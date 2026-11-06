@@ -198,10 +198,6 @@ function renderBody(body: string) {
   );
 }
 
-function ImagePlaceholder({ className = "" }: { className?: string }) {
-  return <div className={`bg-[#dcdcdc] rounded ${className}`} />;
-}
-
 export default function Moodboard() {
   return (
     <ContentGrid className="pb-24 flex flex-col gap-12">
@@ -238,8 +234,10 @@ export default function Moodboard() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-2 gap-4 h-[348px]">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <ImagePlaceholder key={i} className="w-full h-full" />
+        {sections.map((section) => (
+          <div key={section.title} className="relative w-full h-full bg-[#f5f5f5] rounded">
+            <Image src={section.image} alt={section.title} fill className="object-contain" />
+          </div>
         ))}
       </div>
 
@@ -267,8 +265,8 @@ export default function Moodboard() {
                 ))}
               </div>
             </div>
-            <div className="flex-1 relative w-full h-[304px]">
-              <Image src={section.image} alt={section.title} fill className="object-cover rounded" />
+            <div className="flex-1 relative w-full h-[304px] bg-[#f5f5f5] rounded">
+              <Image src={section.image} alt={section.title} fill className="object-contain" />
             </div>
           </div>
         </div>
