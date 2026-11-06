@@ -189,7 +189,7 @@ function renderBody(body: string) {
   const parts = body.split(/\*\*(.+?)\*\*/g);
   return parts.map((part, i) =>
     i % 2 === 1 ? (
-      <strong key={i} className="font-bold">
+      <strong key={i} className="font-bold text-[#1d1d1d]">
         {part}
       </strong>
     ) : (
@@ -210,22 +210,22 @@ export default function Moodboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-[15px] font-light text-black">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-[15px] tracking-[0.15px] text-[#6e6e73]">
         <p>
-          <strong className="font-bold">Referencias visuales</strong> a partir de las cuales vamos a
-          construir la marca.
+          <strong className="font-bold text-[#1d1d1d]">Referencias visuales</strong> a partir de las
+          cuales vamos a construir la marca.
           <br />
           <br />
           Aquí reunimos lo que va a definir cómo se ve y cómo se siente El Pulso: tipografía, iconos,
           color, composición, la forma de mostrar los datos, la presencia digital y la fotografía.
           <br />
           <br />
-          <strong className="font-bold">Nada de esto está aquí por gusto,</strong> sino porque responde a
-          lo que escribimos en el ADN.
+          <strong className="font-bold text-[#1d1d1d]">Nada de esto está aquí por gusto,</strong> sino
+          porque responde a lo que escribimos en el ADN.
         </p>
         <p>
-          Estas imágenes <strong className="font-bold">no son el diseño final</strong>, sino la dirección
-          que vamos a seguir.
+          Estas imágenes <strong className="font-bold text-[#1d1d1d]">no son el diseño final</strong>,
+          sino la dirección que vamos a seguir.
           <br />
           <br />
           Son el punto de partida que nos permitirá tomar decisiones con un mismo criterio y construir una
@@ -245,19 +245,21 @@ export default function Moodboard() {
         <div key={section.title} className="flex flex-col gap-10">
           {i > 0 && <hr className="border-black/20" />}
           <div className="flex flex-col md:flex-row items-start gap-10">
-            <div className="flex-1 flex flex-col gap-10 text-[#111]">
-              <p className="text-[36px] font-bold">{section.title}</p>
+            <div className="flex-1 flex flex-col gap-10">
+              <p className="text-[36px] font-bold text-[#1d1d1d]">{section.title}</p>
               <div className="flex flex-col gap-6">
                 {section.subsections.map((sub) => (
                   <div
                     key={sub.label}
                     className={sub.label !== "Lo que evitamos" ? "border-l border-black pl-4" : ""}
                   >
-                    <p className="text-[21px] font-bold mb-2">{sub.label}</p>
+                    <p className="text-[21px] font-bold text-[#1d1d1d] mb-2">{sub.label}</p>
                     <p
-                      className={`font-light ${
-                        sub.label === "Principio" ? "text-[28px]" : "text-[15px] tracking-[0.15px]"
-                      }`}
+                      className={
+                        sub.label === "Principio"
+                          ? "text-[28px] font-light text-[#6e6e73]"
+                          : "text-[15px] tracking-[0.15px] text-[#6e6e73]"
+                      }
                     >
                       {sub.label === "Principio" ? sub.body : renderBody(sub.body)}
                     </p>
