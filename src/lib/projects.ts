@@ -12,7 +12,7 @@ export const projects: Project[] = [
     href: "/project10",
     name: "Bando",
     date: "2024 – 2025",
-    cover: "/design/bando/8_Bando.mp4",
+    cover: "/design/bando/Product/Final-1.jpg",
     description: {
       es: "Bando es una fintech que busca conectar la blockchain con la banca tradicional, conectando servicios y la bolsa de valores a usuarios finales.",
       en: "Bando is a fintech that connects blockchain with traditional banking, bringing services and the stock market to end users.",
