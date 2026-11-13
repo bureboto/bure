@@ -2,7 +2,7 @@ import Image from "next/image";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
-import { HeroMeta, HeroTitle, HeroLead } from "@/components/caseStudy/Hero";
+import { HeroMeta, HeroTitle, HeroIntro, HeroLead } from "@/components/caseStudy/Hero";
 
 const bando = (file: string) => `/design/bando/Product/${file}`;
 
@@ -77,15 +77,17 @@ export default function Project10() {
               { label: "Industry", value: "Fintech" },
             ]}
           />
-          <HeroTitle>Safe, Invest &amp; Pay in one app.</HeroTitle>
-          <HeroLead>
-            Bando was a fintech. Users could <strong className="font-bold text-[#1d1d1d]">invest</strong> in
-            tokenized CETES, stocks like Tesla, gold, or crypto like Bitcoin.
-          </HeroLead>
-          <Body>
-            Users could also create <strong className="font-bold text-[#1d1d1d]">their own savings goals</strong>{" "}
-            and <strong className="font-bold text-[#1d1d1d]">pay</strong> for everyday purchases.
-          </Body>
+          <HeroIntro>
+            <HeroTitle>Safe, Invest &amp; Pay in one app.</HeroTitle>
+            <HeroLead>
+              Bando was a fintech. Users could <strong className="font-bold text-[#1d1d1d]">invest</strong> in
+              tokenized CETES, stocks like Tesla, gold, or crypto like Bitcoin.
+            </HeroLead>
+            <Body>
+              Users could also create <strong className="font-bold text-[#1d1d1d]">their own savings goals</strong>{" "}
+              and <strong className="font-bold text-[#1d1d1d]">pay</strong> for everyday purchases.
+            </Body>
+          </HeroIntro>
         </div>
         <div className="flex flex-1 flex-col">
           <Body>
