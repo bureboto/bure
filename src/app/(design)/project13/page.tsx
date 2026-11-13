@@ -350,7 +350,7 @@ export default function Project13() {
             </Sub>
           </div>
           <div className="flex-1">
-            <Figure src={ine("INE-Challenge-3-1.jpg")} alt="INE challenge 3, legal content and neutrality, color palette" />
+            <Figure src={ine("INE-Challenge-3-1.gif")} alt="INE challenge 3, legal content and neutrality, color palette" />
           </div>
         </div>
 
