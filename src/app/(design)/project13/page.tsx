@@ -72,6 +72,8 @@ function Bi({ es, en }: { es: string; en: string }) {
   return <Body>{renderBody(language === "es" ? es : en)}</Body>;
 }
 
+const linkClass = "underline underline-offset-4 text-[#1d1d1d]";
+
 function T({ es, en }: { es: string; en: string }) {
   const { language } = useLanguage();
   return <>{language === "es" ? es : en}</>;
@@ -320,97 +322,69 @@ export default function Project13() {
       {/* Deliverables */}
       <div className="flex flex-col gap-10 border-t border-black/20 pt-16">
         <SectionTitle><T es="Qué se entregó" en="Deliverables" /></SectionTitle>
-        <div className="flex flex-col gap-16">
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1 flex flex-col gap-4">
-              <p className="text-[24px] font-bold text-[#1d1d1d]">
-                <T es="Guía de estilo de ilustración" en="Illustration style guide" />
-              </p>
-              <Bi
-                es="**La base de todo el sistema**. Definía formatos, tipografías, elementos base, colores e ilustraciones, con la flexibilidad de estilo necesaria para adaptarse a cualquier pieza, e incluía ejemplos de uso. A partir de ella se crearon informes, infografías, publicaciones para redes sociales y materiales de uso interno."
-                en="**The foundation of the whole system**. It defined formats, typography, base elements, colors, and illustrations, with the stylistic flexibility needed to adapt to any piece, and included usage examples. It became the basis for reports, infographics, social media posts, and internal materials."
-              />
-            </div>
-            <div className="flex-1">
-              <Figure src={ine("INE-Illustration.jpg")} alt="INE illustration style guide" />
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
+          <div className="flex flex-col gap-4">
+            <p className="text-[24px] font-bold text-[#1d1d1d]">
+              <T es="Guía de estilo de ilustración" en="Illustration style guide" />
+            </p>
+            <Bi
+              es="**La base de todo el sistema**. Definía formatos, tipografías, elementos base, colores e ilustraciones, con la flexibilidad de estilo necesaria para adaptarse a cualquier pieza, e incluía ejemplos de uso. A partir de ella se crearon informes, infografías, publicaciones para redes sociales y materiales de uso interno."
+              en="**The foundation of the whole system**. It defined formats, typography, base elements, colors, and illustrations, with the stylistic flexibility needed to adapt to any piece, and included usage examples. It became the basis for reports, infographics, social media posts, and internal materials."
+            />
+            <Figure src={ine("INE-Illustration.jpg")} alt="INE illustration style guide" />
           </div>
 
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1 flex flex-col gap-4">
-              <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Sitio web" en="Website" /></p>
-              <Bi
-                es="El centro de ayuda para que la ciudadanía conociera qué es el PREP, cómo funciona y cuáles son sus objetivos. Se organizó en **siete secciones**: Conoce el PREP, Elecciones federales, Acerca del voto, Actas, Glosario, Aspectos técnicos y Preguntas frecuentes."
-                en="The help center where citizens could learn what the PREP is, how it works, and what its goals are. It was organized into **seven sections**: About the PREP, Federal Elections, About the Vote, Tally Sheets, Glossary, Technical Aspects, and FAQ."
-              />
-            </div>
-            <div className="flex-1">
-              <Figure src={ine("INE-Fotos.jpg")} alt="INE PREP help center website" />
-            </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Sitio web" en="Website" /></p>
+            <Bi
+              es="El centro de ayuda para que la ciudadanía conociera qué es el PREP, cómo funciona y cuáles son sus objetivos. Se organizó en **siete secciones**: Conoce el PREP, Elecciones federales, Acerca del voto, Actas, Glosario, Aspectos técnicos y Preguntas frecuentes."
+              en="The help center where citizens could learn what the PREP is, how it works, and what its goals are. It was organized into **seven sections**: About the PREP, Federal Elections, About the Vote, Tally Sheets, Glossary, Technical Aspects, and FAQ."
+            />
+            <Figure src={ine("INE-Fotos.jpg")} alt="INE PREP help center website" />
           </div>
 
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1 flex flex-col gap-4">
-              <p className="text-[24px] font-bold text-[#1d1d1d]">Videos</p>
-              <Bi
-                es="**Más de 10 clips** de alrededor de un minuto cada uno, con adaptaciones para el sitio web y las redes sociales."
-                en="**More than 10 clips** of about one minute each, adapted for the website and social media."
-              />
-            </div>
-            <div className="flex-1">
-              <Figure src={ine("INE-Videos.jpg")} alt="INE video deliverables" />
-            </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[24px] font-bold text-[#1d1d1d]">Videos</p>
+            <Bi
+              es="**Más de 10 clips** de alrededor de un minuto cada uno, con adaptaciones para el sitio web y las redes sociales."
+              en="**More than 10 clips** of about one minute each, adapted for the website and social media."
+            />
+            <Figure src={ine("INE-Videos.jpg")} alt="INE video deliverables" />
           </div>
 
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1 flex flex-col gap-4">
-              <p className="text-[24px] font-bold text-[#1d1d1d]">
-                <T es="Guías para documentos internos" en="Internal document guidelines" />
-              </p>
-              <Bi
-                es="Lineamientos para crear ilustraciones, presentaciones, documentos y plantillas, de libre uso para todo el personal del INE."
-                en="Guidelines for creating illustrations, presentations, documents, and templates, free for all INE staff to use."
-              />
-            </div>
-            <div className="flex-1">
-              <Figure src={ine("INE-Documents.jpg")} alt="INE internal document guidelines" />
-            </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[24px] font-bold text-[#1d1d1d]">
+              <T es="Guías para documentos internos" en="Internal document guidelines" />
+            </p>
+            <Bi
+              es="Lineamientos para crear ilustraciones, presentaciones, documentos y plantillas, de libre uso para todo el personal del INE."
+              en="Guidelines for creating illustrations, presentations, documents, and templates, free for all INE staff to use."
+            />
+            <Figure src={ine("INE-Documents.jpg")} alt="INE internal document guidelines" />
           </div>
 
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1 flex flex-col gap-4">
-              <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Instalaciones" en="Installations" /></p>
-              <Bi
-                es="Señalética, banners y murales para el simulacro del PREP."
-                en="Signage, banners, and murals for the PREP drill."
-              />
-            </div>
-            <div className="flex-1">
-              <Figure src={ine("INE-Installations.jpg")} alt="INE installations, signage and banners" />
-            </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Instalaciones" en="Installations" /></p>
+            <Bi
+              es="Señalética, banners y murales para el simulacro del PREP."
+              en="Signage, banners, and murals for the PREP drill."
+            />
+            <Figure src={ine("INE-Installations.jpg")} alt="INE installations, signage and banners" />
           </div>
 
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1 flex flex-col gap-4">
-              <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Impresos" en="Print" /></p>
-              <Bi es="Carteles, folletos y manuales." en="Posters, brochures, and manuals." />
-            </div>
-            <div className="flex-1">
-              <Figure src={ine("INE-Prints.jpg")} alt="INE print deliverables, posters and manuals" />
-            </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Impresos" en="Print" /></p>
+            <Bi es="Carteles, folletos y manuales." en="Posters, brochures, and manuals." />
+            <Figure src={ine("INE-Prints.jpg")} alt="INE print deliverables, posters and manuals" />
           </div>
 
-          <div className="flex flex-col gap-6 md:flex-row">
-            <div className="flex-1 flex flex-col gap-4">
-              <p className="text-[24px] font-bold text-[#1d1d1d]">Stand</p>
-              <Bi
-                es="Un espacio dentro de las instalaciones del INE para la prensa, que se instaló durante la **jornada electoral** para que los medios pudieran visitarlo e informarse sobre qué es el PREP y cómo funciona."
-                en="A space inside the INE's facilities for the press, set up on **election day** so media outlets could visit it and learn what the PREP is and how it works."
-              />
-            </div>
-            <div className="flex-1">
-              <Figure src={ine("INE-Stand.jpg")} alt="INE press stand" />
-            </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-[24px] font-bold text-[#1d1d1d]">Stand</p>
+            <Bi
+              es="Un espacio dentro de las instalaciones del INE para la prensa, que se instaló durante la **jornada electoral** para que los medios pudieran visitarlo e informarse sobre qué es el PREP y cómo funciona."
+              en="A space inside the INE's facilities for the press, set up on **election day** so media outlets could visit it and learn what the PREP is and how it works."
+            />
+            <Figure src={ine("INE-Stand.jpg")} alt="INE press stand" />
           </div>
         </div>
       </div>
@@ -418,8 +392,8 @@ export default function Project13() {
       {/* Learnings */}
       <div className="flex flex-col gap-10 border-t border-black/20 pt-16">
         <SectionTitle><T es="Aprendizajes" en="Learnings" /></SectionTitle>
-        <div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:gap-x-10 md:gap-y-10">
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-10 md:grid md:grid-cols-3 md:gap-x-10 md:gap-y-10">
+          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T
                 es="Coordinar disciplinas sin estorbarse"
@@ -431,21 +405,21 @@ export default function Project13() {
               en="I learned to understand each discipline's timing and to bring copy, design, motion, and development together without getting in each other's way; instead, we built something very well structured. The team's bond was incredible: it led to great friendships that continue outside of work."
             />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Saber decir no" en="Learning to say no" /></p>
             <Bi
               es="Como resolvíamos todo en tiempo y forma, en ocasiones nos buscaban cargar la mesa de trabajo. Si algo cambiaría, sería poner límites más claros a nuestras actividades desde el inicio. Fue algo en lo que crecí mucho: **aprender a decir no**."
               en="Because we always delivered on time, people sometimes tried to pile more work on us. If I could change one thing, it would be setting clearer limits on our scope from the start. It's something I grew a lot in: **learning to say no**."
             />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Diseñar para cualquier formato" en="Designing for any format" /></p>
             <Bi
               es="Diseñar un sistema multiplataforma me enseñó a simplificar el uso de los elementos visuales y a considerar todas las variables de uso: tamaños, soportes, limitaciones visuales y de equipo, y optimización de recursos."
               en="Designing a multiplatform system taught me to simplify the use of visual elements and to consider every usage variable: sizes, media, visual and hardware limitations, and resource optimization."
             />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Documentar para que otros continúen" en="Documenting so others can continue" />
             </p>
@@ -454,14 +428,14 @@ export default function Project13() {
               en="I learned to document design so that anyone could **continue the system** using the parameters we set."
             />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Diseñar más allá de lo visual" en="Designing beyond the visual" /></p>
             <Bi
               es="Trabajar con una institución me enseñó a diseñar contemplando todo lo que implica un proyecto, más allá de lo bonito o funcional que pueda ser un diseño: cubrir también los **requerimientos legales y tecnológicos**."
               en="Working with an institution taught me to design with everything a project involves in mind, beyond how beautiful or functional a design can be: also meeting **legal and technological requirements**."
             />
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Qué haría diferente hoy" en="What I'd do differently today" /></p>
             <Bi
               es="Haría una medición después del PREP para conocer el impacto en la ciudadanía y en los capturistas que consultaron la información, y dejar documentado qué se debería considerar en futuras elecciones."
@@ -472,35 +446,76 @@ export default function Project13() {
       </div>
 
       {/* Team */}
-      <div className="flex flex-col gap-10 border-t border-black/20 pt-16">
-        <SectionTitle><T es="Equipo del proyecto" en="Project team" /></SectionTitle>
-        <div className="flex flex-col gap-10 md:flex-row">
-          <div className="flex-1">
-            <Figure src={ine("INE-Team.jpg")} alt="INE project team" aspect="aspect-[580/360]" />
-          </div>
-          <div className="flex-1 flex flex-col gap-6">
-            <Sub>
-              <SubLabel><T es="Diseñadores" en="Designers" /></SubLabel>
-              <Body>Bure, Leonor Toscano, Mauricio Rosales</Body>
-            </Sub>
-            <Sub>
-              <SubLabel><T es="Desarrolladores" en="Devs" /></SubLabel>
-              <Body>Vania Castillo, Maribel Pichardo, Daniel</Body>
-            </Sub>
-            <Sub>
-              <SubLabel>Motion</SubLabel>
-              <Body>Alexis Ramírez</Body>
-            </Sub>
-            <Sub bordered={false}>
-              <SubLabel><T es="Arquitectura de información" en="Information architecture" /></SubLabel>
-              <Body>Laura Arias</Body>
-            </Sub>
+      <div className="flex flex-col gap-10 border-t border-black/20 pt-16 md:flex-row">
+        <div className="flex-1 flex flex-col gap-10">
+          <Bi
+            es="**Un agradecimiento especial** a las personas que me ayudaron en el camino: sin ustedes, nada de esto habría sido posible. Ustedes saben quiénes son. 🙌"
+            en="**Special thanks** to the people who helped me along the way: none of this would have been possible without you. You know who you are. 🙌"
+          />
+          <div className="flex flex-col gap-4">
+            <p className="text-[16px] font-bold text-[#1d1d1d]"><T es="Equipo del proyecto" en="Project team" /></p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
+              <div className="flex flex-col gap-1">
+                <p className="text-[11px] text-[#6e6e73]"><T es="Diseñadores" en="Designers" /></p>
+                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">Bure</p>
+                <a
+                  href="https://www.linkedin.com/in/leonor-t-4134ab122/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={linkClass}
+                >
+                  Leonor Toscano
+                </a>
+                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">Mauricio Rosales</p>
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-[11px] text-[#6e6e73]"><T es="Desarrolladores" en="Devs" /></p>
+                <a
+                  href="https://www.linkedin.com/in/vania-mydori-castillo-rend%C3%B3n-0a923099/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={linkClass}
+                >
+                  Vania Castillo
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/maribel-isidoro-pichardo-6340aa167/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={linkClass}
+                >
+                  Maribel Pichardo
+                </a>
+                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">Daniel</p>
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-[11px] text-[#6e6e73]">Motion</p>
+                <a
+                  href="https://www.linkedin.com/in/alexis11err/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={linkClass}
+                >
+                  Alexis Ramírez
+                </a>
+              </div>
+              <div className="flex flex-col gap-1">
+                <p className="text-[11px] text-[#6e6e73]"><T es="Arquitectura de información" en="Information architecture" /></p>
+                <a
+                  href="https://www.linkedin.com/in/laura-arias-oropeza-4b153a82/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={linkClass}
+                >
+                  Laura Arias
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <Bi
-          es="**Un agradecimiento especial** a las personas que me ayudaron en el camino: sin ustedes, nada de esto habría sido posible. Ustedes saben quiénes son. 🙌"
-          en="**Special thanks** to the people who helped me along the way: none of this would have been possible without you. You know who you are. 🙌"
-        />
+        <div className="flex-1">
+          <Figure src={ine("INE-Team.jpg")} alt="INE project team" aspect="aspect-[580/360]" />
+        </div>
       </div>
 
       <OtherProjects currentHref="/project13" />
