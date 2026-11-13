@@ -61,7 +61,19 @@ function Figure({
   return (
     <div className="flex flex-col gap-2 flex-1">
       <div className={`relative w-full ${aspect}`}>
-        <Image src={src} alt={alt} fill className="object-contain" />
+        {src.endsWith(".mp4") ? (
+          <video
+            src={src}
+            autoPlay
+            loop
+            muted
+            playsInline
+            controls={false}
+            className="absolute inset-0 size-full object-contain"
+          />
+        ) : (
+          <Image src={src} alt={alt} fill className="object-contain" />
+        )}
       </div>
       {caption && <p className="text-[11px] text-[#6e6e73]">{caption}</p>}
     </div>
@@ -163,7 +175,7 @@ export default function Project13() {
         </div>
       </div>
 
-      <Figure src={ine("INE-Intro.jpg")} alt="INE PREP help center introduction" aspect="aspect-[1200/590]" />
+      <Figure src={ine("INE-HelpCenter.mp4")} alt="INE PREP help center introduction" aspect="aspect-[1200/590]" />
 
       {/* Context */}
       <Divider />
@@ -363,7 +375,7 @@ export default function Project13() {
               es="**Más de 10 clips** de alrededor de un minuto cada uno, con adaptaciones para el sitio web y las redes sociales."
               en="**More than 10 clips** of about one minute each, adapted for the website and social media."
             />
-            <Figure src={ine("INE-Videos.jpg")} alt="INE video deliverables" />
+            <Figure src={ine("INE-Videos.mp4")} alt="INE video deliverables" />
           </div>
 
           <div className="flex flex-col gap-4">
