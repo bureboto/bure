@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
+import Breadcrumb from "@/components/caseStudy/Breadcrumb";
 
 const bando = (file: string) => `/design/bando/Product/${file}`;
 
@@ -61,11 +61,8 @@ export default function Project10() {
   return (
     <ContentGrid className="pb-24 flex flex-col gap-16">
       {/* Back link + breadcrumb */}
-      <div className="flex flex-col gap-4 pt-6">
-        <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
-          ← Bando
-        </Link>
-        <p className="text-[21px] font-light text-[#6e6e73]">Safe, Invest &amp; Pay in one app.</p>
+      <div className="pt-6">
+        <Breadcrumb client="Bando" project="Safe, Invest & Pay in one app." />
       </div>
 
       {/* Hero */}

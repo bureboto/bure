@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
+import Breadcrumb from "@/components/caseStudy/Breadcrumb";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ine = (file: string) => `/design/INE/${file}`;
@@ -116,13 +116,8 @@ export default function Project13() {
   return (
     <ContentGrid className="pb-24 flex flex-col gap-16">
       {/* Back link + breadcrumb */}
-      <div className="flex items-center gap-2 pt-6 text-[#1d1d1d]">
-        <Link href="/home" className="text-[32px] hover:opacity-70 transition-opacity w-fit">
-          ← INE
-        </Link>
-        <p className="text-[21px]">
-          / <T es="Materiales de ayuda del PREP" en="PREP Help Materials" />
-        </p>
+      <div className="pt-6">
+        <Breadcrumb client="INE" project={<T es="Materiales de ayuda del PREP" en="PREP Help Materials" />} />
       </div>
 
       {/* Hero */}
