@@ -21,6 +21,10 @@ function renderBody(body: string) {
   );
 }
 
+function Divider() {
+  return <hr className="w-screen ml-[calc(50%-50vw)] border-black/20" />;
+}
+
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return <p className="text-[36px] font-bold text-[#1d1d1d]">{children}</p>;
 }
@@ -162,37 +166,42 @@ export default function Project13() {
       <Figure src={ine("INE-Intro.jpg")} alt="INE PREP help center introduction" aspect="aspect-[1200/590]" />
 
       {/* Context */}
-      <div className="flex flex-col gap-10 border-t border-black/20 pt-16 md:flex-row">
-        <div className="flex-1">
-          <SectionTitle><T es="Contexto" en="Context" /></SectionTitle>
+      <Divider />
+      <div className="flex flex-col gap-10 pt-16">
+        <div className="flex flex-col gap-10 md:flex-row">
+          <div className="flex-1">
+            <SectionTitle><T es="Contexto" en="Context" /></SectionTitle>
+          </div>
+          <div className="flex-1 flex flex-col gap-10">
+            <div className="flex flex-col gap-4">
+              <SubLabel><T es="¿Qué es el PREP y por qué importa?" en="What is the PREP and why does it matter?" /></SubLabel>
+              <Bi
+                es="El PREP es el Programa de Resultados Electorales Preliminares, que publica los primeros resultados de la elección a partir de las actas de cada casilla. En 2018 se vivió **la elección más grande de la historia de México**: además de la elección federal, hubo elecciones locales en 30 de los 32 estados, con una participación de **56.6 millones de votantes**."
+                en="The PREP (Preliminary Electoral Results Program) publishes the first results of the election based on the tally sheets from each polling station. 2018 was **the largest election in Mexico's history**: alongside the federal election, 30 of the 32 states held local elections, with a turnout of **56.6 million voters**."
+              />
+            </div>
+            <div className="flex flex-col gap-4">
+              <SubLabel><T es="¿Quién usaba los materiales?" en="Who used the materials?" /></SubLabel>
+              <Bi
+                es="Este proyecto dio ayuda a la capacitación de más de 8,000 capturistas a nivel nacional, que registraron las actas con la información de cada una de las **157,000 casillas** que se colocaron en todo el país. Además, el centro de ayuda sirvió como **guía para la ciudadanía**: cualquier persona podía consultarlo para entender qué hacía el PREP, cómo funcionaba y de dónde salían los resultados preliminares de la elección."
+                en="This project supported the training of more than 8,000 data entry staff nationwide, who recorded the tally sheets with the results from each of the **157,000 polling stations** set up across the country. The help center also served as a **guide for citizens**: anyone could visit it to understand what the PREP did, how it worked, and where the preliminary election results came from."
+              />
+            </div>
+            <div className="flex flex-col gap-4">
+              <SubLabel><T es="¿Cómo estaba formado el equipo?" en="Who was on the team?" /></SubLabel>
+              <Bi
+                es="Un equipo de 8 personas: 3 diseñadores, 1 arquitecta de información, 1 motion designer, 2 developers y yo como Principal designer & Manager."
+                en="A team of 8 people: 3 designers, 1 information architect, 1 motion designer, 2 developers, and me as Principal Designer & Manager."
+              />
+            </div>
+          </div>
         </div>
-        <div className="flex-1 flex flex-col gap-10">
-          <div className="flex flex-col gap-4">
-            <SubLabel><T es="¿Qué es el PREP y por qué importa?" en="What is the PREP and why does it matter?" /></SubLabel>
-            <Bi
-              es="El PREP es el Programa de Resultados Electorales Preliminares, que publica los primeros resultados de la elección a partir de las actas de cada casilla. En 2018 se vivió **la elección más grande de la historia de México**: además de la elección federal, hubo elecciones locales en 30 de los 32 estados, con una participación de **56.6 millones de votantes**."
-              en="The PREP (Preliminary Electoral Results Program) publishes the first results of the election based on the tally sheets from each polling station. 2018 was **the largest election in Mexico's history**: alongside the federal election, 30 of the 32 states held local elections, with a turnout of **56.6 million voters**."
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <SubLabel><T es="¿Quién usaba los materiales?" en="Who used the materials?" /></SubLabel>
-            <Bi
-              es="Este proyecto dio ayuda a la capacitación de más de 8,000 capturistas a nivel nacional, que registraron las actas con la información de cada una de las **157,000 casillas** que se colocaron en todo el país. Además, el centro de ayuda sirvió como **guía para la ciudadanía**: cualquier persona podía consultarlo para entender qué hacía el PREP, cómo funcionaba y de dónde salían los resultados preliminares de la elección."
-              en="This project supported the training of more than 8,000 data entry staff nationwide, who recorded the tally sheets with the results from each of the **157,000 polling stations** set up across the country. The help center also served as a **guide for citizens**: anyone could visit it to understand what the PREP did, how it worked, and where the preliminary election results came from."
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <SubLabel><T es="¿Cómo estaba formado el equipo?" en="Who was on the team?" /></SubLabel>
-            <Bi
-              es="Un equipo de 8 personas: 3 diseñadores, 1 arquitecta de información, 1 motion designer, 2 developers y yo como Principal designer & Manager."
-              en="A team of 8 people: 3 designers, 1 information architect, 1 motion designer, 2 developers, and me as Principal Designer & Manager."
-            />
-          </div>
-        </div>
+        <Figure src={ine("INE-Fotos.jpg")} alt="INE PREP data entry staff on election day" aspect="aspect-[1080/540]" />
       </div>
 
       {/* Challenges */}
-      <div className="flex flex-col gap-16 border-t border-black/20 pt-16">
+      <Divider />
+      <div className="flex flex-col gap-16 pt-16">
         <div className="flex flex-col gap-4 md:flex-row md:gap-10">
           <div className="flex-1">
             <SectionTitle><T es="Retos y cómo los resolvimos" en="Challenges and how we solved them" /></SectionTitle>
@@ -325,7 +334,8 @@ export default function Project13() {
       </div>
 
       {/* Deliverables */}
-      <div className="flex flex-col gap-10 border-t border-black/20 pt-16">
+      <Divider />
+      <div className="flex flex-col gap-10 pt-16">
         <SectionTitle><T es="Qué se entregó" en="Deliverables" /></SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
           <div className="flex flex-col gap-4">
@@ -345,7 +355,6 @@ export default function Project13() {
               es="El centro de ayuda para que la ciudadanía conociera qué es el PREP, cómo funciona y cuáles son sus objetivos. Se organizó en **siete secciones**: Conoce el PREP, Elecciones federales, Acerca del voto, Actas, Glosario, Aspectos técnicos y Preguntas frecuentes."
               en="The help center where citizens could learn what the PREP is, how it works, and what its goals are. It was organized into **seven sections**: About the PREP, Federal Elections, About the Vote, Tally Sheets, Glossary, Technical Aspects, and FAQ."
             />
-            <Figure src={ine("INE-Fotos.jpg")} alt="INE PREP help center website" />
           </div>
 
           <div className="flex flex-col gap-4">
@@ -395,7 +404,8 @@ export default function Project13() {
       </div>
 
       {/* Learnings */}
-      <div className="flex flex-col gap-10 border-t border-black/20 pt-16">
+      <Divider />
+      <div className="flex flex-col gap-10 pt-16">
         <SectionTitle><T es="Aprendizajes" en="Learnings" /></SectionTitle>
         <div className="flex flex-col gap-10 md:grid md:grid-cols-3 md:gap-x-10 md:gap-y-10">
           <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
@@ -451,7 +461,8 @@ export default function Project13() {
       </div>
 
       {/* Team */}
-      <div className="flex flex-col gap-10 border-t border-black/20 pt-16 md:flex-row">
+      <Divider />
+      <div className="flex flex-col gap-10 md:flex-row pt-16">
         <div className="flex-1 flex flex-col gap-10">
           <Bi
             es="**Un agradecimiento especial** a las personas que me ayudaron en el camino: sin ustedes, nada de esto habría sido posible. Ustedes saben quiénes son. 🙌"
