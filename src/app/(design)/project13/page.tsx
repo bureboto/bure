@@ -83,14 +83,26 @@ function Figure({
 // Renders only the current site language's paragraph, picking between the
 // Spanish and English text as written in the source document — nothing
 // here is translated, just toggled.
-function Bi({ es, en, lead = false }: { es: string; en: string; lead?: boolean }) {
+function Bi({
+  es,
+  en,
+  lead = false,
+  size,
+}: {
+  es: string;
+  en: string;
+  lead?: boolean;
+  size?: "21";
+}) {
   const { language } = useLanguage();
   const text = renderBody(language === "es" ? es : en);
-  return lead ? (
-    <p className="text-[28px] font-light text-[#6e6e73]">{text}</p>
-  ) : (
-    <Body>{text}</Body>
-  );
+  if (lead) {
+    return <p className="text-[28px] font-light text-[#6e6e73]">{text}</p>;
+  }
+  if (size === "21") {
+    return <p className="text-[21px] text-[#6e6e73]">{text}</p>;
+  }
+  return <Body>{text}</Body>;
 }
 
 const linkClass = "underline underline-offset-4 text-[#1d1d1d]";
@@ -104,12 +116,12 @@ export default function Project13() {
   return (
     <ContentGrid className="pb-24 flex flex-col gap-16">
       {/* Back link + breadcrumb */}
-      <div className="flex flex-col gap-4 pt-6">
-        <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
+      <div className="flex items-center gap-2 pt-6 text-[#1d1d1d]">
+        <Link href="/home" className="text-[32px] hover:opacity-70 transition-opacity w-fit">
           ← INE
         </Link>
-        <p className="text-[21px] font-light text-[#6e6e73]">
-          <T es="Materiales de ayuda del PREP" en="PREP Help Materials" />
+        <p className="text-[21px]">
+          / <T es="Materiales de ayuda del PREP" en="PREP Help Materials" />
         </p>
       </div>
 
@@ -142,6 +154,7 @@ export default function Project13() {
           <Bi
             es="Branding para los capturistas y el centro de ayuda de las elecciones nacionales de México de 2018."
             en="Branding for the data entry staff and help center of Mexico's 2018 national elections."
+            size="21"
           />
           <Bi
             es="Creamos todo el material multimedia para capacitar y apoyar, hasta el día de la elección, a más de 8,000 capturistas con los que contaba el INE a nivel nacional, además de un centro de ayuda en línea para que la ciudadanía pudiera entender los procesos del INE en esa elección."
