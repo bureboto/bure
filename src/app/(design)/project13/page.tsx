@@ -287,7 +287,7 @@ export default function Project13() {
           </div>
           <div className="flex-1 flex flex-col gap-4">
             <Figure src={ine("INE-Challenge-2-1.jpg")} alt="INE challenge 2, users of all ages, illustration guide" />
-            <Figure src={ine("INE-Challenge-2-2.jpg")} alt="INE challenge 2, system fonts and high contrast" />
+            <Figure src={ine("INE-Challenge-2-2.mp4")} alt="INE challenge 2, system fonts and high contrast" />
             <Figure src={ine("INE-Challenge-2-3.gif")} alt="INE challenge 2, explainer video" />
           </div>
         </div>
