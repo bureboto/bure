@@ -9,6 +9,17 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    href: "/project13",
+    name: "INE – PREP Help Materials",
+    date: "2018",
+    cover: "/design/INE/INE-Challenge-2-3.gif",
+    description: {
+      es: "Branding y sistema de ilustración para el centro de ayuda y los materiales de capacitación del PREP en las elecciones nacionales de México 2018, usado por más de 8,000 capturistas y 171,000 ciudadanos.",
+      en: "Branding and illustration system for the help center and training materials of the PREP in Mexico's 2018 national elections, used by more than 8,000 data entry staff and 171,000 citizens.",
+    },
+    tags: ["Brand", "Ilustración", "UI"],
+  },
+  {
     href: "/project10",
     name: "Bando",
     date: "2024 – 2025",
