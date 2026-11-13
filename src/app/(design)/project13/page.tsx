@@ -4,6 +4,7 @@ import Image from "next/image";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
+import { HeroMeta, HeroTitle, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ine = (file: string) => `/design/INE/${file}`;
@@ -123,8 +124,8 @@ export default function Project13() {
       {/* Hero */}
       <div className="flex flex-col gap-10 md:flex-row md:gap-10">
         <div className="flex flex-1 flex-col gap-4">
-          <div className="flex flex-wrap gap-8">
-            {[
+          <HeroMeta
+            items={[
               { es: { label: "Cliente", value: "INE" }, en: { label: "Client", value: "INE" } },
               {
                 es: { label: "Servicio", value: "Sistema de diseño, Ilustración, UX Writing" },
@@ -132,20 +133,14 @@ export default function Project13() {
               },
               { es: { label: "Año", value: "2018" }, en: { label: "Year", value: "2018" } },
               { es: { label: "Industria", value: "Gobierno" }, en: { label: "Industry", value: "Government" } },
-            ].map((item) => (
-              <div key={item.en.label} className="flex flex-col">
-                <p className="text-[11px] text-[#6e6e73]">
-                  <T es={item.es.label} en={item.en.label} />
-                </p>
-                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">
-                  <T es={item.es.value} en={item.en.value} />
-                </p>
-              </div>
-            ))}
-          </div>
-          <h1 className="text-[48px] leading-[0.9] font-bold text-[#1d1d1d]">
+            ].map((item) => ({
+              label: <T es={item.es.label} en={item.en.label} />,
+              value: <T es={item.es.value} en={item.en.value} />,
+            }))}
+          />
+          <HeroTitle>
             INE – <T es="Materiales de ayuda del PREP" en="PREP Help Materials" />
-          </h1>
+          </HeroTitle>
           <Bi
             es="Branding para los capturistas y el centro de ayuda de las elecciones nacionales de México de 2018."
             en="Branding for the data entry staff and help center of Mexico's 2018 national elections."
@@ -155,43 +150,31 @@ export default function Project13() {
             es="Creamos todo el material multimedia para capacitar y apoyar, hasta el día de la elección, a más de 8,000 capturistas con los que contaba el INE a nivel nacional, además de un centro de ayuda en línea para que la ciudadanía pudiera entender los procesos del INE en esa elección."
             en="We created all the multimedia material to train and support, up to election day, the more than 8,000 data entry staff the INE had nationwide, plus an online help center so citizens could understand the INE's processes in those elections."
           />
-          <div>
-            <p className="text-[18px] font-bold text-[#1d1d1d] mb-2">
-              <T es="Mi rol" en="My role" />
-            </p>
+          <HeroDetail label={<T es="Mi rol" en="My role" />}>
             <Bi es="Diseñador principal y Manager" en="Principal designer & Manager" />
-          </div>
-          <div>
-            <p className="text-[18px] font-bold text-[#1d1d1d] mb-2">
-              <T es="Equipo" en="Team" />
-            </p>
+          </HeroDetail>
+          <HeroDetail label={<T es="Equipo" en="Team" />}>
             <Bi
               es="Un equipo de 8 personas: 3 diseñadores, 1 arquitecta de información, 1 motion designer, 2 developers y yo como Principal Designer & Manager."
               en="A team of 8 people: 3 designers, 1 information architect, 1 motion designer, 2 developers, and me as Principal Designer & Manager."
             />
-          </div>
+          </HeroDetail>
         </div>
         <div className="flex-1 flex flex-col gap-2">
-          <p className="text-[18px] font-bold text-[#1d1d1d] mb-2">Impact</p>
-          <Bi
-            es="Durante la semana electoral (28 de junio al 4 de julio de 2018), el centro de ayuda recibió más de **171,000 usuarios** y **226,000 páginas vistas.** El tráfico tuvo su pico el 2 de julio, un día después de la elección, con casi 100,000 páginas vistas en un solo día, y el tiempo promedio en página fue de 3 minutos con 34 segundos. A eso se sumó el material de capacitación para los más de **8,000 capturistas** del PREP."
-            en="During election week (June 28 to July 4, 2018), the help center received more than **171,000 users** and **226,000 page views.** Traffic peaked on July 2, the day after the election, with nearly 100,000 page views in a single day, and the average time on page was 3 minutes and 34 seconds. On top of that came the training material for the more than **8,000 PREP staff** who captured the tally sheets."
-          />
-          <div className="flex flex-wrap gap-10 pt-2">
-            {[
+          <HeroDetail label="Impact">
+            <Bi
+              es="Durante la semana electoral (28 de junio al 4 de julio de 2018), el centro de ayuda recibió más de **171,000 usuarios** y **226,000 páginas vistas.** El tráfico tuvo su pico el 2 de julio, un día después de la elección, con casi 100,000 páginas vistas en un solo día, y el tiempo promedio en página fue de 3 minutos con 34 segundos. A eso se sumó el material de capacitación para los más de **8,000 capturistas** del PREP."
+              en="During election week (June 28 to July 4, 2018), the help center received more than **171,000 users** and **226,000 page views.** Traffic peaked on July 2, the day after the election, with nearly 100,000 page views in a single day, and the average time on page was 3 minutes and 34 seconds. On top of that came the training material for the more than **8,000 PREP staff** who captured the tally sheets."
+            />
+          </HeroDetail>
+          <HeroStats
+            stats={[
               { value: "+171,000", es: "Usuarios", en: "Users" },
               { value: "+226,000", es: "Páginas vistas", en: "Page views" },
               { value: "+8,000", es: "Capturistas del PREP", en: "PREP staff" },
               { value: "+6", es: "Meses de diseño", en: "Months of design" },
-            ].map((stat) => (
-              <div key={stat.en} className="flex flex-col gap-1">
-                <p className="text-[21px] text-[#1d1d1d]">{stat.value}</p>
-                <p className="text-[16px] tracking-[0.15px] text-[#6e6e73]">
-                  <T es={stat.es} en={stat.en} />
-                </p>
-              </div>
-            ))}
-          </div>
+            ].map((stat) => ({ value: stat.value, label: <T es={stat.es} en={stat.en} /> }))}
+          />
         </div>
       </div>
 

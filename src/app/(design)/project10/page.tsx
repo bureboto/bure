@@ -2,6 +2,7 @@ import Image from "next/image";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
+import { HeroMeta, HeroTitle, HeroLead } from "@/components/caseStudy/Hero";
 
 const bando = (file: string) => `/design/bando/Product/${file}`;
 
@@ -68,26 +69,19 @@ export default function Project10() {
       {/* Hero */}
       <div className="flex flex-col gap-10 md:flex-row md:gap-10">
         <div className="flex flex-1 flex-col gap-4">
-          <div className="flex flex-wrap gap-8">
-            {[
+          <HeroMeta
+            items={[
               { label: "Client", value: "Bando" },
               { label: "Service", value: "Product design, UX/UI" },
               { label: "Year", value: "2026" },
               { label: "Industry", value: "Fintech" },
-            ].map((item) => (
-              <div key={item.label} className="flex flex-col">
-                <p className="text-[11px] text-[#6e6e73]">{item.label}</p>
-                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">{item.value}</p>
-              </div>
-            ))}
-          </div>
-          <h1 className="text-[48px] leading-[0.9] font-bold text-[#1d1d1d]">
-            Safe, Invest &amp; Pay in one app.
-          </h1>
-          <p className="text-[21px] font-light text-[#6e6e73]">
+            ]}
+          />
+          <HeroTitle>Safe, Invest &amp; Pay in one app.</HeroTitle>
+          <HeroLead>
             Bando was a fintech. Users could <strong className="font-bold text-[#1d1d1d]">invest</strong> in
             tokenized CETES, stocks like Tesla, gold, or crypto like Bitcoin.
-          </p>
+          </HeroLead>
           <Body>
             Users could also create <strong className="font-bold text-[#1d1d1d]">their own savings goals</strong>{" "}
             and <strong className="font-bold text-[#1d1d1d]">pay</strong> for everyday purchases.
