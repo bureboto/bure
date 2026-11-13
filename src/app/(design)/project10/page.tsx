@@ -27,7 +27,7 @@ function SubLabel({ children }: { children: React.ReactNode }) {
 }
 
 function Body({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <p className={`text-[15px] tracking-[0.15px] text-[#6e6e73] ${className}`}>{children}</p>;
+  return <p className={`text-[16px] tracking-[0.15px] text-[#6e6e73] ${className}`}>{children}</p>;
 }
 
 function Lead({ children }: { children: React.ReactNode }) {
@@ -80,7 +80,7 @@ export default function Project10() {
             ].map((item) => (
               <div key={item.label} className="flex flex-col">
                 <p className="text-[11px] text-[#6e6e73]">{item.label}</p>
-                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">{item.value}</p>
+                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">{item.value}</p>
               </div>
             ))}
           </div>

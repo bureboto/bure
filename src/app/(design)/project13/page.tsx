@@ -30,7 +30,7 @@ function SubLabel({ children }: { children: React.ReactNode }) {
 }
 
 function Body({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <p className={`text-[15px] tracking-[0.15px] text-[#6e6e73] ${className}`}>{children}</p>;
+  return <p className={`text-[16px] tracking-[0.15px] text-[#6e6e73] ${className}`}>{children}</p>;
 }
 
 function Sub({
@@ -114,7 +114,7 @@ export default function Project13() {
                 <p className="text-[11px] text-[#6e6e73]">
                   <T es={item.es.label} en={item.en.label} />
                 </p>
-                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">
+                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">
                   <T es={item.es.value} en={item.en.value} />
                 </p>
               </div>
@@ -134,13 +134,13 @@ export default function Project13() {
         </div>
         <div className="flex flex-1 flex-col gap-6">
           <div>
-            <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d] font-bold mb-1">
+            <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d] font-bold mb-1">
               <T es="Mi rol" en="My role" />
             </p>
             <Bi es="Diseñador principal y Manager" en="Principal designer & Manager" />
           </div>
           <div>
-            <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d] font-bold mb-1">
+            <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d] font-bold mb-1">
               <T es="Equipo" en="Team" />
             </p>
             <Bi
@@ -149,7 +149,7 @@ export default function Project13() {
             />
           </div>
           <div>
-            <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d] font-bold mb-1">Impact</p>
+            <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d] font-bold mb-1">Impact</p>
             <Body>
               {renderBody(
                 "During election week (June 28 to July 4, 2018), the help center received more than **171,000 users** and 226,000 page views. Traffic peaked on July 2, the day after the election, with nearly **100,000 page views in a single day**, and the average time on page was **3 minutes and 34 seconds**. On top of that came the training material for the more than 8,000 PREP staff who captured the tally sheets."
@@ -463,7 +463,7 @@ export default function Project13() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
               <div className="flex flex-col gap-1">
                 <p className="text-[11px] text-[#6e6e73]"><T es="Diseñadores" en="Designers" /></p>
-                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">Bure</p>
+                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">Bure</p>
                 <a
                   href="https://www.linkedin.com/in/leonor-t-4134ab122/"
                   target="_blank"
@@ -472,7 +472,7 @@ export default function Project13() {
                 >
                   Leonor Toscano
                 </a>
-                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">Mauricio Rosales</p>
+                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">Mauricio Rosales</p>
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-[11px] text-[#6e6e73]"><T es="Desarrolladores" en="Devs" /></p>
@@ -492,7 +492,7 @@ export default function Project13() {
                 >
                   Maribel Pichardo
                 </a>
-                <p className="text-[15px] tracking-[0.15px] text-[#1d1d1d]">Daniel</p>
+                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">Daniel</p>
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-[11px] text-[#6e6e73]">Motion</p>
