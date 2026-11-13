@@ -127,7 +127,7 @@ export default function AdnRespuestas() {
                   <div key={field.label} className="flex flex-col gap-1">
                     <p className="text-[16px] font-bold text-black">{field.label}</p>
                     <p
-                      className={`text-[15px] whitespace-pre-line ${
+                      className={`text-[16px] whitespace-pre-line ${
                         value ? "text-black/80 font-light" : "text-black/30 italic"
                       }`}
                     >

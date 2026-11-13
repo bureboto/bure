@@ -178,7 +178,7 @@ export default function AdnDeMarca() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-[15px] font-light text-black">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-[16px] font-light text-black">
         <div>
           <p>
             Este documento es el ADN de El Pulso: lo que somos, lo que defendemos y lo que nos hace únicos
@@ -219,7 +219,7 @@ export default function AdnDeMarca() {
                 {row.map((item) => (
                   <div key={item.label} className="flex flex-col gap-2">
                     <p className="text-[16px] font-bold">{item.label}</p>
-                    <p className="text-[15px] font-light whitespace-pre-line">
+                    <p className="text-[16px] font-light whitespace-pre-line">
                       {(() => {
                         const value = answers[fieldId(item.section, item.field)];
                         return value ? summarize(value) : "...";

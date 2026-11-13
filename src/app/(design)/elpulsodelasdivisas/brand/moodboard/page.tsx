@@ -210,7 +210,7 @@ export default function Moodboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-[15px] tracking-[0.15px] text-[#6e6e73]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-[16px] tracking-[0.15px] text-[#6e6e73]">
         <p>
           <strong className="font-bold text-[#1d1d1d]">Referencias visuales</strong> a partir de las
           cuales vamos a construir la marca.
@@ -258,7 +258,7 @@ export default function Moodboard() {
                       className={
                         sub.label === "Principio"
                           ? "text-[28px] font-light text-[#6e6e73]"
-                          : "text-[15px] tracking-[0.15px] text-[#6e6e73]"
+                          : "text-[16px] tracking-[0.15px] text-[#6e6e73]"
                       }
                     >
                       {sub.label === "Principio" ? sub.body : renderBody(sub.body)}
