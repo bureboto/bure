@@ -252,6 +252,8 @@ export default function Project13() {
           </div>
         </div>
 
+        <hr className="border-black/10" />
+
         {/* Challenge 2 */}
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="flex-1 flex flex-col gap-4">
@@ -288,6 +290,8 @@ export default function Project13() {
           </div>
         </div>
 
+        <hr className="border-black/10" />
+
         {/* Challenge 3 */}
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="flex-1 flex flex-col gap-4">
@@ -317,6 +321,8 @@ export default function Project13() {
             <Figure src={ine("INE-Challenge-3-1.jpg")} alt="INE challenge 3, legal content and neutrality, color palette" />
           </div>
         </div>
+
+        <hr className="border-black/10" />
 
         {/* Challenge 4 */}
         <div className="flex flex-col gap-6 md:flex-row">
