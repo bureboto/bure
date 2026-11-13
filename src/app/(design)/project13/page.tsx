@@ -67,9 +67,14 @@ function Figure({
 // Renders only the current site language's paragraph, picking between the
 // Spanish and English text as written in the source document — nothing
 // here is translated, just toggled.
-function Bi({ es, en }: { es: string; en: string }) {
+function Bi({ es, en, lead = false }: { es: string; en: string; lead?: boolean }) {
   const { language } = useLanguage();
-  return <Body>{renderBody(language === "es" ? es : en)}</Body>;
+  const text = renderBody(language === "es" ? es : en);
+  return lead ? (
+    <p className="text-[28px] font-light text-[#6e6e73]">{text}</p>
+  ) : (
+    <Body>{text}</Body>
+  );
 }
 
 const linkClass = "underline underline-offset-4 text-[#1d1d1d]";
@@ -206,14 +211,14 @@ export default function Project13() {
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 1: Equipos viejos y conexión lenta" en="Challenge 1: Old devices and slow connections" />
             </p>
-            <Sub>
+            <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
                 es="Nuestro usuario podía vivir en el norte, centro o sur de México, así que el sitio tenía que ser fácil de usar tanto en una computadora actual como en una que aún tuviera Internet Explorer en una sierra alejada de la ciudad."
                 en="Our users could live in the north, center, or south of Mexico, so the site had to be easy to use on a modern computer as well as on one still running Internet Explorer in a remote mountain town."
               />
             </Sub>
-            <Sub bordered={false}>
+            <Sub>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
                 es="Diseñamos un sitio web sin animaciones complejas, cuidando su peso para que la carga no fuera un problema: el sitio completo **no pasaba de los 4 MB**. Los videos se optimizaron para reducir su tamaño **hasta en un 80%** de su peso original, conservando su calidad. Junto con el equipo de desarrollo, hacíamos pruebas constantes de rendimiento en distintos navegadores, velocidades de conexión y dispositivos móviles antiguos. Los datos lo confirmaron: más de la mitad de los usuarios entró **desde un celular**, y **1,682 personas** consultaron el sitio desde Internet Explorer."
@@ -232,14 +237,14 @@ export default function Project13() {
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 2: Usuarios de todas las edades" en="Challenge 2: Users of all ages" />
             </p>
-            <Sub>
+            <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
                 es="Nuestro usuario tenía un rango de edad muy amplio, de los 18 a los 60 años, con distintos niveles de estudio y de familiaridad con la tecnología."
                 en="Our users spanned a very wide age range, from 18 to 60, with different levels of education and familiarity with technology."
               />
             </Sub>
-            <Sub bordered={false}>
+            <Sub>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
                 es="Sintetizamos al máximo todos los contenidos, siempre buscando claridad y precisión. Para lograrlo, trabajé de cerca con una arquitecta de información, con quien definimos la **arquitectura del sitio y el UX writing**."
@@ -268,14 +273,14 @@ export default function Project13() {
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 3: Contenido legal y neutralidad" en="Challenge 3: Legal content and neutrality" />
             </p>
-            <Sub>
+            <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
                 es="Todo el contenido se hacía de la mano con el equipo legal: se cuidaba cada tecnicismo y el lugar donde poníamos cada mención a alguna ley. Además, se debía tener extrema precaución con el uso de colores más allá de los institucionales, para no dar la impresión de favorecer a algún partido en particular."
                 en="All content was developed hand in hand with the legal team: every technical term and every reference to a law was carefully placed. We also had to be extremely careful with any colors beyond the institutional ones, so as not to appear to favor any political party."
               />
             </Sub>
-            <Sub bordered={false}>
+            <Sub>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
                 es="Delimitamos la paleta a los colores institucionales y solo ampliamos el espectro derivando tonos: el rosa, color institucional del INE, como base, y el aqua, su complementario, solo para algunos acentos. Elegimos estos colores porque son de los que menos aparecen en los partidos políticos, lo que nos ayudaba a **mantener la neutralidad**."
@@ -298,14 +303,14 @@ export default function Project13() {
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 4: Tiempos y aprobaciones del INE" en="Challenge 4: INE timelines and approvals" />
             </p>
-            <Sub>
+            <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
                 es="El tiempo estaba marcado, pero se debía empujar mucho a las áreas del INE para que todo saliera a tiempo. Hubo momentos en los que avanzar o no, no estaba en nuestras manos."
                 en="The deadline was fixed, but we had to push the INE's departments hard to get everything out on time. At times, whether we could move forward was out of our hands."
               />
             </Sub>
-            <Sub bordered={false}>
+            <Sub>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
                 es="**Armé un calendario propio** de actividades y entregables para el equipo, para que siempre estuviéramos listos para entregar. Cuando otras áreas se atrasaban en autorizar contenidos, avanzábamos de todos modos: enviábamos el material por correo indicando el estado actual de cada archivo y qué parte seguía en proceso de aprobación. Así, los retrasos externos nunca se convirtieron en un bloqueo para nuestro flujo de trabajo, y **todo se entregó en tiempo y forma**."
@@ -451,6 +456,7 @@ export default function Project13() {
           <Bi
             es="**Un agradecimiento especial** a las personas que me ayudaron en el camino: sin ustedes, nada de esto habría sido posible. Ustedes saben quiénes son. 🙌"
             en="**Special thanks** to the people who helped me along the way: none of this would have been possible without you. You know who you are. 🙌"
+            lead
           />
           <div className="flex flex-col gap-4">
             <p className="text-[16px] font-bold text-[#1d1d1d]"><T es="Equipo del proyecto" en="Project team" /></p>
