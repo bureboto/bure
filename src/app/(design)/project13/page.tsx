@@ -207,15 +207,15 @@ export default function Project13() {
             <Sub>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
-                es="**Reto:** Nuestro usuario podía vivir en el norte, centro o sur de México, así que el sitio tenía que ser fácil de usar tanto en una computadora actual como en una que aún tuviera Internet Explorer en una sierra alejada de la ciudad."
-                en="**Challenge:** Our users could live in the north, center, or south of Mexico, so the site had to be easy to use on a modern computer as well as on one still running Internet Explorer in a remote mountain town."
+                es="Nuestro usuario podía vivir en el norte, centro o sur de México, así que el sitio tenía que ser fácil de usar tanto en una computadora actual como en una que aún tuviera Internet Explorer en una sierra alejada de la ciudad."
+                en="Our users could live in the north, center, or south of Mexico, so the site had to be easy to use on a modern computer as well as on one still running Internet Explorer in a remote mountain town."
               />
             </Sub>
             <Sub bordered={false}>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
-                es="**Solución:** Diseñamos un sitio web sin animaciones complejas, cuidando su peso para que la carga no fuera un problema: el sitio completo **no pasaba de los 4 MB**. Los videos se optimizaron para reducir su tamaño **hasta en un 80%** de su peso original, conservando su calidad. Junto con el equipo de desarrollo, hacíamos pruebas constantes de rendimiento en distintos navegadores, velocidades de conexión y dispositivos móviles antiguos. Los datos lo confirmaron: más de la mitad de los usuarios entró **desde un celular**, y **1,682 personas** consultaron el sitio desde Internet Explorer."
-                en="**Solution:** We designed a website without complex animations and kept its weight low so loading wouldn't be a problem: the entire site **stayed under 4 MB**. We optimized the videos to cut their file size by **up to 80%** while keeping their quality. Together with the development team, we constantly tested performance across browsers, connection speeds, and older mobile devices. The data confirmed it: more than half of users visited **from a phone**, and **1,682 people** accessed the site from Internet Explorer."
+                es="Diseñamos un sitio web sin animaciones complejas, cuidando su peso para que la carga no fuera un problema: el sitio completo **no pasaba de los 4 MB**. Los videos se optimizaron para reducir su tamaño **hasta en un 80%** de su peso original, conservando su calidad. Junto con el equipo de desarrollo, hacíamos pruebas constantes de rendimiento en distintos navegadores, velocidades de conexión y dispositivos móviles antiguos. Los datos lo confirmaron: más de la mitad de los usuarios entró **desde un celular**, y **1,682 personas** consultaron el sitio desde Internet Explorer."
+                en="We designed a website without complex animations and kept its weight low so loading wouldn't be a problem: the entire site **stayed under 4 MB**. We optimized the videos to cut their file size by **up to 80%** while keeping their quality. Together with the development team, we constantly tested performance across browsers, connection speeds, and older mobile devices. The data confirmed it: more than half of users visited **from a phone**, and **1,682 people** accessed the site from Internet Explorer."
               />
             </Sub>
           </div>
@@ -233,15 +233,15 @@ export default function Project13() {
             <Sub>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
-                es="**Reto:** Nuestro usuario tenía un rango de edad muy amplio, de los 18 a los 60 años, con distintos niveles de estudio y de familiaridad con la tecnología."
-                en="**Challenge:** Our users spanned a very wide age range, from 18 to 60, with different levels of education and familiarity with technology."
+                es="Nuestro usuario tenía un rango de edad muy amplio, de los 18 a los 60 años, con distintos niveles de estudio y de familiaridad con la tecnología."
+                en="Our users spanned a very wide age range, from 18 to 60, with different levels of education and familiarity with technology."
               />
             </Sub>
             <Sub bordered={false}>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
-                es="**Solución:** Sintetizamos al máximo todos los contenidos, siempre buscando claridad y precisión. Para lograrlo, trabajé de cerca con una arquitecta de información, con quien definimos la **arquitectura del sitio y el UX writing**."
-                en="**Solution:** We condensed all the content as much as possible, always aiming for clarity and precision. To do this, I worked closely with an information architect, with whom I defined the **site architecture and the UX writing**."
+                es="Sintetizamos al máximo todos los contenidos, siempre buscando claridad y precisión. Para lograrlo, trabajé de cerca con una arquitecta de información, con quien definimos la **arquitectura del sitio y el UX writing**."
+                en="We condensed all the content as much as possible, always aiming for clarity and precision. To do this, I worked closely with an information architect, with whom I defined the **site architecture and the UX writing**."
               />
               <Bi
                 es="Diseñamos el sitio pensando en que las imágenes fueran solo un complemento del contenido, como una versión lite integrada en el mismo sitio. Usamos **tipografías del sistema**, disponibles en cualquier computadora sin necesidad de instalarlas; aplicamos **alto contraste** validado con pruebas de contraste para UI; y evitamos poner texto dentro de las imágenes, para que, si alguna no cargaba, no se perdiera información importante."
@@ -269,15 +269,15 @@ export default function Project13() {
             <Sub>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
-                es="**Reto:** Todo el contenido se hacía de la mano con el equipo legal: se cuidaba cada tecnicismo y el lugar donde poníamos cada mención a alguna ley. Además, se debía tener extrema precaución con el uso de colores más allá de los institucionales, para no dar la impresión de favorecer a algún partido en particular."
-                en="**Challenge:** All content was developed hand in hand with the legal team: every technical term and every reference to a law was carefully placed. We also had to be extremely careful with any colors beyond the institutional ones, so as not to appear to favor any political party."
+                es="Todo el contenido se hacía de la mano con el equipo legal: se cuidaba cada tecnicismo y el lugar donde poníamos cada mención a alguna ley. Además, se debía tener extrema precaución con el uso de colores más allá de los institucionales, para no dar la impresión de favorecer a algún partido en particular."
+                en="All content was developed hand in hand with the legal team: every technical term and every reference to a law was carefully placed. We also had to be extremely careful with any colors beyond the institutional ones, so as not to appear to favor any political party."
               />
             </Sub>
             <Sub bordered={false}>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
-                es="**Solución:** Delimitamos la paleta a los colores institucionales y solo ampliamos el espectro derivando tonos: el rosa, color institucional del INE, como base, y el aqua, su complementario, solo para algunos acentos. Elegimos estos colores porque son de los que menos aparecen en los partidos políticos, lo que nos ayudaba a **mantener la neutralidad**."
-                en="**Solution:** We limited the palette to the institutional colors and only expanded it by deriving tones: pink, the INE's institutional color, as the base, and aqua, its complement, only for a few accents. We chose these colors because they are among the least used by political parties, which helped us **stay neutral**."
+                es="Delimitamos la paleta a los colores institucionales y solo ampliamos el espectro derivando tonos: el rosa, color institucional del INE, como base, y el aqua, su complementario, solo para algunos acentos. Elegimos estos colores porque son de los que menos aparecen en los partidos políticos, lo que nos ayudaba a **mantener la neutralidad**."
+                en="We limited the palette to the institutional colors and only expanded it by deriving tones: pink, the INE's institutional color, as the base, and aqua, its complement, only for a few accents. We chose these colors because they are among the least used by political parties, which helped us **stay neutral**."
               />
               <Bi
                 es="La parte legal fue un reto aparte: constantemente se ajustaban artículos o salían nuevas disposiciones, y debíamos actualizar los materiales. Para manejarlo, llevábamos un **control de versiones** de cada archivo, lo que nos permitía hacer cambios rápido sin perder el rastro de lo aprobado."
@@ -299,15 +299,15 @@ export default function Project13() {
             <Sub>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
-                es="**Reto:** El tiempo estaba marcado, pero se debía empujar mucho a las áreas del INE para que todo saliera a tiempo. Hubo momentos en los que avanzar o no, no estaba en nuestras manos."
-                en="**Challenge:** The deadline was fixed, but we had to push the INE's departments hard to get everything out on time. At times, whether we could move forward was out of our hands."
+                es="El tiempo estaba marcado, pero se debía empujar mucho a las áreas del INE para que todo saliera a tiempo. Hubo momentos en los que avanzar o no, no estaba en nuestras manos."
+                en="The deadline was fixed, but we had to push the INE's departments hard to get everything out on time. At times, whether we could move forward was out of our hands."
               />
             </Sub>
             <Sub bordered={false}>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
               <Bi
-                es="**Solución:** **Armé un calendario propio** de actividades y entregables para el equipo, para que siempre estuviéramos listos para entregar. Cuando otras áreas se atrasaban en autorizar contenidos, avanzábamos de todos modos: enviábamos el material por correo indicando el estado actual de cada archivo y qué parte seguía en proceso de aprobación. Así, los retrasos externos nunca se convirtieron en un bloqueo para nuestro flujo de trabajo, y **todo se entregó en tiempo y forma**."
-                en="**Solution:** **I set up our own calendar** of activities and deliverables for the team, so we were always ready to deliver. When other departments were late approving content, we kept moving: we sent the material by email, noting the current status of each file and which parts were still pending approval. That way, external delays never blocked our workflow, and **everything was delivered on time** and as agreed."
+                es="**Armé un calendario propio** de actividades y entregables para el equipo, para que siempre estuviéramos listos para entregar. Cuando otras áreas se atrasaban en autorizar contenidos, avanzábamos de todos modos: enviábamos el material por correo indicando el estado actual de cada archivo y qué parte seguía en proceso de aprobación. Así, los retrasos externos nunca se convirtieron en un bloqueo para nuestro flujo de trabajo, y **todo se entregó en tiempo y forma**."
+                en="**I set up our own calendar** of activities and deliverables for the team, so we were always ready to deliver. When other departments were late approving content, we kept moving: we sent the material by email, noting the current status of each file and which parts were still pending approval. That way, external delays never blocked our workflow, and **everything was delivered on time** and as agreed."
               />
             </Sub>
           </div>
