@@ -4,7 +4,7 @@ import Image from "next/image";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
-import { HeroMeta, HeroTitle, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
+import { HeroMeta, HeroTitle, HeroIntro, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ine = (file: string) => `/design/INE/${file}`;
@@ -138,18 +138,20 @@ export default function Project13() {
               value: <T es={item.es.value} en={item.en.value} />,
             }))}
           />
-          <HeroTitle>
-            INE – <T es="Materiales de ayuda del PREP" en="PREP Help Materials" />
-          </HeroTitle>
-          <Bi
-            es="Branding para los capturistas y el centro de ayuda de las elecciones nacionales de México de 2018."
-            en="Branding for the data entry staff and help center of Mexico's 2018 national elections."
-            size="21"
-          />
-          <Bi
-            es="Creamos todo el material multimedia para capacitar y apoyar, hasta el día de la elección, a más de 8,000 capturistas con los que contaba el INE a nivel nacional, además de un centro de ayuda en línea para que la ciudadanía pudiera entender los procesos del INE en esa elección."
-            en="We created all the multimedia material to train and support, up to election day, the more than 8,000 data entry staff the INE had nationwide, plus an online help center so citizens could understand the INE's processes in those elections."
-          />
+          <HeroIntro>
+            <HeroTitle>
+              INE – <T es="Materiales de ayuda del PREP" en="PREP Help Materials" />
+            </HeroTitle>
+            <Bi
+              es="Branding para los capturistas y el centro de ayuda de las elecciones nacionales de México de 2018."
+              en="Branding for the data entry staff and help center of Mexico's 2018 national elections."
+              size="21"
+            />
+            <Bi
+              es="Creamos todo el material multimedia para capacitar y apoyar, hasta el día de la elección, a más de 8,000 capturistas con los que contaba el INE a nivel nacional, además de un centro de ayuda en línea para que la ciudadanía pudiera entender los procesos del INE en esa elección."
+              en="We created all the multimedia material to train and support, up to election day, the more than 8,000 data entry staff the INE had nationwide, plus an online help center so citizens could understand the INE's processes in those elections."
+            />
+          </HeroIntro>
           <HeroDetail label={<T es="Mi rol" en="My role" />}>
             <Bi es="Diseñador principal y Manager" en="Principal designer & Manager" />
           </HeroDetail>
@@ -162,19 +164,19 @@ export default function Project13() {
         </div>
         <div className="flex-1 flex flex-col gap-2">
           <HeroDetail label="Impact">
+            <HeroStats
+              stats={[
+                { value: "+171,000", es: "Usuarios", en: "Users" },
+                { value: "+226,000", es: "Páginas vistas", en: "Page views" },
+                { value: "+8,000", es: "Capturistas del PREP", en: "PREP staff" },
+                { value: "+6", es: "Meses de diseño", en: "Months of design" },
+              ].map((stat) => ({ value: stat.value, label: <T es={stat.es} en={stat.en} /> }))}
+            />
             <Bi
               es="Durante la semana electoral (28 de junio al 4 de julio de 2018), el centro de ayuda recibió más de **171,000 usuarios** y **226,000 páginas vistas.** El tráfico tuvo su pico el 2 de julio, un día después de la elección, con casi 100,000 páginas vistas en un solo día, y el tiempo promedio en página fue de 3 minutos con 34 segundos. A eso se sumó el material de capacitación para los más de **8,000 capturistas** del PREP."
               en="During election week (June 28 to July 4, 2018), the help center received more than **171,000 users** and **226,000 page views.** Traffic peaked on July 2, the day after the election, with nearly 100,000 page views in a single day, and the average time on page was 3 minutes and 34 seconds. On top of that came the training material for the more than **8,000 PREP staff** who captured the tally sheets."
             />
           </HeroDetail>
-          <HeroStats
-            stats={[
-              { value: "+171,000", es: "Usuarios", en: "Users" },
-              { value: "+226,000", es: "Páginas vistas", en: "Page views" },
-              { value: "+8,000", es: "Capturistas del PREP", en: "PREP staff" },
-              { value: "+6", es: "Meses de diseño", en: "Months of design" },
-            ].map((stat) => ({ value: stat.value, label: <T es={stat.es} en={stat.en} /> }))}
-          />
         </div>
       </div>
 

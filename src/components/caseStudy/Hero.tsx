@@ -14,6 +14,11 @@ export function HeroMeta({ items }: { items: { label: ReactNode; value: ReactNod
   );
 }
 
+/** Groups title + lead + body paragraph. Token: gap S (16px), padding-bottom S (16px). */
+export function HeroIntro({ children }: { children: ReactNode }) {
+  return <div className="flex flex-col gap-4 pb-4">{children}</div>;
+}
+
 /** H1 title. Token: H/1 (48px bold, Primary). */
 export function HeroTitle({ children }: { children: ReactNode }) {
   return <h1 className="text-[48px] leading-[0.9] font-bold text-[#1d1d1d]">{children}</h1>;
