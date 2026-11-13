@@ -296,18 +296,20 @@ export default function Project13() {
             </Sub>
             <Sub>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
-              <Bi
-                es="Sintetizamos al máximo todos los contenidos, siempre buscando claridad y precisión. Para lograrlo, trabajé de cerca con una arquitecta de información, con quien definimos la **arquitectura del sitio y el UX writing**."
-                en="We condensed all the content as much as possible, always aiming for clarity and precision. To do this, I worked closely with an information architect, with whom I defined the **site architecture and the UX writing**."
-              />
-              <Bi
-                es="Diseñamos el sitio pensando en que las imágenes fueran solo un complemento del contenido, como una versión lite integrada en el mismo sitio. Usamos **tipografías del sistema**, disponibles en cualquier computadora sin necesidad de instalarlas; aplicamos **alto contraste** validado con pruebas de contraste para UI; y evitamos poner texto dentro de las imágenes, para que, si alguna no cargaba, no se perdiera información importante."
-                en="We designed the site so images were only a complement to the content, like a lite version built into the same site. We used **system fonts**, available on any computer without installation; applied **high contrast** validated with UI contrast tests; and avoided placing text inside images, so that if one didn't load, no important information was lost."
-              />
-              <Bi
-                es="La guía de ilustración tuvo un papel clave para escalar la producción de videos. Estos materiales **explicaban en segundos** los puntos más importantes del PREP, de forma entendible sin importar la edad o el nivel de estudios. Explicar el PREP siempre había sido un reto para la gente del INE, y resumirlo en video ayudó a que cada persona comprendiera su rol dentro de la elección."
-                en="The illustration guide played a key role in scaling video production. These videos explained the most important points of the PREP **in seconds**, in a way anyone could understand regardless of age or education level. Explaining the PREP had always been a challenge for INE staff, and summarizing it on video helped each person understand their role in the election."
-              />
+              <div className="flex flex-col gap-4">
+                <Bi
+                  es="Sintetizamos al máximo todos los contenidos, siempre buscando claridad y precisión. Para lograrlo, trabajé de cerca con una arquitecta de información, con quien definimos la **arquitectura del sitio y el UX writing**."
+                  en="We condensed all the content as much as possible, always aiming for clarity and precision. To do this, I worked closely with an information architect, with whom I defined the **site architecture and the UX writing**."
+                />
+                <Bi
+                  es="Diseñamos el sitio pensando en que las imágenes fueran solo un complemento del contenido, como una versión lite integrada en el mismo sitio. Usamos **tipografías del sistema**, disponibles en cualquier computadora sin necesidad de instalarlas; aplicamos **alto contraste** validado con pruebas de contraste para UI; y evitamos poner texto dentro de las imágenes, para que, si alguna no cargaba, no se perdiera información importante."
+                  en="We designed the site so images were only a complement to the content, like a lite version built into the same site. We used **system fonts**, available on any computer without installation; applied **high contrast** validated with UI contrast tests; and avoided placing text inside images, so that if one didn't load, no important information was lost."
+                />
+                <Bi
+                  es="La guía de ilustración tuvo un papel clave para escalar la producción de videos. Estos materiales **explicaban en segundos** los puntos más importantes del PREP, de forma entendible sin importar la edad o el nivel de estudios. Explicar el PREP siempre había sido un reto para la gente del INE, y resumirlo en video ayudó a que cada persona comprendiera su rol dentro de la elección."
+                  en="The illustration guide played a key role in scaling video production. These videos explained the most important points of the PREP **in seconds**, in a way anyone could understand regardless of age or education level. Explaining the PREP had always been a challenge for INE staff, and summarizing it on video helped each person understand their role in the election."
+                />
+              </div>
             </Sub>
           </div>
           <div className="flex-1 flex flex-col gap-4">
@@ -335,14 +337,16 @@ export default function Project13() {
             </Sub>
             <Sub>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
-              <Bi
-                es="Delimitamos la paleta a los colores institucionales y solo ampliamos el espectro derivando tonos: el rosa, color institucional del INE, como base, y el aqua, su complementario, solo para algunos acentos. Elegimos estos colores porque son de los que menos aparecen en los partidos políticos, lo que nos ayudaba a **mantener la neutralidad**."
-                en="We limited the palette to the institutional colors and only expanded it by deriving tones: pink, the INE's institutional color, as the base, and aqua, its complement, only for a few accents. We chose these colors because they are among the least used by political parties, which helped us **stay neutral**."
-              />
-              <Bi
-                es="La parte legal fue un reto aparte: constantemente se ajustaban artículos o salían nuevas disposiciones, y debíamos actualizar los materiales. Para manejarlo, llevábamos un **control de versiones** de cada archivo, lo que nos permitía hacer cambios rápido sin perder el rastro de lo aprobado."
-                en="The legal side was a challenge of its own: articles were constantly adjusted or new provisions issued, and we had to update the materials. To manage this, we kept **version control** on every file, which let us make changes quickly without losing track of what had been approved."
-              />
+              <div className="flex flex-col gap-4">
+                <Bi
+                  es="Delimitamos la paleta a los colores institucionales y solo ampliamos el espectro derivando tonos: el rosa, color institucional del INE, como base, y el aqua, su complementario, solo para algunos acentos. Elegimos estos colores porque son de los que menos aparecen en los partidos políticos, lo que nos ayudaba a **mantener la neutralidad**."
+                  en="We limited the palette to the institutional colors and only expanded it by deriving tones: pink, the INE's institutional color, as the base, and aqua, its complement, only for a few accents. We chose these colors because they are among the least used by political parties, which helped us **stay neutral**."
+                />
+                <Bi
+                  es="La parte legal fue un reto aparte: constantemente se ajustaban artículos o salían nuevas disposiciones, y debíamos actualizar los materiales. Para manejarlo, llevábamos un **control de versiones** de cada archivo, lo que nos permitía hacer cambios rápido sin perder el rastro de lo aprobado."
+                  en="The legal side was a challenge of its own: articles were constantly adjusted or new provisions issued, and we had to update the materials. To manage this, we kept **version control** on every file, which let us make changes quickly without losing track of what had been approved."
+                />
+              </div>
             </Sub>
           </div>
           <div className="flex-1">
