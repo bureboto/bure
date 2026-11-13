@@ -175,7 +175,7 @@ export default function Project13() {
         </div>
       </div>
 
-      <Figure src={ine("INE-HelpCenter.mp4")} alt="INE PREP help center introduction" aspect="aspect-[1200/590]" />
+      <Figure src={ine("INE-Intro.jpg")} alt="INE PREP help center introduction" aspect="aspect-[1200/590]" />
 
       {/* Context */}
       <Divider />
@@ -237,6 +237,7 @@ export default function Project13() {
               <Bi
                 es="Nuestro usuario podía vivir en el norte, centro o sur de México, así que el sitio tenía que ser fácil de usar tanto en una computadora actual como en una que aún tuviera Internet Explorer en una sierra alejada de la ciudad."
                 en="Our users could live in the north, center, or south of Mexico, so the site had to be easy to use on a modern computer as well as on one still running Internet Explorer in a remote mountain town."
+              lead
               />
             </Sub>
             <Sub>
@@ -265,6 +266,7 @@ export default function Project13() {
               <Bi
                 es="Nuestro usuario tenía un rango de edad muy amplio, de los 18 a los 60 años, con distintos niveles de estudio y de familiaridad con la tecnología."
                 en="Our users spanned a very wide age range, from 18 to 60, with different levels of education and familiarity with technology."
+              lead
               />
             </Sub>
             <Sub>
@@ -303,6 +305,7 @@ export default function Project13() {
               <Bi
                 es="Todo el contenido se hacía de la mano con el equipo legal: se cuidaba cada tecnicismo y el lugar donde poníamos cada mención a alguna ley. Además, se debía tener extrema precaución con el uso de colores más allá de los institucionales, para no dar la impresión de favorecer a algún partido en particular."
                 en="All content was developed hand in hand with the legal team: every technical term and every reference to a law was carefully placed. We also had to be extremely careful with any colors beyond the institutional ones, so as not to appear to favor any political party."
+              lead
               />
             </Sub>
             <Sub>
@@ -335,6 +338,7 @@ export default function Project13() {
               <Bi
                 es="El tiempo estaba marcado, pero se debía empujar mucho a las áreas del INE para que todo saliera a tiempo. Hubo momentos en los que avanzar o no, no estaba en nuestras manos."
                 en="The deadline was fixed, but we had to push the INE's departments hard to get everything out on time. At times, whether we could move forward was out of our hands."
+              lead
               />
             </Sub>
             <Sub>
@@ -373,6 +377,7 @@ export default function Project13() {
               es="El centro de ayuda para que la ciudadanía conociera qué es el PREP, cómo funciona y cuáles son sus objetivos. Se organizó en **siete secciones**: Conoce el PREP, Elecciones federales, Acerca del voto, Actas, Glosario, Aspectos técnicos y Preguntas frecuentes."
               en="The help center where citizens could learn what the PREP is, how it works, and what its goals are. It was organized into **seven sections**: About the PREP, Federal Elections, About the Vote, Tally Sheets, Glossary, Technical Aspects, and FAQ."
             />
+            <Figure src={ine("INE-HelpCenter.mp4")} alt="INE PREP help center website" />
           </div>
 
           <div className="flex flex-col gap-4">
