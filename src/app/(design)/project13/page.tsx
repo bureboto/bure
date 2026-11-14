@@ -113,6 +113,19 @@ function ItemTitle({ children }: { children: React.ReactNode }) {
   return <p className="text-[24px] font-bold text-[#1d1d1d]">{children}</p>;
 }
 
+function JumboTitle({ children }: { children: React.ReactNode }) {
+  return <p className="text-[80px] font-light text-[#1d1d1d]">{children}</p>;
+}
+
+function ChallengeTitle({ number, children }: { number: number; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col items-start text-[#1d1d1d]">
+      <JumboTitle>{number}.</JumboTitle>
+      <p className="text-[24px] font-bold">{children}</p>
+    </div>
+  );
+}
+
 function Lead28({ es, en }: { es: string; en: string }) {
   const { language } = useLanguage();
   return <p className="text-[28px] text-[#6e6e73]">{renderBody(language === "es" ? es : en)}</p>;
@@ -251,7 +264,7 @@ export default function Project13() {
       {/* Challenges */}
       <Divider />
       <div className="flex flex-col gap-10 pt-16">
-        <SectionTitle><T es="Retos y cómo los resolvimos" en="Challenges and how we solved them" /></SectionTitle>
+        <JumboTitle><T es="Retos" en="Challenges" /></JumboTitle>
         <Body>
           <T
             es="Necesitábamos plasmar todo el proceso del PREP de una forma simple y directa. Todo un reto, porque este proceso conlleva muchos tecnicismos y términos legales poco fáciles de comprender a la primera."
@@ -262,9 +275,9 @@ export default function Project13() {
         {/* Challenge 1 */}
         <div className="flex flex-col gap-10 md:flex-row">
           <div className="flex-1 flex flex-col gap-6">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">
-              <T es="Reto 1: Equipos viejos y conexión lenta" en="Challenge 1: Old devices and slow connections" />
-            </p>
+            <ChallengeTitle number={1}>
+              <T es="Equipos viejos y conexión lenta" en="Old devices and slow connections" />
+            </ChallengeTitle>
             <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
@@ -291,9 +304,9 @@ export default function Project13() {
         {/* Challenge 2 */}
         <div className="flex flex-col gap-10 md:flex-row">
           <div className="flex-1 flex flex-col gap-6">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">
-              <T es="Reto 2: Usuarios de todas las edades" en="Challenge 2: Users of all ages" />
-            </p>
+            <ChallengeTitle number={2}>
+              <T es="Usuarios de todas las edades" en="Users of all ages" />
+            </ChallengeTitle>
             <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
@@ -332,9 +345,9 @@ export default function Project13() {
         {/* Challenge 3 */}
         <div className="flex flex-col gap-10 md:flex-row">
           <div className="flex-1 flex flex-col gap-6">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">
-              <T es="Reto 3: Contenido legal y neutralidad" en="Challenge 3: Legal content and neutrality" />
-            </p>
+            <ChallengeTitle number={3}>
+              <T es="Contenido legal y neutralidad" en="Legal content and neutrality" />
+            </ChallengeTitle>
             <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
@@ -367,9 +380,9 @@ export default function Project13() {
         {/* Challenge 4 */}
         <div className="flex flex-col gap-10 md:flex-row">
           <div className="flex-1 flex flex-col gap-6">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">
-              <T es="Reto 4: Tiempos y aprobaciones del INE" en="Challenge 4: INE timelines and approvals" />
-            </p>
+            <ChallengeTitle number={4}>
+              <T es="Tiempos y aprobaciones del INE" en="INE timelines and approvals" />
+            </ChallengeTitle>
             <Sub bordered={false}>
               <SubLabel><T es="Reto" en="Challenge" /></SubLabel>
               <Bi
