@@ -111,11 +111,6 @@ function ItemTitle({ children }: { children: React.ReactNode }) {
   return <p className="text-[24px] font-bold text-[#1d1d1d]">{children}</p>;
 }
 
-function Lead21({ es, en }: { es: string; en: string }) {
-  const { language } = useLanguage();
-  return <p className="text-[21px] text-[#1d1d1d]">{renderBody(language === "es" ? es : en)}</p>;
-}
-
 const linkClass = "underline underline-offset-4 text-[#1d1d1d]";
 
 function T({ es, en }: { es: string; en: string }) {
@@ -202,25 +197,37 @@ export default function Project13() {
           <div className="flex-1 flex flex-col gap-10">
             <div className="flex flex-col gap-2">
               <ItemTitle><T es="¿Qué es el PREP y por qué importa?" en="What is the PREP and why does it matter?" /></ItemTitle>
-              <Bi
-                es="El PREP es el Programa de Resultados Electorales Preliminares, que publica los primeros resultados de la elección a partir de las actas de cada casilla. En 2018 se vivió **la elección más grande de la historia de México**: además de la elección federal, hubo elecciones locales en 30 de los 32 estados, con una participación de **56.6 millones de votantes**."
-                en="The PREP (Preliminary Electoral Results Program) publishes the first results of the election based on the tally sheets from each polling station. 2018 was **the largest election in Mexico's history**: alongside the federal election, 30 of the 32 states held local elections, with a turnout of **56.6 million voters**."
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <ItemTitle><T es="¿Quién usaba los materiales?" en="Who used the materials?" /></ItemTitle>
-              <div className="flex flex-col gap-2">
-                <Lead21
-                  es="Este proyecto dio ayuda a la capacitación de más de 8,000 capturistas a nivel nacional, que registraron las actas con la información de cada una de las 157,000 casillas que se colocaron en todo el país."
-                  en="This project supported the training of more than 8,000 data entry staff nationwide, who recorded the tally sheets with the results from each of the 157,000 polling stations set up across the country."
+              <Body>
+                <T
+                  es="El PREP es el Programa de Resultados Electorales Preliminares, que publica los primeros resultados de la elección a partir de las actas de cada casilla."
+                  en="The PREP (Preliminary Electoral Results Program) publishes the first results of the election based on the tally sheets from each polling station."
                 />
-                <Body>
-                  <T
-                    es="Además, el centro de ayuda sirvió como guía para la ciudadanía: cualquier persona podía consultarlo para entender qué hacía el PREP, cómo funcionaba y de dónde salían los resultados preliminares de la elección."
-                    en="The help center also served as a guide for citizens: anyone could visit it to understand what the PREP did, how it worked, and where the preliminary election results came from."
-                  />
-                </Body>
-              </div>
+              </Body>
+              <Bi
+                es="En 2018 se vivió la elección más grande de la historia de México:"
+                en="2018 was the largest election in Mexico's history:"
+                size="21"
+              />
+              <Body>
+                <T
+                  es="Además de la elección federal, hubo elecciones locales en 30 de los 32 estados, con una participación de 56.6 millones de votantes."
+                  en="Alongside the federal election, 30 of the 32 states held local elections, with a turnout of 56.6 million voters."
+                />
+              </Body>
+            </div>
+            <div className="flex flex-col gap-2 py-2">
+              <ItemTitle><T es="¿Quién usaba los materiales?" en="Who used the materials?" /></ItemTitle>
+              <Bi
+                es="Este proyecto dio ayuda a la capacitación de más de 8,000 capturistas a nivel nacional, que registraron las actas con la información de cada una de las 157,000 casillas que se colocaron en todo el país."
+                en="This project supported the training of more than 8,000 data entry staff nationwide, who recorded the tally sheets with the results from each of the 157,000 polling stations set up across the country."
+                size="21"
+              />
+              <Body>
+                <T
+                  es="Además, el centro de ayuda sirvió como guía para la ciudadanía: cualquier persona podía consultarlo para entender qué hacía el PREP, cómo funcionaba y de dónde salían los resultados preliminares de la elección."
+                  en="The help center also served as a guide for citizens: anyone could visit it to understand what the PREP did, how it worked, and where the preliminary election results came from."
+                />
+              </Body>
             </div>
             <div className="flex flex-col gap-2">
               <ItemTitle><T es="¿Cómo estaba formado el equipo?" en="Who was on the team?" /></ItemTitle>
