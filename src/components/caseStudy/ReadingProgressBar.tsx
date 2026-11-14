@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 /**
  * Fixed top bar tracking scroll progress through the whole page: starts as
- * a 1.5rem nub and grows to full width by the time the user reaches the
+ * a 0.75rem nub and grows to full width by the time the user reaches the
  * end of the article.
  */
 export default function ReadingProgressBar() {
@@ -25,10 +25,10 @@ export default function ReadingProgressBar() {
   }, []);
 
   return (
-    <div className="fixed left-0 top-0 z-50 h-6 w-screen">
+    <div className="fixed left-0 top-0 z-50 h-3 w-screen">
       <div
         className="h-full bg-[#D5007E] transition-[width] duration-500 ease-out"
-        style={{ width: `calc(1.5rem + (100% - 1.5rem) * ${progress})` }}
+        style={{ width: `calc(0.75rem + (100% - 0.75rem) * ${progress})` }}
       />
     </div>
   );
