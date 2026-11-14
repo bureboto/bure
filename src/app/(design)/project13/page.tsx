@@ -8,6 +8,7 @@ import { HeroMeta, HeroTitle, HeroIntro, HeroDetail, HeroStats } from "@/compone
 import ImageFocus from "@/components/caseStudy/ImageFocus";
 import DeliverablesScroll from "@/components/caseStudy/DeliverablesScroll";
 import DeliverablesFilmstrip from "@/components/caseStudy/DeliverablesFilmstrip";
+import ReadingProgressBar from "@/components/caseStudy/ReadingProgressBar";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ine = (file: string) => `/design/INE/${file}`;
@@ -140,7 +141,9 @@ function T({ es, en }: { es: string; en: string }) {
 
 export default function Project13() {
   return (
-    <ContentGrid className="pb-24 flex flex-col gap-16">
+    <>
+      <ReadingProgressBar />
+      <ContentGrid className="pb-24 flex flex-col gap-16">
       {/* Back link + breadcrumb */}
       <div className="pt-6">
         <Breadcrumb client="INE" project={<T es="Materiales de ayuda del PREP" en="PREP Help Materials" />} />
@@ -715,6 +718,7 @@ export default function Project13() {
       </div>
 
       <OtherProjects currentHref="/project13" />
-    </ContentGrid>
+      </ContentGrid>
+    </>
   );
 }
