@@ -8,7 +8,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   const { language } = useLanguage();
 
   return (
-    <Link href={project.href} className="flex flex-col gap-3 group">
+    <Link href={project.href} className="flex flex-col gap-4 group">
       {project.cover ? (
         project.cover.endsWith(".mp4") ? (
           <video
@@ -31,9 +31,9 @@ export default function ProjectCard({ project }: { project: Project }) {
       ) : (
         <div className="w-full aspect-video bg-black transition-opacity group-hover:opacity-80" />
       )}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-1">
         <div className="flex items-start justify-between gap-4">
-          <p className="font-bold">
+          <p className="text-[21px] font-bold text-[#1d1d1d]">
             {project.name}. {project.date}.
           </p>
           {/* Tags hidden for now — kept in data for future catalog/filtering */}
@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
         </div>
-        <p className="text-sm text-black/70">{project.description[language]}</p>
+        <p className="text-[16px] tracking-[0.15px] text-[#6e6e73]">{project.description[language]}</p>
       </div>
     </Link>
   );
