@@ -185,7 +185,7 @@ export default function Project13() {
         </div>
       </div>
 
-      <ImageFocus src={ine("INE-Intro.jpg")} alt="INE PREP help center introduction" />
+      <ImageFocus images={[{ src: ine("INE-Intro.jpg"), alt: "INE PREP help center introduction" }]} />
 
       {/* Context */}
       <Divider />
