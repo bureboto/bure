@@ -67,7 +67,7 @@ export default function Project10() {
       </div>
 
       {/* Hero */}
-      <div className="flex flex-col gap-10 md:flex-row md:gap-10">
+      <div className="flex flex-col gap-10 md:flex-row md:gap-20">
         <div className="flex flex-1 flex-col gap-4">
           <HeroMeta
             items={[
