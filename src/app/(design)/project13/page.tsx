@@ -6,6 +6,7 @@ import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
 import { HeroMeta, HeroTitle, HeroIntro, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
 import ImageFocus from "@/components/caseStudy/ImageFocus";
+import DeliverablesScroll from "@/components/caseStudy/DeliverablesScroll";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ine = (file: string) => `/design/INE/${file}`;
@@ -390,7 +391,9 @@ export default function Project13() {
         </div>
       </div>
 
-      {/* Deliverables */}
+      {/* Deliverables — experiment: pinned scroll version below replaces this grid for now */}
+      {false && (
+      <>
       <Divider />
       <div className="flex flex-col gap-10 pt-16">
         <SectionTitle><T es="Qué se entregó" en="Deliverables" /></SectionTitle>
@@ -474,6 +477,87 @@ export default function Project13() {
           </div>
         </div>
       </div>
+      </>
+      )}
+
+      {/* Deliverables (experiment: pinned scroll) */}
+      <DeliverablesScroll
+        title={<T es="Qué se entregó" en="Deliverables" />}
+        items={[
+          {
+            title: <T es="Guía de estilo de ilustración" en="Illustration style guide" />,
+            body: (
+              <Bi
+                es="**La base de todo el sistema**. Definía formatos, tipografías, elementos base, colores e ilustraciones, con la flexibilidad de estilo necesaria para adaptarse a cualquier pieza, e incluía ejemplos de uso. A partir de ella se crearon informes, infografías, publicaciones para redes sociales y materiales de uso interno."
+                en="**The foundation of the whole system**. It defined formats, typography, base elements, colors, and illustrations, with the stylistic flexibility needed to adapt to any piece, and included usage examples. It became the basis for reports, infographics, social media posts, and internal materials."
+              />
+            ),
+            src: ine("INE-Illustration.jpg"),
+            alt: "INE illustration style guide",
+          },
+          {
+            title: <T es="Sitio web" en="Website" />,
+            body: (
+              <Bi
+                es="El centro de ayuda para que la ciudadanía conociera qué es el PREP, cómo funciona y cuáles son sus objetivos. Se organizó en **siete secciones**: Conoce el PREP, Elecciones federales, Acerca del voto, Actas, Glosario, Aspectos técnicos y Preguntas frecuentes."
+                en="The help center where citizens could learn what the PREP is, how it works, and what its goals are. It was organized into **seven sections**: About the PREP, Federal Elections, About the Vote, Tally Sheets, Glossary, Technical Aspects, and FAQ."
+              />
+            ),
+            src: ine("INE-HelpCenter.mp4"),
+            alt: "INE PREP help center website",
+          },
+          {
+            title: "Videos",
+            body: (
+              <Bi
+                es="**Más de 10 clips** de alrededor de un minuto cada uno, con adaptaciones para el sitio web y las redes sociales."
+                en="**More than 10 clips** of about one minute each, adapted for the website and social media."
+              />
+            ),
+            src: ine("INE-Videos.mp4"),
+            alt: "INE video deliverables",
+          },
+          {
+            title: <T es="Guías para documentos internos" en="Internal document guidelines" />,
+            body: (
+              <Bi
+                es="Lineamientos para crear ilustraciones, presentaciones, documentos y plantillas, de libre uso para todo el personal del INE."
+                en="Guidelines for creating illustrations, presentations, documents, and templates, free for all INE staff to use."
+              />
+            ),
+            src: ine("INE-Documents.jpg"),
+            alt: "INE internal document guidelines",
+          },
+          {
+            title: <T es="Instalaciones" en="Installations" />,
+            body: (
+              <Bi
+                es="Señalética, banners y murales para el simulacro del PREP."
+                en="Signage, banners, and murals for the PREP drill."
+              />
+            ),
+            src: ine("INE-Installations.jpg"),
+            alt: "INE installations, signage and banners",
+          },
+          {
+            title: <T es="Impresos" en="Print" />,
+            body: <Bi es="Carteles, folletos y manuales." en="Posters, brochures, and manuals." />,
+            src: ine("INE-Prints.jpg"),
+            alt: "INE print deliverables, posters and manuals",
+          },
+          {
+            title: "Stand",
+            body: (
+              <Bi
+                es="Un espacio dentro de las instalaciones del INE para la prensa, que se instaló durante la **jornada electoral** para que los medios pudieran visitarlo e informarse sobre qué es el PREP y cómo funciona."
+                en="A space inside the INE's facilities for the press, set up on **election day** so media outlets could visit it and learn what the PREP is and how it works."
+              />
+            ),
+            src: ine("INE-Stand.jpg"),
+            alt: "INE press stand",
+          },
+        ]}
+      />
 
       {/* Learnings */}
       <Divider />
