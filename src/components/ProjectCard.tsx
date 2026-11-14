@@ -48,7 +48,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             ))}
           </div>
         </div>
-        <p className="text-[16px] tracking-[0.15px] text-[#6e6e73]">{project.description[language]}</p>
+        <p className="text-[16px] tracking-[0.16px] text-[#6e6e73]">{project.description[language]}</p>
       </div>
     </Link>
   );
