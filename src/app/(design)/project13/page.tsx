@@ -5,6 +5,7 @@ import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
 import { HeroMeta, HeroTitle, HeroIntro, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
+import ImageFocus from "@/components/caseStudy/ImageFocus";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ine = (file: string) => `/design/INE/${file}`;
@@ -180,7 +181,7 @@ export default function Project13() {
         </div>
       </div>
 
-      <Figure src={ine("INE-Intro.jpg")} alt="INE PREP help center introduction" aspect="aspect-[1200/590]" />
+      <ImageFocus src={ine("INE-Intro.jpg")} alt="INE PREP help center introduction" />
 
       {/* Context */}
       <Divider />
