@@ -57,7 +57,7 @@ export default function DeliverablesFilmstrip({ title, items }: { title: ReactNo
             }}
           >
             {items.map((item, i) => {
-              const opacity = Math.max(0, 1 - 2 * Math.abs(i - activePos));
+              const opacity = Math.max(0, 1 - 0.7 * Math.abs(i - activePos));
               return (
                 <div
                   key={i}
