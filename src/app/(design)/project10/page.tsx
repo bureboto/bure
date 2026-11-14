@@ -28,7 +28,7 @@ function SubLabel({ children }: { children: React.ReactNode }) {
 }
 
 function Body({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <p className={`text-[16px] tracking-[0.15px] text-[#6e6e73] ${className}`}>{children}</p>;
+  return <p className={`text-[16px] tracking-[0.16px] text-[#6e6e73] ${className}`}>{children}</p>;
 }
 
 function Lead({ children }: { children: React.ReactNode }) {

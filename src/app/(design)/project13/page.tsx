@@ -36,7 +36,7 @@ function SubLabel({ children }: { children: React.ReactNode }) {
 }
 
 function Body({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <p className={`text-[16px] tracking-[0.15px] text-[#6e6e73] ${className}`}>{children}</p>;
+  return <p className={`text-[16px] tracking-[0.16px] text-[#6e6e73] ${className}`}>{children}</p>;
 }
 
 function Sub({
@@ -99,7 +99,7 @@ function Bi({
   const { language } = useLanguage();
   const text = renderBody(language === "es" ? es : en);
   if (lead) {
-    return <p className="text-[28px] font-light text-[#6e6e73]">{text}</p>;
+    return <p className="text-[28px] text-[#6e6e73]">{text}</p>;
   }
   if (size === "21") {
     return <p className="text-[21px] text-[#6e6e73]">{text}</p>;
@@ -155,7 +155,7 @@ export default function Project13() {
             <Bi
               es="Branding para los capturistas y el centro de ayuda de las elecciones nacionales de México de 2018."
               en="Branding for the data entry staff and help center of Mexico's 2018 national elections."
-              size="21"
+              lead
             />
             <Bi
               es="Creamos todo el material multimedia para capacitar y apoyar, hasta el día de la elección, a más de 8,000 capturistas con los que contaba el INE a nivel nacional, además de un centro de ayuda en línea para que la ciudadanía pudiera entender los procesos del INE en esa elección."
@@ -545,7 +545,7 @@ export default function Project13() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
               <div className="flex flex-col gap-2">
                 <p className="text-[11px] text-[#6e6e73]"><T es="Diseñadores" en="Designers" /></p>
-                <div className="flex flex-col text-[16px] tracking-[0.15px] text-[#1d1d1d]">
+                <div className="flex flex-col text-[16px] tracking-[0.16px] text-[#1d1d1d]">
                   <p>Bure</p>
                   <a
                     href="https://www.linkedin.com/in/leonor-t-4134ab122/"
@@ -560,7 +560,7 @@ export default function Project13() {
               </div>
               <div className="flex flex-col gap-2">
                 <p className="text-[11px] text-[#6e6e73]"><T es="Desarrolladores" en="Devs" /></p>
-                <div className="flex flex-col text-[16px] tracking-[0.15px] text-[#1d1d1d]">
+                <div className="flex flex-col text-[16px] tracking-[0.16px] text-[#1d1d1d]">
                   <a
                     href="https://www.linkedin.com/in/vania-mydori-castillo-rend%C3%B3n-0a923099/"
                     target="_blank"
