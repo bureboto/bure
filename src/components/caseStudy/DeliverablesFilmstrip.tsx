@@ -45,15 +45,14 @@ export default function DeliverablesFilmstrip({ title, items }: { title: ReactNo
 
   return (
     <div ref={containerRef} className="relative" style={{ height: `${n * 100}vh` }}>
-      <div className="sticky top-0 ml-[calc(50%-50vw)] flex h-screen w-screen flex-col gap-10 overflow-hidden border-t border-[#6e6e73] bg-white py-10">
+      <div className="sticky top-0 ml-[calc(50%-50vw)] flex h-screen w-screen flex-col items-center justify-center gap-10 overflow-hidden border-t border-[#6e6e73] bg-white">
         <p className="text-center text-[80px] font-light text-[#1d1d1d]">{title}</p>
-        <div className="relative flex-1">
+        <div className="relative w-full overflow-hidden">
           <div
-            className="absolute top-0 flex h-full items-start"
+            className="flex items-start"
             style={{
               gap: `${GAP}px`,
-              left: "50vw",
-              transform: `translateX(calc(-${ITEM_WIDTH / 2}px - ${offsetPx}px))`,
+              transform: `translateX(calc(50vw - ${ITEM_WIDTH / 2}px - ${offsetPx}px))`,
             }}
           >
             {items.map((item, i) => {
@@ -87,14 +86,6 @@ export default function DeliverablesFilmstrip({ title, items }: { title: ReactNo
               );
             })}
           </div>
-        </div>
-        <div className="flex justify-center gap-2">
-          {items.map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 w-1.5 rounded-full ${Math.round(activePos) === i ? "bg-[#1d1d1d]" : "bg-[#1d1d1d]/20"}`}
-            />
-          ))}
         </div>
       </div>
     </div>
