@@ -212,7 +212,7 @@ export default function Project13() {
       <div className="flex flex-col gap-10 pt-16">
         <div className="flex flex-col gap-10 md:flex-row md:gap-20">
           <div className="flex-1">
-            <SectionTitle><T es="Contexto" en="Context" /></SectionTitle>
+            <JumboTitle><T es="Contexto" en="Context" /></JumboTitle>
           </div>
           <div className="flex-1 flex flex-col gap-10">
             <div className="flex flex-col gap-2">
@@ -582,7 +582,7 @@ export default function Project13() {
       {/* Learnings */}
       <Divider />
       <div className="flex flex-col gap-10 pt-16">
-        <SectionTitle><T es="Aprendizajes" en="Learnings" /></SectionTitle>
+        <JumboTitle><T es="Aprendizajes" en="Learnings" /></JumboTitle>
         <div className="flex flex-col gap-10 md:grid md:grid-cols-3 md:gap-x-10 md:gap-y-10">
           <div className="flex flex-col gap-4 md:border-l md:border-[#1d1d1d] md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]">

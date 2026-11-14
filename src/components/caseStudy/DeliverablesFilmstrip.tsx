@@ -10,10 +10,15 @@ export type DeliverableItem = {
   alt: string;
 };
 
+const ITEM_WIDTH = 580;
+const GAP = 120;
+
 /**
- * Pinned "Deliverables" section: scrolling down drives a horizontal
- * filmstrip of items (one centered at a time) instead of swapping them in
- * place. Once the last item is centered, normal vertical scroll resumes.
+ * Pinned "Deliverables" section: full-bleed, 100vw-wide filmstrip of items
+ * placed side by side (120px gap). Scrolling down slides the row
+ * horizontally; whichever item is centered on screen is fully opaque, and
+ * opacity fades to 0 the further an item is from center. Once the last
+ * item has been centered, normal vertical scroll resumes.
  */
 export default function DeliverablesFilmstrip({ title, items }: { title: ReactNode; items: DeliverableItem[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,51 +40,59 @@ export default function DeliverablesFilmstrip({ title, items }: { title: ReactNo
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const translate = progress * ((n - 1) * (100 / n));
+  const activePos = progress * (n - 1);
+  const offsetPx = activePos * (ITEM_WIDTH + GAP);
 
   return (
     <div ref={containerRef} className="relative" style={{ height: `${n * 100}vh` }}>
-      <div className="sticky top-0 flex h-screen flex-col gap-10 overflow-hidden border-t border-[#6e6e73] bg-white py-10">
-        <p className="text-center text-[36px] font-bold text-[#1d1d1d]">{title}</p>
-        <div
-          className="flex flex-1"
-          style={{ width: `${n * 100}%`, transform: `translateX(-${translate}%)` }}
-        >
-          {items.map((item, i) => (
-            <div
-              key={i}
-              className="flex shrink-0 flex-col items-center justify-start gap-8 px-6 text-center md:px-[120px]"
-              style={{ width: `${100 / n}%` }}
-            >
-              <div className="flex w-[580px] max-w-full flex-col items-center gap-2">
-                <p className="text-[24px] font-bold text-[#1d1d1d]">{item.title}</p>
-                <p className="text-[16px] tracking-[0.16px] text-[#6e6e73]">{item.body}</p>
-              </div>
-              <div className="relative h-[360px] w-[580px] max-w-full">
-                {item.src.endsWith(".mp4") ? (
-                  <video
-                    src={item.src}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    controls={false}
-                    className="absolute inset-0 size-full object-contain"
-                  />
-                ) : (
-                  <Image src={item.src} alt={item.alt} fill className="object-contain" />
-                )}
-              </div>
-            </div>
-          ))}
+      <div className="sticky top-0 ml-[calc(50%-50vw)] flex h-screen w-screen flex-col gap-10 overflow-hidden border-t border-[#6e6e73] bg-white py-10">
+        <p className="text-center text-[80px] font-light text-[#1d1d1d]">{title}</p>
+        <div className="relative flex-1">
+          <div
+            className="absolute top-0 flex h-full items-start"
+            style={{
+              gap: `${GAP}px`,
+              left: "50vw",
+              transform: `translateX(calc(-${ITEM_WIDTH / 2}px - ${offsetPx}px))`,
+            }}
+          >
+            {items.map((item, i) => {
+              const opacity = Math.max(0, 1 - 2 * Math.abs(i - activePos));
+              return (
+                <div
+                  key={i}
+                  className="flex shrink-0 flex-col items-center gap-8 text-center transition-opacity duration-[400ms] ease-out"
+                  style={{ width: ITEM_WIDTH, opacity }}
+                >
+                  <div className="flex w-full flex-col items-center gap-2">
+                    <p className="text-[24px] font-bold text-[#1d1d1d]">{item.title}</p>
+                    <p className="text-[16px] tracking-[0.16px] text-[#6e6e73]">{item.body}</p>
+                  </div>
+                  <div className="relative h-[360px] w-full">
+                    {item.src.endsWith(".mp4") ? (
+                      <video
+                        src={item.src}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        controls={false}
+                        className="absolute inset-0 size-full object-contain"
+                      />
+                    ) : (
+                      <Image src={item.src} alt={item.alt} fill className="object-contain" />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className="flex justify-center gap-2">
           {items.map((_, i) => (
             <div
               key={i}
-              className={`h-1.5 w-1.5 rounded-full ${
-                i === Math.round(progress * (n - 1)) ? "bg-[#1d1d1d]" : "bg-[#1d1d1d]/20"
-              }`}
+              className={`h-1.5 w-1.5 rounded-full ${Math.round(activePos) === i ? "bg-[#1d1d1d]" : "bg-[#1d1d1d]/20"}`}
             />
           ))}
         </div>
