@@ -111,6 +111,11 @@ function ItemTitle({ children }: { children: React.ReactNode }) {
   return <p className="text-[24px] font-bold text-[#1d1d1d]">{children}</p>;
 }
 
+function Lead28({ es, en }: { es: string; en: string }) {
+  const { language } = useLanguage();
+  return <p className="text-[28px] text-[#6e6e73]">{renderBody(language === "es" ? es : en)}</p>;
+}
+
 const linkClass = "underline underline-offset-4 text-[#1d1d1d]";
 
 function T({ es, en }: { es: string; en: string }) {
@@ -531,48 +536,51 @@ export default function Project13() {
       <Divider />
       <div className="flex flex-col gap-10 md:flex-row pt-16">
         <div className="flex-1 flex flex-col gap-10">
-          <Bi
+          <Lead28
             es="**Un agradecimiento especial** a las personas que me ayudaron en el camino: sin ustedes, nada de esto habría sido posible. Ustedes saben quiénes son. 🙌"
             en="**Special thanks** to the people who helped me along the way: none of this would have been possible without you. You know who you are. 🙌"
-            lead
           />
           <div className="flex flex-col gap-4">
-            <p className="text-[16px] font-bold text-[#1d1d1d]"><T es="Equipo del proyecto" en="Project team" /></p>
+            <p className="text-[18px] font-bold text-[#1d1d1d]"><T es="Equipo del proyecto" en="Project team" /></p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <p className="text-[11px] text-[#6e6e73]"><T es="Diseñadores" en="Designers" /></p>
-                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">Bure</p>
-                <a
-                  href="https://www.linkedin.com/in/leonor-t-4134ab122/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={linkClass}
-                >
-                  Leonor Toscano
-                </a>
-                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">Mauricio Rosales</p>
+                <div className="flex flex-col text-[16px] tracking-[0.15px] text-[#1d1d1d]">
+                  <p>Bure</p>
+                  <a
+                    href="https://www.linkedin.com/in/leonor-t-4134ab122/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={linkClass}
+                  >
+                    Leonor Toscano
+                  </a>
+                  <p>Mauricio Rosales</p>
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <p className="text-[11px] text-[#6e6e73]"><T es="Desarrolladores" en="Devs" /></p>
-                <a
-                  href="https://www.linkedin.com/in/vania-mydori-castillo-rend%C3%B3n-0a923099/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={linkClass}
-                >
-                  Vania Castillo
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/maribel-isidoro-pichardo-6340aa167/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={linkClass}
-                >
-                  Maribel Pichardo
-                </a>
-                <p className="text-[16px] tracking-[0.15px] text-[#1d1d1d]">Daniel</p>
+                <div className="flex flex-col text-[16px] tracking-[0.15px] text-[#1d1d1d]">
+                  <a
+                    href="https://www.linkedin.com/in/vania-mydori-castillo-rend%C3%B3n-0a923099/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={linkClass}
+                  >
+                    Vania Castillo
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/maribel-isidoro-pichardo-6340aa167/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={linkClass}
+                  >
+                    Maribel Pichardo
+                  </a>
+                  <p>Daniel</p>
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <p className="text-[11px] text-[#6e6e73]">Motion</p>
                 <a
                   href="https://www.linkedin.com/in/alexis11err/"
@@ -583,7 +591,7 @@ export default function Project13() {
                   Alexis Ramírez
                 </a>
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <p className="text-[11px] text-[#6e6e73]"><T es="Arquitectura de información" en="Information architecture" /></p>
                 <a
                   href="https://www.linkedin.com/in/laura-arias-oropeza-4b153a82/"
