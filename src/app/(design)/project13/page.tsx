@@ -389,68 +389,82 @@ export default function Project13() {
       <Divider />
       <div className="flex flex-col gap-10 pt-16">
         <SectionTitle><T es="Qué se entregó" en="Deliverables" /></SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-16">
-          <div className="flex flex-col gap-4">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">
-              <T es="Guía de estilo de ilustración" en="Illustration style guide" />
-            </p>
-            <Bi
-              es="**La base de todo el sistema**. Definía formatos, tipografías, elementos base, colores e ilustraciones, con la flexibilidad de estilo necesaria para adaptarse a cualquier pieza, e incluía ejemplos de uso. A partir de ella se crearon informes, infografías, publicaciones para redes sociales y materiales de uso interno."
-              en="**The foundation of the whole system**. It defined formats, typography, base elements, colors, and illustrations, with the stylistic flexibility needed to adapt to any piece, and included usage examples. It became the basis for reports, infographics, social media posts, and internal materials."
-            />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10">
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <p className="text-[24px] font-bold text-[#1d1d1d]">
+                <T es="Guía de estilo de ilustración" en="Illustration style guide" />
+              </p>
+              <Bi
+                es="**La base de todo el sistema**. Definía formatos, tipografías, elementos base, colores e ilustraciones, con la flexibilidad de estilo necesaria para adaptarse a cualquier pieza, e incluía ejemplos de uso. A partir de ella se crearon informes, infografías, publicaciones para redes sociales y materiales de uso interno."
+                en="**The foundation of the whole system**. It defined formats, typography, base elements, colors, and illustrations, with the stylistic flexibility needed to adapt to any piece, and included usage examples. It became the basis for reports, infographics, social media posts, and internal materials."
+              />
+            </div>
             <Figure src={ine("INE-Illustration.jpg")} alt="INE illustration style guide" />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Sitio web" en="Website" /></p>
-            <Bi
-              es="El centro de ayuda para que la ciudadanía conociera qué es el PREP, cómo funciona y cuáles son sus objetivos. Se organizó en **siete secciones**: Conoce el PREP, Elecciones federales, Acerca del voto, Actas, Glosario, Aspectos técnicos y Preguntas frecuentes."
-              en="The help center where citizens could learn what the PREP is, how it works, and what its goals are. It was organized into **seven sections**: About the PREP, Federal Elections, About the Vote, Tally Sheets, Glossary, Technical Aspects, and FAQ."
-            />
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Sitio web" en="Website" /></p>
+              <Bi
+                es="El centro de ayuda para que la ciudadanía conociera qué es el PREP, cómo funciona y cuáles son sus objetivos. Se organizó en **siete secciones**: Conoce el PREP, Elecciones federales, Acerca del voto, Actas, Glosario, Aspectos técnicos y Preguntas frecuentes."
+                en="The help center where citizens could learn what the PREP is, how it works, and what its goals are. It was organized into **seven sections**: About the PREP, Federal Elections, About the Vote, Tally Sheets, Glossary, Technical Aspects, and FAQ."
+              />
+            </div>
             <Figure src={ine("INE-HelpCenter.mp4")} alt="INE PREP help center website" />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">Videos</p>
-            <Bi
-              es="**Más de 10 clips** de alrededor de un minuto cada uno, con adaptaciones para el sitio web y las redes sociales."
-              en="**More than 10 clips** of about one minute each, adapted for the website and social media."
-            />
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <p className="text-[24px] font-bold text-[#1d1d1d]">Videos</p>
+              <Bi
+                es="**Más de 10 clips** de alrededor de un minuto cada uno, con adaptaciones para el sitio web y las redes sociales."
+                en="**More than 10 clips** of about one minute each, adapted for the website and social media."
+              />
+            </div>
             <Figure src={ine("INE-Videos.mp4")} alt="INE video deliverables" />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">
-              <T es="Guías para documentos internos" en="Internal document guidelines" />
-            </p>
-            <Bi
-              es="Lineamientos para crear ilustraciones, presentaciones, documentos y plantillas, de libre uso para todo el personal del INE."
-              en="Guidelines for creating illustrations, presentations, documents, and templates, free for all INE staff to use."
-            />
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <p className="text-[24px] font-bold text-[#1d1d1d]">
+                <T es="Guías para documentos internos" en="Internal document guidelines" />
+              </p>
+              <Bi
+                es="Lineamientos para crear ilustraciones, presentaciones, documentos y plantillas, de libre uso para todo el personal del INE."
+                en="Guidelines for creating illustrations, presentations, documents, and templates, free for all INE staff to use."
+              />
+            </div>
             <Figure src={ine("INE-Documents.jpg")} alt="INE internal document guidelines" />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Instalaciones" en="Installations" /></p>
-            <Bi
-              es="Señalética, banners y murales para el simulacro del PREP."
-              en="Signage, banners, and murals for the PREP drill."
-            />
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Instalaciones" en="Installations" /></p>
+              <Bi
+                es="Señalética, banners y murales para el simulacro del PREP."
+                en="Signage, banners, and murals for the PREP drill."
+              />
+            </div>
             <Figure src={ine("INE-Installations.jpg")} alt="INE installations, signage and banners" />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Impresos" en="Print" /></p>
-            <Bi es="Carteles, folletos y manuales." en="Posters, brochures, and manuals." />
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Impresos" en="Print" /></p>
+              <Bi es="Carteles, folletos y manuales." en="Posters, brochures, and manuals." />
+            </div>
             <Figure src={ine("INE-Prints.jpg")} alt="INE print deliverables, posters and manuals" />
           </div>
 
-          <div className="flex flex-col gap-4">
-            <p className="text-[24px] font-bold text-[#1d1d1d]">Stand</p>
-            <Bi
-              es="Un espacio dentro de las instalaciones del INE para la prensa, que se instaló durante la **jornada electoral** para que los medios pudieran visitarlo e informarse sobre qué es el PREP y cómo funciona."
-              en="A space inside the INE's facilities for the press, set up on **election day** so media outlets could visit it and learn what the PREP is and how it works."
-            />
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-2">
+              <p className="text-[24px] font-bold text-[#1d1d1d]">Stand</p>
+              <Bi
+                es="Un espacio dentro de las instalaciones del INE para la prensa, que se instaló durante la **jornada electoral** para que los medios pudieran visitarlo e informarse sobre qué es el PREP y cómo funciona."
+                en="A space inside the INE's facilities for the press, set up on **election day** so media outlets could visit it and learn what the PREP is and how it works."
+              />
+            </div>
             <Figure src={ine("INE-Stand.jpg")} alt="INE press stand" />
           </div>
         </div>
