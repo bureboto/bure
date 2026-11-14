@@ -142,7 +142,7 @@ function T({ es, en }: { es: string; en: string }) {
 export default function Project13() {
   return (
     <>
-      <ReadingProgressBar />
+      {false && <ReadingProgressBar />}
       <ContentGrid className="pb-24 flex flex-col gap-16">
       {/* Back link + breadcrumb */}
       <div className="pt-6">
