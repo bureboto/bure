@@ -243,12 +243,18 @@ export default function Project13() {
 
       {/* Challenges */}
       <Divider />
-      <div className="flex flex-col gap-16 pt-16">
+      <div className="flex flex-col gap-10 pt-16">
         <SectionTitle><T es="Retos y cómo los resolvimos" en="Challenges and how we solved them" /></SectionTitle>
+        <Body>
+          <T
+            es="Necesitábamos plasmar todo el proceso del PREP de una forma simple y directa. Todo un reto, porque este proceso conlleva muchos tecnicismos y términos legales poco fáciles de comprender a la primera."
+            en="We needed to present the entire PREP process in a simple, direct way. That was a challenge in itself, because the process involves many technical and legal terms that are hard to grasp at first."
+          />
+        </Body>
 
         {/* Challenge 1 */}
         <div className="flex flex-col gap-10 md:flex-row">
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex-1 flex flex-col gap-6">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 1: Equipos viejos y conexión lenta" en="Challenge 1: Old devices and slow connections" />
             </p>
@@ -262,16 +268,10 @@ export default function Project13() {
             </Sub>
             <Sub>
               <SubLabel><T es="Solución" en="Solution" /></SubLabel>
-              <div className="flex flex-col gap-4">
-                <Bi
-                  es="Necesitábamos plasmar todo el proceso del PREP de una forma simple y directa. Todo un reto, porque este proceso conlleva muchos tecnicismos y términos legales poco fáciles de comprender a la primera."
-                  en="We needed to present the entire PREP process in a simple, direct way. That was a challenge in itself, because the process involves many technical and legal terms that are hard to grasp at first."
-                />
-                <Bi
-                  es="Diseñamos un sitio web sin animaciones complejas, cuidando su peso para que la carga no fuera un problema: el sitio completo **no pasaba de los 4 MB**. Los videos se optimizaron para reducir su tamaño **hasta en un 80%** de su peso original, conservando su calidad. Junto con el equipo de desarrollo, hacíamos pruebas constantes de rendimiento en distintos navegadores, velocidades de conexión y dispositivos móviles antiguos. Los datos lo confirmaron: más de la mitad de los usuarios entró **desde un celular**, y **1,682 personas** consultaron el sitio desde Internet Explorer."
-                  en="We designed a website without complex animations and kept its weight low so loading wouldn't be a problem: the entire site **stayed under 4 MB**. We optimized the videos to cut their file size by **up to 80%** while keeping their quality. Together with the development team, we constantly tested performance across browsers, connection speeds, and older mobile devices. The data confirmed it: more than half of users visited **from a phone**, and **1,682 people** accessed the site from Internet Explorer."
-                />
-              </div>
+              <Bi
+                es="Diseñamos un sitio web sin animaciones complejas, cuidando su peso para que la carga no fuera un problema: el sitio completo **no pasaba de los 4 MB**. Los videos se optimizaron para reducir su tamaño **hasta en un 80%** de su peso original, conservando su calidad. Junto con el equipo de desarrollo, hacíamos pruebas constantes de rendimiento en distintos navegadores, velocidades de conexión y dispositivos móviles antiguos. Los datos lo confirmaron: más de la mitad de los usuarios entró **desde un celular**, y **1,682 personas** consultaron el sitio desde Internet Explorer."
+                en="We designed a website without complex animations and kept its weight low so loading wouldn't be a problem: the entire site **stayed under 4 MB**. We optimized the videos to cut their file size by **up to 80%** while keeping their quality. Together with the development team, we constantly tested performance across browsers, connection speeds, and older mobile devices. The data confirmed it: more than half of users visited **from a phone**, and **1,682 people** accessed the site from Internet Explorer."
+              />
             </Sub>
           </div>
           <div className="flex-1">
@@ -283,7 +283,7 @@ export default function Project13() {
 
         {/* Challenge 2 */}
         <div className="flex flex-col gap-10 md:flex-row">
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex-1 flex flex-col gap-6">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 2: Usuarios de todas las edades" en="Challenge 2: Users of all ages" />
             </p>
@@ -313,7 +313,7 @@ export default function Project13() {
               </div>
             </Sub>
           </div>
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex-1 flex flex-col gap-2">
             <Figure src={ine("INE-Challenge-2-1.jpg")} alt="INE challenge 2, users of all ages, illustration guide" />
             <Figure src={ine("INE-Challenge-2-2.mp4")} alt="INE challenge 2, system fonts and high contrast" />
             <Figure src={ine("INE-Challenge-2-3.gif")} alt="INE challenge 2, explainer video" />
@@ -324,7 +324,7 @@ export default function Project13() {
 
         {/* Challenge 3 */}
         <div className="flex flex-col gap-10 md:flex-row">
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex-1 flex flex-col gap-6">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 3: Contenido legal y neutralidad" en="Challenge 3: Legal content and neutrality" />
             </p>
@@ -359,7 +359,7 @@ export default function Project13() {
 
         {/* Challenge 4 */}
         <div className="flex flex-col gap-10 md:flex-row">
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="flex-1 flex flex-col gap-6">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Reto 4: Tiempos y aprobaciones del INE" en="Challenge 4: INE timelines and approvals" />
             </p>
