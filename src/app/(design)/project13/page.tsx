@@ -475,7 +475,7 @@ export default function Project13() {
       <div className="flex flex-col gap-10 pt-16">
         <SectionTitle><T es="Aprendizajes" en="Learnings" /></SectionTitle>
         <div className="flex flex-col gap-10 md:grid md:grid-cols-3 md:gap-x-10 md:gap-y-10">
-          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
+          <div className="flex flex-col gap-4 md:border-l md:border-[#1d1d1d] md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T
                 es="Coordinar disciplinas sin estorbarse"
@@ -487,21 +487,21 @@ export default function Project13() {
               en="I learned to understand each discipline's timing and to bring copy, design, motion, and development together without getting in each other's way; instead, we built something very well structured. The team's bond was incredible: it led to great friendships that continue outside of work."
             />
           </div>
-          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
+          <div className="flex flex-col gap-4 md:border-l md:border-[#1d1d1d] md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Saber decir no" en="Learning to say no" /></p>
             <Bi
               es="Como resolvíamos todo en tiempo y forma, en ocasiones nos buscaban cargar la mesa de trabajo. Si algo cambiaría, sería poner límites más claros a nuestras actividades desde el inicio. Fue algo en lo que crecí mucho: **aprender a decir no**."
               en="Because we always delivered on time, people sometimes tried to pile more work on us. If I could change one thing, it would be setting clearer limits on our scope from the start. It's something I grew a lot in: **learning to say no**."
             />
           </div>
-          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
+          <div className="flex flex-col gap-4 md:border-l md:border-[#1d1d1d] md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Diseñar para cualquier formato" en="Designing for any format" /></p>
             <Bi
               es="Diseñar un sistema multiplataforma me enseñó a simplificar el uso de los elementos visuales y a considerar todas las variables de uso: tamaños, soportes, limitaciones visuales y de equipo, y optimización de recursos."
               en="Designing a multiplatform system taught me to simplify the use of visual elements and to consider every usage variable: sizes, media, visual and hardware limitations, and resource optimization."
             />
           </div>
-          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
+          <div className="flex flex-col gap-4 md:border-l md:border-[#1d1d1d] md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]">
               <T es="Documentar para que otros continúen" en="Documenting so others can continue" />
             </p>
@@ -510,14 +510,14 @@ export default function Project13() {
               en="I learned to document design so that anyone could **continue the system** using the parameters we set."
             />
           </div>
-          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
+          <div className="flex flex-col gap-4 md:border-l md:border-[#1d1d1d] md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Diseñar más allá de lo visual" en="Designing beyond the visual" /></p>
             <Bi
               es="Trabajar con una institución me enseñó a diseñar contemplando todo lo que implica un proyecto, más allá de lo bonito o funcional que pueda ser un diseño: cubrir también los **requerimientos legales y tecnológicos**."
               en="Working with an institution taught me to design with everything a project involves in mind, beyond how beautiful or functional a design can be: also meeting **legal and technological requirements**."
             />
           </div>
-          <div className="flex flex-col gap-3 md:border-l md:border-black md:pl-4">
+          <div className="flex flex-col gap-4 md:border-l md:border-[#1d1d1d] md:pl-4">
             <p className="text-[24px] font-bold text-[#1d1d1d]"><T es="Qué haría diferente hoy" en="What I'd do differently today" /></p>
             <Bi
               es="Haría una medición después del PREP para conocer el impacto en la ciudadanía y en los capturistas que consultaron la información, y dejar documentado qué se debería considerar en futuras elecciones."
