@@ -61,7 +61,7 @@ export default function DeliverablesFilmstrip({ title, items }: { title: ReactNo
               return (
                 <div
                   key={i}
-                  className="flex shrink-0 flex-col items-center gap-8 text-center"
+                  className="flex shrink-0 flex-col items-center gap-8 text-center transition-opacity duration-[400ms] ease-out"
                   style={{ width: ITEM_WIDTH, opacity }}
                 >
                   <div className="flex w-full flex-col items-center gap-2">
