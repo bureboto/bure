@@ -39,10 +39,10 @@ export function HeroDetail({ label, children }: { label: ReactNode; children: Re
   );
 }
 
-/** Stat row (e.g. "+171,000 Users"). Tokens: Body/lg (21px, Primary) value, Body/sm (16px, Secondary) label, gap XL (40px). */
+/** Stat row (e.g. "+171,000 Users"). Tokens: Body/lg (21px, Primary) value, Body/sm (16px, Secondary) label, gap XL (40px), padding XS (8px) top / S (16px) bottom. */
 export function HeroStats({ stats }: { stats: { value: ReactNode; label: ReactNode }[] }) {
   return (
-    <div className="flex flex-wrap gap-10 pt-2">
+    <div className="flex flex-wrap gap-10 pt-2 pb-6">
       {stats.map((stat, i) => (
         <div key={i} className="flex flex-col gap-1">
           <p className="text-[21px] text-[#1d1d1d]">{stat.value}</p>
