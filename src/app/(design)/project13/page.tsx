@@ -7,6 +7,7 @@ import Breadcrumb from "@/components/caseStudy/Breadcrumb";
 import { HeroMeta, HeroTitle, HeroIntro, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
 import ImageFocus from "@/components/caseStudy/ImageFocus";
 import DeliverablesScroll from "@/components/caseStudy/DeliverablesScroll";
+import DeliverablesFilmstrip from "@/components/caseStudy/DeliverablesFilmstrip";
 import { useLanguage } from "@/lib/LanguageContext";
 
 const ine = (file: string) => `/design/INE/${file}`;
@@ -481,9 +482,8 @@ export default function Project13() {
       )}
 
       {/* Deliverables (experiment: pinned scroll) */}
-      <DeliverablesScroll
-        title={<T es="Qué se entregó" en="Deliverables" />}
-        items={[
+      {(() => {
+        const deliverableItems = [
           {
             title: <T es="Guía de estilo de ilustración" en="Illustration style guide" />,
             body: (
@@ -556,8 +556,15 @@ export default function Project13() {
             src: ine("INE-Stand.jpg"),
             alt: "INE press stand",
           },
-        ]}
-      />
+        ];
+        const deliverablesTitle = <T es="Qué se entregó" en="Deliverables" />;
+        return (
+          <>
+            {false && <DeliverablesScroll title={deliverablesTitle} items={deliverableItems} />}
+            <DeliverablesFilmstrip title={deliverablesTitle} items={deliverableItems} />
+          </>
+        );
+      })()}
 
       {/* Learnings */}
       <Divider />
