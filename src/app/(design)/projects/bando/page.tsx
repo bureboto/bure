@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
@@ -19,10 +18,6 @@ import {
   ContentBorderedItem,
 } from "@/components/caseStudy/Typography";
 
-export const metadata: Metadata = {
-  robots: { index: false, follow: false },
-};
-
 const bando = (file: string) => `/design/bando/Product/${file}`;
 const bold = (text: string) => <strong className="font-bold text-[#1d1d1d]">{text}</strong>;
 /** Underlined for emphasis, per Figma — not a real hyperlink (no URL is bound to these names in the file). */
@@ -30,14 +25,12 @@ const underline = (text: string) => <span className="underline">{text}</span>;
 const strike = (text: string) => <span className="line-through">{text}</span>;
 
 /**
- * Draft/test page: Bando's content, rebuilt with the shared case-study
- * components (Content1-5, Images, Hero, Breadcrumb) we're polishing from
- * the Figma "Demo" frame — structure scaffolded from the "Bando" frame
- * (node 3557:24288), copy taken verbatim (English) from the Bando Google
- * Doc. Unlisted intentionally (not linked from /home, noindex): this is
- * a component test, not a published project.
+ * Bando case study, built with the shared case-study components
+ * (Content1-5, Images, Hero, Breadcrumb) scaffolded from the Figma
+ * "Bando" frame (node 3557:24288), copy taken verbatim (English) from
+ * the Bando Google Doc. Replaces the old /project10 page.
  */
-export default function BandoPreview() {
+export default function Bando() {
   return (
     <ContentGrid className="flex flex-col gap-0 pb-24">
       <Breadcrumb client="Bando" project="Safe, Invest & Pay in one app." />
@@ -352,7 +345,7 @@ export default function BandoPreview() {
         ]}
       />
 
-      <OtherProjects currentHref="/bando-preview" />
+      <OtherProjects currentHref="/projects/bando" />
     </ContentGrid>
   );
 }

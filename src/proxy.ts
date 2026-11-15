@@ -12,10 +12,10 @@ const DESIGN_PATHS = [
   "/project7",
   "/project8",
   "/project9",
-  "/project10",
   "/project11",
   "/project12",
   "/project13",
+  "/projects",
   "/robopets",
   "/elpulsodelasdivisas",
 ];
@@ -34,6 +34,10 @@ export function proxy(request: NextRequest) {
 
   if (pathname === "/") {
     return NextResponse.redirect(new URL("/home", request.url));
+  }
+
+  if (pathname === "/project10" || pathname.startsWith("/project10/")) {
+    return NextResponse.redirect(new URL("/projects/bando", request.url));
   }
 
   if (!DESIGN_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
