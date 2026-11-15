@@ -21,7 +21,7 @@ function Slot({ image, aspect = "h-[400px]" }: { image: ImageSlot; aspect?: stri
 /** Images/Image-Focus: a single full-width image with a caption below. */
 export function ImagesFocus({ image }: { image: ImageSlot }) {
   return (
-    <div className="flex flex-col items-center gap-2 py-10">
+    <div className="flex flex-col items-center gap-2 px-40 py-10">
       <div className="relative h-[400px] w-full">
         <Image src={image.src} alt={image.alt} fill className="object-contain bg-[#f0f0f5]" />
       </div>

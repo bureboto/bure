@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { JumboTitle, BodyText, SectionDivider } from "./Typography";
 
@@ -50,8 +49,9 @@ export function Content2Item({
   return (
     <div className={`flex items-start gap-20 ${first ? "" : "border-t border-[#6e6e73] pt-20"}`}>
       <div className="flex flex-1 flex-col gap-6">{children}</div>
-      <div className="relative flex-1 self-stretch">
-        <Image src={image.src} alt={image.alt} fill className="object-contain bg-[#f0f0f5]" />
+      <div className="flex flex-1 items-start">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image.src} alt={image.alt} className="w-full h-auto max-h-[800px] object-contain" />
       </div>
     </div>
   );

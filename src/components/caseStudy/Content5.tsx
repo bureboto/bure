@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { JumboTitle, FocusText, BodyText, Subtitle18, MiniTitle, LinkText, SectionDivider } from "./Typography";
 
@@ -55,15 +54,24 @@ export default function Content5({
           )}
         </div>
         {images.length === 1 ? (
-          <div className="relative flex-1 self-stretch">
-            <Image src={images[0].src} alt={images[0].alt} fill className="object-contain bg-[#f0f0f5]" />
+          <div className="flex flex-1 items-start">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={images[0].src}
+              alt={images[0].alt}
+              className="w-full h-auto max-h-[800px] object-contain"
+            />
           </div>
         ) : (
           <div className="flex flex-1 flex-col gap-6">
             {images.map((image, i) => (
-              <div key={i} className="relative h-[360px] w-full">
-                <Image src={image.src} alt={image.alt} fill className="object-contain bg-[#f0f0f5]" />
-              </div>
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={i}
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-auto max-h-[800px] object-contain"
+              />
             ))}
           </div>
         )}
