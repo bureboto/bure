@@ -236,11 +236,11 @@ export default function StylesPage() {
 
       {/* Images — Complex (single + double stacked, beside a tall image) */}
       <div className="flex items-stretch gap-6 py-10">
-        <div className="flex flex-1 flex-col gap-6">
+        <div className="flex h-[866px] flex-1 flex-col justify-center gap-6">
           <ImageWithDetail aspect="h-[421px]" grow={false} />
           <div className="flex gap-6">
-            <ImageWithDetail />
-            <ImageWithDetail />
+            <ImageWithDetail aspect="h-[421px]" />
+            <ImageWithDetail aspect="h-[421px]" />
           </div>
         </div>
         <div className="flex flex-1">
