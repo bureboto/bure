@@ -75,9 +75,7 @@ export default function StylesPage() {
   return (
     <ContentGrid className="flex flex-col gap-0 pb-24">
       {/* Breadcrumb */}
-      <div className="pt-6">
-        <Breadcrumb client="Title" project="Detail" />
-      </div>
+      <Breadcrumb client="Title" project="Detail" />
 
       {/* Hero */}
       <div className="flex flex-col gap-10 py-10 md:flex-row md:gap-20">
