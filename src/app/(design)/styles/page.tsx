@@ -57,6 +57,15 @@ function ContentBorderedItem({ children }: { children: React.ReactNode }) {
   return <div className="border-l border-[#1d1d1d] pl-4">{children}</div>;
 }
 
+function ImageWithDetail({ aspect = "h-[400px]" }: { aspect?: string }) {
+  return (
+    <div className={`flex flex-1 flex-col gap-2 ${aspect}`}>
+      <Placeholder className="w-full flex-1" />
+      <DetailText>Detail</DetailText>
+    </div>
+  );
+}
+
 export default function StylesPage() {
   return (
     <ContentGrid className="flex flex-col gap-0 pb-24">
@@ -177,6 +186,59 @@ export default function StylesPage() {
             ))}
           </div>
         ))}
+      </div>
+
+      {/* Images — double (2-up) */}
+      <div className="flex items-start gap-10 border-t border-[#6e6e73] py-10">
+        <ImageWithDetail />
+        <ImageWithDetail />
+      </div>
+
+      {/* Images — triple (3-up) */}
+      <div className="flex items-start gap-10 py-10">
+        <ImageWithDetail />
+        <ImageWithDetail />
+        <ImageWithDetail />
+      </div>
+
+      {/* Images — Grid-6 (3 over 3) */}
+      <div className="flex flex-col gap-6 py-10">
+        <div className="flex items-start gap-6">
+          <ImageWithDetail />
+          <ImageWithDetail />
+          <ImageWithDetail />
+        </div>
+        <div className="flex items-start gap-6">
+          <ImageWithDetail />
+          <ImageWithDetail />
+          <ImageWithDetail />
+        </div>
+      </div>
+
+      {/* Images — Grid-4 (2 over 2) */}
+      <div className="flex flex-col gap-6 py-10">
+        <div className="flex items-start gap-6">
+          <ImageWithDetail />
+          <ImageWithDetail />
+        </div>
+        <div className="flex items-start gap-6">
+          <ImageWithDetail aspect="h-[421px]" />
+          <ImageWithDetail aspect="h-[421px]" />
+        </div>
+      </div>
+
+      {/* Images — Complex (single + double stacked, beside a tall image) */}
+      <div className="flex items-stretch gap-6 py-10">
+        <div className="flex flex-1 flex-col gap-6">
+          <ImageWithDetail aspect="h-[421px]" />
+          <div className="flex gap-6">
+            <ImageWithDetail />
+            <ImageWithDetail />
+          </div>
+        </div>
+        <div className="flex flex-1">
+          <ImageWithDetail aspect="h-full" />
+        </div>
       </div>
 
       {/* Content-5: focus+items beside a tall image */}
