@@ -22,6 +22,11 @@ export function FocusText({ children }: { children: ReactNode }) {
   return <p className="text-[28px] text-[#6e6e73]">{children}</p>;
 }
 
+/** Body/lg (21px) — used for a shorter lead line in a couple of Content-1 items, distinct from the 28px Focus scale. */
+export function LeadText({ children }: { children: ReactNode }) {
+  return <p className="text-[21px] text-[#6e6e73]">{children}</p>;
+}
+
 export function BodyText({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <p className={`text-[16px] tracking-[0.16px] text-[#6e6e73] ${className}`}>{children}</p>;
 }

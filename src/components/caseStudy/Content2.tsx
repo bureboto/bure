@@ -15,7 +15,7 @@ export default function Content2({
   return (
     <>
       <SectionDivider />
-      <div className="flex flex-col gap-10 py-10">
+      <div className="flex flex-col gap-10 py-20">
         <div className="flex items-start gap-20">
           <div className="flex w-[480px] flex-col gap-4 pr-20">
             <JumboTitle>{title}</JumboTitle>

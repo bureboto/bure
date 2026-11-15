@@ -2,32 +2,40 @@ import type { Metadata } from "next";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
-import { HeroMeta, HeroTitle, HeroIntro, HeroLead } from "@/components/caseStudy/Hero";
+import { HeroMeta, HeroTitle, HeroIntro, HeroLead, HeroDetail } from "@/components/caseStudy/Hero";
 import Content1 from "@/components/caseStudy/Content1";
 import Content2, { Content2Item } from "@/components/caseStudy/Content2";
 import Content3 from "@/components/caseStudy/Content3";
 import Content4 from "@/components/caseStudy/Content4";
 import Content5 from "@/components/caseStudy/Content5";
 import { ImagesFocus } from "@/components/caseStudy/Images";
-import { JumboTitle, Subtitle18, Subtitle24, Subtitle36, FocusText, BodyText, ContentBorderedItem } from "@/components/caseStudy/Typography";
+import {
+  JumboTitle,
+  Subtitle24,
+  Subtitle36,
+  FocusText,
+  LeadText,
+  BodyText,
+  ContentBorderedItem,
+} from "@/components/caseStudy/Typography";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
 const bando = (file: string) => `/design/bando/Product/${file}`;
+const bold = (text: string) => <strong className="font-bold text-[#1d1d1d]">{text}</strong>;
+/** Underlined for emphasis, per Figma — not a real hyperlink (no URL is bound to these names in the file). */
+const underline = (text: string) => <span className="underline">{text}</span>;
+const strike = (text: string) => <span className="line-through">{text}</span>;
 
 /**
- * Draft/test page: Bando's real content, rebuilt with the shared
- * case-study components (Content1-5, Images, Hero, Breadcrumb) we're
- * polishing from the Figma "Demo" frame — scaffolded from the "Bando"
- * frame (node 3557:24288). Unlisted intentionally (not linked from
- * /home, noindex): this is a component test, not a published project.
- *
- * Two labels below ("Goal" / "Solution" above each Design-goals item's
- * Focus/Body block) are placeholders — the real Figma copy for those
- * two short labels wasn't resolved from the design frame, only the
- * surrounding structure.
+ * Draft/test page: Bando's content, rebuilt with the shared case-study
+ * components (Content1-5, Images, Hero, Breadcrumb) we're polishing from
+ * the Figma "Demo" frame — structure scaffolded from the "Bando" frame
+ * (node 3557:24288), copy taken verbatim (English) from the Bando Google
+ * Doc. Unlisted intentionally (not linked from /home, noindex): this is
+ * a component test, not a published project.
  */
 export default function BandoPreview() {
   return (
@@ -40,7 +48,7 @@ export default function BandoPreview() {
           <HeroMeta
             items={[
               { label: "Client", value: "Bando" },
-              { label: "Service", value: "Product design, UX/UI" },
+              { label: "Service", value: "Product design" },
               { label: "Year", value: "2026" },
               { label: "Industry", value: "Fintech" },
             ]}
@@ -48,31 +56,39 @@ export default function BandoPreview() {
           <HeroIntro>
             <HeroTitle>Safe, Invest &amp; Pay in one app.</HeroTitle>
             <HeroLead>
-              Bando was a fintech. Users could <strong className="font-bold text-[#1d1d1d]">invest</strong> in
-              tokenized CETES, stocks like Tesla, gold, or crypto like Bitcoin.
+              Bando was a fintech. Users could {bold("invest")} in tokenized CETES, stocks like Tesla, gold, or
+              crypto like Bitcoin.
             </HeroLead>
             <BodyText>
-              Users could also create <strong className="font-bold text-[#1d1d1d]">their own savings goals</strong>{" "}
-              and <strong className="font-bold text-[#1d1d1d]">pay</strong> for everyday purchases.
+              Users could also create {bold("their own savings goals")} and {bold("pay")} for everyday
+              purchases.
             </BodyText>
           </HeroIntro>
         </div>
-        <div className="flex flex-1 flex-col">
-          <BodyText>
-            The idea was simple: <br />
-            <strong className="font-bold text-[#1d1d1d]">it should feel like a traditional bank,</strong> but
-            everything ran on blockchain.
-            <br />
-            <br />
-            The product was announced publicly, but it never launched.
-          </BodyText>
+        <div className="flex flex-1 flex-col gap-6">
+          <HeroDetail label="Main objetive">
+            <BodyText>
+              {bold("It should feel like a traditional bank,")} but everything ran on blockchain.
+              <br />
+              The product was announced publicly, but it never launched.
+            </BodyText>
+          </HeroDetail>
+          <HeroDetail label="My rol">
+            <BodyText>
+              Principal designer.
+              <br />
+              <br />
+              Special thanks to {underline("Ab")}, {underline("Eduardo Ríos")}, and {underline("Guayabas")} for
+              trusting me and letting me be part of this amazing project.
+            </BodyText>
+          </HeroDetail>
         </div>
       </div>
 
       <ImagesFocus image={{ src: bando("Welcome.jpg"), alt: "Bando welcome screen" }} />
 
       {/* Content-1: Context */}
-      <Content1 title="Context" subtitle="Bando had two types of users:">
+      <Content1 title="Context" subtitle="Bando had two types of users">
         <ContentBorderedItem>
           <Subtitle24>People (B2C)</Subtitle24>
           <BodyText>First, people who wanted to invest, with little or medium experience.</BodyText>
@@ -83,56 +99,58 @@ export default function BandoPreview() {
             Second, other fintechs. Bando wanted established companies to connect our product to their apps.
           </BodyText>
         </ContentBorderedItem>
-        <ContentBorderedItem>
+        <div className="flex w-[480px] flex-col gap-2">
           <Subtitle24>Business goal</Subtitle24>
-          <FocusText>Bando earned a fee on every transaction, so the business needed volume.</FocusText>
+          <LeadText>Bando earned a fee on every transaction, so the business needed volume.</LeadText>
           <BodyText>
             That gave me three design goals: Conversion, so people actually invest; Trust, so blockchain feels
             safe; and Scalability, so the design works for other companies too.
           </BodyText>
-        </ContentBorderedItem>
+        </div>
       </Content1>
 
       {/* Content-1: Challenge */}
       <Content1 title="Challenge">
-        <BodyText>
-          For most people, <strong className="font-bold text-[#1d1d1d]">blockchain is new and confusing.</strong>
-          <br />
-          So this was the question behind every decision I made.
-        </BodyText>
-        <FocusText>
-          How do we make something complex{" "}
-          <strong className="font-bold text-[#1d1d1d]">feel simple and trustworthy?</strong>
-        </FocusText>
+        <div className="flex w-[480px] flex-col gap-2">
+          <FocusText>How do we make something complex feel simple and trustworthy?</FocusText>
+          <BodyText>
+            For most people, blockchain is new and confusing.
+            <br />
+            So this was the question behind every decision I made.
+          </BodyText>
+        </div>
       </Content1>
 
       {/* Content-5: Research */}
       <Content5
         title="Research"
-        focus="We created the user personas, and I gave feedback on it."
+        focus="We created the user personas, and I gave feedback on it. Then I joined the user interviews and tests."
         body={
           <>
-            Then I joined the user interviews and tests. I tested the flows, made changes, and tested again.
+            I tested the flows, made changes, and tested again.
             <br />
             <br />→ Persona
             <br />→ Test
             <br />→ Iterate
+            <br />
+            <br />
+            That was thanks to {underline("Julián")}, who did the research to give us a guide about our main
+            user personas.
           </>
         }
-        linksLabel="Credit"
-        links={[{ label: "Research by", href: "https://www.linkedin.com/in/", text: "Julián" }]}
         image={{ src: bando("Research.jpg"), alt: "Bando user research personas" }}
       />
 
       {/* Explorations — a one-off layout per Figma (title/focus/body beside two stacked images), not one of the reusable shells */}
       <hr className="w-screen ml-[calc(50%-50vw)] border-[#6e6e73]" />
       <div className="flex flex-col gap-10 py-10 md:flex-row">
-        <div className="flex w-full flex-col gap-4 md:w-[560px]">
+        <div className="flex w-full flex-col gap-2 md:w-[560px]">
           <JumboTitle>Explorations</JumboTitle>
-          <Subtitle24>From the sketches to screens</Subtitle24>
+          <FocusText>From the sketches to screens</FocusText>
           <BodyText>
-            This is how the visual started: on paper. The UI showed users their investments, returns, goal
-            progress, and transactions, all in one place.
+            This is how {bold("the visual started: on paper.")}
+            <br />
+            The UI showed users their investments, returns, goal progress, and transactions, all in one place.
           </BodyText>
         </div>
         <div className="flex flex-1 flex-col gap-6">
@@ -156,59 +174,51 @@ export default function BandoPreview() {
       </div>
 
       {/* Content-2: Design goals */}
-      <Content2 title="Design goals">
+      <Content2 title="Design Goals">
         <Content2Item image={{ src: bando("Convertion.jpg"), alt: "Bando conversion flow" }}>
           <div>
-            <JumboTitle>1</JumboTitle>
-            <Subtitle36>Conversion</Subtitle36>
+            <JumboTitle>1.</JumboTitle>
+            <Subtitle36>Convertion</Subtitle36>
           </div>
-          <div className="flex flex-col gap-2">
-            <Subtitle18>Goal</Subtitle18>
-            <FocusText>Transactions in a couple taps.</FocusText>
-          </div>
+          <FocusText>Transactions in a couple taps.</FocusText>
           <ContentBorderedItem>
-            <Subtitle18>Solution</Subtitle18>
             <BodyText>
-              From the home screen, users can make a transaction directly, without going to another screen. We
-              placed the most popular investments right there. We also set a default amount, which users can
+              From the home screen, users can make a transaction directly, without going to another screen.
+              <br />
+              <br />
+              We placed the most popular investments right there. We also set a default amount, which users can
               change.
             </BodyText>
           </ContentBorderedItem>
         </Content2Item>
         <Content2Item image={{ src: bando("Trust.jpg"), alt: "Bando trust and simplicity" }}>
           <div>
-            <JumboTitle>2</JumboTitle>
+            <JumboTitle>2.</JumboTitle>
             <Subtitle36>Trust &amp; Simplicity</Subtitle36>
           </div>
-          <div className="flex flex-col gap-2">
-            <Subtitle18>Goal</Subtitle18>
-            <FocusText>Focus on the content.</FocusText>
-          </div>
+          <FocusText>Focus on the content.</FocusText>
           <ContentBorderedItem>
-            <Subtitle18>Solution</Subtitle18>
             <BodyText>
-              We kept a clear hierarchy of elements and data, with nothing extra. Accent colors appear only
-              when the screen needs them, like CTAs and price changes.
+              We kept a clear {bold("hierarchy of elements and data,")} with nothing extra. Accent colors
+              appear only when the screen needs them, like CTAs and price changes.
               <br />
-              The goal: clear, minimal screens.
+              <br />
+              The goal: {bold("clear, minimal screens.")}
             </BodyText>
           </ContentBorderedItem>
         </Content2Item>
         <Content2Item image={{ src: bando("Themeable.jpg"), alt: "Bando themeable design system" }}>
           <div>
-            <JumboTitle>3</JumboTitle>
+            <JumboTitle>3.</JumboTitle>
             <Subtitle36>A scalable design system</Subtitle36>
           </div>
-          <div className="flex flex-col gap-2">
-            <Subtitle18>Goal</Subtitle18>
-            <FocusText>One system, many brands.</FocusText>
-          </div>
+          <FocusText>One system, many brands</FocusText>
           <ContentBorderedItem>
-            <Subtitle18>Solution</Subtitle18>
             <BodyText>
-              For the B2B side, I built a themeable design system. The components and the structure stayed the
-              same, but each company could change colors, typography, borders, and other visual details to
-              match their own brand.
+              For the B2B side, I built a {bold("themeable design system.")}
+              <br />
+              The components and the structure stayed the same, but {bold("each company could change")} colors,
+              typography, borders, and other visual details to match their own brand.
               <br />
               <br />
               Here you can see the same component with two different brands. We explored this with an
@@ -222,92 +232,93 @@ export default function BandoPreview() {
       {/* Content-2: It wasn't all sweet */}
       <Content2 title="It wasn't all sweet">
         <Content2Item image={{ src: bando("Logos.jpg"), alt: "Bando logo evolution, before and after" }}>
-          <div>
-            <JumboTitle>1</JumboTitle>
-            <Subtitle36>The brand problem</Subtitle36>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Subtitle18>Goal</Subtitle18>
-            <FocusText>The old logo didn&apos;t scale.</FocusText>
-          </div>
+          <Subtitle36>The brand problem</Subtitle36>
+          <FocusText>The old logo {bold("didn't scale")}</FocusText>
           <ContentBorderedItem>
-            <Subtitle18>Solution</Subtitle18>
             <BodyText>
               It wasn&apos;t designed to scale. At small sizes, like an app icon, the symbol got lost. Also, our
-              products didn&apos;t look connected; they looked like different companies. So I raised my hand
-              and proposed a rebrand.
+              products {bold("didn't look connected;")} they looked like different companies.
               <br />
               <br />
-              One option was to change the logo completely. But the founders wanted to keep it, because the
-              symbol had a special meaning for them. So I decided to evolve it instead — kept the meaning, but
-              fixed the problems: it works at any size now, and it became the base of a complete visual system.
+              So I raised my hand and proposed a {underline("rebrand.")}
+              <br />
+              <br />
+              {bold("Evolution,")} not {strike("revolution")}
+              <br />
+              <br />
+              One option was to change the logo completely.
+              <br />
+              <br />
+              But the founders wanted to keep it, because the symbol had a special meaning for them. So I
+              decided to evolve it instead.
+              <br />
+              <br />
+              I kept the meaning, but fixed the problems: it works at {bold("any size now,")} and it became the
+              base of a complete visual system.
             </BodyText>
           </ContentBorderedItem>
         </Content2Item>
         <Content2Item image={{ src: bando("Legal.jpg"), alt: "Bando legal requirements component" }}>
-          <div>
-            <JumboTitle>2</JumboTitle>
-            <Subtitle36>Legal requirements</Subtitle36>
-          </div>
+          <Subtitle36>Legal requirements</Subtitle36>
+          <FocusText>To keep the screens simple, I had removed some legal information... But it was required.</FocusText>
           <ContentBorderedItem>
-            <Subtitle18>Solution</Subtitle18>
             <BodyText>
-              To keep the screens simple, I had removed some legal information... but it was required. Instead
-              of fighting it, I designed a way to show it without breaking the flow, and I made it a component
-              in the design system, so it was consistent everywhere.
+              Instead of fighting it, I designed a way to show it without breaking the flow, and I made it a
+              component in the design system, so it was {bold("consistent everywhere.")}
             </BodyText>
           </ContentBorderedItem>
         </Content2Item>
         <Content2Item image={{ src: bando("Saving.jpg"), alt: "Bando saving goals, before and after" }}>
-          <div>
-            <JumboTitle>3</JumboTitle>
-            <Subtitle36>Saving goals</Subtitle36>
-          </div>
-          <div className="flex flex-col gap-2">
-            <Subtitle18>Solution</Subtitle18>
-            <BodyText>In user tests, we noticed that users didn&apos;t understand some tasks, so we made these changes:</BodyText>
-          </div>
-          <div className="flex flex-col gap-4">
-            <ContentBorderedItem>
-              <Subtitle18>1. Screen title</Subtitle18>
-              <BodyText>It needed to be clearer.</BodyText>
-            </ContentBorderedItem>
-            <ContentBorderedItem>
-              <Subtitle18>2. Secondary tasks</Subtitle18>
-              <BodyText>&ldquo;Add goal&rdquo; didn&apos;t belong on this screen.</BodyText>
-            </ContentBorderedItem>
-            <ContentBorderedItem>
-              <Subtitle18>3. CTA Add</Subtitle18>
-              <BodyText>We moved it closer to the thumb.</BodyText>
-            </ContentBorderedItem>
-            <ContentBorderedItem>
-              <Subtitle18>4. Labels</Subtitle18>
-              <BodyText>We made them bigger and added details.</BodyText>
-            </ContentBorderedItem>
-            <ContentBorderedItem>
-              <Subtitle18>5. Assets</Subtitle18>
-              <BodyText>We changed the grid to a list.</BodyText>
-            </ContentBorderedItem>
-          </div>
+          <Subtitle36>Saving goals</Subtitle36>
+          <FocusText>
+            {bold("In user tests,")} we noticed that users {bold("didn't understand some tasks,")} so we made
+            these changes:
+          </FocusText>
+          <ContentBorderedItem>
+            <BodyText>
+              1. Screen title
+              <br />
+              It needed to be {bold("clearer.")}
+              <br />
+              <br />
+              2. Secondary tasks
+              <br />
+              {bold('"Add goal"')} didn&apos;t belong on this screen.
+              <br />
+              <br />
+              3. CTA Add
+              <br />
+              {bold("We moved")} it closer to the thumb.
+              <br />
+              <br />
+              4. Labels
+              <br />
+              We made them {bold("bigger")} and {bold("added details.")}
+              <br />
+              <br />
+              5. Assets
+              <br />
+              We changed the {bold("grid to a list.")}
+            </BodyText>
+          </ContentBorderedItem>
         </Content2Item>
         <Content2Item image={{ src: bando("Founders.jpg"), alt: "Bando buy/sell modal, before and after" }}>
-          <div>
-            <JumboTitle>4</JumboTitle>
-            <Subtitle36>Two founders, Two opinions</Subtitle36>
-          </div>
+          <Subtitle36>Two founders, Two opinions</Subtitle36>
+          <FocusText>
+            One founder wanted to {bold("show a lot of information")} on the first screen. The other wanted
+            very little. Instead of choosing a side, I went back to our user persona and our goals.
+          </FocusText>
           <ContentBorderedItem>
-            <Subtitle18>Solution</Subtitle18>
             <BodyText>
-              One founder wanted to show a lot of information on the first screen. The other wanted very
-              little. Instead of choosing a side, I went back to our user persona and our goals.
+              Our users had little experience, so too much information {bold("could scare them.")}
               <br />
               <br />
-              Our users had little experience, so too much information could scare them. But too little could
-              feel like we were hiding something.
+              But too little could feel like we were hiding something.
               <br />
               <br />
-              So we found a middle point: we kept the interaction in a modal, but reduced the information and
-              decisions inside it.
+              {bold("So we found a middle point:")}
+              <br />
+              We kept the interaction in a modal, but reduced the information and decisions inside it.
             </BodyText>
           </ContentBorderedItem>
         </Content2Item>
@@ -330,30 +341,27 @@ export default function BandoPreview() {
             subtitle: "What we validated",
             body: (
               <>
-                <strong className="font-bold text-[#1d1d1d]">
-                  We validated the product with users,
-                </strong>{" "}
-                we had real interest from another fintech, and the product was announced publicly.
-                <br />
-                <br />
-                What stopped it was regulation, not design.
+                {bold("We validated the product with users,")} we had real interest from another fintech, and
+                the product was announced publicly. What stopped it was regulation, not design.
               </>
             ),
           },
           {
             subtitle: "What I learned",
             body: (
-              <div className="flex flex-col gap-4">
-                <BodyText>I learned two things.</BodyText>
-                <ContentBorderedItem>
-                  <Subtitle18>1st – Ask about legal and regulatory limits</Subtitle18>
-                  <BodyText>From day one, even as a designer.</BodyText>
-                </ContentBorderedItem>
-                <ContentBorderedItem>
-                  <Subtitle18>2nd – Push for a smaller MVP</Subtitle18>
-                  <BodyText>to get real data sooner.</BodyText>
-                </ContentBorderedItem>
-              </div>
+              <>
+                I learned two things.
+                <br />
+                <br />
+                1st – Ask about legal and regulatory limits
+                <br />
+                From day one, even as a designer.
+                <br />
+                <br />
+                2nd – Push for a smaller MVP
+                <br />
+                to get real data sooner.
+              </>
             ),
           },
         ]}

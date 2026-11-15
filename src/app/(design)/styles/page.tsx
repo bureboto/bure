@@ -115,7 +115,7 @@ export default function StylesPage() {
 
       {/* Content-1: jumbo title + bordered stacked items */}
       <SectionDivider />
-      <div className="flex flex-col gap-10 py-10 md:flex-row md:gap-20">
+      <div className="flex flex-col gap-10 py-20 md:flex-row md:gap-20">
         <div className="flex-1">
           <JumboTitle>Title</JumboTitle>
         </div>
@@ -133,7 +133,7 @@ export default function StylesPage() {
 
       {/* Content-2: Intro (jumbo + body) over a numbered split item */}
       <SectionDivider />
-      <div className="flex flex-col gap-10 py-10">
+      <div className="flex flex-col gap-10 py-20">
         <div className="flex items-start gap-20">
           <div className="flex w-[480px] flex-col gap-4 pr-20">
             <JumboTitle>Title</JumboTitle>
@@ -164,7 +164,7 @@ export default function StylesPage() {
 
       {/* Content-3: title over two subtitle+body+image columns */}
       <SectionDivider />
-      <div className="flex flex-col gap-10 py-10">
+      <div className="flex flex-col gap-20 py-10">
         <JumboTitle>Title</JumboTitle>
         <div className="flex flex-col gap-10 md:flex-row">
           {[0, 1].map((i) => (
@@ -181,7 +181,7 @@ export default function StylesPage() {
 
       {/* Content-4: title over a 3x2 grid of bordered subtitle+body items */}
       <SectionDivider />
-      <div className="flex flex-col gap-10 py-10">
+      <div className="flex flex-col gap-10 py-20">
         <JumboTitle>Title</JumboTitle>
         {[0, 1].map((row) => (
           <div key={row} className="flex items-start gap-10">
@@ -250,7 +250,7 @@ export default function StylesPage() {
 
       {/* Content-5: focus+items beside a tall image */}
       <SectionDivider />
-      <div className="flex items-start gap-10 py-10">
+      <div className="flex items-start gap-10 py-20">
         <div className="flex flex-1 flex-col gap-10">
           <div className="flex flex-col gap-2">
             <JumboTitle>Title</JumboTitle>

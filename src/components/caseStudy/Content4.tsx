@@ -11,7 +11,7 @@ export default function Content4({ title, items }: { title: ReactNode; items: Co
   return (
     <>
       <SectionDivider />
-      <div className="flex flex-col gap-10 py-10">
+      <div className="flex flex-col gap-10 py-20">
         <JumboTitle>{title}</JumboTitle>
         {rows.map((row, r) => (
           <div key={r} className="flex items-start gap-10">
