@@ -16,12 +16,13 @@ export default function Content2({
     <>
       <SectionDivider />
       <div className="flex flex-col gap-20 py-20">
-        <div className="flex items-start gap-20">
-          <div className="flex w-[480px] flex-col gap-4 pr-20">
-            <JumboTitle>{title}</JumboTitle>
-            {body && <BodyText>{body}</BodyText>}
-          </div>
-          <div className="flex-1" />
+        <div className="flex flex-col gap-4">
+          <JumboTitle>{title}</JumboTitle>
+          {body && (
+            <div className="w-[480px]">
+              <BodyText>{body}</BodyText>
+            </div>
+          )}
         </div>
         {children}
       </div>

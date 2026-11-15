@@ -143,32 +143,35 @@ export default function BandoPreview() {
 
       {/* Explorations — a one-off layout per Figma (title/focus/body beside two stacked images), not one of the reusable shells */}
       <hr className="w-screen ml-[calc(50%-50vw)] border-[#6e6e73]" />
-      <div className="flex flex-col gap-10 py-10 md:flex-row">
-        <div className="flex w-full flex-col gap-2 md:w-[560px]">
-          <JumboTitle>Explorations</JumboTitle>
-          <FocusText>From the sketches to screens</FocusText>
-          <BodyText>
-            This is how {bold("the visual started: on paper.")}
-            <br />
-            The UI showed users their investments, returns, goal progress, and transactions, all in one place.
-          </BodyText>
-        </div>
-        <div className="flex flex-1 flex-col gap-6">
-          <div className="relative h-[360px] w-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={bando("Sketch-1.jpg")}
-              alt="Bando low-fidelity sketches"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+      <div className="flex flex-col gap-10 py-10">
+        <JumboTitle>Explorations</JumboTitle>
+        <div className="flex flex-col gap-10 md:flex-row">
+          <div className="flex w-full flex-col gap-2 md:w-[560px]">
+            <FocusText>From the sketches to screens</FocusText>
+            <BodyText>
+              This is how {bold("the visual started: on paper.")}
+              <br />
+              The UI showed users their investments, returns, goal progress, and transactions, all in one
+              place.
+            </BodyText>
           </div>
-          <div className="relative h-[360px] w-full">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={bando("Sketch-2.jpg")}
-              alt="Bando sketches to screens"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+          <div className="flex flex-1 flex-col gap-6">
+            <div className="relative h-[360px] w-full">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={bando("Sketch-1.jpg")}
+                alt="Bando low-fidelity sketches"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
+            <div className="relative h-[360px] w-full">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={bando("Sketch-2.jpg")}
+                alt="Bando sketches to screens"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>
