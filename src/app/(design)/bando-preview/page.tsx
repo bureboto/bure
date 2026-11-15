@@ -314,7 +314,7 @@ export default function BandoPreview() {
         title="Result"
         columns={[
           { body: "Previews about V1 product.", image: { src: bando("Final-1.jpg"), alt: "Bando final product, V1 previews" } },
-          { body: "Content to the public announcement.", image: { src: bando("Final-2.jpg"), alt: "Bando public announcement content" } },
+          { body: "Content to the public announcement.", video: { src: "/design/bando/8_Bando.mp4" } },
         ]}
       />
 
