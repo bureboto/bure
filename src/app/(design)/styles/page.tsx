@@ -57,13 +57,18 @@ function ContentBorderedItem({ children }: { children: React.ReactNode }) {
   return <div className="border-l border-[#1d1d1d] pl-4">{children}</div>;
 }
 
-function ImageWithDetail({ aspect = "h-[400px]" }: { aspect?: string }) {
+function ImageWithDetail({ aspect = "h-[400px]", grow = true }: { aspect?: string; grow?: boolean }) {
   return (
-    <div className={`flex flex-1 flex-col gap-2 ${aspect}`}>
+    <div className={`flex ${grow ? "flex-1" : "shrink-0"} flex-col gap-2 ${aspect}`}>
       <Placeholder className="w-full flex-1" />
       <DetailText>Detail</DetailText>
     </div>
   );
+}
+
+/** Full-bleed section divider — breaks out of ContentGrid's centered column to span the full viewport width, matching Figma's edge-to-edge section borders. */
+function SectionDivider() {
+  return <hr className="w-screen ml-[calc(50%-50vw)] border-[#6e6e73]" />;
 }
 
 export default function StylesPage() {
@@ -111,7 +116,8 @@ export default function StylesPage() {
       </div>
 
       {/* Content-1: jumbo title + bordered stacked items */}
-      <div className="flex flex-col gap-10 border-t border-[#6e6e73] py-10 md:flex-row md:gap-20">
+      <SectionDivider />
+      <div className="flex flex-col gap-10 py-10 md:flex-row md:gap-20">
         <div className="flex-1">
           <JumboTitle>Title</JumboTitle>
         </div>
@@ -128,7 +134,8 @@ export default function StylesPage() {
       </div>
 
       {/* Content-2: Intro (jumbo + body) over a numbered split item */}
-      <div className="flex flex-col gap-10 border-t border-[#6e6e73] py-10">
+      <SectionDivider />
+      <div className="flex flex-col gap-10 py-10">
         <div className="flex items-start gap-20">
           <div className="flex w-[480px] flex-col gap-4 pr-20">
             <JumboTitle>Title</JumboTitle>
@@ -158,7 +165,8 @@ export default function StylesPage() {
       </div>
 
       {/* Content-3: title over two subtitle+body+image columns */}
-      <div className="flex flex-col gap-10 border-t border-[#6e6e73] py-10">
+      <SectionDivider />
+      <div className="flex flex-col gap-10 py-10">
         <JumboTitle>Title</JumboTitle>
         <div className="flex flex-col gap-10 md:flex-row">
           {[0, 1].map((i) => (
@@ -174,7 +182,8 @@ export default function StylesPage() {
       </div>
 
       {/* Content-4: title over a 3x2 grid of bordered subtitle+body items */}
-      <div className="flex flex-col gap-10 border-t border-[#6e6e73] py-10">
+      <SectionDivider />
+      <div className="flex flex-col gap-10 py-10">
         <JumboTitle>Title</JumboTitle>
         {[0, 1].map((row) => (
           <div key={row} className="flex items-start gap-10">
@@ -189,7 +198,7 @@ export default function StylesPage() {
       </div>
 
       {/* Images — double (2-up) */}
-      <div className="flex items-start gap-10 border-t border-[#6e6e73] py-10">
+      <div className="flex items-start gap-10 py-10">
         <ImageWithDetail />
         <ImageWithDetail />
       </div>
@@ -230,7 +239,7 @@ export default function StylesPage() {
       {/* Images — Complex (single + double stacked, beside a tall image) */}
       <div className="flex items-stretch gap-6 py-10">
         <div className="flex flex-1 flex-col gap-6">
-          <ImageWithDetail aspect="h-[421px]" />
+          <ImageWithDetail aspect="h-[421px]" grow={false} />
           <div className="flex gap-6">
             <ImageWithDetail />
             <ImageWithDetail />
@@ -242,7 +251,8 @@ export default function StylesPage() {
       </div>
 
       {/* Content-5: focus+items beside a tall image */}
-      <div className="flex items-start gap-10 border-t border-[#6e6e73] py-10">
+      <SectionDivider />
+      <div className="flex items-start gap-10 py-10">
         <div className="flex flex-1 flex-col gap-10">
           <div className="flex flex-col gap-2">
             <JumboTitle>Title</JumboTitle>
