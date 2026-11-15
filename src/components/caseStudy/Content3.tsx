@@ -19,7 +19,7 @@ export default function Content3({ title, columns }: { title: ReactNode; columns
           {columns.map((col, i) => (
             <div key={i} className="flex flex-1 flex-col gap-4">
               <div className="relative h-[360px] w-full">
-                <Image src={col.image.src} alt={col.image.alt} fill className="object-cover" />
+                <Image src={col.image.src} alt={col.image.alt} fill className="object-contain bg-[#f0f0f5]" />
               </div>
               {(col.subtitle || col.body) && (
                 <div className="flex flex-col gap-2">

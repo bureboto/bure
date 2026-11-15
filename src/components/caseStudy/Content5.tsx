@@ -56,13 +56,13 @@ export default function Content5({
         </div>
         {images.length === 1 ? (
           <div className="relative flex-1 self-stretch">
-            <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" />
+            <Image src={images[0].src} alt={images[0].alt} fill className="object-contain bg-[#f0f0f5]" />
           </div>
         ) : (
           <div className="flex flex-1 flex-col gap-6">
             {images.map((image, i) => (
               <div key={i} className="relative h-[360px] w-full">
-                <Image src={image.src} alt={image.alt} fill className="object-cover" />
+                <Image src={image.src} alt={image.alt} fill className="object-contain bg-[#f0f0f5]" />
               </div>
             ))}
           </div>

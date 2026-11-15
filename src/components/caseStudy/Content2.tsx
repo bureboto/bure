@@ -51,7 +51,7 @@ export function Content2Item({
     <div className={`flex items-start gap-20 ${first ? "" : "border-t border-[#6e6e73] pt-20"}`}>
       <div className="flex flex-1 flex-col gap-6">{children}</div>
       <div className="relative flex-1 self-stretch">
-        <Image src={image.src} alt={image.alt} fill className="object-cover" />
+        <Image src={image.src} alt={image.alt} fill className="object-contain bg-[#f0f0f5]" />
       </div>
     </div>
   );
