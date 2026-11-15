@@ -141,8 +141,8 @@ export default function StylesPage() {
           </div>
           <div className="flex-1" />
         </div>
-        <div className="flex items-start gap-10 border-t border-[#6e6e73] pt-10 md:flex-row">
-          <div className="flex w-full flex-col gap-6 pr-20 md:w-[480px]">
+        <div className="flex items-start gap-20 border-t border-[#6e6e73] pt-10">
+          <div className="flex flex-1 flex-col gap-6">
             <div>
               <JumboTitle>#</JumboTitle>
               <Subtitle36>Subtitle</Subtitle36>
