@@ -53,15 +53,6 @@ function Placeholder({ className = "h-[400px] w-full" }: { className?: string })
   return <div className={`bg-[#f0f0f5] ${className}`} />;
 }
 
-function ImageWithDetail({ aspect = "h-[400px]" }: { aspect?: string }) {
-  return (
-    <div className={`flex flex-1 flex-col gap-2 ${aspect}`}>
-      <Placeholder className={`w-full flex-1`} />
-      <DetailText>Detail</DetailText>
-    </div>
-  );
-}
-
 function ContentBorderedItem({ children }: { children: React.ReactNode }) {
   return <div className="border-l border-[#1d1d1d] pl-4">{children}</div>;
 }
@@ -186,42 +177,6 @@ export default function StylesPage() {
             ))}
           </div>
         ))}
-      </div>
-
-      {/* Images — two up, four up */}
-      <div className="flex items-start gap-10 border-t border-[#6e6e73] py-10">
-        <ImageWithDetail />
-        <ImageWithDetail />
-      </div>
-      <div className="flex items-start gap-10 py-10">
-        <ImageWithDetail />
-        <ImageWithDetail />
-        <ImageWithDetail />
-      </div>
-
-      {/* Images — gallery grid (3 over 3, then default/double item preview) */}
-      <div className="flex flex-col gap-6 py-10">
-        <div className="flex items-start gap-6">
-          <ImageWithDetail />
-          <ImageWithDetail />
-          <ImageWithDetail />
-        </div>
-        <div className="flex items-start gap-6">
-          <ImageWithDetail />
-          <ImageWithDetail />
-          <ImageWithDetail />
-        </div>
-      </div>
-      <div className="flex flex-col gap-6 py-10">
-        <div className="flex items-start gap-6">
-          <ImageWithDetail />
-          <ImageWithDetail />
-        </div>
-        <div className="flex items-start gap-6">
-          {/* "Item" default variant: image + single caption */}
-          <ImageWithDetail aspect="h-[421px]" />
-          <ImageWithDetail aspect="h-[421px]" />
-        </div>
       </div>
 
       {/* Content-5: focus+items beside a tall image */}
