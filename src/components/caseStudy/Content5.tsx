@@ -3,11 +3,15 @@ import type { ReactNode } from "react";
 import { JumboTitle, FocusText, BodyText, Subtitle18, MiniTitle, LinkText, SectionDivider } from "./Typography";
 
 export type Content5Link = { label: ReactNode; href: string; text: ReactNode };
+export type Content5Image = { src: string; alt: string };
 
 /**
  * Content-5: a jumbo title/focus/body intro plus an optional labeled row
- * of mini-title+link items, beside a tall image. Omit `linksLabel`/`links`
- * entirely when a project has no links row (Figma hides that block).
+ * of mini-title+link items, beside one or more images. Omit
+ * `linksLabel`/`links` entirely when a project has no links row (Figma
+ * hides that block). Pass a single image to fill the full column height
+ * (e.g. Research), or two+ to stack them at a fixed 360px each with a
+ * 24px gap (e.g. Explorations).
  */
 export default function Content5({
   title,
@@ -15,14 +19,14 @@ export default function Content5({
   body,
   linksLabel,
   links,
-  image,
+  images,
 }: {
   title: ReactNode;
   focus?: ReactNode;
   body?: ReactNode;
   linksLabel?: ReactNode;
   links?: Content5Link[];
-  image: { src: string; alt: string };
+  images: Content5Image[];
 }) {
   return (
     <>
@@ -50,9 +54,19 @@ export default function Content5({
             </div>
           )}
         </div>
-        <div className="relative flex-1 self-stretch">
-          <Image src={image.src} alt={image.alt} fill className="object-cover" />
-        </div>
+        {images.length === 1 ? (
+          <div className="relative flex-1 self-stretch">
+            <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" />
+          </div>
+        ) : (
+          <div className="flex flex-1 flex-col gap-6">
+            {images.map((image, i) => (
+              <div key={i} className="relative h-[360px] w-full">
+                <Image src={image.src} alt={image.alt} fill className="object-cover" />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
