@@ -17,16 +17,16 @@ export default function Content3({ title, columns }: { title: ReactNode; columns
         <JumboTitle>{title}</JumboTitle>
         <div className="flex flex-col gap-10 md:flex-row">
           {columns.map((col, i) => (
-            <div key={i} className="flex flex-1 flex-col gap-8">
+            <div key={i} className="flex flex-1 flex-col gap-4">
+              <div className="relative h-[360px] w-full">
+                <Image src={col.image.src} alt={col.image.alt} fill className="object-cover" />
+              </div>
               {(col.subtitle || col.body) && (
                 <div className="flex flex-col gap-2">
                   {col.subtitle && <Subtitle24>{col.subtitle}</Subtitle24>}
                   {col.body && <BodyText>{col.body}</BodyText>}
                 </div>
               )}
-              <div className="relative h-[360px] w-full">
-                <Image src={col.image.src} alt={col.image.alt} fill className="object-cover" />
-              </div>
             </div>
           ))}
         </div>

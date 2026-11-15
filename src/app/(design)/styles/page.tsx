@@ -168,12 +168,12 @@ export default function StylesPage() {
         <JumboTitle>Title</JumboTitle>
         <div className="flex flex-col gap-10 md:flex-row">
           {[0, 1].map((i) => (
-            <div key={i} className="flex flex-1 flex-col gap-8">
+            <div key={i} className="flex flex-1 flex-col gap-4">
+              <Placeholder className="h-[360px] w-full" />
               <div className="flex flex-col gap-2">
                 <Subtitle24>Subtitle</Subtitle24>
                 <BodyText>Body</BodyText>
               </div>
-              <Placeholder className="h-[360px] w-full" />
             </div>
           ))}
         </div>
