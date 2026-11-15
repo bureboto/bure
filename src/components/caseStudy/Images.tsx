@@ -22,9 +22,8 @@ function Slot({ image, aspect = "h-[400px]" }: { image: ImageSlot; aspect?: stri
 export function ImagesFocus({ image }: { image: ImageSlot }) {
   return (
     <div className="flex flex-col items-center gap-2 px-40 py-10">
-      <div className="relative h-[400px] w-full">
-        <Image src={image.src} alt={image.alt} fill className="object-contain bg-[#f0f0f5]" />
-      </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={image.src} alt={image.alt} className="w-full h-auto max-h-[800px] object-contain" />
       <Caption caption={image.caption} />
     </div>
   );
