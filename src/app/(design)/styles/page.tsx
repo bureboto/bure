@@ -133,7 +133,7 @@ export default function StylesPage() {
 
       {/* Content-2: Intro (jumbo + body) over a numbered split item */}
       <SectionDivider />
-      <div className="flex flex-col gap-10 py-20">
+      <div className="flex flex-col gap-20 py-20">
         <div className="flex items-start gap-20">
           <div className="flex w-[480px] flex-col gap-4 pr-20">
             <JumboTitle>Title</JumboTitle>
@@ -141,7 +141,7 @@ export default function StylesPage() {
           </div>
           <div className="flex-1" />
         </div>
-        <div className="flex items-start gap-20 border-t border-[#6e6e73] pt-10">
+        <div className="flex items-start gap-20 border-t border-[#6e6e73] pt-20">
           <div className="flex flex-1 flex-col gap-6">
             <div>
               <JumboTitle>#</JumboTitle>

@@ -175,7 +175,7 @@ export default function BandoPreview() {
 
       {/* Content-2: Design goals */}
       <Content2 title="Design Goals">
-        <Content2Item image={{ src: bando("Convertion.jpg"), alt: "Bando conversion flow" }}>
+        <Content2Item first image={{ src: bando("Convertion.jpg"), alt: "Bando conversion flow" }}>
           <div>
             <JumboTitle>1.</JumboTitle>
             <Subtitle36>Convertion</Subtitle36>
@@ -231,7 +231,7 @@ export default function BandoPreview() {
 
       {/* Content-2: It wasn't all sweet */}
       <Content2 title="It wasn't all sweet">
-        <Content2Item image={{ src: bando("Logos.jpg"), alt: "Bando logo evolution, before and after" }}>
+        <Content2Item first image={{ src: bando("Logos.jpg"), alt: "Bando logo evolution, before and after" }}>
           <Subtitle36>The brand problem</Subtitle36>
           <FocusText>The old logo {bold("didn't scale")}</FocusText>
           <ContentBorderedItem>
