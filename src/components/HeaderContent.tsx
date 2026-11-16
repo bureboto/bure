@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CVLink from "@/components/CVLink";
+import LanguageSwitch from "@/components/LanguageSwitch";
 
 const navLinks = [
   { href: "/about-me", label: "About me" },
@@ -75,6 +76,7 @@ export default function HeaderContent() {
         >
           <LinkedInIcon />
         </a>
+        <LanguageSwitch />
       </div>
 
       {/* Mobile hamburger */}
@@ -110,6 +112,7 @@ export default function HeaderContent() {
           >
             <LinkedInIcon />
           </a>
+          <LanguageSwitch className="border-l-0 pl-0" />
         </div>
       )}
     </div>
