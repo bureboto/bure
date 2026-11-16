@@ -2,45 +2,70 @@
 
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
-import { RevealProvider, Letters, Block, FadeIn } from "./reveal";
+import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
 
 const featured = projects;
 // Placeholder selection — swap these once the final picks are decided.
 // Figma: desktop shows 6 rows, mobile shows 5 (the 6th is hidden on mobile below).
 const tableProjects = projects.slice(0, 6);
 
+const PARAGRAPH =
+  "+10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.\nExperiencia en industrias Fintech, Banking and Gouvernment.";
+
 function yearOf(date: string) {
   const match = date.match(/\d{4}/);
   return match ? match[0] : date;
 }
 
-function Pfp({ className = "" }: { className?: string }) {
+function Pfp({ className = "", delay = 0 }: { className?: string; delay?: number }) {
   return (
-    <div className={`overflow-hidden rounded-full bg-[#f0f0f5] ${className}`}>
+    <FadeIn delay={delay} duration={500} className={`overflow-hidden rounded-full bg-[#f0f0f5] ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/design/profile/Bure_PFP.png" alt="Erick A. portrait" className="h-full w-full object-cover" />
-    </div>
+    </FadeIn>
   );
 }
 
-function UnderlineLink({ href, children, external = false }: { href: string; children: string; external?: boolean }) {
+function UnderlineLink({
+  href,
+  children,
+  external = false,
+  delay = 0,
+}: {
+  href: string;
+  children: string;
+  external?: boolean;
+  delay?: number;
+}) {
   return (
     <a
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
-      className="text-[16px] tracking-[0.16px] text-[#1d1d1d] underline underline-offset-2"
+      className="text-[16px] tracking-[0.16px] text-[#1d1d1d]"
     >
-      {children}
+      <Letters text={children} start={delay} step={8} letterClassName="underline underline-offset-2" />
     </a>
   );
 }
 
-function ProjectRow({ project, first = false, mobileHidden = false }: { project: Project; first?: boolean; mobileHidden?: boolean }) {
+function ProjectRow({
+  project,
+  first = false,
+  mobileHidden = false,
+  delay,
+}: {
+  project: Project;
+  first?: boolean;
+  mobileHidden?: boolean;
+  delay: number;
+}) {
   const service = project.tags[0] ?? "—";
   const industry = project.tags[1] ?? project.tags[0] ?? "—";
   return (
-    <div
+    <Block
+      delay={delay}
+      duration={300}
       className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${
         first ? "border-t-0" : ""
       } ${mobileHidden ? "hidden md:flex" : ""}`}
@@ -54,7 +79,7 @@ function ProjectRow({ project, first = false, mobileHidden = false }: { project:
       <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
         {yearOf(project.date)}
       </p>
-    </div>
+    </Block>
   );
 }
 
@@ -119,19 +144,15 @@ export default function HomeV2Content() {
                 <p className="text-[28px]">Brand &amp; Product designer</p>
               </Block>
             </div>
-            <Pfp className="hidden h-[140px] w-[140px] md:block" />
+            <Pfp className="hidden h-[140px] w-[140px] md:block" delay={180} />
           </div>
 
-          <Pfp className="h-[160px] w-[160px] md:hidden" />
+          <Pfp className="h-[160px] w-[160px] md:hidden" delay={180} />
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
-          <Block delay={260} duration={320} className="md:hidden">
-            <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-              +10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.
-              <br />
-              Experiencia en industrias Fintech, Banking and Gouvernment.
-            </p>
-          </Block>
+          <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
+            <LinesText text={PARAGRAPH} start={260} lineStep={70} duration={320} />
+          </p>
 
           {/* Links — desktop: México/LinkedIn left, paragraph+Cocinemos+CV right */}
           <div className="hidden items-start gap-0 md:flex">
@@ -139,21 +160,23 @@ export default function HomeV2Content() {
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">México</p>
               </Block>
-              <UnderlineLink href="/home-v2-preview#projects">Full about me →</UnderlineLink>
-              <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external>
+              <UnderlineLink href="/home-v2-preview#projects" delay={240}>
+                Full about me →
+              </UnderlineLink>
+              <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={280}>
                 LinkedIn
               </UnderlineLink>
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
-              <Block delay={260} duration={320}>
-                <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-                  +10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.
-                  <br />
-                  Experiencia en industrias Fintech, Banking and Gouvernment.
-                </p>
-              </Block>
-              <UnderlineLink href="mailto:hola@bure.art">Cocinemos algo juntos</UnderlineLink>
-              <UnderlineLink href="/cv.pdf">CV</UnderlineLink>
+              <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
+                <LinesText text={PARAGRAPH} start={260} lineStep={70} duration={320} />
+              </p>
+              <UnderlineLink href="mailto:hola@bure.art" delay={420}>
+                Cocinemos algo juntos
+              </UnderlineLink>
+              <UnderlineLink href="/cv.pdf" delay={460}>
+                CV
+              </UnderlineLink>
             </div>
           </div>
 
@@ -163,14 +186,20 @@ export default function HomeV2Content() {
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">México</p>
               </Block>
-              <UnderlineLink href="/home-v2-preview#projects">Full about me →</UnderlineLink>
+              <UnderlineLink href="/home-v2-preview#projects" delay={240}>
+                Full about me →
+              </UnderlineLink>
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
-              <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external>
+              <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={420}>
                 LinkedIn
               </UnderlineLink>
-              <UnderlineLink href="mailto:hola@bure.art">Cocinemos algo juntos</UnderlineLink>
-              <UnderlineLink href="/cv.pdf">CV</UnderlineLink>
+              <UnderlineLink href="mailto:hola@bure.art" delay={460}>
+                Cocinemos algo juntos
+              </UnderlineLink>
+              <UnderlineLink href="/cv.pdf" delay={500}>
+                CV
+              </UnderlineLink>
             </div>
           </div>
         </div>
@@ -189,21 +218,29 @@ export default function HomeV2Content() {
 
         {/* Bottom — full project list */}
         <div className="flex flex-col md:[grid-area:bottom] md:self-end md:pb-6">
-          <div className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
+          <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
             <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[273px]">Titulo del proyecto</p>
             <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">Service</p>
             <p className="flex-1 text-[12px] text-[#6e6e73]">Cliente</p>
             <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">Industry</p>
             <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">Year</p>
-          </div>
+          </Block>
           <div className="flex flex-col">
             {tableProjects.map((project, i) => (
-              <ProjectRow key={project.href} project={project} first={i === 0} mobileHidden={i === 5} />
+              <ProjectRow
+                key={project.href}
+                project={project}
+                first={i === 0}
+                mobileHidden={i === 5}
+                delay={520 + i * 50}
+              />
             ))}
           </div>
-          <div className="border-t border-[#909096] py-2 text-right">
-            <UnderlineLink href="/projects-glossary-preview">Ver todos →</UnderlineLink>
-          </div>
+          <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
+            <UnderlineLink href="/projects-glossary-preview" delay={0}>
+              Ver todos →
+            </UnderlineLink>
+          </Block>
         </div>
       </div>
     </RevealProvider>

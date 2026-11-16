@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
 const RevealContext = createContext(false);
 
@@ -31,12 +31,15 @@ export function Letters({
   step = 10,
   duration = 280,
   className = "",
+  letterClassName = "",
 }: {
   text: string;
   start?: number;
   step?: number;
   duration?: number;
   className?: string;
+  /** Applied to each per-character span — use this (not className) for decorations like underline, since text-decoration on an ancestor doesn't reliably paint through inline-block boxes. */
+  letterClassName?: string;
 }) {
   const revealed = useRevealed();
   return (
@@ -44,7 +47,7 @@ export function Letters({
       {Array.from(text).map((char, i) => (
         <span
           key={i}
-          className="inline-block transition-[opacity,transform] ease-out"
+          className={`inline-block transition-[opacity,transform] ease-out ${letterClassName}`}
           style={{
             opacity: revealed ? 1 : 0,
             transform: revealed ? "translateY(0)" : "translateY(0.2em)",
@@ -87,7 +90,78 @@ export function Block({
   );
 }
 
-/** Opacity-only fade (no movement) — for grids where only an opacity ramp is wanted. */
+/**
+ * Reveals real wrapped lines of a paragraph in sequence, top to bottom —
+ * not the whole block at once. Each word is its own inline-block span;
+ * after mount we measure each word's offsetTop to group them into their
+ * actual rendered line (works at any viewport width), then every word in
+ * the same line shares one transition delay. A literal "\n" in `text`
+ * becomes a forced line break (plain string marker, not a <br/> element).
+ */
+export function LinesText({
+  text,
+  start = 0,
+  lineStep = 70,
+  duration = 320,
+  className = "",
+}: {
+  text: string;
+  start?: number;
+  lineStep?: number;
+  duration?: number;
+  className?: string;
+}) {
+  const revealed = useRevealed();
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const [lineOf, setLineOf] = useState<number[]>([]);
+
+  const words: (string | "BR")[] = [];
+  text.split("\n").forEach((line, i, arr) => {
+    line.split(/(\s+)/).forEach((tok) => {
+      if (tok) words.push(tok);
+    });
+    if (i < arr.length - 1) words.push("BR");
+  });
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const spans = Array.from(el.querySelectorAll<HTMLElement>("[data-word]"));
+    const tops = spans.map((s) => s.offsetTop);
+    const uniqueTops = Array.from(new Set(tops)).sort((a, b) => a - b);
+    setLineOf(spans.map((_, i) => uniqueTops.indexOf(tops[i])));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
+
+  let wordIndex = -1;
+  return (
+    <span ref={containerRef} className={className}>
+      {words.map((w, i) => {
+        if (w === "BR") return <br key={i} />;
+        if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
+        wordIndex += 1;
+        const line = lineOf[wordIndex] ?? 0;
+        return (
+          <span
+            key={i}
+            data-word
+            className="inline-block transition-[opacity,transform] ease-out"
+            style={{
+              opacity: revealed ? 1 : 0,
+              transform: revealed ? "translateY(0)" : "translateY(4px)",
+              transitionDuration: `${duration}ms`,
+              transitionDelay: `${start + line * lineStep}ms`,
+            }}
+          >
+            {w}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+/** Opacity-only fade (no movement) — for images and grids where only an opacity ramp is wanted. */
 export function FadeIn({
   children,
   delay = 0,
