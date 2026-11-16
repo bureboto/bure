@@ -1,11 +1,74 @@
 "use client";
 
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
-import { useLanguage } from "@/lib/LanguageContext";
+import { useLanguage, type Language } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
+
+/**
+ * Re-animates language-dependent copy whenever the selected language
+ * changes: the old text fades out first (staggered top to bottom, like
+ * it's being erased), then the new text slides in left to right. Mount's
+ * own entrance (RevealProvider/Letters/Block/etc.) is untouched — this
+ * only drives the *re*-animation on a later language switch.
+ */
+const EXIT_DURATION = 200;
+const EXIT_STEP = 40;
+const ENTER_DURATION = 260;
+const ENTER_STEP = 40;
+
+const LangTransitionContext = createContext(true);
+
+function useLangTransition(language: Language) {
+  const [visible, setVisible] = useState(true);
+  const [displayLanguage, setDisplayLanguage] = useState(language);
+  const prevLanguage = useRef(language);
+
+  useEffect(() => {
+    if (prevLanguage.current === language) return;
+    prevLanguage.current = language;
+    setVisible(false);
+    const exitTotal = EXIT_DURATION + EXIT_STEP * 8;
+    const swapTimer = setTimeout(() => {
+      setDisplayLanguage(language);
+      requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
+    }, exitTotal);
+    return () => clearTimeout(swapTimer);
+  }, [language]);
+
+  return { visible, displayLanguage };
+}
+
+/** Wraps one piece of language-dependent text; `line` staggers it against siblings. */
+function LangText({
+  children,
+  line = 0,
+  col = 0,
+  className = "",
+}: {
+  children: ReactNode;
+  line?: number;
+  col?: number;
+  className?: string;
+}) {
+  const visible = useContext(LangTransitionContext);
+  return (
+    <span
+      className={`inline-block transition-[opacity,transform] ease-out ${className}`}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateX(0)" : "translateX(-10px)",
+        transitionDuration: `${visible ? ENTER_DURATION : EXIT_DURATION}ms`,
+        transitionDelay: visible ? `${line * ENTER_STEP + col * 20}ms` : `${line * EXIT_STEP}ms`,
+      }}
+    >
+      {children}
+    </span>
+  );
+}
 
 const featured = projects;
 
@@ -69,13 +132,16 @@ function UnderlineLink({
   children,
   external = false,
   delay = 0,
+  line,
 }: {
   href: string;
   children: string;
   external?: boolean;
   delay?: number;
+  /** When set, re-animates this link's text on language switch (see LangText). */
+  line?: number;
 }) {
-  return (
+  const link = (
     <a
       href={href}
       target={external ? "_blank" : undefined}
@@ -85,6 +151,7 @@ function UnderlineLink({
       <Letters text={children} start={delay} step={8} letterClassName="underline underline-offset-2" />
     </a>
   );
+  return line === undefined ? link : <LangText line={line}>{link}</LangText>;
 }
 
 function ProjectRow({
@@ -160,10 +227,12 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
 
 export default function HomeV2Content() {
   const { language } = useLanguage();
-  const t = copy[language];
+  const { visible, displayLanguage } = useLangTransition(language);
+  const t = copy[displayLanguage];
 
   return (
     <RevealProvider>
+      <LangTransitionContext.Provider value={visible}>
       <div
         className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-0 md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
       >
@@ -186,7 +255,9 @@ export default function HomeV2Content() {
                 </p>
               </div>
               <Block delay={150} duration={300}>
-                <p className="text-[28px]">{t.role}</p>
+                <p className="text-[28px]">
+                  <LangText line={0}>{t.role}</LangText>
+                </p>
               </Block>
             </div>
             <Pfp className="hidden h-[140px] w-[140px] md:block" delay={180} />
@@ -196,16 +267,20 @@ export default function HomeV2Content() {
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
           <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
-            <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
+            <LangText line={2}>
+              <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
+            </LangText>
           </p>
 
           {/* Links — desktop: México/LinkedIn left, paragraph+Cocinemos+CV right */}
           <div className="hidden items-start gap-0 md:flex">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
-                <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
+                <p className="text-[18px] text-[#6e6e73]">
+                  <LangText line={1}>{t.location}</LangText>
+                </p>
               </Block>
-              <UnderlineLink href="/about-me" delay={240}>
+              <UnderlineLink href="/about-me" delay={240} line={1}>
                 {t.fullAboutMe}
               </UnderlineLink>
               <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={280}>
@@ -214,9 +289,11 @@ export default function HomeV2Content() {
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
               <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-                <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
+                <LangText line={2}>
+                  <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
+                </LangText>
               </p>
-              <UnderlineLink href="mailto:hola@bure.art" delay={420}>
+              <UnderlineLink href="mailto:hola@bure.art" delay={420} line={3}>
                 {t.cocinemos}
               </UnderlineLink>
             </div>
@@ -226,9 +303,11 @@ export default function HomeV2Content() {
           <div className="flex items-start gap-6 md:hidden">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
-                <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
+                <p className="text-[18px] text-[#6e6e73]">
+                  <LangText line={1}>{t.location}</LangText>
+                </p>
               </Block>
-              <UnderlineLink href="/about-me" delay={240}>
+              <UnderlineLink href="/about-me" delay={240} line={1}>
                 {t.fullAboutMe}
               </UnderlineLink>
             </div>
@@ -236,7 +315,7 @@ export default function HomeV2Content() {
               <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={420}>
                 LinkedIn
               </UnderlineLink>
-              <UnderlineLink href="mailto:hola@bure.art" delay={460}>
+              <UnderlineLink href="mailto:hola@bure.art" delay={460} line={3}>
                 {t.cocinemos}
               </UnderlineLink>
             </div>
@@ -262,11 +341,21 @@ export default function HomeV2Content() {
           </div>
           <div className="flex flex-1 flex-col">
             <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
-              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">{t.tableHeaders.title}</p>
-              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">{t.tableHeaders.service}</p>
-              <p className="flex-1 text-[12px] text-[#6e6e73]">{t.tableHeaders.client}</p>
-              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">{t.tableHeaders.industry}</p>
-              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">{t.tableHeaders.year}</p>
+              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">
+                <LangText line={4} col={0}>{t.tableHeaders.title}</LangText>
+              </p>
+              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">
+                <LangText line={4} col={1}>{t.tableHeaders.service}</LangText>
+              </p>
+              <p className="flex-1 text-[12px] text-[#6e6e73]">
+                <LangText line={4} col={2}>{t.tableHeaders.client}</LangText>
+              </p>
+              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">
+                <LangText line={4} col={3}>{t.tableHeaders.industry}</LangText>
+              </p>
+              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">
+                <LangText line={4} col={4}>{t.tableHeaders.year}</LangText>
+              </p>
             </Block>
             <div className="flex flex-col">
               {tableProjects.map((project, i) => (
@@ -279,13 +368,14 @@ export default function HomeV2Content() {
               ))}
             </div>
             <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
-              <UnderlineLink href="/projects" delay={0}>
+              <UnderlineLink href="/projects" delay={0} line={5}>
                 {t.verTodos}
               </UnderlineLink>
             </Block>
           </div>
         </div>
       </div>
+      </LangTransitionContext.Provider>
     </RevealProvider>
   );
 }

@@ -18,8 +18,8 @@ export default function LanguageSwitch({ className = "" }: { className?: string 
       <div className="relative grid grid-cols-2 rounded-[4px] border border-[#1d1d1d]">
         <div
           aria-hidden
-          className={`absolute inset-y-0 left-0 w-1/2 rounded-[4px] bg-[#1d1d1d] transition-transform duration-300 ease-out ${
-            isEs ? "translate-x-full" : "translate-x-0"
+          className={`absolute inset-y-0 left-0 w-1/2 bg-[#1d1d1d] transition-transform duration-300 ease-out ${
+            isEs ? "translate-x-full rounded-r-[4px]" : "translate-x-0 rounded-l-[4px]"
           }`}
         />
         <button
