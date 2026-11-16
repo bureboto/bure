@@ -49,7 +49,7 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
  * 3591:41758): desktop (3591:40804) and mobile (3591:41706) frames. The
  * page's own Header shown in Figma is an in-progress experiment, not
  * built here — this page sits under the existing global DesignHeader.
- * PFP photo: public/design/profile/pfp-bure.jpg. Unlisted (noindex,
+ * PFP photo: public/design/profile/Bure_PFP.png. Unlisted (noindex,
  * not linked from /home) until reviewed, same as /bando-preview
  * before it went live.
  */
@@ -71,7 +71,7 @@ export default function AboutMePreview() {
           {/* PFP — mobile only, sits right under the name */}
           <div className="relative h-[160px] w-[160px] overflow-hidden rounded-full bg-[#f0f0f5] md:hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/design/profile/pfp-bure.jpg" alt="Erick A. portrait" className="h-full w-full object-cover" />
+            <img src="/design/profile/Bure_PFP.png" alt="Erick A. portrait" className="h-full w-full object-cover" />
           </div>
 
           <div className="flex items-start gap-0">
@@ -117,7 +117,7 @@ export default function AboutMePreview() {
           {/* PFP — desktop only */}
           <div className="relative hidden h-[280px] w-[280px] overflow-hidden rounded-full bg-[#f0f0f5] md:block">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/design/profile/pfp-bure.jpg" alt="Erick A. portrait" className="h-full w-full object-cover" />
+            <img src="/design/profile/Bure_PFP.png" alt="Erick A. portrait" className="h-full w-full object-cover" />
           </div>
 
           {/* Experience — horizontal label + 3-col grid on desktop, rotated label + single column on mobile */}
