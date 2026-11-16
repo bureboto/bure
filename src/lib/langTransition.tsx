@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { useLanguage, type Language } from "@/lib/LanguageContext";
 
 /**
@@ -165,6 +165,105 @@ export function LangLetters({
             }}
           >
             {char === " " ? " " : char}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+/**
+ * Like each page's own LinesText, but each real rendered line re-animates
+ * on language switch (lines move together, no top-to-bottom stagger —
+ * within each line, words still sweep left to right): measures every
+ * word's offsetTop after mount/text-change to group words into their
+ * actual line, same technique as LinesText. Pass the page's own
+ * `revealedMount` (its RevealProvider's flag) so the very first paint
+ * keeps using that page's own entrance timing.
+ */
+export function LangParagraph({
+  text,
+  revealedMount = true,
+  mountStart = 0,
+  mountLineStep = 70,
+  className = "",
+}: {
+  text: string;
+  revealedMount?: boolean;
+  mountStart?: number;
+  mountLineStep?: number;
+  className?: string;
+}) {
+  const langVisible = useLangVisible();
+
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const [lineOf, setLineOf] = useState<number[]>([]);
+
+  const words: (string | "BR")[] = [];
+  const bold: boolean[] = [];
+  let boldOn = false;
+  text.split("\n").forEach((line, i, arr) => {
+    line.split(/(\s+)/).forEach((tok) => {
+      if (!tok) return;
+      const hasOpen = tok.includes("**");
+      let clean = tok;
+      let tokenBold = boldOn;
+      if (hasOpen) {
+        const markerCount = (tok.match(/\*\*/g) ?? []).length;
+        clean = tok.replace(/\*\*/g, "");
+        tokenBold = boldOn || markerCount > 0;
+        if (markerCount % 2 === 1) boldOn = !boldOn;
+      }
+      words.push(clean);
+      bold.push(tokenBold);
+    });
+    if (i < arr.length - 1) {
+      words.push("BR");
+      bold.push(false);
+    }
+  });
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const spans = Array.from(el.querySelectorAll<HTMLElement>("[data-word]"));
+    const tops = spans.map((s) => s.offsetTop);
+    const uniqueTops = Array.from(new Set(tops)).sort((a, b) => a - b);
+    setLineOf(spans.map((_, i) => uniqueTops.indexOf(tops[i])));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
+
+  const visible = revealedMount && langVisible;
+  let wordIndex = -1;
+  const colInLineByLine: Record<number, number> = {};
+  return (
+    <span ref={containerRef} className={className}>
+      {words.map((w, i) => {
+        if (w === "BR") return <br key={i} />;
+        if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
+        wordIndex += 1;
+        const line = lineOf[wordIndex] ?? 0;
+        const colInLine = colInLineByLine[line] ?? 0;
+        colInLineByLine[line] = colInLine + 1;
+        const delay = !revealedMount ? `${mountStart + line * mountLineStep}ms` : `${colInLine * 30}ms`;
+        const duration = !revealedMount ? 320 : visible ? ENTER_DURATION : EXIT_DURATION;
+        return (
+          <span
+            key={i}
+            data-word
+            className={`inline-block transition-[opacity,transform] ease-out ${bold[i] ? "font-bold text-[#1d1d1d]" : ""}`}
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible
+                ? "translate(0, 0)"
+                : revealedMount
+                  ? "translate(-10px, 0)"
+                  : "translate(0, 4px)",
+              transitionDuration: `${duration}ms`,
+              transitionDelay: delay,
+            }}
+          >
+            {w}
           </span>
         );
       })}

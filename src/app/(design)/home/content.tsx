@@ -1,118 +1,17 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
-import {
-  LangLetters,
-  LangText,
-  useLangVisible,
-  useDelayedLanguage,
-  ENTER_DURATION,
-  EXIT_DURATION,
-} from "@/lib/langTransition";
+import { LangLetters, LangText, LangParagraph, useDelayedLanguage } from "@/lib/langTransition";
 import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
 
-/**
- * Like LinesText, but each real rendered line re-animates on its own when
- * the language switches (not the whole paragraph as one block): measures
- * each word's offsetTop after mount/text-change to group words into their
- * actual line, same technique as LinesText.
- */
-function LangParagraph({
-  text,
-  mountStart = 260,
-  mountLineStep = 70,
-  className = "",
-}: {
-  text: string;
-  mountStart?: number;
-  mountLineStep?: number;
-  className?: string;
-}) {
+/** Rendered inside RevealProvider (unlike HomeV2Content, which renders it) so useRevealed() here reflects the real mount state. */
+function HomeParagraph({ text }: { text: string }) {
   const revealedMount = useRevealed();
-  const langVisible = useLangVisible();
-
-  const containerRef = useRef<HTMLSpanElement>(null);
-  const [lineOf, setLineOf] = useState<number[]>([]);
-
-  const words: (string | "BR")[] = [];
-  const bold: boolean[] = [];
-  let boldOn = false;
-  text.split("\n").forEach((line, i, arr) => {
-    line.split(/(\s+)/).forEach((tok) => {
-      if (!tok) return;
-      const hasOpen = tok.includes("**");
-      let clean = tok;
-      let tokenBold = boldOn;
-      if (hasOpen) {
-        const markerCount = (tok.match(/\*\*/g) ?? []).length;
-        clean = tok.replace(/\*\*/g, "");
-        tokenBold = boldOn || markerCount > 0;
-        if (markerCount % 2 === 1) boldOn = !boldOn;
-      }
-      words.push(clean);
-      bold.push(tokenBold);
-    });
-    if (i < arr.length - 1) {
-      words.push("BR");
-      bold.push(false);
-    }
-  });
-
-  useLayoutEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const spans = Array.from(el.querySelectorAll<HTMLElement>("[data-word]"));
-    const tops = spans.map((s) => s.offsetTop);
-    const uniqueTops = Array.from(new Set(tops)).sort((a, b) => a - b);
-    setLineOf(spans.map((_, i) => uniqueTops.indexOf(tops[i])));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text]);
-
-  const visible = revealedMount && langVisible;
-  let wordIndex = -1;
-  const colInLineByLine: Record<number, number> = {};
-  return (
-    <span ref={containerRef} className={className}>
-      {words.map((w, i) => {
-        if (w === "BR") return <br key={i} />;
-        if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
-        wordIndex += 1;
-        const line = lineOf[wordIndex] ?? 0;
-        const colInLine = colInLineByLine[line] ?? 0;
-        colInLineByLine[line] = colInLine + 1;
-        // Lines move together (no top-to-bottom stagger), but within each
-        // line the words still sweep left to right, like Letters' entrance.
-        const delay = !revealedMount
-          ? `${mountStart + line * mountLineStep}ms`
-          : `${colInLine * 30}ms`;
-        const duration = !revealedMount ? 320 : visible ? ENTER_DURATION : EXIT_DURATION;
-        return (
-          <span
-            key={i}
-            data-word
-            className={`inline-block transition-[opacity,transform] ease-out ${bold[i] ? "font-bold text-[#1d1d1d]" : ""}`}
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible
-                ? "translate(0, 0)"
-                : revealedMount
-                  ? "translate(-10px, 0)"
-                  : "translate(0, 4px)",
-              transitionDuration: `${duration}ms`,
-              transitionDelay: delay,
-            }}
-          >
-            {w}
-          </span>
-        );
-      })}
-    </span>
-  );
+  return <LangParagraph text={text} revealedMount={revealedMount} mountStart={260} mountLineStep={70} />;
 }
 
 const featured = projects;
@@ -328,7 +227,7 @@ export default function HomeV2Content() {
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
           <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
-            <LangParagraph text={t.paragraph} mountStart={260} mountLineStep={70} />
+            <HomeParagraph text={t.paragraph} />
           </p>
 
           {/* Links — desktop: México/LinkedIn left, paragraph+Cocinemos+CV right */}
@@ -348,7 +247,7 @@ export default function HomeV2Content() {
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
               <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-                <LangParagraph text={t.paragraph} mountStart={260} mountLineStep={70} />
+                <HomeParagraph text={t.paragraph} />
               </p>
               <UnderlineLink href="mailto:hola@bure.art" delay={420}>
                 {t.cocinemos}
