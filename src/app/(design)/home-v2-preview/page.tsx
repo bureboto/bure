@@ -38,11 +38,15 @@ function UnderlineLink({ href, children, external = false }: { href: string; chi
   );
 }
 
-function ProjectRow({ project }: { project: Project }) {
+function ProjectRow({ project, first = false, mobileHidden = false }: { project: Project; first?: boolean; mobileHidden?: boolean }) {
   const service = project.tags[0] ?? "—";
   const industry = project.tags[1] ?? project.tags[0] ?? "—";
   return (
-    <div className="flex items-start gap-4 border-t border-[#909096] py-2 first:border-t-0 md:gap-0 md:justify-between">
+    <div
+      className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${
+        first ? "border-t-0" : ""
+      } ${mobileHidden ? "hidden md:flex" : ""}`}
+    >
       <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[273px] md:text-[16px] md:tracking-[0.16px]">
         {project.name}
       </p>
@@ -95,10 +99,10 @@ function ProjectCardV2({ project }: { project: Project }) {
 export default function HomeV2Preview() {
   return (
     <div
-      className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-6 md:[grid-template-areas:'top_right'_'bottom_right']"
+      className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
     >
       {/* Top — hero content */}
-      <div className="flex flex-col gap-6 md:[grid-area:top]">
+      <div className="flex flex-col gap-6 md:[grid-area:top] md:pt-6">
           {/* Head */}
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div className="flex flex-col gap-0 text-[#1d1d1d]">
@@ -114,7 +118,7 @@ export default function HomeV2Preview() {
           <Pfp className="h-[160px] w-[160px] md:hidden" />
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
-          <p className="text-[12px] text-[#6e6e73] md:hidden">
+          <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
             +10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.
             <br />
             Experiencia en industrias Fintech, Banking and Gouvernment.
@@ -130,7 +134,7 @@ export default function HomeV2Preview() {
               </UnderlineLink>
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
-              <p className="text-[12px] text-[#6e6e73]">
+              <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
                 +10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.
                 <br />
                 Experiencia en industrias Fintech, Banking and Gouvernment.
@@ -159,7 +163,7 @@ export default function HomeV2Preview() {
       {/* Right — featured project grid, scrolls internally on desktop */}
       <div
         id="projects"
-        className="grid grid-cols-2 content-start gap-x-2 gap-y-4 md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto md:pb-6"
+        className="grid grid-cols-2 content-start gap-x-2 gap-y-4 md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto"
       >
         {featured.map((project) => (
           <ProjectCardV2 key={project.href} project={project} />
@@ -167,7 +171,7 @@ export default function HomeV2Preview() {
       </div>
 
       {/* Bottom — full project list */}
-      <div className="flex flex-col md:[grid-area:bottom] md:self-end">
+      <div className="flex flex-col md:[grid-area:bottom] md:self-end md:pb-6">
         <div className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
           <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[273px]">Titulo del proyecto</p>
           <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">Service</p>
@@ -177,9 +181,7 @@ export default function HomeV2Preview() {
         </div>
         <div className="flex flex-col">
           {tableProjects.map((project, i) => (
-            <div key={project.href} className={i === 5 ? "hidden md:block" : undefined}>
-              <ProjectRow project={project} />
-            </div>
+            <ProjectRow key={project.href} project={project} first={i === 0} mobileHidden={i === 5} />
           ))}
         </div>
         <div className="border-t border-[#909096] py-2 text-right">
