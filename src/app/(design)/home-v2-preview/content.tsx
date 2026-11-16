@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
-import { RevealProvider, Letters, Block } from "./reveal";
-import { Splash } from "./splash";
+import { RevealProvider, Letters, Block, FadeIn } from "./reveal";
 
 const featured = projects;
 // Placeholder selection — swap these once the final picks are decided.
@@ -63,7 +61,7 @@ function ProjectRow({ project, first = false, mobileHidden = false }: { project:
 function ProjectCardV2({ project, delay }: { project: Project; delay: number }) {
   const serviceType = project.tags[0] ?? "";
   return (
-    <Block delay={delay} duration={320} className="group">
+    <FadeIn delay={delay} duration={400} className="group">
       <Link href={project.href} className="flex flex-col gap-2">
         <div className="relative h-[200px] w-full overflow-hidden rounded bg-[#1d1d1d]">
           {project.cover ? (
@@ -94,16 +92,13 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
           </div>
         </div>
       </Link>
-    </Block>
+    </FadeIn>
   );
 }
 
 export default function HomeV2Content() {
-  const [revealed, setRevealed] = useState(false);
-
   return (
-    <RevealProvider revealed={revealed}>
-      <Splash onDone={() => setRevealed(true)} />
+    <RevealProvider>
       <div
         className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
       >
@@ -185,9 +180,11 @@ export default function HomeV2Content() {
           id="projects"
           className="grid grid-cols-2 content-start gap-x-2 gap-y-4 md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto"
         >
-          {featured.map((project, i) => (
-            <ProjectCardV2 key={project.href} project={project} delay={300 + i * 45} />
-          ))}
+          {featured.map((project, i) => {
+            const row = Math.floor(i / 2);
+            const col = i % 2;
+            return <ProjectCardV2 key={project.href} project={project} delay={row * 90 + col * 50} />;
+          })}
         </div>
 
         {/* Bottom — full project list */}

@@ -1,10 +1,22 @@
 "use client";
 
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 const RevealContext = createContext(false);
 
-export function RevealProvider({ revealed, children }: { revealed: boolean; children: ReactNode }) {
+/** Flips to revealed one frame after mount, so the hidden state paints first. */
+export function RevealProvider({ children }: { children: ReactNode }) {
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setRevealed(true);
+      return;
+    }
+    const raf = requestAnimationFrame(() => setRevealed(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return <RevealContext.Provider value={revealed}>{children}</RevealContext.Provider>;
 }
 
@@ -66,6 +78,33 @@ export function Block({
       style={{
         opacity: revealed ? 1 : 0,
         transform: revealed ? "translateY(0)" : "translateY(6px)",
+        transitionDuration: `${duration}ms`,
+        transitionDelay: `${delay}ms`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** Opacity-only fade (no movement) — for grids where only an opacity ramp is wanted. */
+export function FadeIn({
+  children,
+  delay = 0,
+  duration = 350,
+  className = "",
+}: {
+  children: ReactNode;
+  delay?: number;
+  duration?: number;
+  className?: string;
+}) {
+  const revealed = useRevealed();
+  return (
+    <div
+      className={`transition-opacity ease-out ${className}`}
+      style={{
+        opacity: revealed ? 1 : 0,
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
       }}
