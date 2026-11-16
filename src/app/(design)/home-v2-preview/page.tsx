@@ -7,8 +7,9 @@ export const metadata: Metadata = {
 };
 
 const featured = projects;
-// Placeholder selection — swap these 5 once the final picks are decided.
-const tableProjects = projects.slice(0, 5);
+// Placeholder selection — swap these once the final picks are decided.
+// Figma: desktop shows 6 rows, mobile shows 5 (the 6th is hidden on mobile below).
+const tableProjects = projects.slice(0, 6);
 
 function yearOf(date: string) {
   const match = date.match(/\d{4}/);
@@ -175,11 +176,13 @@ export default function HomeV2Preview() {
           <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">Year</p>
         </div>
         <div className="flex flex-col">
-          {tableProjects.map((project) => (
-            <ProjectRow key={project.href} project={project} />
+          {tableProjects.map((project, i) => (
+            <div key={project.href} className={i === 5 ? "hidden md:block" : undefined}>
+              <ProjectRow project={project} />
+            </div>
           ))}
         </div>
-        <div className="pt-4">
+        <div className="border-t border-[#909096] py-2 text-right">
           <UnderlineLink href="/projects-glossary-preview">Ver todos →</UnderlineLink>
         </div>
       </div>
