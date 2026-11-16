@@ -163,7 +163,7 @@ export default function AboutMePreview() {
           {/* Right column */}
           <div className="flex flex-1 flex-col gap-10 md:justify-between md:gap-0">
             {/* PFP — desktop only */}
-            <Pfp className="hidden h-[280px] w-[280px] md:block" />
+            <Pfp className="hidden h-[240px] w-[240px] md:block" />
 
             {/* Experience — horizontal label + 3-col grid on desktop, rotated label + single column on mobile */}
             <div className="flex items-start gap-4 md:flex-col md:gap-6">
