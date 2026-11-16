@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import ContentGrid from "@/components/ContentGrid";
-import { JumboTitle, BodyText } from "@/components/caseStudy/Typography";
+import { BodyText } from "@/components/caseStudy/Typography";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -44,6 +43,15 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
   );
 }
 
+function Pfp({ className = "" }: { className?: string }) {
+  return (
+    <div className={`relative overflow-hidden rounded-full bg-[#f0f0f5] ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/design/profile/Bure_PFP.png" alt="Erick A. portrait" className="h-full w-full object-cover" />
+    </div>
+  );
+}
+
 /**
  * About me page, scaffolded from the Figma "About me" section (node
  * 3591:41758): desktop (3591:40804) and mobile (3591:41706) frames. The
@@ -52,36 +60,41 @@ function ExperienceCard({ item }: { item: ExperienceItem }) {
  * PFP photo: public/design/profile/Bure_PFP.png. Unlisted (noindex,
  * not linked from /home) until reviewed, same as /bando-preview
  * before it went live.
+ *
+ * Full-width (not the site's ContentGrid) to match Figma's edge-to-edge
+ * Container. On desktop the Left/Right columns stretch to fill the
+ * available viewport height (below the header) and each spread their
+ * own blocks with justify-between, matching Figma's `h-full
+ * justify-between` on both columns — on mobile it's a normal scrolling
+ * stack instead.
  */
 export default function AboutMePreview() {
   return (
-    <ContentGrid className="flex flex-col gap-10 py-10 pb-24">
-      {/* Name + tagline — full width on both breakpoints */}
-      <div className="flex flex-col items-start gap-0 text-[#1d1d1d]">
-        <div className="flex items-start gap-0 whitespace-nowrap">
-          <p className="text-[48px] font-light leading-none md:text-[80px]">Erick A.</p>
-          <p className="text-[20px] md:text-[28px]">(Bure)</p>
-        </div>
-        <p className="text-[28px]">Brand &amp; Product designer</p>
-      </div>
-
-      <div className="flex flex-col gap-10 md:flex-row">
+    <div className="flex w-full flex-1 flex-col px-4 py-6 md:px-10 md:py-4">
+      <div className="flex flex-1 flex-col gap-10 md:flex-row md:gap-10">
         {/* Left column */}
-        <div className="flex flex-1 flex-col gap-10">
-          {/* PFP — mobile only, sits right under the name */}
-          <div className="relative h-[160px] w-[160px] overflow-hidden rounded-full bg-[#f0f0f5] md:hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/design/profile/Bure_PFP.png" alt="Erick A. portrait" className="h-full w-full object-cover" />
-          </div>
-
-          <div className="flex items-start gap-0">
-            <div className="flex flex-1 flex-col gap-4">
-              <Body18>México</Body18>
-              <UnderlineLink href="https://www.linkedin.com/in/bureboto/">LinkedIn</UnderlineLink>
+        <div className="flex flex-1 flex-col gap-10 md:justify-between md:gap-0">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col items-start gap-0 text-[#1d1d1d]">
+              <div className="flex items-start gap-0 whitespace-nowrap">
+                <p className="text-[48px] font-light leading-none md:text-[80px]">Erick A.</p>
+                <p className="text-[20px] md:text-[28px]">(Bure)</p>
+              </div>
+              <p className="text-[28px]">Brand &amp; Product designer</p>
             </div>
-            <div className="flex flex-1 flex-col gap-4">
-              <UnderlineLink href="mailto:hola@bure.art">Cocinemos algo juntos</UnderlineLink>
-              <UnderlineLink href="/cv.pdf">CV</UnderlineLink>
+
+            {/* PFP — mobile only, sits right under the name */}
+            <Pfp className="h-[160px] w-[160px] md:hidden" />
+
+            <div className="flex items-start gap-0">
+              <div className="flex flex-1 flex-col gap-4">
+                <Body18>México</Body18>
+                <UnderlineLink href="https://www.linkedin.com/in/bureboto/">LinkedIn</UnderlineLink>
+              </div>
+              <div className="flex flex-1 flex-col gap-4">
+                <UnderlineLink href="mailto:hola@bure.art">Cocinemos algo juntos</UnderlineLink>
+                <UnderlineLink href="/cv.pdf">CV</UnderlineLink>
+              </div>
             </div>
           </div>
 
@@ -113,12 +126,9 @@ export default function AboutMePreview() {
         </div>
 
         {/* Right column */}
-        <div className="flex flex-1 flex-col gap-10">
+        <div className="flex flex-1 flex-col gap-10 md:justify-between md:gap-0">
           {/* PFP — desktop only */}
-          <div className="relative hidden h-[280px] w-[280px] overflow-hidden rounded-full bg-[#f0f0f5] md:block">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/design/profile/Bure_PFP.png" alt="Erick A. portrait" className="h-full w-full object-cover" />
-          </div>
+          <Pfp className="hidden h-[280px] w-[280px] md:block" />
 
           {/* Experience — horizontal label + 3-col grid on desktop, rotated label + single column on mobile */}
           <div className="flex items-start gap-4 md:flex-col md:gap-6">
@@ -141,6 +151,6 @@ export default function AboutMePreview() {
           </div>
         </div>
       </div>
-    </ContentGrid>
+    </div>
   );
 }
