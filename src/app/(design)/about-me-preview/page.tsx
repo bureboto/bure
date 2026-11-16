@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BodyText } from "@/components/caseStudy/Typography";
-import { RevealProvider, Letters, Block, FadeImage } from "./reveal";
+import { RevealProvider, Letters, Block, LinesText, FadeImage } from "./reveal";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -34,13 +34,15 @@ function UnderlineLink({ href, delay, children }: { href: string; delay: number;
 
 function ExperienceCard({ item, delay }: { item: ExperienceItem; delay: number }) {
   return (
-    <Block delay={delay} className="flex flex-col gap-2">
-      <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-2">
+      <Block delay={delay} duration={280} className="flex flex-col gap-1">
         <p className="text-[21px] text-[#1d1d1d]">{item.company}</p>
         <p className="text-[12px] text-[#6e6e73]">{item.years}</p>
-      </div>
-      <p className="text-[12px] text-[#6e6e73]">{item.description}</p>
-    </Block>
+      </Block>
+      <p className="text-[12px] text-[#6e6e73]">
+        <LinesText text={item.description} start={delay + 60} lineStep={55} duration={280} />
+      </p>
+    </div>
   );
 }
 
@@ -123,37 +125,38 @@ export default function AboutMePreview() {
               </div>
             </div>
 
-            <Block delay={500} duration={350}>
-              <Focus28>
-                +10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última
-                pantalla.
-                <br />
-                Experiencia en industrias Fintech, Banking and Gouvernment.
-              </Focus28>
-            </Block>
+            <Focus28>
+              <LinesText
+                start={500}
+                lineStep={80}
+                duration={320}
+                text={
+                  "+10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.\nExperiencia en industrias Fintech, Banking and Gouvernment."
+                }
+              />
+            </Focus28>
 
             <div className="flex flex-col gap-10 md:flex-row">
-              <Block delay={650} duration={400}>
-                <BodyText>
-                  Mi trabajo vive en el cruce entre marca y producto: desarrollo sistemas visuales sólidos y
-                  los llevo hasta UX, UI, motion y código, trabajando en sincronía con cada punto de contacto
-                  del producto.
-                  <br />
-                  <br />
-                  Empecé en 2013 en un despacho de diseño, después pasé al sector gobierno en México, luego a
-                  BBVA, y de ahí salté al mundo blockchain surfeando las olas de las fintech.
-                </BodyText>
-              </Block>
-              <Block delay={730} duration={400}>
-                <BodyText>
-                  Ese recorrido me enseñó a moverme entre reglas rígidas (banca, gobierno) y terrenos sin
-                  mapa (blockchain) — y a construir sistemas de marca que funcionan en ambos extremos.
-                  <br />
-                  <br />
-                  No me limito a una sola etiqueta: branding, UX, UI, motion y código son ingredientes del
-                  mismo proceso para mí, no recetas separadas.
-                </BodyText>
-              </Block>
+              <BodyText>
+                <LinesText
+                  start={650}
+                  lineStep={60}
+                  duration={320}
+                  text={
+                    "Mi trabajo vive en el cruce entre marca y producto: desarrollo sistemas visuales sólidos y los llevo hasta UX, UI, motion y código, trabajando en sincronía con cada punto de contacto del producto.\n\nEmpecé en 2013 en un despacho de diseño, después pasé al sector gobierno en México, luego a BBVA, y de ahí salté al mundo blockchain surfeando las olas de las fintech."
+                  }
+                />
+              </BodyText>
+              <BodyText>
+                <LinesText
+                  start={650}
+                  lineStep={60}
+                  duration={320}
+                  text={
+                    "Ese recorrido me enseñó a moverme entre reglas rígidas (banca, gobierno) y terrenos sin mapa (blockchain) — y a construir sistemas de marca que funcionan en ambos extremos.\n\nNo me limito a una sola etiqueta: branding, UX, UI, motion y código son ingredientes del mismo proceso para mí, no recetas separadas."
+                  }
+                />
+              </BodyText>
             </div>
           </div>
 
