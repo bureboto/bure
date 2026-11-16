@@ -20,7 +20,7 @@ export const projects: Project[] = [
     tags: ["Brand", "Ilustración", "UI"],
   },
   {
-    href: "/project10",
+    href: "/projects/bando",
     name: "Bando",
     date: "2024 – 2025",
     cover: "/design/bando/Product/Final-1.jpg",

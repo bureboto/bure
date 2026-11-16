@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 
-/** Client/Service/Year/Industry row. Tokens: Body/xs (11px) label in Secondary, Body/sm (16px) value in Primary, gap XL (40px→gap-8 on this scale). */
+/** Client/Service/Year/Industry row. Tokens: Body/xs (11px) label in Secondary, Body/sm (16px) value in Primary, gap XL (40px), border-b Secondary, padding-bottom S (16px). */
 export function HeroMeta({ items }: { items: { label: ReactNode; value: ReactNode }[] }) {
   return (
-    <div className="flex flex-wrap gap-8">
+    <div className="flex flex-wrap gap-10 border-b border-[#6e6e73] pb-4">
       {items.map((item, i) => (
         <div key={i} className="flex flex-col">
           <p className="text-[11px] text-[#6e6e73]">{item.label}</p>
@@ -39,12 +39,12 @@ export function HeroDetail({ label, children }: { label: ReactNode; children: Re
   );
 }
 
-/** Stat row (e.g. "+171,000 Users"). Tokens: Body/lg (21px, Primary) value, Body/sm (16px, Secondary) label, gap XL (40px), padding XS (8px) top / S (16px) bottom. */
+/** Stat row (e.g. "+171,000 Users"). Tokens: Body/lg (21px, Primary) value, Body/sm (16px, Secondary) label, gap XL (40px), padding XS (8px) top / S (16px) bottom, each item divided by a border-l Secondary. */
 export function HeroStats({ stats }: { stats: { value: ReactNode; label: ReactNode }[] }) {
   return (
     <div className="flex flex-wrap gap-10 pt-2 pb-6">
       {stats.map((stat, i) => (
-        <div key={i} className="flex flex-col gap-1">
+        <div key={i} className="flex flex-col gap-2 border-l border-[#6e6e73] pl-2">
           <p className="text-[21px] text-[#1d1d1d]">{stat.value}</p>
           <p className="text-[16px] tracking-[0.16px] text-[#6e6e73]">{stat.label}</p>
         </div>
