@@ -5,7 +5,14 @@ import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
-import { LangText, useLangVisible, useDelayedLanguage, ENTER_DURATION, EXIT_DURATION } from "@/lib/langTransition";
+import {
+  LangLetters,
+  LangText,
+  useLangVisible,
+  useDelayedLanguage,
+  ENTER_DURATION,
+  EXIT_DURATION,
+} from "@/lib/langTransition";
 import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
 
@@ -68,6 +75,7 @@ function LangParagraph({
 
   const visible = revealedMount && langVisible;
   let wordIndex = -1;
+  const colInLineByLine: Record<number, number> = {};
   return (
     <span ref={containerRef} className={className}>
       {words.map((w, i) => {
@@ -75,9 +83,13 @@ function LangParagraph({
         if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
         wordIndex += 1;
         const line = lineOf[wordIndex] ?? 0;
-        // Language-switch re-animation moves every line together (no
-        // top-to-bottom stagger) — only the initial mount reveal staggers.
-        const delay = !revealedMount ? `${mountStart + line * mountLineStep}ms` : "0ms";
+        const colInLine = colInLineByLine[line] ?? 0;
+        colInLineByLine[line] = colInLine + 1;
+        // Lines move together (no top-to-bottom stagger), but within each
+        // line the words still sweep left to right, like Letters' entrance.
+        const delay = !revealedMount
+          ? `${mountStart + line * mountLineStep}ms`
+          : `${colInLine * 30}ms`;
         const duration = !revealedMount ? 320 : visible ? ENTER_DURATION : EXIT_DURATION;
         return (
           <span
@@ -165,26 +177,30 @@ function UnderlineLink({
   children,
   external = false,
   delay = 0,
-  line,
 }: {
   href: string;
   children: string;
   external?: boolean;
   delay?: number;
-  /** When set, re-animates this link's text on language switch (see LangText). */
-  line?: number;
 }) {
-  const link = (
+  const revealedMount = useRevealed();
+  return (
     <a
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noreferrer" : undefined}
       className="text-[16px] tracking-[0.16px] text-[#1d1d1d]"
     >
-      <Letters text={children} start={delay} step={8} letterClassName="underline underline-offset-2" />
+      <LangLetters
+        text={children}
+        revealedMount={revealedMount}
+        mountStart={delay}
+        mountStep={8}
+        switchStep={10}
+        letterClassName="underline underline-offset-2"
+      />
     </a>
   );
-  return line === undefined ? link : <LangText line={line}>{link}</LangText>;
 }
 
 function ProjectRow({
@@ -207,19 +223,20 @@ function ProjectRow({
         }`}
       >
         <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[222px] md:text-[16px] md:tracking-[0.16px]">
-          <LangText>{project.name}</LangText>
+          {/* Per-character wrap can break long names mid-word — use the whole-block fade instead */}
+          <LangText className="whitespace-normal">{project.name}</LangText>
         </p>
         <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[137px]">
-          <LangText>{service}</LangText>
+          <LangText className="whitespace-normal">{service}</LangText>
         </p>
         <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">
-          <LangText>{project.name}</LangText>
+          <LangText className="whitespace-normal">{project.name}</LangText>
         </p>
         <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] md:block">
-          <LangText>{industry}</LangText>
+          <LangText className="whitespace-normal">{industry}</LangText>
         </p>
         <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
-          <LangText>{yearOf(project.date)}</LangText>
+          <LangLetters text={yearOf(project.date)} />
         </p>
       </Link>
     </Block>
@@ -254,14 +271,14 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
         </div>
         <div className="flex items-center justify-between gap-2">
           <p className="text-[12px] font-bold tracking-[0.16px] text-[#1d1d1d] md:text-[16px]">
-            <LangText>{project.name}</LangText>
+            <LangText className="whitespace-normal">{project.name}</LangText>
           </p>
           <div className="flex shrink-0 flex-col items-end text-[9px] text-[#1d1d1d] md:text-[12px]">
             <p>
-              <LangText>{yearOf(project.date)}</LangText>
+              <LangLetters text={yearOf(project.date)} />
             </p>
             <p>
-              <LangText>{serviceType}</LangText>
+              <LangText className="whitespace-normal">{serviceType}</LangText>
             </p>
           </div>
         </div>
@@ -300,7 +317,7 @@ export default function HomeV2Content() {
               </div>
               <Block delay={150} duration={300}>
                 <p className="text-[28px]">
-                  <LangText line={0}>{t.role}</LangText>
+                  <LangLetters text={t.role} />
                 </p>
               </Block>
             </div>
@@ -319,10 +336,10 @@ export default function HomeV2Content() {
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
-                  <LangText line={0}>{t.location}</LangText>
+                  <LangLetters text={t.location} />
                 </p>
               </Block>
-              <UnderlineLink href="/about-me" delay={240} line={0}>
+              <UnderlineLink href="/about-me" delay={240}>
                 {t.fullAboutMe}
               </UnderlineLink>
               <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={280}>
@@ -333,7 +350,7 @@ export default function HomeV2Content() {
               <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
                 <LangParagraph text={t.paragraph} mountStart={260} mountLineStep={70} />
               </p>
-              <UnderlineLink href="mailto:hola@bure.art" delay={420} line={0}>
+              <UnderlineLink href="mailto:hola@bure.art" delay={420}>
                 {t.cocinemos}
               </UnderlineLink>
             </div>
@@ -344,10 +361,10 @@ export default function HomeV2Content() {
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
-                  <LangText line={0}>{t.location}</LangText>
+                  <LangLetters text={t.location} />
                 </p>
               </Block>
-              <UnderlineLink href="/about-me" delay={240} line={0}>
+              <UnderlineLink href="/about-me" delay={240}>
                 {t.fullAboutMe}
               </UnderlineLink>
             </div>
@@ -355,7 +372,7 @@ export default function HomeV2Content() {
               <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={420}>
                 LinkedIn
               </UnderlineLink>
-              <UnderlineLink href="mailto:hola@bure.art" delay={460} line={0}>
+              <UnderlineLink href="mailto:hola@bure.art" delay={460}>
                 {t.cocinemos}
               </UnderlineLink>
             </div>
@@ -377,24 +394,26 @@ export default function HomeV2Content() {
         {/* Bottom — full project list, with a rotated "Projects" title on desktop */}
         <div className="flex flex-col md:flex-row md:items-start md:gap-4 md:[grid-area:bottom] md:self-end md:pb-6">
           <div className="hidden h-[131px] w-[41px] shrink-0 items-center justify-center md:flex">
-            <p className="-rotate-90 whitespace-nowrap text-[36px] font-normal text-[#1d1d1d]">Projects</p>
+            <p className="-rotate-90 whitespace-nowrap text-[36px] font-normal text-[#1d1d1d]">
+              <LangLetters text="Projects" mountStep={14} switchStep={14} />
+            </p>
           </div>
           <div className="flex flex-1 flex-col">
             <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
               <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">
-                <LangText line={0} col={0}>{t.tableHeaders.title}</LangText>
+                <LangLetters text={t.tableHeaders.title} />
               </p>
               <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">
-                <LangText line={0} col={0}>{t.tableHeaders.service}</LangText>
+                <LangLetters text={t.tableHeaders.service} />
               </p>
               <p className="flex-1 text-[12px] text-[#6e6e73]">
-                <LangText line={0} col={0}>{t.tableHeaders.client}</LangText>
+                <LangLetters text={t.tableHeaders.client} />
               </p>
               <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">
-                <LangText line={0} col={0}>{t.tableHeaders.industry}</LangText>
+                <LangLetters text={t.tableHeaders.industry} />
               </p>
               <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">
-                <LangText line={0} col={0}>{t.tableHeaders.year}</LangText>
+                <LangLetters text={t.tableHeaders.year} />
               </p>
             </Block>
             <div className="flex flex-col">
@@ -408,7 +427,7 @@ export default function HomeV2Content() {
               ))}
             </div>
             <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
-              <UnderlineLink href="/projects" delay={0} line={0}>
+              <UnderlineLink href="/projects" delay={0}>
                 {t.verTodos}
               </UnderlineLink>
             </Block>

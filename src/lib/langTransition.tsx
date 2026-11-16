@@ -117,3 +117,57 @@ export function LangText({
     </span>
   );
 }
+
+/**
+ * Splits text into per-character spans that fade+slide in left to right,
+ * one after another — the same left-to-right "wipe" used for the page's
+ * own mount entrance (see each page's reveal.tsx `Letters`), now reused
+ * for the language-switch re-animation. When `revealedMount` is passed
+ * (the page's own mount-reveal flag), the very first paint still uses
+ * the page's own entrance timing (`mountStart`/`mountStep`); every later
+ * language switch uses `switchStep` instead. Pass nothing for a plain
+ * static piece of text (e.g. in the header) — it will just use the
+ * switch timing from the start, no separate mount behavior.
+ */
+export function LangLetters({
+  text,
+  revealedMount = true,
+  mountStart = 0,
+  mountStep = 10,
+  switchStep = 10,
+  className = "",
+  letterClassName = "",
+}: {
+  text: string;
+  revealedMount?: boolean;
+  mountStart?: number;
+  mountStep?: number;
+  switchStep?: number;
+  className?: string;
+  letterClassName?: string;
+}) {
+  const langVisible = useLangVisible();
+  const visible = revealedMount && langVisible;
+  return (
+    <span className={className}>
+      {Array.from(text).map((char, i) => {
+        const delay = !revealedMount ? `${mountStart + i * mountStep}ms` : `${i * switchStep}ms`;
+        const duration = !revealedMount ? 280 : visible ? ENTER_DURATION : EXIT_DURATION;
+        return (
+          <span
+            key={i}
+            className={`inline-block transition-[opacity,transform] ease-out ${letterClassName}`}
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translate(0, 0)" : revealedMount ? "translate(-6px, 0)" : "translate(0, 0.2em)",
+              transitionDuration: `${duration}ms`,
+              transitionDelay: delay,
+            }}
+          >
+            {char === " " ? " " : char}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
