@@ -6,9 +6,12 @@ import { useLanguage } from "@/lib/LanguageContext";
 import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
 
 const featured = projects;
-// Placeholder selection — swap these once the final picks are decided.
-// Figma: desktop shows 6 rows, mobile shows 5 (the 6th is hidden on mobile below).
-const tableProjects = projects.slice(0, 6);
+
+// The 5 projects to show in the list, in order.
+const TABLE_HREFS = ["/projects/bando", "/project13", "/project3", "/project12", "/robopets"];
+const tableProjects = TABLE_HREFS.map((href) => projects.find((p) => p.href === href)).filter(
+  (p): p is Project => !!p
+);
 
 const copy = {
   es: {
@@ -69,12 +72,10 @@ function UnderlineLink({
 function ProjectRow({
   project,
   first = false,
-  mobileHidden = false,
   delay,
 }: {
   project: Project;
   first?: boolean;
-  mobileHidden?: boolean;
   delay: number;
 }) {
   const service = project.tags[0] ?? "—";
@@ -85,7 +86,7 @@ function ProjectRow({
       duration={300}
       className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${
         first ? "border-t-0" : ""
-      } ${mobileHidden ? "hidden md:flex" : ""}`}
+      }`}
     >
       <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[273px] md:text-[16px] md:tracking-[0.16px]">
         {project.name}
@@ -227,7 +228,7 @@ export default function HomeV2Content() {
         {/* Right — featured project grid, scrolls internally on desktop */}
         <div
           id="projects"
-          className="scrollbar-hidden grid grid-cols-2 content-start gap-x-2 gap-y-4 md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto"
+          className="scrollbar-hidden grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto"
         >
           {featured.map((project, i) => {
             const row = Math.floor(i / 2);
@@ -251,7 +252,6 @@ export default function HomeV2Content() {
                 key={project.href}
                 project={project}
                 first={i === 0}
-                mobileHidden={i === 5}
                 delay={520 + i * 50}
               />
             ))}
