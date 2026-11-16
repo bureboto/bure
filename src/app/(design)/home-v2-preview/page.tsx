@@ -6,7 +6,9 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const featured = projects.slice(0, 8);
+const featured = projects;
+// Placeholder selection — swap these 5 once the final picks are decided.
+const tableProjects = projects.slice(0, 5);
 
 function yearOf(date: string) {
   const match = date.match(/\d{4}/);
@@ -92,7 +94,7 @@ function ProjectCardV2({ project }: { project: Project }) {
 export default function HomeV2Preview() {
   return (
     <div
-      className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:grid-cols-2 md:items-start md:gap-x-10 md:gap-y-6 md:px-10 md:py-6 md:[grid-template-areas:'top_right'_'bottom_right']"
+      className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:items-stretch md:gap-x-10 md:gap-y-6 md:overflow-hidden md:px-10 md:py-6 md:[grid-template-areas:'top_right'_'bottom_right']"
     >
       {/* Top — hero content */}
       <div className="flex flex-col gap-6 md:[grid-area:top]">
@@ -156,7 +158,7 @@ export default function HomeV2Preview() {
       {/* Right — featured project grid, scrolls internally on desktop */}
       <div
         id="projects"
-        className="grid grid-cols-2 content-start gap-x-2 gap-y-4 md:sticky md:top-[72px] md:[grid-area:right] md:max-h-[calc(100vh-72px)] md:gap-x-4 md:gap-y-4 md:overflow-y-auto md:pb-6"
+        className="grid grid-cols-2 content-start gap-x-2 gap-y-4 md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto md:pb-6"
       >
         {featured.map((project) => (
           <ProjectCardV2 key={project.href} project={project} />
@@ -173,9 +175,12 @@ export default function HomeV2Preview() {
           <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">Year</p>
         </div>
         <div className="flex flex-col">
-          {projects.map((project) => (
+          {tableProjects.map((project) => (
             <ProjectRow key={project.href} project={project} />
           ))}
+        </div>
+        <div className="pt-4">
+          <UnderlineLink href="/projects-glossary-preview">Ver todos →</UnderlineLink>
         </div>
       </div>
     </div>
