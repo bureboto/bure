@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
-import { CV_HREF } from "@/components/CVLink";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
@@ -220,13 +219,10 @@ export default function HomeV2Content() {
               <UnderlineLink href="mailto:hola@bure.art" delay={420}>
                 {t.cocinemos}
               </UnderlineLink>
-              <UnderlineLink href={CV_HREF[language]} delay={460}>
-                CV
-              </UnderlineLink>
             </div>
           </div>
 
-          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos/CV right */}
+          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos right */}
           <div className="flex items-start gap-6 md:hidden">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
@@ -242,9 +238,6 @@ export default function HomeV2Content() {
               </UnderlineLink>
               <UnderlineLink href="mailto:hola@bure.art" delay={460}>
                 {t.cocinemos}
-              </UnderlineLink>
-              <UnderlineLink href={CV_HREF[language]} delay={500}>
-                CV
               </UnderlineLink>
             </div>
           </div>
