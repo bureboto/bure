@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import CVLink from "@/components/CVLink";
 
 const navLinks = [
-  { href: "/about-me-preview", label: "About me" },
+  { href: "/about-me", label: "About me" },
   { href: "/home#projects", label: "Projects" },
 ];
 

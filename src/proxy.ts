@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const DESIGN_HOSTS = ["design.bure.art", "www.design.bure.art"];
 const DESIGN_PATHS = [
   "/home",
+  "/about-me",
   "/project1",
   "/project2",
   "/project3",

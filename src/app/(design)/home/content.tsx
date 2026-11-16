@@ -181,7 +181,7 @@ export default function HomeV2Content() {
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
               </Block>
-              <UnderlineLink href="/home-v2-preview#projects" delay={240}>
+              <UnderlineLink href="/about-me" delay={240}>
                 {t.fullAboutMe}
               </UnderlineLink>
               <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={280}>
@@ -207,7 +207,7 @@ export default function HomeV2Content() {
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
               </Block>
-              <UnderlineLink href="/home-v2-preview#projects" delay={240}>
+              <UnderlineLink href="/about-me" delay={240}>
                 {t.fullAboutMe}
               </UnderlineLink>
             </div>

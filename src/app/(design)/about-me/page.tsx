@@ -1,10 +1,5 @@
-import type { Metadata } from "next";
 import { BodyText } from "@/components/caseStudy/Typography";
 import { RevealProvider, Letters, Block, LinesText, FadeImage } from "./reveal";
-
-export const metadata: Metadata = {
-  robots: { index: false, follow: false },
-};
 
 type ExperienceItem = { company: string; years: string; description: string };
 
@@ -60,9 +55,7 @@ function Pfp({ className = "" }: { className?: string }) {
  * 3591:41758): desktop (3591:40804) and mobile (3591:41706) frames. The
  * page's own Header shown in Figma is an in-progress experiment, not
  * built here — this page sits under the existing global DesignHeader.
- * PFP photo: public/design/profile/Bure_PFP.png. Unlisted (noindex,
- * not linked from /home) until reviewed, same as /bando-preview
- * before it went live.
+ * PFP photo: public/design/profile/Bure_PFP.png.
  *
  * Full-width (not the site's ContentGrid) to match Figma's edge-to-edge
  * Container. On desktop the Left/Right columns stretch to fill the
