@@ -95,7 +95,7 @@ function ProjectCardV2({ project }: { project: Project }) {
 export default function HomeV2Preview() {
   return (
     <div
-      className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:items-stretch md:gap-x-10 md:gap-y-6 md:overflow-hidden md:px-10 md:py-6 md:[grid-template-areas:'top_right'_'bottom_right']"
+      className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-6 md:[grid-template-areas:'top_right'_'bottom_right']"
     >
       {/* Top — hero content */}
       <div className="flex flex-col gap-6 md:[grid-area:top]">
@@ -167,7 +167,7 @@ export default function HomeV2Preview() {
       </div>
 
       {/* Bottom — full project list */}
-      <div className="flex flex-col md:[grid-area:bottom]">
+      <div className="flex flex-col md:[grid-area:bottom] md:self-end">
         <div className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
           <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[273px]">Titulo del proyecto</p>
           <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">Service</p>
