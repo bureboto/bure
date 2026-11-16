@@ -5,6 +5,7 @@ import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CV_HREF } from "@/components/CVLink";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
+import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
 
 const featured = projects;
@@ -165,10 +166,15 @@ export default function HomeV2Content() {
   return (
     <RevealProvider>
       <div
-        className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
+        className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-0 md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
       >
         {/* Top — hero content */}
-        <div className="flex flex-col gap-6 md:[grid-area:top] md:pt-6">
+        <div className="flex flex-col gap-6 md:[grid-area:top]">
+          {/* Header — scoped to this column only on desktop (Figma node 3578:39752); mobile keeps the global header */}
+          <div className="hidden md:block">
+            <HeaderContent />
+          </div>
+
           {/* Head */}
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div className="flex flex-col gap-0 text-[#1d1d1d]">
