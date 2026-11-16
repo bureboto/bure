@@ -17,7 +17,7 @@ function ProjectRow({ project, first }: { project: Project; first: boolean }) {
   return (
     <Link
       href={project.href}
-      className={`flex items-start gap-4 border-t border-[#909096] py-2 transition-opacity hover:opacity-70 md:gap-0 md:justify-between ${
+      className={`group flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${
         first ? "border-t-0" : ""
       }`}
     >
@@ -27,9 +27,19 @@ function ProjectRow({ project, first }: { project: Project; first: boolean }) {
       <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[160px]">{service}</p>
       <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">{project.name}</p>
       <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#909096] md:block">{industry}</p>
-      <p className="shrink-0 text-right text-[12px] text-[#909096] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
-        {yearOf(project.date)}
-      </p>
+
+      {/* Mobile: plain year, no hover interaction */}
+      <p className="shrink-0 text-right text-[12px] text-[#909096] md:hidden">{yearOf(project.date)}</p>
+
+      {/* Desktop: on hover, the year shifts left and a reveal arrow fades in */}
+      <span className="hidden shrink-0 items-center justify-end gap-1 md:flex md:flex-1">
+        <span className="text-[16px] tracking-[0.16px] text-[#909096] transition-transform duration-200 group-hover:-translate-x-2">
+          {yearOf(project.date)}
+        </span>
+        <span aria-hidden className="text-[16px] text-[#909096] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+          →
+        </span>
+      </span>
     </Link>
   );
 }
