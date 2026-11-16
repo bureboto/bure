@@ -18,19 +18,35 @@ const tableProjects = TABLE_HREFS.map((href) => projects.find((p) => p.href === 
 const copy = {
   es: {
     location: "México",
+    role: "Diseñador de marca y producto",
     paragraph:
       "**+10 años** construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.\nExperiencia en industrias **Fintech, Banking and Gouvernment**.",
-    fullAboutMe: "Full about me →",
+    fullAboutMe: "Todo sobre mí →",
     cocinemos: "Cocinemos algo juntos",
     verTodos: "Ver todos →",
+    tableHeaders: {
+      title: "Título del proyecto",
+      service: "Servicio",
+      client: "Cliente",
+      industry: "Industria",
+      year: "Año",
+    },
   },
   en: {
     location: "Mexico",
+    role: "Brand & Product designer",
     paragraph:
       "**+10 years** building identity systems that scale — from the logo to the last screen.\nExperience across **Fintech, Banking and Government** industries.",
     fullAboutMe: "Full about me →",
     cocinemos: "Let's cook something together",
     verTodos: "View all →",
+    tableHeaders: {
+      title: "Project title",
+      service: "Service",
+      client: "Client",
+      industry: "Industry",
+      year: "Year",
+    },
   },
 };
 
@@ -165,7 +181,7 @@ export default function HomeV2Content() {
                 </p>
               </div>
               <Block delay={150} duration={300}>
-                <p className="text-[28px]">Brand &amp; Product designer</p>
+                <p className="text-[28px]">{t.role}</p>
               </Block>
             </div>
             <Pfp className="hidden h-[140px] w-[140px] md:block" delay={180} />
@@ -247,11 +263,11 @@ export default function HomeV2Content() {
           </div>
           <div className="flex flex-1 flex-col">
             <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
-              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">Titulo del proyecto</p>
-              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">Service</p>
-              <p className="flex-1 text-[12px] text-[#6e6e73]">Cliente</p>
-              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">Industry</p>
-              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">Year</p>
+              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">{t.tableHeaders.title}</p>
+              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">{t.tableHeaders.service}</p>
+              <p className="flex-1 text-[12px] text-[#6e6e73]">{t.tableHeaders.client}</p>
+              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">{t.tableHeaders.industry}</p>
+              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">{t.tableHeaders.year}</p>
             </Block>
             <div className="flex flex-col">
               {tableProjects.map((project, i) => (
