@@ -1,9 +1,12 @@
 /**
- * Shared hover style for clickable list rows (Figma node 3601:44043):
- * on desktop hover, the row gets left/right borders (matching its
- * existing top divider) plus matching horizontal padding, reading as
- * an outlined box. No arrow, no content shift — reuse this for any
- * future listing of clickable lines.
+ * Shared style for clickable list rows (Figma node 3601:44043): the
+ * Default variant already carries 16px horizontal padding and reserves
+ * the left/right border space (transparent at rest) on desktop — the
+ * Active/hover variant only swaps that border to solid. Keeping the
+ * padding and border box present at rest means nothing shifts on
+ * hover-in, and animating border-color only (not width/style) is
+ * smoothly transitionable. No arrow, no content shift — reuse this for
+ * any future listing of clickable lines.
  */
 export const CLICKABLE_ROW_CLASS =
-  "transition-[padding,border-color] duration-200 md:hover:border-l md:hover:border-r md:hover:border-[#909096] md:hover:px-4";
+  "md:border-l md:border-r md:border-transparent md:px-4 md:transition-[border-color] md:duration-300 md:ease-out md:hover:border-[#909096]";
