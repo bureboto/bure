@@ -2,13 +2,18 @@
 
 import { useLanguage } from "@/lib/LanguageContext";
 
+export const CV_HREF = {
+  es: "/design/profile/CV_ErickAlvarez_Spanish.pdf",
+  en: "/design/profile/CV_ErickAlvarez_English.pdf",
+};
+
 export default function CVLink({ className }: { className?: string }) {
   const { language } = useLanguage();
   const isSpanish = language === "es";
 
   return (
     <a
-      href={isSpanish ? "/cv-es.pdf" : "/cv-en.pdf"}
+      href={CV_HREF[language]}
       target="_blank"
       rel="noreferrer"
       aria-label={isSpanish ? "Descargar CV" : "Download CV"}

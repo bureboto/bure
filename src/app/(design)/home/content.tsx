@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
+import { CV_HREF } from "@/components/CVLink";
 import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
 
 const featured = projects;
@@ -195,7 +196,7 @@ export default function HomeV2Content() {
               <UnderlineLink href="mailto:hola@bure.art" delay={420}>
                 {t.cocinemos}
               </UnderlineLink>
-              <UnderlineLink href="/cv.pdf" delay={460}>
+              <UnderlineLink href={CV_HREF[language]} delay={460}>
                 CV
               </UnderlineLink>
             </div>
@@ -218,7 +219,7 @@ export default function HomeV2Content() {
               <UnderlineLink href="mailto:hola@bure.art" delay={460}>
                 {t.cocinemos}
               </UnderlineLink>
-              <UnderlineLink href="/cv.pdf" delay={500}>
+              <UnderlineLink href={CV_HREF[language]} delay={500}>
                 CV
               </UnderlineLink>
             </div>

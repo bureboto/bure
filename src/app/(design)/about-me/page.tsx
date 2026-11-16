@@ -1,5 +1,6 @@
 import { BodyText } from "@/components/caseStudy/Typography";
 import { RevealProvider, Letters, Block, LinesText, FadeImage } from "./reveal";
+import { CvLink } from "./cv-link";
 
 type ExperienceItem = { company: string; years: string; description: string };
 
@@ -111,9 +112,7 @@ export default function AboutMePreview() {
                   <UnderlineLink href="mailto:hola@bure.art" delay={420}>
                     Cocinemos algo juntos
                   </UnderlineLink>
-                  <UnderlineLink href="/cv.pdf" delay={480}>
-                    CV
-                  </UnderlineLink>
+                  <CvLink delay={480} />
                 </div>
               </div>
             </div>
