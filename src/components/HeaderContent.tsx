@@ -7,7 +7,7 @@ import CVLink from "@/components/CVLink";
 
 const navLinks = [
   { href: "/about-me", label: "About me" },
-  { href: "/home#projects", label: "Projects" },
+  { href: "/projects", label: "Projects" },
 ];
 
 function NavLinks({ className = "" }: { className?: string }) {

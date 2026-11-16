@@ -257,7 +257,7 @@ export default function HomeV2Content() {
             ))}
           </div>
           <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
-            <UnderlineLink href="/projects-glossary-preview" delay={0}>
+            <UnderlineLink href="/projects" delay={0}>
               {t.verTodos}
             </UnderlineLink>
           </Block>
