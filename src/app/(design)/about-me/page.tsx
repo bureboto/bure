@@ -4,13 +4,37 @@ import { CvLink } from "./cv-link";
 
 type ExperienceItem = { company: string; years: string; description: string };
 
-/** All 7 slots share the same placeholder copy in the Figma frame — swap in the real per-role text/years. */
-const experienceItems: ExperienceItem[] = Array.from({ length: 7 }, () => ({
-  company: "Espacio",
-  years: "(2024-2026)",
-  description:
-    "Convergieron todas las skills acumuladas hasta este punto: Branding, UX, UI, motion, coding, sistemas de diseño — todo aplicado en productos.",
-}));
+const experienceItems: ExperienceItem[] = [
+  {
+    company: "Espacio",
+    years: "(2024-2026)",
+    description:
+      "Convergieron todas las skills acumuladas hasta este punto: Branding, UX, UI, motion, coding, sistemas de diseño — todo aplicado en productos.",
+  },
+  {
+    company: "Bueno",
+    years: "(2023-2024)",
+    description: "Creando pequeños sistemas de ilustraciones, branding, UX y UI.",
+  },
+  {
+    company: "Robotos",
+    years: "(2021-2024)",
+    description:
+      "Mi entrada al mundo cripto. Diseñador e ilustrador en la colección, además de apoyo visual a equipo de markting.",
+  },
+  {
+    company: "BBVA",
+    years: "(2019-2021)",
+    description:
+      "Fui parte del equipo del design system, colaborando con otros países como España, Colombia, Argentina y Estados Unidos. También ayudé en la refactorización de los ATM, fue uno de los proyectos más representativos donde participé en el banco.",
+  },
+  {
+    company: "INE (Instituto Nacional Electoral)",
+    years: "(2015-2018)",
+    description:
+      "Estuve como UX/UI en el equipo que dio un rediseño al sitio web principal, posterior lideré un equipo de diseño interno, para las elecciones nacionales de México en el 2018.",
+  },
+];
 
 function Body18({ children }: { children: React.ReactNode }) {
   return <p className="text-[18px] text-[#6e6e73]">{children}</p>;
@@ -109,7 +133,7 @@ export default function AboutMePreview() {
                   </UnderlineLink>
                 </div>
                 <div className="flex flex-1 flex-col gap-4">
-                  <UnderlineLink href="mailto:hola@bure.art" delay={420}>
+                  <UnderlineLink href="mailto:bureboto@gmail.com" delay={420}>
                     Cocinemos algo juntos
                   </UnderlineLink>
                   <CvLink delay={480} />
