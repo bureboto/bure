@@ -140,7 +140,7 @@ export default function DesignHome() {
       </section>
 
       {/* Projects */}
-      <section className="flex flex-col gap-8">
+      <section id="projects" className="flex flex-col gap-8">
         <h2 className="text-2xl">{isEs ? "Proyectos" : "Projects"}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
           {projects.map((project) => (
