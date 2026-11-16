@@ -1,89 +1,21 @@
 "use client";
 
-import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
-import { useLanguage, type Language } from "@/lib/LanguageContext";
+import { useLanguage } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
+import {
+  LangText,
+  useLangVisible,
+  useDelayedLanguage,
+  ENTER_STEP,
+  EXIT_STEP,
+  ENTER_DURATION,
+  EXIT_DURATION,
+} from "@/lib/langTransition";
 import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
-
-/**
- * Re-animates language-dependent copy whenever the selected language
- * changes: the old text fades out first (staggered top to bottom, like
- * it's being erased), then the new text slides in left to right. Mount's
- * own entrance (RevealProvider/Letters/Block/etc.) is untouched — this
- * only drives the *re*-animation on a later language switch.
- */
-const EXIT_DURATION = 200;
-const EXIT_STEP = 40;
-const ENTER_DURATION = 260;
-const ENTER_STEP = 40;
-
-const LangTransitionContext = createContext(true);
-
-function useLangTransition(language: Language) {
-  const [visible, setVisible] = useState(true);
-  const [displayLanguage, setDisplayLanguage] = useState(language);
-  const prevLanguage = useRef(language);
-  // LanguageContext starts at "es" then corrects itself to the stored/
-  // detected language right after mount — that correction isn't a user
-  // switch, so ignore any language change until this window has passed.
-  const armedRef = useRef(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => {
-      armedRef.current = true;
-    }, 80);
-    return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    if (prevLanguage.current === language) return;
-    prevLanguage.current = language;
-    if (!armedRef.current) {
-      setDisplayLanguage(language);
-      return;
-    }
-    setVisible(false);
-    const exitTotal = EXIT_DURATION + EXIT_STEP * 8;
-    const swapTimer = setTimeout(() => {
-      setDisplayLanguage(language);
-      requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)));
-    }, exitTotal);
-    return () => clearTimeout(swapTimer);
-  }, [language]);
-
-  return { visible, displayLanguage };
-}
-
-/** Wraps one piece of language-dependent text; `line` staggers it against siblings. */
-function LangText({
-  children,
-  line = 0,
-  col = 0,
-  className = "",
-}: {
-  children: ReactNode;
-  line?: number;
-  col?: number;
-  className?: string;
-}) {
-  const visible = useContext(LangTransitionContext);
-  return (
-    <span
-      className={`inline-block transition-[opacity,transform] ease-out ${className}`}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateX(0)" : "translateX(-10px)",
-        transitionDuration: `${visible ? ENTER_DURATION : EXIT_DURATION}ms`,
-        transitionDelay: visible ? `${line * ENTER_STEP + col * 20}ms` : `${line * EXIT_STEP}ms`,
-      }}
-    >
-      {children}
-    </span>
-  );
-}
 
 /**
  * Like LinesText, but each real rendered line re-animates on its own when
@@ -105,7 +37,7 @@ function LangParagraph({
   className?: string;
 }) {
   const revealedMount = useRevealed();
-  const langVisible = useContext(LangTransitionContext);
+  const langVisible = useLangVisible();
 
   const containerRef = useRef<HTMLSpanElement>(null);
   const [lineOf, setLineOf] = useState<number[]>([]);
@@ -338,12 +270,11 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
 
 export default function HomeV2Content() {
   const { language } = useLanguage();
-  const { visible, displayLanguage } = useLangTransition(language);
+  const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
 
   return (
     <RevealProvider>
-      <LangTransitionContext.Provider value={visible}>
       <div
         className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-0 md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
       >
@@ -482,7 +413,6 @@ export default function HomeV2Content() {
           </div>
         </div>
       </div>
-      </LangTransitionContext.Provider>
     </RevealProvider>
   );
 }

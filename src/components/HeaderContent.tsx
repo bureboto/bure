@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CVLink from "@/components/CVLink";
 import LanguageSwitch from "@/components/LanguageSwitch";
+import { LangText } from "@/lib/langTransition";
 
 const navLinks = [
   { href: "/about-me", label: "About me" },
@@ -14,13 +15,15 @@ const navLinks = [
 function NavLinks({ className = "" }: { className?: string }) {
   return (
     <>
-      {navLinks.map(({ href, label }) => (
+      {navLinks.map(({ href, label }, i) => (
         <Link
           key={href}
           href={href}
           className={`font-['Helvetica'] text-[16px] tracking-[0.16px] text-[#111] underline underline-offset-2 ${className}`}
         >
-          {label}
+          <LangText line={0} col={i}>
+            {label}
+          </LangText>
         </Link>
       ))}
     </>
