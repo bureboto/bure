@@ -246,7 +246,7 @@ export default function HomeV2Content() {
             <p className="-rotate-90 whitespace-nowrap text-[36px] font-normal text-[#1d1d1d]">Projects</p>
           </div>
           <div className="flex flex-1 flex-col">
-            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
+            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
               <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">Titulo del proyecto</p>
               <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">Service</p>
               <p className="flex-1 text-[12px] text-[#6e6e73]">Cliente</p>

@@ -41,7 +41,7 @@ export default function ProjectsPage() {
       <p className="text-[48px] font-light leading-none text-[#1d1d1d] md:text-[80px]">Projects</p>
 
       <div className="flex flex-col">
-        <div className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
+        <div className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
           <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[180px]">Titulo del proyecto</p>
           <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[160px]">Service</p>
           <p className="flex-1 text-[12px] text-[#6e6e73]">Cliente</p>
