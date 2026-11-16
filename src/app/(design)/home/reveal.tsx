@@ -20,7 +20,7 @@ export function RevealProvider({ children }: { children: ReactNode }) {
   return <RevealContext.Provider value={revealed}>{children}</RevealContext.Provider>;
 }
 
-function useRevealed() {
+export function useRevealed() {
   return useContext(RevealContext);
 }
 

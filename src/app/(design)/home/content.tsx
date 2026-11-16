@@ -1,12 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage, type Language } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import HeaderContent from "@/components/HeaderContent";
-import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
+import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
 
 /**
  * Re-animates language-dependent copy whenever the selected language
@@ -26,10 +26,25 @@ function useLangTransition(language: Language) {
   const [visible, setVisible] = useState(true);
   const [displayLanguage, setDisplayLanguage] = useState(language);
   const prevLanguage = useRef(language);
+  // LanguageContext starts at "es" then corrects itself to the stored/
+  // detected language right after mount — that correction isn't a user
+  // switch, so ignore any language change until this window has passed.
+  const armedRef = useRef(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      armedRef.current = true;
+    }, 80);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     if (prevLanguage.current === language) return;
     prevLanguage.current = language;
+    if (!armedRef.current) {
+      setDisplayLanguage(language);
+      return;
+    }
     setVisible(false);
     const exitTotal = EXIT_DURATION + EXIT_STEP * 8;
     const swapTimer = setTimeout(() => {
@@ -66,6 +81,102 @@ function LangText({
       }}
     >
       {children}
+    </span>
+  );
+}
+
+/**
+ * Like LinesText, but each real rendered line re-animates on its own when
+ * the language switches (not the whole paragraph as one block): measures
+ * each word's offsetTop after mount/text-change to group words into their
+ * actual line, same technique as LinesText.
+ */
+function LangParagraph({
+  text,
+  startLine = 0,
+  mountStart = 260,
+  mountLineStep = 70,
+  className = "",
+}: {
+  text: string;
+  startLine?: number;
+  mountStart?: number;
+  mountLineStep?: number;
+  className?: string;
+}) {
+  const revealedMount = useRevealed();
+  const langVisible = useContext(LangTransitionContext);
+
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const [lineOf, setLineOf] = useState<number[]>([]);
+
+  const words: (string | "BR")[] = [];
+  const bold: boolean[] = [];
+  let boldOn = false;
+  text.split("\n").forEach((line, i, arr) => {
+    line.split(/(\s+)/).forEach((tok) => {
+      if (!tok) return;
+      const hasOpen = tok.includes("**");
+      let clean = tok;
+      let tokenBold = boldOn;
+      if (hasOpen) {
+        const markerCount = (tok.match(/\*\*/g) ?? []).length;
+        clean = tok.replace(/\*\*/g, "");
+        tokenBold = boldOn || markerCount > 0;
+        if (markerCount % 2 === 1) boldOn = !boldOn;
+      }
+      words.push(clean);
+      bold.push(tokenBold);
+    });
+    if (i < arr.length - 1) {
+      words.push("BR");
+      bold.push(false);
+    }
+  });
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const spans = Array.from(el.querySelectorAll<HTMLElement>("[data-word]"));
+    const tops = spans.map((s) => s.offsetTop);
+    const uniqueTops = Array.from(new Set(tops)).sort((a, b) => a - b);
+    setLineOf(spans.map((_, i) => uniqueTops.indexOf(tops[i])));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
+
+  const visible = revealedMount && langVisible;
+  let wordIndex = -1;
+  return (
+    <span ref={containerRef} className={className}>
+      {words.map((w, i) => {
+        if (w === "BR") return <br key={i} />;
+        if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
+        wordIndex += 1;
+        const line = lineOf[wordIndex] ?? 0;
+        const delay = !revealedMount
+          ? `${mountStart + line * mountLineStep}ms`
+          : `${(startLine + line) * (visible ? ENTER_STEP : EXIT_STEP)}ms`;
+        const duration = !revealedMount ? 320 : visible ? ENTER_DURATION : EXIT_DURATION;
+        return (
+          <span
+            key={i}
+            data-word
+            className={`inline-block transition-[opacity,transform] ease-out ${bold[i] ? "font-bold text-[#1d1d1d]" : ""}`}
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible
+                ? "translate(0, 0)"
+                : revealedMount
+                  ? "translate(-10px, 0)"
+                  : "translate(0, 4px)",
+              transitionDuration: `${duration}ms`,
+              transitionDelay: delay,
+            }}
+          >
+            {w}
+          </span>
+        );
+      })}
     </span>
   );
 }
@@ -267,9 +378,7 @@ export default function HomeV2Content() {
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
           <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
-            <LangText line={2}>
-              <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
-            </LangText>
+            <LangParagraph text={t.paragraph} startLine={2} mountStart={260} mountLineStep={70} />
           </p>
 
           {/* Links — desktop: México/LinkedIn left, paragraph+Cocinemos+CV right */}
@@ -289,11 +398,9 @@ export default function HomeV2Content() {
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
               <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-                <LangText line={2}>
-                  <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
-                </LangText>
+                <LangParagraph text={t.paragraph} startLine={2} mountStart={260} mountLineStep={70} />
               </p>
-              <UnderlineLink href="mailto:hola@bure.art" delay={420} line={3}>
+              <UnderlineLink href="mailto:hola@bure.art" delay={420} line={6}>
                 {t.cocinemos}
               </UnderlineLink>
             </div>
@@ -315,7 +422,7 @@ export default function HomeV2Content() {
               <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={420}>
                 LinkedIn
               </UnderlineLink>
-              <UnderlineLink href="mailto:hola@bure.art" delay={460} line={3}>
+              <UnderlineLink href="mailto:hola@bure.art" delay={460} line={6}>
                 {t.cocinemos}
               </UnderlineLink>
             </div>
@@ -342,19 +449,19 @@ export default function HomeV2Content() {
           <div className="flex flex-1 flex-col">
             <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
               <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">
-                <LangText line={4} col={0}>{t.tableHeaders.title}</LangText>
+                <LangText line={7} col={0}>{t.tableHeaders.title}</LangText>
               </p>
               <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">
-                <LangText line={4} col={1}>{t.tableHeaders.service}</LangText>
+                <LangText line={7} col={1}>{t.tableHeaders.service}</LangText>
               </p>
               <p className="flex-1 text-[12px] text-[#6e6e73]">
-                <LangText line={4} col={2}>{t.tableHeaders.client}</LangText>
+                <LangText line={7} col={2}>{t.tableHeaders.client}</LangText>
               </p>
               <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">
-                <LangText line={4} col={3}>{t.tableHeaders.industry}</LangText>
+                <LangText line={7} col={3}>{t.tableHeaders.industry}</LangText>
               </p>
               <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">
-                <LangText line={4} col={4}>{t.tableHeaders.year}</LangText>
+                <LangText line={7} col={4}>{t.tableHeaders.year}</LangText>
               </p>
             </Block>
             <div className="flex flex-col">
@@ -368,7 +475,7 @@ export default function HomeV2Content() {
               ))}
             </div>
             <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
-              <UnderlineLink href="/projects" delay={0} line={5}>
+              <UnderlineLink href="/projects" delay={0} line={8}>
                 {t.verTodos}
               </UnderlineLink>
             </Block>
