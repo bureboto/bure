@@ -46,9 +46,9 @@ function ExperienceCard({ item, delay }: { item: ExperienceItem; delay: number }
   );
 }
 
-function Pfp({ className = "", delay = 0 }: { className?: string; delay?: number }) {
+function Pfp({ className = "" }: { className?: string }) {
   return (
-    <FadeImage delay={delay} className={`relative overflow-hidden rounded-full bg-[#f0f0f5] ${className}`}>
+    <FadeImage delay={0} duration={2000} className={`relative overflow-hidden rounded-full bg-[#f0f0f5] ${className}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/design/profile/Bure_PFP.png" alt="Erick A. portrait" className="h-full w-full object-cover" />
     </FadeImage>
@@ -103,7 +103,7 @@ export default function AboutMePreview() {
               </div>
 
               {/* PFP — mobile only, sits right under the name */}
-              <Pfp className="h-[160px] w-[160px] md:hidden" delay={0} />
+              <Pfp className="h-[160px] w-[160px] md:hidden" />
 
               <div className="flex items-start gap-0">
                 <div className="flex flex-1 flex-col gap-4">
@@ -163,7 +163,7 @@ export default function AboutMePreview() {
           {/* Right column */}
           <div className="flex flex-1 flex-col gap-10 md:justify-between md:gap-0">
             {/* PFP — desktop only */}
-            <Pfp className="hidden h-[280px] w-[280px] md:block" delay={0} />
+            <Pfp className="hidden h-[280px] w-[280px] md:block" />
 
             {/* Experience — horizontal label + 3-col grid on desktop, rotated label + single column on mobile */}
             <div className="flex items-start gap-4 md:flex-col md:gap-6">
