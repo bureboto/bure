@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
+import { useLanguage } from "@/lib/LanguageContext";
 import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
 
 const featured = projects;
@@ -9,8 +10,24 @@ const featured = projects;
 // Figma: desktop shows 6 rows, mobile shows 5 (the 6th is hidden on mobile below).
 const tableProjects = projects.slice(0, 6);
 
-const PARAGRAPH =
-  "+10 años construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.\nExperiencia en industrias Fintech, Banking and Gouvernment.";
+const copy = {
+  es: {
+    location: "México",
+    paragraph:
+      "**+10 años** construyendo sistemas de identidad que escalan — desde el logo hasta la última pantalla.\nExperiencia en industrias **Fintech, Banking and Gouvernment**.",
+    fullAboutMe: "Full about me →",
+    cocinemos: "Cocinemos algo juntos",
+    verTodos: "Ver todos →",
+  },
+  en: {
+    location: "Mexico",
+    paragraph:
+      "**+10 years** building identity systems that scale — from the logo to the last screen.\nExperience across **Fintech, Banking and Government** industries.",
+    fullAboutMe: "Full about me →",
+    cocinemos: "Let's cook something together",
+    verTodos: "View all →",
+  },
+};
 
 function yearOf(date: string) {
   const match = date.match(/\d{4}/);
@@ -122,6 +139,9 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
 }
 
 export default function HomeV2Content() {
+  const { language } = useLanguage();
+  const t = copy[language];
+
   return (
     <RevealProvider>
       <div
@@ -151,17 +171,17 @@ export default function HomeV2Content() {
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
           <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
-            <LinesText text={PARAGRAPH} start={260} lineStep={70} duration={320} />
+            <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
           </p>
 
           {/* Links — desktop: México/LinkedIn left, paragraph+Cocinemos+CV right */}
           <div className="hidden items-start gap-0 md:flex">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
-                <p className="text-[18px] text-[#6e6e73]">México</p>
+                <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
               </Block>
               <UnderlineLink href="/home-v2-preview#projects" delay={240}>
-                Full about me →
+                {t.fullAboutMe}
               </UnderlineLink>
               <UnderlineLink href="https://www.linkedin.com/in/bureboto/" external delay={280}>
                 LinkedIn
@@ -169,10 +189,10 @@ export default function HomeV2Content() {
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
               <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-                <LinesText text={PARAGRAPH} start={260} lineStep={70} duration={320} />
+                <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
               </p>
               <UnderlineLink href="mailto:hola@bure.art" delay={420}>
-                Cocinemos algo juntos
+                {t.cocinemos}
               </UnderlineLink>
               <UnderlineLink href="/cv.pdf" delay={460}>
                 CV
@@ -184,10 +204,10 @@ export default function HomeV2Content() {
           <div className="flex items-start gap-6 md:hidden">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
-                <p className="text-[18px] text-[#6e6e73]">México</p>
+                <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
               </Block>
               <UnderlineLink href="/home-v2-preview#projects" delay={240}>
-                Full about me →
+                {t.fullAboutMe}
               </UnderlineLink>
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
@@ -195,7 +215,7 @@ export default function HomeV2Content() {
                 LinkedIn
               </UnderlineLink>
               <UnderlineLink href="mailto:hola@bure.art" delay={460}>
-                Cocinemos algo juntos
+                {t.cocinemos}
               </UnderlineLink>
               <UnderlineLink href="/cv.pdf" delay={500}>
                 CV
@@ -238,7 +258,7 @@ export default function HomeV2Content() {
           </div>
           <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
             <UnderlineLink href="/projects-glossary-preview" delay={0}>
-              Ver todos →
+              {t.verTodos}
             </UnderlineLink>
           </Block>
         </div>

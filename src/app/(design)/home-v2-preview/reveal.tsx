@@ -97,6 +97,8 @@ export function Block({
  * actual rendered line (works at any viewport width), then every word in
  * the same line shares one transition delay. A literal "\n" in `text`
  * becomes a forced line break (plain string marker, not a <br/> element).
+ * Wrapping a word (or several, space-separated) in "**" marks it bold —
+ * still a plain string, so it survives the same way "\n" does.
  */
 export function LinesText({
   text,
@@ -116,11 +118,27 @@ export function LinesText({
   const [lineOf, setLineOf] = useState<number[]>([]);
 
   const words: (string | "BR")[] = [];
+  const bold: boolean[] = [];
+  let boldOn = false;
   text.split("\n").forEach((line, i, arr) => {
     line.split(/(\s+)/).forEach((tok) => {
-      if (tok) words.push(tok);
+      if (!tok) return;
+      const hasOpen = tok.includes("**");
+      let clean = tok;
+      let tokenBold = boldOn;
+      if (hasOpen) {
+        const markerCount = (tok.match(/\*\*/g) ?? []).length;
+        clean = tok.replace(/\*\*/g, "");
+        tokenBold = boldOn || markerCount > 0;
+        if (markerCount % 2 === 1) boldOn = !boldOn;
+      }
+      words.push(clean);
+      bold.push(tokenBold);
     });
-    if (i < arr.length - 1) words.push("BR");
+    if (i < arr.length - 1) {
+      words.push("BR");
+      bold.push(false);
+    }
   });
 
   useLayoutEffect(() => {
@@ -145,7 +163,7 @@ export function LinesText({
           <span
             key={i}
             data-word
-            className="inline-block transition-[opacity,transform] ease-out"
+            className={`inline-block transition-[opacity,transform] ease-out ${bold[i] ? "font-bold text-[#1d1d1d]" : ""}`}
             style={{
               opacity: revealed ? 1 : 0,
               transform: revealed ? "translateY(0)" : "translateY(4px)",
