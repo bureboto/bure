@@ -241,7 +241,7 @@ export default function HomeV2Content() {
         {/* Bottom — full project list, with a rotated "Projects" title on desktop */}
         <div className="flex flex-col md:flex-row md:items-start md:gap-4 md:[grid-area:bottom] md:self-end md:pb-6">
           <div className="hidden h-[131px] w-[41px] shrink-0 items-center justify-center md:flex">
-            <p className="-rotate-90 whitespace-nowrap text-[36px] font-bold text-[#1d1d1d]">Projects</p>
+            <p className="-rotate-90 whitespace-nowrap text-[36px] font-normal text-[#1d1d1d]">Projects</p>
           </div>
           <div className="flex flex-1 flex-col">
             <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
