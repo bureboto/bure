@@ -4,6 +4,7 @@ import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CV_HREF } from "@/components/CVLink";
+import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
 
 const featured = projects;
@@ -85,7 +86,7 @@ function ProjectRow({
     <Block delay={delay} duration={300}>
       <Link
         href={project.href}
-        className={`group flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${
+        className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${CLICKABLE_ROW_CLASS} ${
           first ? "border-t-0" : ""
         }`}
       >
@@ -95,19 +96,9 @@ function ProjectRow({
         <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[137px]">{service}</p>
         <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">{project.name}</p>
         <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] md:block">{industry}</p>
-
-        {/* Mobile: plain year, no hover interaction */}
-        <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:hidden">{yearOf(project.date)}</p>
-
-        {/* Desktop: on hover, the year shifts left and a reveal arrow fades in */}
-        <span className="hidden shrink-0 items-center justify-end gap-1 md:flex md:flex-1">
-          <span className="text-[16px] tracking-[0.16px] text-[#6e6e73] transition-transform duration-200 group-hover:-translate-x-2">
-            {yearOf(project.date)}
-          </span>
-          <span aria-hidden className="text-[16px] text-[#6e6e73] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-            →
-          </span>
-        </span>
+        <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
+          {yearOf(project.date)}
+        </p>
       </Link>
     </Block>
   );
