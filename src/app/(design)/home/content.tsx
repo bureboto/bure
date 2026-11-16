@@ -88,7 +88,7 @@ function ProjectRow({
         first ? "border-t-0" : ""
       }`}
     >
-      <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[273px] md:text-[16px] md:tracking-[0.16px]">
+      <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[222px] md:text-[16px] md:tracking-[0.16px]">
         {project.name}
       </p>
       <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[137px]">{service}</p>
@@ -237,30 +237,35 @@ export default function HomeV2Content() {
           })}
         </div>
 
-        {/* Bottom — full project list */}
-        <div className="flex flex-col md:[grid-area:bottom] md:self-end md:pb-6">
-          <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
-            <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[273px]">Titulo del proyecto</p>
-            <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">Service</p>
-            <p className="flex-1 text-[12px] text-[#6e6e73]">Cliente</p>
-            <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">Industry</p>
-            <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">Year</p>
-          </Block>
-          <div className="flex flex-col">
-            {tableProjects.map((project, i) => (
-              <ProjectRow
-                key={project.href}
-                project={project}
-                first={i === 0}
-                delay={520 + i * 50}
-              />
-            ))}
+        {/* Bottom — full project list, with a rotated "Projects" title on desktop */}
+        <div className="flex flex-col md:flex-row md:items-start md:gap-4 md:[grid-area:bottom] md:self-end md:pb-6">
+          <div className="hidden h-[131px] w-[41px] shrink-0 items-center justify-center md:flex">
+            <p className="-rotate-90 whitespace-nowrap text-[36px] font-bold text-[#1d1d1d]">Projects</p>
           </div>
-          <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
-            <UnderlineLink href="/projects" delay={0}>
-              {t.verTodos}
-            </UnderlineLink>
-          </Block>
+          <div className="flex flex-1 flex-col">
+            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between">
+              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">Titulo del proyecto</p>
+              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">Service</p>
+              <p className="flex-1 text-[12px] text-[#6e6e73]">Cliente</p>
+              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">Industry</p>
+              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">Year</p>
+            </Block>
+            <div className="flex flex-col">
+              {tableProjects.map((project, i) => (
+                <ProjectRow
+                  key={project.href}
+                  project={project}
+                  first={i === 0}
+                  delay={520 + i * 50}
+                />
+              ))}
+            </div>
+            <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
+              <UnderlineLink href="/projects" delay={0}>
+                {t.verTodos}
+              </UnderlineLink>
+            </Block>
+          </div>
         </div>
       </div>
     </RevealProvider>

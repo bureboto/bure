@@ -118,7 +118,7 @@ export default function AboutMePreview() {
               </div>
             </div>
 
-            <Focus28>
+            <Focus28 className="md:pr-[120px]">
               <LinesText
                 start={500}
                 lineStep={80}
