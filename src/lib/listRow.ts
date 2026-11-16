@@ -9,4 +9,4 @@
  * any future listing of clickable lines.
  */
 export const CLICKABLE_ROW_CLASS =
-  "md:border-l md:border-r md:border-transparent md:px-4 md:transition-[border-color] md:duration-300 md:ease-out md:hover:border-[#909096]";
+  "md:border-l md:border-r md:border-l-transparent md:border-r-transparent md:px-4 md:transition-[border-color] md:duration-300 md:ease-out md:hover:border-l-[#909096] md:hover:border-r-[#909096]";
