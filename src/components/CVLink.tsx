@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/lib/LanguageContext";
+import { LangText, useDelayedLanguage } from "@/lib/langTransition";
 
 export const CV_HREF = {
   es: "/design/profile/CV_ErickAlvarez_Spanish.pdf",
@@ -9,7 +10,9 @@ export const CV_HREF = {
 
 export default function CVLink({ className }: { className?: string }) {
   const { language } = useLanguage();
+  const displayLanguage = useDelayedLanguage(language);
   const isSpanish = language === "es";
+  const displayIsSpanish = displayLanguage === "es";
 
   return (
     <a
@@ -37,7 +40,9 @@ export default function CVLink({ className }: { className?: string }) {
         />
       </svg>
       <span className="sm:hidden">CV</span>
-      <span className="hidden sm:inline">{isSpanish ? "Descargar CV" : "Download CV"}</span>
+      <LangText className="hidden sm:inline" line={0} col={2}>
+        {displayIsSpanish ? "Descargar CV" : "Download CV"}
+      </LangText>
     </a>
   );
 }

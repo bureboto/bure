@@ -3,6 +3,7 @@ import "../globals.css";
 import DesignHeader from "@/components/DesignHeader";
 import FloatingHeader from "@/components/FloatingHeader";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import { LangTransitionProvider } from "@/lib/langTransition";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://design.bure.art"),
@@ -15,9 +16,11 @@ export default function DesignLayout({ children }: LayoutProps<"/">) {
     <html lang="es" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-white text-black">
         <LanguageProvider>
-          <DesignHeader />
-          <main className="flex-1 flex flex-col">{children}</main>
-          <FloatingHeader />
+          <LangTransitionProvider>
+            <DesignHeader />
+            <main className="flex-1 flex flex-col">{children}</main>
+            <FloatingHeader />
+          </LangTransitionProvider>
         </LanguageProvider>
       </body>
     </html>

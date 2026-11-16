@@ -1,11 +1,119 @@
 "use client";
 
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
-import { CV_HREF } from "@/components/CVLink";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
-import { RevealProvider, Letters, Block, FadeIn, LinesText } from "./reveal";
+import {
+  LangLetters,
+  LangText,
+  useLangVisible,
+  useDelayedLanguage,
+  ENTER_DURATION,
+  EXIT_DURATION,
+} from "@/lib/langTransition";
+import HeaderContent from "@/components/HeaderContent";
+import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
+
+/**
+ * Like LinesText, but each real rendered line re-animates on its own when
+ * the language switches (not the whole paragraph as one block): measures
+ * each word's offsetTop after mount/text-change to group words into their
+ * actual line, same technique as LinesText.
+ */
+function LangParagraph({
+  text,
+  mountStart = 260,
+  mountLineStep = 70,
+  className = "",
+}: {
+  text: string;
+  mountStart?: number;
+  mountLineStep?: number;
+  className?: string;
+}) {
+  const revealedMount = useRevealed();
+  const langVisible = useLangVisible();
+
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const [lineOf, setLineOf] = useState<number[]>([]);
+
+  const words: (string | "BR")[] = [];
+  const bold: boolean[] = [];
+  let boldOn = false;
+  text.split("\n").forEach((line, i, arr) => {
+    line.split(/(\s+)/).forEach((tok) => {
+      if (!tok) return;
+      const hasOpen = tok.includes("**");
+      let clean = tok;
+      let tokenBold = boldOn;
+      if (hasOpen) {
+        const markerCount = (tok.match(/\*\*/g) ?? []).length;
+        clean = tok.replace(/\*\*/g, "");
+        tokenBold = boldOn || markerCount > 0;
+        if (markerCount % 2 === 1) boldOn = !boldOn;
+      }
+      words.push(clean);
+      bold.push(tokenBold);
+    });
+    if (i < arr.length - 1) {
+      words.push("BR");
+      bold.push(false);
+    }
+  });
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const spans = Array.from(el.querySelectorAll<HTMLElement>("[data-word]"));
+    const tops = spans.map((s) => s.offsetTop);
+    const uniqueTops = Array.from(new Set(tops)).sort((a, b) => a - b);
+    setLineOf(spans.map((_, i) => uniqueTops.indexOf(tops[i])));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text]);
+
+  const visible = revealedMount && langVisible;
+  let wordIndex = -1;
+  const colInLineByLine: Record<number, number> = {};
+  return (
+    <span ref={containerRef} className={className}>
+      {words.map((w, i) => {
+        if (w === "BR") return <br key={i} />;
+        if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
+        wordIndex += 1;
+        const line = lineOf[wordIndex] ?? 0;
+        const colInLine = colInLineByLine[line] ?? 0;
+        colInLineByLine[line] = colInLine + 1;
+        // Lines move together (no top-to-bottom stagger), but within each
+        // line the words still sweep left to right, like Letters' entrance.
+        const delay = !revealedMount
+          ? `${mountStart + line * mountLineStep}ms`
+          : `${colInLine * 30}ms`;
+        const duration = !revealedMount ? 320 : visible ? ENTER_DURATION : EXIT_DURATION;
+        return (
+          <span
+            key={i}
+            data-word
+            className={`inline-block transition-[opacity,transform] ease-out ${bold[i] ? "font-bold text-[#1d1d1d]" : ""}`}
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible
+                ? "translate(0, 0)"
+                : revealedMount
+                  ? "translate(-10px, 0)"
+                  : "translate(0, 4px)",
+              transitionDuration: `${duration}ms`,
+              transitionDelay: delay,
+            }}
+          >
+            {w}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
 
 const featured = projects;
 
@@ -75,6 +183,7 @@ function UnderlineLink({
   external?: boolean;
   delay?: number;
 }) {
+  const revealedMount = useRevealed();
   return (
     <a
       href={href}
@@ -82,7 +191,14 @@ function UnderlineLink({
       rel={external ? "noreferrer" : undefined}
       className="text-[16px] tracking-[0.16px] text-[#1d1d1d]"
     >
-      <Letters text={children} start={delay} step={8} letterClassName="underline underline-offset-2" />
+      <LangLetters
+        text={children}
+        revealedMount={revealedMount}
+        mountStart={delay}
+        mountStep={8}
+        switchStep={10}
+        letterClassName="underline underline-offset-2"
+      />
     </a>
   );
 }
@@ -107,13 +223,20 @@ function ProjectRow({
         }`}
       >
         <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[222px] md:text-[16px] md:tracking-[0.16px]">
-          {project.name}
+          {/* Per-character wrap can break long names mid-word — use the whole-block fade instead */}
+          <LangText className="whitespace-normal">{project.name}</LangText>
         </p>
-        <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[137px]">{service}</p>
-        <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">{project.name}</p>
-        <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] md:block">{industry}</p>
+        <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[137px]">
+          <LangText className="whitespace-normal">{service}</LangText>
+        </p>
+        <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">
+          <LangText className="whitespace-normal">{project.name}</LangText>
+        </p>
+        <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] md:block">
+          <LangText className="whitespace-normal">{industry}</LangText>
+        </p>
         <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
-          {yearOf(project.date)}
+          <LangLetters text={yearOf(project.date)} />
         </p>
       </Link>
     </Block>
@@ -147,10 +270,16 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
           ) : null}
         </div>
         <div className="flex items-center justify-between gap-2">
-          <p className="text-[12px] font-bold tracking-[0.16px] text-[#1d1d1d] md:text-[16px]">{project.name}</p>
+          <p className="text-[12px] font-bold tracking-[0.16px] text-[#1d1d1d] md:text-[16px]">
+            <LangText className="whitespace-normal">{project.name}</LangText>
+          </p>
           <div className="flex shrink-0 flex-col items-end text-[9px] text-[#1d1d1d] md:text-[12px]">
-            <p>{yearOf(project.date)}</p>
-            <p>{serviceType}</p>
+            <p>
+              <LangLetters text={yearOf(project.date)} />
+            </p>
+            <p>
+              <LangText className="whitespace-normal">{serviceType}</LangText>
+            </p>
           </div>
         </div>
       </Link>
@@ -160,15 +289,21 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
 
 export default function HomeV2Content() {
   const { language } = useLanguage();
-  const t = copy[language];
+  const displayLanguage = useDelayedLanguage(language);
+  const t = copy[displayLanguage];
 
   return (
     <RevealProvider>
       <div
-        className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-[72px] md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
+        className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-0 md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
       >
         {/* Top — hero content */}
-        <div className="flex flex-col gap-6 md:[grid-area:top] md:pt-6">
+        <div className="flex flex-col gap-6 md:[grid-area:top]">
+          {/* Header — scoped to this column only on desktop (Figma node 3578:39752); mobile keeps the global header */}
+          <div className="hidden md:block">
+            <HeaderContent />
+          </div>
+
           {/* Head */}
           <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div className="flex flex-col gap-0 text-[#1d1d1d]">
@@ -181,7 +316,9 @@ export default function HomeV2Content() {
                 </p>
               </div>
               <Block delay={150} duration={300}>
-                <p className="text-[28px]">{t.role}</p>
+                <p className="text-[28px]">
+                  <LangLetters text={t.role} />
+                </p>
               </Block>
             </div>
             <Pfp className="hidden h-[140px] w-[140px] md:block" delay={180} />
@@ -191,14 +328,16 @@ export default function HomeV2Content() {
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
           <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
-            <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
+            <LangParagraph text={t.paragraph} mountStart={260} mountLineStep={70} />
           </p>
 
           {/* Links — desktop: México/LinkedIn left, paragraph+Cocinemos+CV right */}
           <div className="hidden items-start gap-0 md:flex">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
-                <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
+                <p className="text-[18px] text-[#6e6e73]">
+                  <LangLetters text={t.location} />
+                </p>
               </Block>
               <UnderlineLink href="/about-me" delay={240}>
                 {t.fullAboutMe}
@@ -209,22 +348,21 @@ export default function HomeV2Content() {
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
               <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-                <LinesText text={t.paragraph} start={260} lineStep={70} duration={320} />
+                <LangParagraph text={t.paragraph} mountStart={260} mountLineStep={70} />
               </p>
               <UnderlineLink href="mailto:hola@bure.art" delay={420}>
                 {t.cocinemos}
               </UnderlineLink>
-              <UnderlineLink href={CV_HREF[language]} delay={460}>
-                CV
-              </UnderlineLink>
             </div>
           </div>
 
-          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos/CV right */}
+          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos right */}
           <div className="flex items-start gap-6 md:hidden">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
-                <p className="text-[18px] text-[#6e6e73]">{t.location}</p>
+                <p className="text-[18px] text-[#6e6e73]">
+                  <LangLetters text={t.location} />
+                </p>
               </Block>
               <UnderlineLink href="/about-me" delay={240}>
                 {t.fullAboutMe}
@@ -237,9 +375,6 @@ export default function HomeV2Content() {
               <UnderlineLink href="mailto:hola@bure.art" delay={460}>
                 {t.cocinemos}
               </UnderlineLink>
-              <UnderlineLink href={CV_HREF[language]} delay={500}>
-                CV
-              </UnderlineLink>
             </div>
           </div>
         </div>
@@ -247,7 +382,7 @@ export default function HomeV2Content() {
         {/* Right — featured project grid, scrolls internally on desktop */}
         <div
           id="projects"
-          className="scrollbar-hidden grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto"
+          className="scrollbar-hidden grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto md:pt-6"
         >
           {featured.map((project, i) => {
             const row = Math.floor(i / 2);
@@ -259,15 +394,27 @@ export default function HomeV2Content() {
         {/* Bottom — full project list, with a rotated "Projects" title on desktop */}
         <div className="flex flex-col md:flex-row md:items-start md:gap-4 md:[grid-area:bottom] md:self-end md:pb-6">
           <div className="hidden h-[131px] w-[41px] shrink-0 items-center justify-center md:flex">
-            <p className="-rotate-90 whitespace-nowrap text-[36px] font-normal text-[#1d1d1d]">Projects</p>
+            <p className="-rotate-90 whitespace-nowrap text-[36px] font-normal text-[#1d1d1d]">
+              <LangLetters text="Projects" mountStep={14} switchStep={14} />
+            </p>
           </div>
           <div className="flex flex-1 flex-col">
             <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
-              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">{t.tableHeaders.title}</p>
-              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">{t.tableHeaders.service}</p>
-              <p className="flex-1 text-[12px] text-[#6e6e73]">{t.tableHeaders.client}</p>
-              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">{t.tableHeaders.industry}</p>
-              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">{t.tableHeaders.year}</p>
+              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">
+                <LangLetters text={t.tableHeaders.title} />
+              </p>
+              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">
+                <LangLetters text={t.tableHeaders.service} />
+              </p>
+              <p className="flex-1 text-[12px] text-[#6e6e73]">
+                <LangLetters text={t.tableHeaders.client} />
+              </p>
+              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">
+                <LangLetters text={t.tableHeaders.industry} />
+              </p>
+              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">
+                <LangLetters text={t.tableHeaders.year} />
+              </p>
             </Block>
             <div className="flex flex-col">
               {tableProjects.map((project, i) => (
