@@ -7,7 +7,7 @@ import Breadcrumb from "@/components/caseStudy/Breadcrumb";
 import { HeroMeta, HeroIntro, HeroLead, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
 import Content1 from "@/components/caseStudy/Content1";
 import { ImagesComplex } from "@/components/caseStudy/Images";
-import { BodyText, ContentBorderedItem, Subtitle18 } from "@/components/caseStudy/Typography";
+import { BodyText, LeadText, Subtitle18 } from "@/components/caseStudy/Typography";
 import { projects } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 
@@ -146,32 +146,25 @@ export default function Project6() {
       </div>
 
       <Content1 title={isEs ? "Reto" : "Challenge"}>
-        <ContentBorderedItem>
-          <BodyText>
-            {isEs
-              ? "El reto era brandear todo un stand dentro de la Devconnect. Nouns tenía un espacio grande este año, así que querían brandear todo con ilustraciones, utilizando sus personajes más icónicos y representativos para la comunidad, buscando a su vez tener consistencia con el estilo de dibujo, paleta de colores y comunicación en general."
-              : "The challenge was to brand an entire booth inside Devconnect. Nouns had a large space this year, so they wanted to brand everything with illustrations, using their most iconic and representative characters for the community, while also aiming for consistency in drawing style, color palette, and overall communication."}
-          </BodyText>
-        </ContentBorderedItem>
-        <ContentBorderedItem>
-          <BodyText>
-            {isEs
-              ? "El principal reto era crear el arte y mandarlo a imprimir a distancia: los impresores estaban en Argentina y yo en México. Debía confiar en que las especificaciones y medidas brindadas eran las correctas y que el arte se viera justo como lo teníamos diseñado (spoiler alert: pequeños detalles de las impresiones no salieron tan bien jeje)."
-              : "The main challenge was creating the artwork and sending it to be printed remotely: the printers were in Argentina and I was in Mexico. I had to trust that the specifications and measurements provided were correct, and that the artwork would look exactly as we had designed it (spoiler alert: a few small printing details didn't turn out so well, haha)."}
-          </BodyText>
-        </ContentBorderedItem>
+        <LeadText>
+          {isEs
+            ? "El reto era brandear todo un stand dentro de la Devconnect. Nouns tenía un espacio grande este año, así que querían brandear todo con ilustraciones, utilizando sus personajes más icónicos y representativos para la comunidad, buscando a su vez tener consistencia con el estilo de dibujo, paleta de colores y comunicación en general."
+            : "The challenge was to brand an entire booth inside Devconnect. Nouns had a large space this year, so they wanted to brand everything with illustrations, using their most iconic and representative characters for the community, while also aiming for consistency in drawing style, color palette, and overall communication."}
+        </LeadText>
+        <BodyText>
+          {isEs
+            ? "El principal reto era crear el arte y mandarlo a imprimir a distancia: los impresores estaban en Argentina y yo en México. Debía confiar en que las especificaciones y medidas brindadas eran las correctas y que el arte se viera justo como lo teníamos diseñado (spoiler alert: pequeños detalles de las impresiones no salieron tan bien jeje)."
+            : "The main challenge was creating the artwork and sending it to be printed remotely: the printers were in Argentina and I was in Mexico. I had to trust that the specifications and measurements provided were correct, and that the artwork would look exactly as we had designed it (spoiler alert: a few small printing details didn't turn out so well, haha)."}
+        </BodyText>
       </Content1>
 
       <Content1 title={isEs ? "Proceso" : "Process"}>
-        <ContentBorderedItem>
-          <BodyText>
-            {isEs
-              ? "Tuve sesiones de trabajo con Mono y Lex para entender qué se buscaba proyectar, aprovechando el espacio tan grande con el que se contaba."
-              : "I had work sessions with Mono and Lex to understand what we wanted to project, making the most of the large space we had."}
-          </BodyText>
-        </ContentBorderedItem>
-        <ContentBorderedItem>
-          <BodyText>
+        <LeadText>
+          {isEs
+            ? "Tuve sesiones de trabajo con Mono y Lex para entender qué se buscaba proyectar, aprovechando el espacio tan grande con el que se contaba."
+            : "I had work sessions with Mono and Lex to understand what we wanted to project, making the most of the large space we had."}
+        </LeadText>
+        <BodyText>
             {isEs ? (
               <>
                 Hice una compilación de los personajes que debíamos plasmar, armé muchos bocetos
@@ -209,7 +202,6 @@ export default function Project6() {
               </>
             )}
           </BodyText>
-        </ContentBorderedItem>
       </Content1>
 
       <div className="grid items-center grid-cols-1 md:grid-cols-6 pb-10">
@@ -219,48 +211,46 @@ export default function Project6() {
       </div>
 
       <Content1 title={isEs ? "Resultado" : "Result"}>
-        <ContentBorderedItem>
-          <BodyText>
-            {isEs ? (
-              <>
-                Se diseñaron más de 12 artes para impresión en gran formato, animaciones de estas
-                ilustraciones y adaptaciones para su difusión en redes sociales.
-                <br />
-                <br />
-                Realmente fue un trabajo épico por la cantidad de vectores y bocetos que se hicieron.
-                <br />
-                <br />
-                <a
-                  href="https://www.flickr.com/photos/196499305@N03/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline underline-offset-2"
-                >
-                  Galería
-                </a>
-              </>
-            ) : (
-              <>
-                More than 8 artworks were designed for large-format printing, along with animations
-                of these illustrations and adaptations for social media.
-                <br />
-                <br />
-                It was truly an epic amount of work given the number of vectors and sketches
-                involved.
-                <br />
-                <br />
-                <a
-                  href="https://www.flickr.com/photos/196499305@N03/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline underline-offset-2"
-                >
-                  Gallery
-                </a>
-              </>
-            )}
-          </BodyText>
-        </ContentBorderedItem>
+        <LeadText>
+          {isEs ? (
+            <>
+              Se diseñaron más de 12 artes para impresión en gran formato, animaciones de estas
+              ilustraciones y adaptaciones para su difusión en redes sociales.
+              <br />
+              <br />
+              Realmente fue un trabajo épico por la cantidad de vectores y bocetos que se hicieron.
+              <br />
+              <br />
+              <a
+                href="https://www.flickr.com/photos/196499305@N03/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-2"
+              >
+                Galería
+              </a>
+            </>
+          ) : (
+            <>
+              More than 8 artworks were designed for large-format printing, along with animations
+              of these illustrations and adaptations for social media.
+              <br />
+              <br />
+              It was truly an epic amount of work given the number of vectors and sketches
+              involved.
+              <br />
+              <br />
+              <a
+                href="https://www.flickr.com/photos/196499305@N03/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-2"
+              >
+                Gallery
+              </a>
+            </>
+          )}
+        </LeadText>
       </Content1>
 
       <div className="grid items-center grid-cols-1 md:grid-cols-6 pb-10">
@@ -313,20 +303,16 @@ export default function Project6() {
       />
 
       <Content1 title={isEs ? "Aprendizajes" : "Learnings"}>
-        <ContentBorderedItem>
-          <BodyText>
-            {isEs
-              ? "Trabajar con equipos a nivel internacional siempre es muy retador; en ocasiones hasta las palabras más pequeñas pueden significar algo distinto entre las personas."
-              : "Working with international teams is always very challenging; sometimes even the smallest words can mean something different between people."}
-          </BodyText>
-        </ContentBorderedItem>
-        <ContentBorderedItem>
-          <BodyText>
-            {isEs
-              ? "No era la primera vez que colaboraba de forma remota, pero sí la primera vez que compartía files de pre-prensa, confiando totalmente en que el equipo del otro lado lo haría excelente — y justo así pasó."
-              : "It wasn't the first time I collaborated remotely, but it was the first time I shared pre-press files, trusting completely that the team on the other end would do an excellent job — and that's exactly what happened."}
-          </BodyText>
-        </ContentBorderedItem>
+        <LeadText>
+          {isEs
+            ? "Trabajar con equipos a nivel internacional siempre es muy retador; en ocasiones hasta las palabras más pequeñas pueden significar algo distinto entre las personas."
+            : "Working with international teams is always very challenging; sometimes even the smallest words can mean something different between people."}
+        </LeadText>
+        <BodyText>
+          {isEs
+            ? "No era la primera vez que colaboraba de forma remota, pero sí la primera vez que compartía files de pre-prensa, confiando totalmente en que el equipo del otro lado lo haría excelente — y justo así pasó."
+            : "It wasn't the first time I collaborated remotely, but it was the first time I shared pre-press files, trusting completely that the team on the other end would do an excellent job — and that's exactly what happened."}
+        </BodyText>
       </Content1>
 
       <div className="grid items-center grid-cols-1 md:grid-cols-6 pb-10">
