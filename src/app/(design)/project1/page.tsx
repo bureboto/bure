@@ -78,7 +78,7 @@ export default function Project1() {
                   rel="noreferrer"
                   className="underline underline-offset-2"
                 >
-                  Sjord
+                  Sjoerd
                 </a>{" "}
                 y el equipo de Musho.
               </>
@@ -95,7 +95,7 @@ export default function Project1() {
                   rel="noreferrer"
                   className="underline underline-offset-2"
                 >
-                  Sjord
+                  Sjoerd
                 </a>{" "}
                 and the Musho team.
               </>
