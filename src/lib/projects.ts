@@ -89,7 +89,7 @@ export const projects: Project[] = [
     href: "/project6",
     name: "Nouns | Devconnect ARG",
     date: "Noviembre, 2025",
-    cover: "/design/nouns/7_Cover_Nous_ARG.jpg",
+    cover: "/design/nouns/5_Nous_ARG.gif",
     description: {
       es: "Ilustración y muralismo para el espacio de Nouns en Devconnect Argentina: gráficas, señalética y piezas para la comunidad durante todo el evento.",
       en: "Illustration and muralism for Nouns' space at Devconnect Argentina: graphics, signage, and community pieces throughout the event.",
