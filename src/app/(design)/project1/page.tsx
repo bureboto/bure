@@ -71,7 +71,16 @@ export default function Project1() {
                 Musho una marca audaz y divertida.
                 <br />
                 <br />
-                Diseño en colaboración con Sjord y el equipo de Musho.
+                Diseño en colaboración con{" "}
+                <a
+                  href="https://www.linkedin.com/in/sjoerd-huisman-5a176420/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  Sjord
+                </a>{" "}
+                y el equipo de Musho.
               </>
             ) : (
               <>
@@ -79,7 +88,16 @@ export default function Project1() {
                 fun brand.
                 <br />
                 <br />
-                Design in collaboration with Sjord and the Musho team.
+                Design in collaboration with{" "}
+                <a
+                  href="https://www.linkedin.com/in/sjoerd-huisman-5a176420/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline underline-offset-2"
+                >
+                  Sjord
+                </a>{" "}
+                and the Musho team.
               </>
             )}
           </BodyText>
