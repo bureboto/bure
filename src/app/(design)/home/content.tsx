@@ -52,6 +52,7 @@ const copy = {
     fullAboutMe: "Todo sobre mí →",
     cocinemos: "Cocinemos algo juntos",
     verTodos: "Ver todos →",
+    footer: (year: number) => `© Erick A. (Bure) ${year}. Todos los derechos reservados`,
     tableHeaders: {
       title: "Título del proyecto",
       service: "Servicio",
@@ -68,6 +69,7 @@ const copy = {
     fullAboutMe: "Full about me →",
     cocinemos: "Let's cook something together",
     verTodos: "View all →",
+    footer: (year: number) => `© Erick A. (Bure) ${year}. All rights reserved`,
     tableHeaders: {
       title: "Project title",
       service: "Service",
@@ -217,6 +219,7 @@ export default function HomeV2Content() {
   const { language } = useLanguage();
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
+  const year = new Date().getFullYear();
   const { previewRef, cover, visible, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
@@ -307,15 +310,20 @@ export default function HomeV2Content() {
         </div>
 
         {/* Right — featured project grid, scrolls internally on desktop */}
-        <div
-          id="projects"
-          className="scrollbar-hidden grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:[grid-area:right] md:h-full md:gap-x-4 md:gap-y-4 md:overflow-y-auto md:pt-6"
-        >
-          {featured.map((project, i) => {
-            const row = Math.floor(i / 2);
-            const col = i % 2;
-            return <ProjectCardV2 key={project.href} project={project} delay={row * 90 + col * 50} />;
-          })}
+        <div className="flex flex-col md:[grid-area:right] md:h-full md:overflow-y-auto">
+          <div
+            id="projects"
+            className="scrollbar-hidden grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:gap-x-4 md:gap-y-4 md:pt-6"
+          >
+            {featured.map((project, i) => {
+              const row = Math.floor(i / 2);
+              const col = i % 2;
+              return <ProjectCardV2 key={project.href} project={project} delay={row * 90 + col * 50} />;
+            })}
+          </div>
+          <footer className="mt-auto flex items-center justify-center pb-[24px] pt-4 text-[12px] text-[#111]">
+            <LangText>{t.footer(year)}</LangText>
+          </footer>
         </div>
 
         {/* Bottom — full project list, with a rotated "Projects" title on desktop */}
