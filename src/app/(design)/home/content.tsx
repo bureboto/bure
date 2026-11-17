@@ -217,7 +217,7 @@ export default function HomeV2Content() {
   const { language } = useLanguage();
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
-  const { containerRef, state, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
+  const { containerRef, previewRef, cover, visible, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
     <RevealProvider>
@@ -354,7 +354,7 @@ export default function HomeV2Content() {
                   onRowMouseLeave={onRowMouseLeave}
                 />
               ))}
-              <HoverPreviewBox {...state} />
+              <HoverPreviewBox previewRef={previewRef} cover={cover} visible={visible} />
             </div>
             <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
               <UnderlineLink href="/projects" delay={0}>

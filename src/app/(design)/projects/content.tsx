@@ -83,7 +83,7 @@ export default function ProjectsContent() {
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
   const year = new Date().getFullYear();
-  const { containerRef, state, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
+  const { containerRef, previewRef, cover, visible, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
     <div className="flex w-full flex-1 flex-col gap-10 px-4 py-6 md:px-[120px] md:py-10">
@@ -119,7 +119,7 @@ export default function ProjectsContent() {
               onRowMouseLeave={onRowMouseLeave}
             />
           ))}
-          <HoverPreviewBox {...state} />
+          <HoverPreviewBox previewRef={previewRef} cover={cover} visible={visible} />
         </div>
       </div>
 
