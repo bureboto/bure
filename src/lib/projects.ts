@@ -87,8 +87,8 @@ export const projects: Project[] = [
     date: "2026",
     cover: "/design/prado/1_Cover_Prado.jpg",
     description: {
-      es: "Plásticos El Prado es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, con distribución en todo México.",
-      en: "Plásticos El Prado is a company selling cleaning and packaging supplies for home and office, distributed across Mexico.",
+      es: "El Prado es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, con distribución en todo México.",
+      en: "El Prado is a company selling cleaning and packaging supplies for home and office, distributed across Mexico.",
     },
     tags: ["Branding", "Facility supplies"],
   },
@@ -106,7 +106,7 @@ export const projects: Project[] = [
   },
   {
     href: "/project7",
-    name: "Nouns | Devconnect Singapore",
+    name: "Nouns | ETHGlobal Singapore",
     client: "Nouns",
     date: "2024",
     cover: "/design/singapore/1_Singapore.jpg",
