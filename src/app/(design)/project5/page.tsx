@@ -125,7 +125,7 @@ export default function Project5() {
         <ProjectMedia src={prado("9_Prado.jpg")} alt="El Prado" />
       </div>
 
-      <Content1 title={isEs ? "Resultado" : "Result"} subtitle={isEs ? "Qué se hizo" : "What we did"}>
+      <Content1 title={isEs ? "Resultado" : "Result"}>
         <BodyText>
           {isEs
             ? "Se diseñó Brand Kit, papelería interna y a clientes, diseño de uniformes y vehículos, diseño de nuevos catálogos, diseño de empaques y etiquetas de productos, plantillas para social media."
