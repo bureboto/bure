@@ -156,7 +156,7 @@ function ProjectRow({
           <LangText className="whitespace-normal">{service}</LangText>
         </p>
         <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">
-          <LangText className="whitespace-normal">{project.name}</LangText>
+          <LangText className="whitespace-normal">{project.client ?? project.name}</LangText>
         </p>
         <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] md:block">
           <LangText className="whitespace-normal">{industry}</LangText>

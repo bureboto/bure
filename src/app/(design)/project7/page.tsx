@@ -68,7 +68,7 @@ export default function Project7() {
         <h1 className="text-2xl">Nouns | Devconnect Singapore</h1>
         <HeroMeta
           items={[
-            { label: isEs ? "Cliente" : "Client", value: project.name },
+            { label: isEs ? "Cliente" : "Client", value: project.client ?? project.name },
             { label: isEs ? "Servicio" : "Service", value: service },
             { label: isEs ? "Año" : "Year", value: year },
             { label: isEs ? "Industria" : "Industry", value: industry },

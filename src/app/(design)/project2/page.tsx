@@ -30,7 +30,7 @@ export default function Project2() {
           <HeroIntro>
             <HeroMeta
               items={[
-                { label: isEs ? "Cliente" : "Client", value: project.name },
+                { label: isEs ? "Cliente" : "Client", value: project.client ?? project.name },
                 { label: isEs ? "Servicio" : "Service", value: service },
                 { label: isEs ? "Año" : "Year", value: year },
                 { label: isEs ? "Industria" : "Industry", value: industry },

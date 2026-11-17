@@ -42,7 +42,7 @@ export default function Project12() {
         <h1 className="text-2xl">The Base Night Show</h1>
         <HeroMeta
           items={[
-            { label: isEs ? "Cliente" : "Client", value: project.name },
+            { label: isEs ? "Cliente" : "Client", value: project.client ?? project.name },
             { label: isEs ? "Servicio" : "Service", value: service },
             { label: isEs ? "Año" : "Year", value: year },
             { label: isEs ? "Industria" : "Industry", value: industry },

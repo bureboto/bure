@@ -70,7 +70,7 @@ export default function Project3() {
         <h1 className="text-2xl">Espacio</h1>
         <HeroMeta
           items={[
-            { label: isEs ? "Cliente" : "Client", value: project.name },
+            { label: isEs ? "Cliente" : "Client", value: project.client ?? project.name },
             { label: isEs ? "Servicio" : "Service", value: service },
             { label: isEs ? "Año" : "Year", value: year },
             { label: isEs ? "Industria" : "Industry", value: industry },

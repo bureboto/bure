@@ -104,7 +104,7 @@ export default function Project9() {
         <h1 className="text-2xl">Linea 16 – Sin Salida</h1>
         <HeroMeta
           items={[
-            { label: isEs ? "Cliente" : "Client", value: project.name },
+            { label: isEs ? "Cliente" : "Client", value: project.client ?? project.name },
             { label: isEs ? "Servicio" : "Service", value: service },
             { label: isEs ? "Año" : "Year", value: year },
             { label: isEs ? "Industria" : "Industry", value: industry },
