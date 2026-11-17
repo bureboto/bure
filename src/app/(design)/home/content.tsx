@@ -310,10 +310,10 @@ export default function HomeV2Content() {
         </div>
 
         {/* Right — featured project grid, scrolls internally on desktop */}
-        <div className="flex flex-col md:[grid-area:right] md:h-full md:overflow-y-auto">
+        <div className="scrollbar-hidden flex flex-col md:[grid-area:right] md:h-full md:overflow-y-auto">
           <div
             id="projects"
-            className="scrollbar-hidden grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:gap-x-4 md:gap-y-4 md:pt-6"
+            className="grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:gap-x-4 md:gap-y-4 md:pt-6"
           >
             {featured.map((project, i) => {
               const row = Math.floor(i / 2);
