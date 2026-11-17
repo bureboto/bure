@@ -14,6 +14,26 @@ function HomeParagraph({ text }: { text: string }) {
   return <LangParagraph text={text} revealedMount={revealedMount} mountStart={260} mountLineStep={70} />;
 }
 
+function PinIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+      <path
+        d="M12 2C7.58 2 4 5.58 4 10c0 5.25 6.72 11.19 7.01 11.44a1.5 1.5 0 0 0 1.98 0C13.28 21.19 20 15.25 20 10c0-4.42-3.58-8-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function LocationText({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 text-[#6e6e73]">
+      <PinIcon />
+      <LangLetters text={text} />
+    </span>
+  );
+}
+
 const featured = projects;
 
 // The 5 projects to show in the list, in order.
@@ -235,7 +255,7 @@ export default function HomeV2Content() {
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
-                  <LangLetters text={t.location} />
+                  <LocationText text={t.location} />
                 </p>
               </Block>
               <UnderlineLink href="/about-me" delay={240}>
@@ -260,7 +280,7 @@ export default function HomeV2Content() {
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
-                  <LangLetters text={t.location} />
+                  <LocationText text={t.location} />
                 </p>
               </Block>
               <UnderlineLink href="/about-me" delay={240}>
