@@ -114,8 +114,8 @@ export default function Project2() {
       </div>
 
       <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-6 pb-10">
-        <ProjectMedia src={gandum("8_Gandum.jpg")} alt="Gandum" />
         <ProjectMedia src={gandum("9_Gandum.mp4")} alt="Gandum" />
+        <ProjectMedia src={gandum("8_Gandum.jpg")} alt="Gandum" />
       </div>
 
       <div className="grid items-center grid-cols-1 md:grid-cols-6 pb-10">
