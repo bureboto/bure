@@ -1,12 +1,14 @@
 "use client";
 
-import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
-import { useLanguage } from "@/lib/LanguageContext";
-import { HeroMeta } from "@/components/caseStudy/Hero";
+import Breadcrumb from "@/components/caseStudy/Breadcrumb";
+import { HeroMeta, HeroIntro, HeroLead, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
+import Content1 from "@/components/caseStudy/Content1";
+import { BodyText, LeadText, Subtitle18 } from "@/components/caseStudy/Typography";
 import { projects } from "@/lib/projects";
+import { useLanguage } from "@/lib/LanguageContext";
 
 const project = projects.find((p) => p.href === "/project7")!;
 const service = project.tags[0] ?? "—";
@@ -15,189 +17,251 @@ const year = project.date.match(/\d{4}/)?.[0] ?? project.date;
 
 const sg = (file: string) => `/design/singapore/${file}`;
 
-type Block =
-  | { type: "full"; src: string }
-  | { type: "grid"; items: string[] }
-  | { type: "split"; left: string; right: string };
-
-const processBlocks: Block[] = [
-  { type: "split", left: sg("2_Singapore.jpg"), right: sg("3_Singapore.jpg") },
-  { type: "grid", items: [sg("9_Singapore.jpg"), sg("10_Singapore.jpg"), sg("8_Singapore.jpg")] },
-  { type: "grid", items: [sg("4_Singapore.jpg"), sg("5_Singapore.gif")] },
-];
-
-function MediaBlock({ block }: { block: Block }) {
-  if (block.type === "full") return <ProjectMedia src={block.src} alt="Nouns | Devconnect Singapore" />;
-
-  if (block.type === "split") {
-    return (
-      <div className="grid items-center grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="md:col-span-2">
-          <ProjectMedia src={block.left} alt="Nouns | Devconnect Singapore" />
-        </div>
-        <div className="md:col-span-1">
-          <ProjectMedia src={block.right} alt="Nouns | Devconnect Singapore" />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={`grid items-center grid-cols-1 gap-4 ${
-        block.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
-      }`}
-    >
-      {block.items.map((src) => (
-        <ProjectMedia key={src} src={src} alt="Nouns | Devconnect Singapore" />
-      ))}
-    </div>
-  );
-}
-
 export default function Project7() {
   const { language } = useLanguage();
   const isEs = language === "es";
 
   return (
-    <ContentGrid className="pb-16 flex flex-col gap-10">
-      <div className="flex flex-col gap-4 pt-6">
-        <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
-          {isEs ? "← Volver" : "← Back"}
-        </Link>
-        <h1 className="text-2xl">Nouns | Devconnect Singapore</h1>
-        <HeroMeta
-          items={[
-            { label: isEs ? "Cliente" : "Client", value: project.client ?? project.name },
-            { label: isEs ? "Servicio" : "Service", value: service },
-            { label: isEs ? "Año" : "Year", value: year },
-            { label: isEs ? "Industria" : "Industry", value: industry },
-          ]}
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
-          <p>
-            {isEs
-              ? "Nouns es una DAO (organización de propiedad colectiva que trabaja hacia una misión compartida.) derivada de una colección de NFTs, las personas pueden hacer propuestas para realizar actividades en torno a la DAO y la comunidad las acepta o rechaza."
-              : "Nouns is a DAO (a collectively owned organization working toward a shared mission) derived from an NFT collection — people can submit proposals for activities around the DAO, and the community accepts or rejects them."}
-          </p>
-          <p>
-            {isEs
-              ? "En esta ocasión me invitaron a colaborar en una prop de hacer una activación en ETHGLOBAL Singapore, Dándole vida a toda la identidad del stand."
-              : "This time I was invited to collaborate on a proposal to run an activation at ETHGlobal Singapore, bringing the entire booth identity to life."}
-          </p>
+    <ContentGrid className="flex flex-col gap-0 pb-24">
+      <Breadcrumb client="Nouns" project="ETHGlobal Singapore 2024" />
+
+      {/* Hero */}
+      <div className="flex flex-col gap-10 py-10 md:flex-row md:gap-20">
+        <div className="flex flex-1 flex-col gap-4">
+          <HeroIntro>
+            <HeroMeta
+              items={[
+                { label: isEs ? "Cliente" : "Client", value: "Nouns" },
+                { label: isEs ? "Servicio" : "Service", value: service },
+                { label: isEs ? "Año" : "Year", value: year },
+                { label: isEs ? "Industria" : "Industry", value: industry },
+              ]}
+            />
+            <HeroLead>
+              {isEs
+                ? "Nouns me buscó para construir la identidad visual completa de su stand en ETHGlobal Singapore, tomando como inspiración el imaginario de la ciudad, su naturaleza y sus costumbres."
+                : "Nouns brought me on to build the complete visual identity for their booth at ETHGlobal Singapore, drawing inspiration from the city's imagery, its nature, and its customs."}
+            </HeroLead>
+          </HeroIntro>
+          <div className="flex flex-col gap-2">
+            <Subtitle18>{isEs ? "Colaboradores" : "Collaborators"}</Subtitle18>
+            <BodyText>
+              {isEs ? (
+                <>
+                  <a
+                    href="https://x.com/0xMonografia"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline underline-offset-2"
+                  >
+                    Mono
+                  </a>{" "}
+                  y{" "}
+                  <a
+                    href="https://x.com/ok_lex_"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline underline-offset-2"
+                  >
+                    Lex
+                  </a>
+                  , ambos parte de la comunidad Nouns Amigos.
+                </>
+              ) : (
+                <>
+                  <a
+                    href="https://x.com/0xMonografia"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline underline-offset-2"
+                  >
+                    Mono
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="https://x.com/ok_lex_"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline underline-offset-2"
+                  >
+                    Lex
+                  </a>
+                  , both part of the Nouns Amigos community.
+                </>
+              )}
+            </BodyText>
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col gap-6">
+          <HeroDetail label={isEs ? "Impacto" : "Impact"}>
+            <HeroStats
+              stats={[
+                { value: "1,300+", label: isEs ? <>Asistentes<br />ETHGlobal</> : <>ETHGlobal<br />attendees</> },
+                { value: "650+", label: isEs ? <>Visitas<br />al stand</> : <>Booth<br />visits</> },
+                { value: "8+", label: isEs ? <>Artes<br />diseñadas</> : <>Artworks<br />designed</> },
+              ]}
+            />
+            <BodyText>
+              {isEs
+                ? "ETHGlobal Singapore tuvo cerca de 1,300 asistentes, y se estima que más de la mitad visitó el stand de Nouns. Varias personas comentaron que, gracias al branding, lograban ubicar el stand de inmediato."
+                : "ETHGlobal Singapore had close to 1,300 attendees, and it's estimated that more than half of them visited the Nouns booth. People mentioned that, thanks to the branding, they could spot the booth right away."}
+            </BodyText>
+          </HeroDetail>
         </div>
       </div>
 
-      <div className="grid items-center grid-cols-1 md:grid-cols-6">
+      <div className="grid items-center grid-cols-1 md:grid-cols-6 pb-10">
         <div className="md:col-start-2 md:col-span-4">
-          <ProjectMedia src={sg("1_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
+          <ProjectMedia src={sg("5_Singapore.gif")} alt="Nouns | ETHGlobal Singapore" />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
-        <div>
-          <h2 className="font-bold text-black mb-2">{isEs ? "Colaboradores" : "Collaborators"}</h2>
-          <p>{isEs ? "Mono y Lex, miembros de la comunidad de Nouns Amigos." : "Mono and Lex, members of the Nouns Amigos community."}</p>
-          <p className="mt-4">{isEs ? "El reto era brandear el stand dentro de la ETHGlobal." : "The challenge was to brand the booth inside ETHGlobal."}</p>
-          <p className="mt-4">
-            {isEs
-              ? "Nouns buscaba hacer arte referente a la ciudad de Singapor, sus edificios, su mascotas y su naturaleza."
-              : "Nouns wanted to make art referencing the city of Singapore — its buildings, its mascots, and its nature."}
-          </p>
+      <Content1 title={isEs ? "Reto" : "Challenge"}>
+        <LeadText>
+          {isEs
+            ? "La encomienda consistía en vestir por completo el stand de ETHGlobal con una identidad propia. En esta ocasión, Nouns quería que el arte dialogara con Singapur: su skyline, su fauna emblemática y la vegetación de la ciudad."
+            : "The assignment was to fully dress ETHGlobal's booth with its own identity. This time, Nouns wanted the artwork to speak to Singapore itself — its skyline, its iconic wildlife, and the city's greenery."}
+        </LeadText>
+        <BodyText>
+          {isEs
+            ? "El desafío logístico más grande fue producir el arte y enviarlo a imprimir sin estar presente: la imprenta se encontraba en Singapur y yo trabajaba desde México. Tuve que depender por completo de las medidas y especificaciones que me compartieron, confiando en que el resultado final respetaría el diseño — y así fue, el acabado salió excelente."
+            : "The main challenge was creating the artwork and sending it off to print without being there in person: the print shop was in Singapore while I worked from Mexico. I had to rely entirely on the measurements and specs I was given, trusting the final result would match the design — and it did, the finish came out excellent."}
+        </BodyText>
+      </Content1>
+
+      <Content1 title={isEs ? "Proceso" : "Process"}>
+        <LeadText>
+          {isEs
+            ? "Arrancamos con varias juntas junto a Mono y Lex para definir qué queríamos comunicar, pensando en cómo aprovechar el espacio disponible."
+            : "We kicked off with several sessions alongside Mono and Lex to define what we wanted to communicate, thinking through how to make the most of the available space."}
+        </LeadText>
+        <BodyText>
+          {isEs ? (
+            <>
+              Reuní el elenco de personajes que íbamos a usar, hice decenas de bocetos para definir
+              su composición y luego pasé todo a vector. Fue una de las etapas más laboriosas,
+              porque también tenía que probar cómo se veía cada pieza dentro de los mockups que nos
+              pasó el equipo del evento.
+              <br />
+              <br />
+              Investigamos los puntos de referencia más representativos del país, su mascota, la
+              flora local y algunas de sus tradiciones; a partir de ahí, fui traduciendo cada
+              hallazgo a una ilustración con el estilo visual de Nouns.
+              <br />
+              <br />
+              El stand se diseñó como una experiencia: la gente podía meterse al ecosistema,
+              tomarse una foto, sentarse en una banca y quedar rodeada por todas las piezas que
+              creamos.
+              <br />
+              <br />
+              Una vez cerrado el diseño, mandé todos los archivos listos para imprenta. Ver el
+              resultado final — con los colores tan vivos como los habíamos definido — fue una
+              sorpresa muy grata.
+            </>
+          ) : (
+            <>
+              I gathered the cast of characters we&apos;d be using, sketched out dozens of layout
+              options, and then took everything to vector. It was one of the most labor-intensive
+              stages, since I also had to test how each piece looked within the mockups the event
+              team sent over.
+              <br />
+              <br />
+              We researched the country&apos;s most representative landmarks, its mascot, the local
+              flora, and a few of its traditions; from there, I translated each finding into an
+              illustration with Nouns&apos; visual style.
+              <br />
+              <br />
+              The booth was designed as an experience: people could step into the ecosystem, take a
+              photo, sit on a bench, and find themselves surrounded by every piece we created.
+              <br />
+              <br />
+              Once the design was locked, I sent over all the print-ready files. Seeing the final
+              result — with colors as vivid as we&apos;d planned — was a very pleasant surprise.
+            </>
+          )}
+        </BodyText>
+      </Content1>
+
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+        <ProjectMedia src={sg("2_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+        <ProjectMedia src={sg("3_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+      </div>
+
+      <div className="grid items-center grid-cols-1 md:grid-cols-3 gap-6 pb-10">
+        <ProjectMedia src={sg("10_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+        <ProjectMedia src={sg("9_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+        <ProjectMedia src={sg("8_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+      </div>
+
+      <Content1 title={isEs ? "Resultado" : "Result"}>
+        <LeadText>
+          {isEs
+            ? "El proyecto terminó incluyendo más de 8 piezas de arte para impresión en gran formato, sus respectivas animaciones y versiones adaptadas para redes sociales — un volumen de vectores y bocetos considerable."
+            : "The project ended up including more than 8 pieces of art for large-format printing, their respective animations, and versions adapted for social media — a considerable volume of vectors and sketches."}
+        </LeadText>
+      </Content1>
+
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-6 pb-6">
+        <ProjectMedia src={sg("4_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+        <ProjectMedia src={sg("1_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+      </div>
+      <div className="grid items-start grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+        <div className="flex flex-col gap-2">
+          <ProjectMedia src={sg("6_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+          <p className="text-[12px] text-[#6e6e73]">{isEs ? "Detalle" : "Detail"}</p>
         </div>
-        <div>
-          <p>
-            {isEs
-              ? "El principal reto era crear el arte y mandarlo a imprimir a distancia, los impresores estaban en Singapur y yo en México."
-              : "The main challenge was creating the art and sending it to be printed remotely — the printers were in Singapore and I was in Mexico."}
-          </p>
-          <p className="mt-4">
-            {isEs
-              ? "Debía confiar en que las especificaciones y medidas brindadas eran las correctas y que el arte se viera justo como lo teníamos diseñado, todo salio muy bien."
-              : "I had to trust that the specifications and measurements provided were correct and that the art would look exactly as we had designed it — everything turned out great."}
-          </p>
+        <div className="flex flex-col gap-2">
+          <ProjectMedia src={sg("7_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
+          <p className="text-[12px] text-[#6e6e73]">{isEs ? "Detalle" : "Detail"}</p>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4">
-        {processBlocks.map((block, i) => (
-          <MediaBlock key={i} block={block} />
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
-        <div>
-          <h2 className="font-bold text-black mb-2">{isEs ? "Proceso" : "Process"}</h2>
-          <p>
-            {isEs
-              ? "Tuve sesiones de trabajo con Mono y Lex para entender que se buscaba proyectar, aprovechando el espacio con el que se contaba."
-              : "I had working sessions with Mono and Lex to understand what we wanted to project, making the most of the space we had."}
-          </p>
-          <p className="mt-4">
-            {isEs
-              ? "Hice una compilacion de los personajes que debiamos plasmar, armé muchos bocetos para posicionarlos y despues vectorizados, este proceso fue de lo mas elaborado, ya que igual requeria tener un preview en los mockups que nos compartio el equipo de la DevConn."
-              : "I compiled the characters we needed to feature, put together many sketches to position them and later vectorized them — this process was quite elaborate, since it also required previewing them in the mockups the DevConnect team shared with us."}
-          </p>
-        </div>
-        <div>
-          <p>
-            {isEs
-              ? "Hicimos un research de los principales lugares del país, su mascota y la flora que tiene la ciudad, asi como sus tradiciones, después esos lo traduje a ilustraciones con la temática de Nouns."
-              : "We did research on the country's main landmarks, its mascot, and the city's flora, as well as its traditions, then I translated all of that into illustrations with a Nouns theme."}
-          </p>
-          <p className="mt-4">
-            {isEs
-              ? "Hicimos un stand donde las personas podían entrar al ecosistema y tomarse una fotografía, sentarse en una banca y estar rodeado de los elementos que diseñamos."
-              : "We built a booth where people could step into the ecosystem, take a photo, sit on a bench, and be surrounded by the elements we designed."}
-          </p>
-          <p className="mt-4">
-            {isEs
-              ? "Al terminar, compartí todos los files en formato de pre-prensa, listos para imprimir, fue una grata sorpresa ver el trabajo impreso y justo con los colores tan intensos como los habíamos planteado."
-              : "When we finished, I shared all the files print-ready in pre-press format — it was a great surprise to see the work printed, with colors just as intense as we had planned."}
-          </p>
-        </div>
-      </div>
-
-      <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-4">
-        <ProjectMedia src={sg("6_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
-        <ProjectMedia src={sg("7_Singapore.jpg")} alt="Nouns | Devconnect Singapore" />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
-        <div>
-          <h2 className="font-bold text-black mb-2">{isEs ? "Resultado" : "Result"}</h2>
-          <p>
-            {isEs
-              ? "Se diseñaron más de 8 artes para impresión en gran formato, animaciones de estas ilustraciones y adaptaciones para su difusión en redes sociales. Realmente fue un trabajo epico por la cantidad de vectores y bocetos que se hicieron."
-              : "We designed more than 8 pieces of art for large-format printing, animations of those illustrations, and adaptations for social media distribution. It was truly an epic job given the number of vectors and sketches involved."}
-          </p>
-          <p className="mt-4">
-            {isEs
-              ? "ETHGlobalt tuvo cerca de 1,300 asistentes, estimando que más de la mitad acudieron al stand de Nouns, seguro pasaron un buen rato con la comunidad y las activaciones que se hicieron. Fue muy grato escuchar que gracias al branding ubicaron inmediatamente dónde estaba ubicado el stand."
-              : "ETHGlobal had around 1,300 attendees, with more than half estimated to have visited the Nouns booth — they surely had a great time with the community and the activations we put together. It was very gratifying to hear that, thanks to the branding, people spotted the booth's location immediately."}
-          </p>
-        </div>
-        <div>
-          <h2 className="font-bold text-black mb-2">{isEs ? "Aprendizaje" : "Learnings"}</h2>
-          <p>
-            {isEs
-              ? "Trabajar con equipos a nivel internacional siempre es muy retador, en ocasiones hasta pequeñas palabras pueden significar una cosa diferente entre las personas, no es la primera vez que lo hago pero si la primera vez que comparto files de pre-prensa, confiando totalmente en que el equipo del otro lado lo hará excelente, justo pasó así."
-              : "Working with teams internationally is always very challenging — sometimes even small words can mean different things to different people. It wasn't the first time I'd done this, but it was the first time I shared pre-press files, trusting completely that the team on the other side would nail it, and that's exactly what happened."}
-          </p>
-          <p className="mt-4">
-            {isEs ? "Galeria fotográfica (" : "Photo gallery ("}
-            <a
-              href="https://www.flickr.com/photos/196499305@N03/albums/72177720320485071/"
-              target="_blank"
-              rel="noreferrer"
-              className="underline underline-offset-4"
-            >
-              https://www.flickr.com/photos/196499305@N03/albums/72177720320485071/
-            </a>
-            )
-          </p>
-        </div>
-      </div>
+      <Content1 title={isEs ? "Aprendizajes" : "Learnings"}>
+        <LeadText>
+          {isEs
+            ? "Colaborar con equipos de otros países siempre trae su nivel de dificultad: a veces basta una palabra mal interpretada para que el mensaje cambie de sentido entre ambas partes."
+            : "Working with international teams is always very challenging; sometimes a single word, taken the wrong way, is enough to shift the meaning between both sides."}
+        </LeadText>
+        <BodyText>
+          {isEs ? (
+            <>
+              No era mi primera colaboración remota, pero sí la primera vez que entregaba archivos
+              de pre-prensa sin poder supervisar la impresión en persona — tuve que confiar por
+              completo en el equipo del otro lado, y la confianza se vio recompensada.
+              <br />
+              <br />
+              {"Galería fotográfica ("}
+              <a
+                href="https://www.flickr.com/photos/196499305@N03/albums/72177720320485071/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-2"
+              >
+                https://www.flickr.com/photos/196499305@N03/albums/72177720320485071/
+              </a>
+              )
+            </>
+          ) : (
+            <>
+              It wasn&apos;t my first remote collaboration, but it was the first time handing off
+              pre-press files without being able to oversee the printing in person — I had to trust
+              the team on the other end completely, and that trust paid off.
+              <br />
+              <br />
+              {"Photo gallery ("}
+              <a
+                href="https://www.flickr.com/photos/196499305@N03/albums/72177720320485071/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-2"
+              >
+                https://www.flickr.com/photos/196499305@N03/albums/72177720320485071/
+              </a>
+              )
+            </>
+          )}
+        </BodyText>
+      </Content1>
 
       <OtherProjects currentHref="/project7" />
     </ContentGrid>

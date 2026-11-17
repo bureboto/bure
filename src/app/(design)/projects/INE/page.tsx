@@ -717,7 +717,7 @@ export default function Project13() {
         </div>
       </div>
 
-      <OtherProjects currentHref="/project13" />
+      <OtherProjects currentHref="/projects/INE" />
       </ContentGrid>
     </>
   );
