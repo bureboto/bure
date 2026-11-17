@@ -105,7 +105,7 @@ export default function Project2() {
           <ProjectMedia src={gandum("3_Gandum.jpg")} alt="Gandum" />
           <ProjectMedia src={gandum("4_Gandum.jpg")} alt="Gandum" />
         </div>
-        <ProjectMedia src={gandum("5_Gandum.mp4")} alt="Gandum" className="w-full h-full object-cover" />
+        <ProjectMedia src={gandum("5_Gandum.mp4")} alt="Gandum" />
       </div>
 
       <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-6 pb-6">
