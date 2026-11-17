@@ -1,116 +1,36 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
-import {
-  LangLetters,
-  LangText,
-  useLangVisible,
-  useDelayedLanguage,
-  ENTER_DURATION,
-  EXIT_DURATION,
-} from "@/lib/langTransition";
+import { LangLetters, LangText, LangParagraph, useDelayedLanguage } from "@/lib/langTransition";
+import { useHoverPreview, HoverPreviewBox } from "@/lib/hoverPreview";
 import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
 
-/**
- * Like LinesText, but each real rendered line re-animates on its own when
- * the language switches (not the whole paragraph as one block): measures
- * each word's offsetTop after mount/text-change to group words into their
- * actual line, same technique as LinesText.
- */
-function LangParagraph({
-  text,
-  mountStart = 260,
-  mountLineStep = 70,
-  className = "",
-}: {
-  text: string;
-  mountStart?: number;
-  mountLineStep?: number;
-  className?: string;
-}) {
+/** Rendered inside RevealProvider (unlike HomeV2Content, which renders it) so useRevealed() here reflects the real mount state. */
+function HomeParagraph({ text }: { text: string }) {
   const revealedMount = useRevealed();
-  const langVisible = useLangVisible();
+  return <LangParagraph text={text} revealedMount={revealedMount} mountStart={260} mountLineStep={70} />;
+}
 
-  const containerRef = useRef<HTMLSpanElement>(null);
-  const [lineOf, setLineOf] = useState<number[]>([]);
-
-  const words: (string | "BR")[] = [];
-  const bold: boolean[] = [];
-  let boldOn = false;
-  text.split("\n").forEach((line, i, arr) => {
-    line.split(/(\s+)/).forEach((tok) => {
-      if (!tok) return;
-      const hasOpen = tok.includes("**");
-      let clean = tok;
-      let tokenBold = boldOn;
-      if (hasOpen) {
-        const markerCount = (tok.match(/\*\*/g) ?? []).length;
-        clean = tok.replace(/\*\*/g, "");
-        tokenBold = boldOn || markerCount > 0;
-        if (markerCount % 2 === 1) boldOn = !boldOn;
-      }
-      words.push(clean);
-      bold.push(tokenBold);
-    });
-    if (i < arr.length - 1) {
-      words.push("BR");
-      bold.push(false);
-    }
-  });
-
-  useLayoutEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const spans = Array.from(el.querySelectorAll<HTMLElement>("[data-word]"));
-    const tops = spans.map((s) => s.offsetTop);
-    const uniqueTops = Array.from(new Set(tops)).sort((a, b) => a - b);
-    setLineOf(spans.map((_, i) => uniqueTops.indexOf(tops[i])));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text]);
-
-  const visible = revealedMount && langVisible;
-  let wordIndex = -1;
-  const colInLineByLine: Record<number, number> = {};
+function PinIcon() {
   return (
-    <span ref={containerRef} className={className}>
-      {words.map((w, i) => {
-        if (w === "BR") return <br key={i} />;
-        if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
-        wordIndex += 1;
-        const line = lineOf[wordIndex] ?? 0;
-        const colInLine = colInLineByLine[line] ?? 0;
-        colInLineByLine[line] = colInLine + 1;
-        // Lines move together (no top-to-bottom stagger), but within each
-        // line the words still sweep left to right, like Letters' entrance.
-        const delay = !revealedMount
-          ? `${mountStart + line * mountLineStep}ms`
-          : `${colInLine * 30}ms`;
-        const duration = !revealedMount ? 320 : visible ? ENTER_DURATION : EXIT_DURATION;
-        return (
-          <span
-            key={i}
-            data-word
-            className={`inline-block transition-[opacity,transform] ease-out ${bold[i] ? "font-bold text-[#1d1d1d]" : ""}`}
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible
-                ? "translate(0, 0)"
-                : revealedMount
-                  ? "translate(-10px, 0)"
-                  : "translate(0, 4px)",
-              transitionDuration: `${duration}ms`,
-              transitionDelay: delay,
-            }}
-          >
-            {w}
-          </span>
-        );
-      })}
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
+      <path
+        d="M12 2C7.58 2 4 5.58 4 10c0 5.25 6.72 11.19 7.01 11.44a1.5 1.5 0 0 0 1.98 0C13.28 21.19 20 15.25 20 10c0-4.42-3.58-8-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+function LocationText({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center gap-1 text-[#6e6e73]">
+      <PinIcon />
+      <LangLetters text={text} />
     </span>
   );
 }
@@ -207,10 +127,14 @@ function ProjectRow({
   project,
   first = false,
   delay,
+  onRowMouseMove,
+  onRowMouseLeave,
 }: {
   project: Project;
   first?: boolean;
   delay: number;
+  onRowMouseMove: (e: React.MouseEvent, cover: string | undefined) => void;
+  onRowMouseLeave: () => void;
 }) {
   const service = project.tags[0] ?? "—";
   const industry = project.tags[1] ?? project.tags[0] ?? "—";
@@ -218,6 +142,8 @@ function ProjectRow({
     <Block delay={delay} duration={300}>
       <Link
         href={project.href}
+        onMouseMove={(e) => onRowMouseMove(e, project.cover)}
+        onMouseLeave={onRowMouseLeave}
         className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${CLICKABLE_ROW_CLASS} ${
           first ? "border-t-0" : ""
         }`}
@@ -291,6 +217,7 @@ export default function HomeV2Content() {
   const { language } = useLanguage();
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
+  const { previewRef, cover, visible, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
     <RevealProvider>
@@ -328,7 +255,7 @@ export default function HomeV2Content() {
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
           <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
-            <LangParagraph text={t.paragraph} mountStart={260} mountLineStep={70} />
+            <HomeParagraph text={t.paragraph} />
           </p>
 
           {/* Links — desktop: México/LinkedIn left, paragraph+Cocinemos+CV right */}
@@ -336,7 +263,7 @@ export default function HomeV2Content() {
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
-                  <LangLetters text={t.location} />
+                  <LocationText text={t.location} />
                 </p>
               </Block>
               <UnderlineLink href="/about-me" delay={240}>
@@ -348,7 +275,7 @@ export default function HomeV2Content() {
             </div>
             <div className="flex flex-1 flex-col items-start gap-4">
               <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73]">
-                <LangParagraph text={t.paragraph} mountStart={260} mountLineStep={70} />
+                <HomeParagraph text={t.paragraph} />
               </p>
               <UnderlineLink href="mailto:hola@bure.art" delay={420}>
                 {t.cocinemos}
@@ -361,7 +288,7 @@ export default function HomeV2Content() {
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
-                  <LangLetters text={t.location} />
+                  <LocationText text={t.location} />
                 </p>
               </Block>
               <UnderlineLink href="/about-me" delay={240}>
@@ -423,8 +350,11 @@ export default function HomeV2Content() {
                   project={project}
                   first={i === 0}
                   delay={520 + i * 50}
+                  onRowMouseMove={onRowMouseMove}
+                  onRowMouseLeave={onRowMouseLeave}
                 />
               ))}
+              <HoverPreviewBox previewRef={previewRef} cover={cover} visible={visible} />
             </div>
             <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
               <UnderlineLink href="/projects" delay={0}>

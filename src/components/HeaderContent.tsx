@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CVLink from "@/components/CVLink";
 import LanguageSwitch from "@/components/LanguageSwitch";
-import { LangText } from "@/lib/langTransition";
+import { LangLetters } from "@/lib/langTransition";
 
 const navLinks = [
   { href: "/about-me", label: "About me" },
@@ -15,15 +15,13 @@ const navLinks = [
 function NavLinks({ className = "" }: { className?: string }) {
   return (
     <>
-      {navLinks.map(({ href, label }, i) => (
+      {navLinks.map(({ href, label }) => (
         <Link
           key={href}
           href={href}
-          className={`font-['Helvetica'] text-[16px] tracking-[0.16px] text-[#111] underline underline-offset-2 ${className}`}
+          className={`font-['Helvetica'] text-[16px] tracking-[0.16px] text-[#111] ${className}`}
         >
-          <LangText line={0} col={i}>
-            {label}
-          </LangText>
+          <LangLetters text={label} letterClassName="underline underline-offset-2" />
         </Link>
       ))}
     </>
@@ -102,7 +100,7 @@ export default function HeaderContent() {
       {/* Mobile dropdown */}
       {menuOpen && (
         <div className="absolute right-0 top-full z-50 mt-2 flex w-48 flex-col gap-4 rounded-lg border border-black/10 bg-white p-5 shadow-lg md:hidden">
-          <NavLinks className="underline-offset-2" />
+          <NavLinks />
           {showCV && (
             <CVLink className="rounded px-4 py-2 text-[16px] tracking-[0.16px] border border-black" />
           )}
