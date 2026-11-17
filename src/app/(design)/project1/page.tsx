@@ -115,14 +115,8 @@ export default function Project1() {
         <ProjectMedia src={musho("2_Musho.mp4")} alt="Musho.ai" />
       </div>
       <div className="grid items-start grid-cols-1 md:grid-cols-2 gap-6 pb-10">
-        <div className="flex flex-col gap-2">
-          <ProjectMedia src={musho("4_Musho.png")} alt="Musho.ai" />
-          <p className="text-[12px] text-[#6e6e73]">{isEs ? "Detalle" : "Detail"}</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          <ProjectMedia src={musho("5_Musho.png")} alt="Musho.ai" />
-          <p className="text-[12px] text-[#6e6e73]">{isEs ? "Detalle" : "Detail"}</p>
-        </div>
+        <ProjectMedia src={musho("4_Musho.png")} alt="Musho.ai" />
+        <ProjectMedia src={musho("5_Musho.png")} alt="Musho.ai" />
       </div>
 
       <div className="grid items-center grid-cols-1 md:grid-cols-6 py-10">
