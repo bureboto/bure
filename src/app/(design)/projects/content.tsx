@@ -55,23 +55,23 @@ function ProjectRow({
       href={project.href}
       onMouseMove={(e) => onRowMouseMove(e, project.cover)}
       onMouseLeave={onRowMouseLeave}
-      className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${CLICKABLE_ROW_CLASS} ${
+      className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 ${CLICKABLE_ROW_CLASS} ${
         first ? "border-t-0" : ""
       }`}
     >
-      <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[180px] md:text-[16px] md:tracking-[0.16px]">
+      <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[40%] md:text-[16px] md:tracking-[0.16px]">
         <LangText className="whitespace-normal">{project.name}</LangText>
       </p>
-      <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[160px]">
+      <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[20%]">
         <LangText className="whitespace-normal">{service}</LangText>
       </p>
-      <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">
+      <p className="flex-1 text-[12px] text-[#1d1d1d] md:w-[20%] md:flex-none md:text-[16px] md:tracking-[0.16px]">
         <LangText className="whitespace-normal">{project.name}</LangText>
       </p>
-      <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#909096] md:block">
+      <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#909096] md:block md:w-[15%] md:flex-none">
         <LangText className="whitespace-normal">{industry}</LangText>
       </p>
-      <p className="shrink-0 text-right text-[12px] text-[#909096] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
+      <p className="shrink-0 text-right text-[12px] text-[#909096] md:w-[5%] md:text-[16px] md:tracking-[0.16px]">
         <LangLetters text={yearOf(project.date)} />
       </p>
     </Link>
@@ -86,26 +86,26 @@ export default function ProjectsContent() {
   const { previewRef, cover, visible, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
-    <div className="flex w-full flex-1 flex-col gap-10 px-4 py-6 md:px-[120px] md:py-10">
+    <div className="flex w-full flex-1 flex-col gap-10 px-4 py-6 md:px-[240px] md:py-10">
       <p className="text-[48px] font-light leading-none text-[#1d1d1d] md:text-[80px]">
         <LangLetters text={t.title} />
       </p>
 
       <div className="flex flex-col">
-        <div className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
-          <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[180px]">
+        <div className="flex items-start gap-4 pb-1 md:gap-0 md:px-4">
+          <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[40%]">
             <LangLetters text={t.tableHeaders.title} />
           </p>
-          <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[160px]">
+          <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[20%]">
             <LangLetters text={t.tableHeaders.service} />
           </p>
-          <p className="flex-1 text-[12px] text-[#6e6e73]">
+          <p className="flex-1 text-[12px] text-[#6e6e73] md:w-[20%] md:flex-none">
             <LangLetters text={t.tableHeaders.client} />
           </p>
-          <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">
+          <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block md:w-[15%] md:flex-none">
             <LangLetters text={t.tableHeaders.industry} />
           </p>
-          <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">
+          <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:w-[5%]">
             <LangLetters text={t.tableHeaders.year} />
           </p>
         </div>
