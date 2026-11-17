@@ -54,7 +54,7 @@ export const projects: Project[] = [
       es: "Espacio es una media company que hace contenido y difusión sobre finanzas y tecnologías emergentes, empezó como Espacio Cripto y evolucionó a Espacio.",
       en: "Espacio is a media company creating content around finance and emerging technologies — it started as Espacio Cripto and evolved into Espacio.",
     },
-    tags: ["Brand", "UI", "Motion"],
+    tags: ["Branding", "UI", "Motion"],
   },
   {
     href: "/project1",
@@ -90,7 +90,7 @@ export const projects: Project[] = [
       es: "El Prado es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, con distribución en todo México.",
       en: "El Prado is a company selling cleaning and packaging supplies for home and office, distributed across Mexico.",
     },
-    tags: ["Branding", "Facility supplies"],
+    tags: ["Design System, Branding", "Facility supplies"],
   },
   {
     href: "/project6",
@@ -149,7 +149,7 @@ export const projects: Project[] = [
       es: "Branding, landing page y materiales de venta para IDF, el curso de Espacio Cripto para aprender a invertir en criptomonedas desde cero.",
       en: "Branding, landing page, and sales materials for IDF, Espacio Cripto's course for learning to invest in crypto from scratch.",
     },
-    tags: ["Brand", "UI"],
+    tags: ["Product design, Branding", "UI"],
   },
   {
     href: "/project12",
@@ -160,7 +160,7 @@ export const projects: Project[] = [
       es: "Branding e ilustración para The Base Night Show, un espacio de conversación creado con Espacio para la colaboración de Base en LATAM.",
       en: "Branding and illustration for The Base Night Show, a conversation space created with Espacio for Base's collaboration in LATAM.",
     },
-    tags: ["Brand", "Ilustración"],
+    tags: ["Branding, Motion graphics", "Ilustración"],
   },
   {
     href: "/robopets",
@@ -171,6 +171,6 @@ export const projects: Project[] = [
       es: "Robotos NFTs es una colección de 10,000 personajes únicos creada por Pablo Stanley. Sistemas de diseño, ilustración y motion para la marca y su colección derivada Robopets.",
       en: "Robotos NFTs is a collection of 10,000 unique characters created by Pablo Stanley. Design systems, illustration, and motion for the brand and its derivative collection, Robopets.",
     },
-    tags: ["Brand", "Ilustración"],
+    tags: ["Illustration, Design System", "Ilustración"],
   },
 ];
