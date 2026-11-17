@@ -65,25 +65,25 @@ export const projects: Project[] = [
   },
   {
     href: "/project4",
-    name: "c3r0",
-    date: "Julio, 2026",
+    name: "C3Я0",
+    date: "2026",
     cover: "/design/cero/Cover_Cer0_03.jpg",
     description: {
       es: "c3r0 es el primer mocktail bar en San José del Cabo, Baja California, México. Branding fresco, orgánico y con vibe tropical.",
       en: "c3r0 is the first mocktail bar in San José del Cabo, Baja California, Mexico. Fresh, organic branding with a tropical vibe.",
     },
-    tags: ["Brand"],
+    tags: ["Branding", "Restaurant"],
   },
   {
     href: "/project5",
     name: "El Prado",
-    date: "Marzo, 2025",
+    date: "2026",
     cover: "/design/prado/1_Cover_Prado.jpg",
     description: {
       es: "Plásticos El Prado es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, con distribución en todo México.",
       en: "Plásticos El Prado is a company selling cleaning and packaging supplies for home and office, distributed across Mexico.",
     },
-    tags: ["Brand"],
+    tags: ["Branding", "Facility supplies"],
   },
   {
     href: "/project6",
@@ -99,13 +99,13 @@ export const projects: Project[] = [
   {
     href: "/project7",
     name: "Nouns | Devconnect Singapore",
-    date: "Septiembre, 2024",
+    date: "2024",
     cover: "/design/singapore/1_Singapore.jpg",
     description: {
       es: "Ilustración y activación para el stand de Nouns en ETHGlobal Singapore: mural, gráficas de gran formato y experiencia para la comunidad.",
       en: "Illustration and activation for Nouns' booth at ETHGlobal Singapore: mural, large-format graphics, and a community experience.",
     },
-    tags: ["Brand"],
+    tags: ["Branding, Ilustración", "Blockchain"],
   },
   {
     href: "/project8",
