@@ -94,7 +94,7 @@ export const projects: Project[] = [
       es: "Ilustración y muralismo para el espacio de Nouns en Devconnect Argentina: gráficas, señalética y piezas para la comunidad durante todo el evento.",
       en: "Illustration and muralism for Nouns' space at Devconnect Argentina: graphics, signage, and community pieces throughout the event.",
     },
-    tags: ["Brand"],
+    tags: ["Branding, Ilustración", "Blockchain"],
   },
   {
     href: "/project7",
