@@ -126,20 +126,11 @@ export default function Project2() {
 
       <div className="grid items-start grid-cols-1 md:grid-cols-2 gap-6 pb-6">
         <ProjectMedia src={gandum("11_Gandum.jpg")} alt="Gandum" />
-        <div className="flex flex-col gap-2">
-          <ProjectMedia src={gandum("12_Gandum.jpg")} alt="Gandum" />
-          <p className="text-[12px] text-[#6e6e73]">{isEs ? "Detalle" : "Detail"}</p>
-        </div>
+        <ProjectMedia src={gandum("12_Gandum.jpg")} alt="Gandum" />
       </div>
       <div className="grid items-start grid-cols-1 md:grid-cols-2 gap-6 pb-10">
-        <div className="flex flex-col gap-2">
-          <ProjectMedia src={gandum("13_Gandum.jpg")} alt="Gandum" />
-          <p className="text-[12px] text-[#6e6e73]">{isEs ? "Detalle" : "Detail"}</p>
-        </div>
-        <div className="flex flex-col gap-2">
-          <ProjectMedia src={gandum("14_Gandum.jpg")} alt="Gandum" />
-          <p className="text-[12px] text-[#6e6e73]">{isEs ? "Detalle" : "Detail"}</p>
-        </div>
+        <ProjectMedia src={gandum("13_Gandum.jpg")} alt="Gandum" />
+        <ProjectMedia src={gandum("14_Gandum.jpg")} alt="Gandum" />
       </div>
 
       <OtherProjects currentHref="/project2" />
