@@ -39,7 +39,7 @@ export const projects: Project[] = [
       es: "Gandum es un festival que conecta la música electrónica y la cultura, la primera edición se realiza en Coffs Harbour, Australia en octubre del 2026.",
       en: "Gandum is a festival connecting electronic music and culture — its first edition takes place in Coffs Harbour, Australia in October 2026.",
     },
-    tags: ["Brand"],
+    tags: ["Brand", "Entertainment"],
   },
   {
     href: "/project3",
