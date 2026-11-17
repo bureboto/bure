@@ -5,10 +5,28 @@ import FloatingHeader from "@/components/FloatingHeader";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import { LangTransitionProvider } from "@/lib/langTransition";
 
+const ogImage = {
+  url: "/design/profile/Bure_PFP.png",
+  width: 1210,
+  height: 1210,
+  alt: "Bure Design",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://design.bure.art"),
   title: "Bure Design",
   description: "Bure — Trabajo de diseño.",
+  openGraph: {
+    title: "Bure Design",
+    description: "Bure — Trabajo de diseño.",
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bure Design",
+    description: "Bure — Trabajo de diseño.",
+    images: [ogImage.url],
+  },
 };
 
 export default function DesignLayout({ children }: LayoutProps<"/">) {

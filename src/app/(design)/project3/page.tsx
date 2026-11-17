@@ -5,6 +5,13 @@ import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import { useLanguage } from "@/lib/LanguageContext";
+import { HeroMeta } from "@/components/caseStudy/Hero";
+import { projects } from "@/lib/projects";
+
+const project = projects.find((p) => p.href === "/project3")!;
+const service = project.tags[0] ?? "—";
+const industry = project.tags[1] ?? project.tags[0] ?? "—";
+const year = project.date.match(/\d{4}/)?.[0] ?? project.date;
 
 const espacio = (file: string) => `/design/espacio/${file}`;
 
@@ -60,10 +67,15 @@ export default function Project3() {
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
           {isEs ? "← Volver" : "← Back"}
         </Link>
-        <div className="flex items-baseline gap-3 flex-wrap">
-          <h1 className="text-2xl">Espacio</h1>
-          <span className="text-sm text-black/60">{isEs ? "Marzo, 2026 · Brand / UI / Motion" : "March, 2026 · Brand / UI / Motion"}</span>
-        </div>
+        <h1 className="text-2xl">Espacio</h1>
+        <HeroMeta
+          items={[
+            { label: isEs ? "Cliente" : "Client", value: project.client ?? project.name },
+            { label: isEs ? "Servicio" : "Service", value: service },
+            { label: isEs ? "Año" : "Year", value: year },
+            { label: isEs ? "Industria" : "Industry", value: industry },
+          ]}
+        />
         <p className="max-w-2xl text-black/70">
           {isEs
             ? "Espacio es una media company que hace contenido y difusión sobre finanzas y tecnologías emergentes, empezó como Espacio Cripto y evolucionó a Espacio. Cuenta con una gran comunidad hispanohablante que empezó en el mundo cripto y ha ampliando sus horizontes."

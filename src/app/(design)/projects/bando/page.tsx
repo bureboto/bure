@@ -38,16 +38,16 @@ export default function Bando() {
       {/* Hero */}
       <div className="flex flex-col gap-10 py-10 md:flex-row md:gap-20">
         <div className="flex flex-1 flex-col gap-4">
-          <HeroMeta
-            items={[
-              { label: "Client", value: "Bando" },
-              { label: "Service", value: "Product design" },
-              { label: "Year", value: "2026" },
-              { label: "Industry", value: "Fintech" },
-            ]}
-          />
           <HeroIntro>
             <HeroTitle>Safe, Invest &amp; Pay in one app.</HeroTitle>
+            <HeroMeta
+              items={[
+                { label: "Client", value: "Bando" },
+                { label: "Service", value: "Product design" },
+                { label: "Year", value: "2026" },
+                { label: "Industry", value: "Fintech" },
+              ]}
+            />
             <HeroLead>
               Bando was a fintech. Users could {bold("invest")} in tokenized CETES, stocks like Tesla, gold, or
               crypto like Bitcoin.

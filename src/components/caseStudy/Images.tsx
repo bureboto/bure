@@ -11,7 +11,7 @@ function Slot({ image, aspect = "h-[400px]" }: { image: ImageSlot; aspect?: stri
   return (
     <div className="flex flex-1 flex-col gap-2">
       <div className={`relative w-full ${aspect}`}>
-        <Image src={image.src} alt={image.alt} fill className="object-contain bg-[#f0f0f5]" />
+        <Image src={image.src} alt={image.alt} fill className="object-contain" />
       </div>
       <Caption caption={image.caption} />
     </div>
