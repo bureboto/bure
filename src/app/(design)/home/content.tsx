@@ -217,7 +217,7 @@ export default function HomeV2Content() {
   const { language } = useLanguage();
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
-  const { containerRef, previewRef, cover, visible, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
+  const { previewRef, cover, visible, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
     <RevealProvider>
@@ -343,7 +343,7 @@ export default function HomeV2Content() {
                 <LangLetters text={t.tableHeaders.year} />
               </p>
             </Block>
-            <div ref={containerRef} className="relative flex flex-col">
+            <div className="flex flex-col">
               {tableProjects.map((project, i) => (
                 <ProjectRow
                   key={project.href}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
+import { createPortal } from "react-dom";
 
 const PREVIEW_WIDTH = 280;
 const PREVIEW_HEIGHT = 158;
@@ -17,19 +18,24 @@ const EASE = 0.22;
  * while it's over any row (not an instant snap) — then fades out on
  * mouseleave.
  *
+ * Rendered through a portal into document.body with `position: fixed`
+ * (viewport coordinates), not absolutely inside the row list — tables
+ * like Home's live inside an `overflow-hidden` layout, which would clip
+ * the preview for rows near the top/edge if it were a normal in-flow
+ * absolute child. A portal + fixed positioning is never clipped by any
+ * ancestor, so it can float freely above the table.
+ *
  * The follow animation runs its own requestAnimationFrame loop writing
  * straight to the DOM node's style (not through React state), so it's
  * perfectly smooth regardless of React's render cycle. Only
  * cover/visibility go through state, since those only change
  * occasionally (on row change), not every frame.
  *
- * Wrap the row list in a `relative` container with `containerRef`, call
- * `onRowMouseMove`/`onRowMouseLeave` on each row, and render
+ * Call `onRowMouseMove`/`onRowMouseLeave` on each row, and render
  * `<HoverPreviewBox previewRef={previewRef} cover={cover} visible={visible} />`
- * as that same container's child.
+ * anywhere — it portals itself to document.body.
  */
 export function useHoverPreview() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const [cover, setCover] = useState<string | undefined>(undefined);
   const [visible, setVisible] = useState(false);
@@ -57,11 +63,9 @@ export function useHoverPreview() {
   }, []);
 
   const setTarget = useCallback((clientX: number, clientY: number) => {
-    const container = containerRef.current;
-    if (!container) return;
-    const rect = container.getBoundingClientRect();
-    const left = clientX - rect.left + 16;
-    const top = Math.max(clientY - rect.top - PREVIEW_HEIGHT - 16, 0);
+    // Viewport coordinates, since the preview is fixed-positioned.
+    const left = clientX + 16;
+    const top = Math.max(clientY - PREVIEW_HEIGHT - 16, 0);
     target.current = { x: left, y: top };
     if (!initialized.current) {
       // Appear right at the cursor the first time, then ease from there on.
@@ -84,7 +88,7 @@ export function useHoverPreview() {
     initialized.current = false;
   }, []);
 
-  return { containerRef, previewRef, cover, visible, onRowMouseMove, onRowMouseLeave };
+  return { previewRef, cover, visible, onRowMouseMove, onRowMouseLeave };
 }
 
 export function HoverPreviewBox({
@@ -97,7 +101,12 @@ export function HoverPreviewBox({
   visible: boolean;
 }) {
   const [shown, setShown] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const lastCover = useRef(cover);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (lastCover.current === cover) return;
@@ -107,13 +116,15 @@ export function HoverPreviewBox({
     return () => clearTimeout(t);
   }, [cover]);
 
+  if (!mounted) return null;
+
   const isVideo = cover?.endsWith(".mp4");
 
-  return (
+  return createPortal(
     <div
       ref={previewRef}
       aria-hidden
-      className="pointer-events-none absolute z-50 hidden overflow-hidden rounded bg-[#1d1d1d] transition-opacity duration-150 ease-out md:block"
+      className="pointer-events-none fixed z-50 hidden overflow-hidden rounded bg-[#1d1d1d] transition-opacity duration-150 ease-out md:block"
       style={{ width: PREVIEW_WIDTH, height: PREVIEW_HEIGHT, opacity: visible && cover ? 1 : 0 }}
     >
       {cover && (
@@ -126,6 +137,7 @@ export function HoverPreviewBox({
           )}
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 }
