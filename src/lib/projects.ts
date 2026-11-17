@@ -10,7 +10,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    href: "/project13",
+    href: "/projects/INE",
     name: "INE – PREP Help Materials",
     client: "Instituto Nacional Electoral (INE)",
     date: "2018",

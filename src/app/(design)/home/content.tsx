@@ -38,7 +38,7 @@ function LocationText({ text }: { text: string }) {
 const featured = projects;
 
 // The 5 projects to show in the list, in order.
-const TABLE_HREFS = ["/projects/bando", "/project13", "/project3", "/project12", "/robopets"];
+const TABLE_HREFS = ["/projects/bando", "/projects/INE", "/project3", "/project12", "/robopets"];
 const tableProjects = TABLE_HREFS.map((href) => projects.find((p) => p.href === href)).filter(
   (p): p is Project => !!p
 );
