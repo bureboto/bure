@@ -4,7 +4,14 @@ import Link from "next/link";
 import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
+import { HeroMeta } from "@/components/caseStudy/Hero";
+import { projects } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
+
+const project = projects.find((p) => p.href === "/project1")!;
+const service = project.tags[0] ?? "—";
+const industry = project.tags[1] ?? project.tags[0] ?? "—";
+const year = project.date.match(/\d{4}/)?.[0] ?? project.date;
 
 const musho = (file: string) => `/design/musho/${file}`;
 
@@ -35,10 +42,15 @@ export default function Project1() {
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
           {isEs ? "← Volver" : "← Back"}
         </Link>
-        <div className="flex items-baseline gap-3 flex-wrap">
-          <h1 className="text-2xl">Musho.ai</h1>
-          <span className="text-sm text-black/60">2024 · Brand / Motion</span>
-        </div>
+        <h1 className="text-2xl">Musho.ai</h1>
+        <HeroMeta
+          items={[
+            { label: isEs ? "Cliente" : "Client", value: project.name },
+            { label: isEs ? "Servicio" : "Service", value: service },
+            { label: isEs ? "Año" : "Year", value: year },
+            { label: isEs ? "Industria" : "Industry", value: industry },
+          ]}
+        />
         <p className="max-w-2xl text-black/70">
           Musho is an AI-powered design assistant, turning your prompts into websites, social
           media posts, slides, and more — effortlessly. Tell Musho your vision and bring it to

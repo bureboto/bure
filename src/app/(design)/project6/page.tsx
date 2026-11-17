@@ -5,6 +5,13 @@ import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import { useLanguage } from "@/lib/LanguageContext";
+import { HeroMeta } from "@/components/caseStudy/Hero";
+import { projects } from "@/lib/projects";
+
+const project = projects.find((p) => p.href === "/project6")!;
+const service = project.tags[0] ?? "—";
+const industry = project.tags[1] ?? project.tags[0] ?? "—";
+const year = project.date.match(/\d{4}/)?.[0] ?? project.date;
 
 const nouns = (file: string) => `/design/nouns/${file}`;
 
@@ -55,10 +62,15 @@ export default function Project6() {
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
           {isEs ? "← Volver" : "← Back"}
         </Link>
-        <div className="flex items-baseline gap-3 flex-wrap">
-          <h1 className="text-2xl">Nouns | Devconnect ARG</h1>
-          <span className="text-sm text-black/60">{isEs ? "Noviembre, 2025 · Brand" : "November, 2025 · Brand"}</span>
-        </div>
+        <h1 className="text-2xl">Nouns | Devconnect ARG</h1>
+        <HeroMeta
+          items={[
+            { label: isEs ? "Cliente" : "Client", value: project.name },
+            { label: isEs ? "Servicio" : "Service", value: service },
+            { label: isEs ? "Año" : "Year", value: year },
+            { label: isEs ? "Industria" : "Industry", value: industry },
+          ]}
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4 text-black/70">
           <p>
             {isEs

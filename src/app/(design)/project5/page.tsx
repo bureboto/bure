@@ -5,6 +5,13 @@ import ProjectMedia from "@/components/ProjectMedia";
 import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import { useLanguage } from "@/lib/LanguageContext";
+import { HeroMeta } from "@/components/caseStudy/Hero";
+import { projects } from "@/lib/projects";
+
+const project = projects.find((p) => p.href === "/project5")!;
+const service = project.tags[0] ?? "—";
+const industry = project.tags[1] ?? project.tags[0] ?? "—";
+const year = project.date.match(/\d{4}/)?.[0] ?? project.date;
 
 const prado = (file: string) => `/design/prado/${file}`;
 
@@ -53,10 +60,15 @@ export default function Project5() {
         <Link href="/home" className="flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity w-fit">
           {isEs ? "← Volver" : "← Back"}
         </Link>
-        <div className="flex items-baseline gap-3 flex-wrap">
-          <h1 className="text-2xl">El Prado</h1>
-          <span className="text-sm text-black/60">{isEs ? "Marzo, 2025 · Brand" : "March, 2025 · Brand"}</span>
-        </div>
+        <h1 className="text-2xl">El Prado</h1>
+        <HeroMeta
+          items={[
+            { label: isEs ? "Cliente" : "Client", value: project.name },
+            { label: isEs ? "Servicio" : "Service", value: service },
+            { label: isEs ? "Año" : "Year", value: year },
+            { label: isEs ? "Industria" : "Industry", value: industry },
+          ]}
+        />
         <p className="max-w-2xl text-black/70">
           {isEs
             ? "Plásticos El Prado, es una empresa dedicada a la venta de artículos de limpieza y empaque para hogar y oficina, hacen distribución en todo México. Su principal punto de venta es online."

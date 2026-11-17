@@ -152,24 +152,24 @@ export default function Project13() {
       {/* Hero */}
       <div className="flex flex-col gap-10 md:flex-row md:gap-20">
         <div className="flex flex-1 flex-col gap-4">
-          <HeroMeta
-            items={[
-              { es: { label: "Cliente", value: "INE" }, en: { label: "Client", value: "INE" } },
-              {
-                es: { label: "Servicio", value: "Sistema de diseño, Ilustración, UX Writing" },
-                en: { label: "Service", value: "Design System, Illustration, UX Writing" },
-              },
-              { es: { label: "Año", value: "2018" }, en: { label: "Year", value: "2018" } },
-              { es: { label: "Industria", value: "Gobierno" }, en: { label: "Industry", value: "Government" } },
-            ].map((item) => ({
-              label: <T es={item.es.label} en={item.en.label} />,
-              value: <T es={item.es.value} en={item.en.value} />,
-            }))}
-          />
           <HeroIntro>
             <HeroTitle>
               INE – <T es="Materiales de ayuda del PREP" en="PREP Help Materials" />
             </HeroTitle>
+            <HeroMeta
+              items={[
+                { es: { label: "Cliente", value: "INE" }, en: { label: "Client", value: "INE" } },
+                {
+                  es: { label: "Servicio", value: "Sistema de diseño, Ilustración, UX Writing" },
+                  en: { label: "Service", value: "Design System, Illustration, UX Writing" },
+                },
+                { es: { label: "Año", value: "2018" }, en: { label: "Year", value: "2018" } },
+                { es: { label: "Industria", value: "Gobierno" }, en: { label: "Industry", value: "Government" } },
+              ].map((item) => ({
+                label: <T es={item.es.label} en={item.en.label} />,
+                value: <T es={item.es.value} en={item.en.value} />,
+              }))}
+            />
             <Bi
               es="Branding para los capturistas y el centro de ayuda de las elecciones nacionales de México de 2018."
               en="Branding for the data entry staff and help center of Mexico's 2018 national elections."
