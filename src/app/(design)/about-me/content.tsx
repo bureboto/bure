@@ -110,9 +110,15 @@ function UnderlineLink({ href, delay, children }: { href: string; delay: number;
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="text-[16px] tracking-[0.16px] text-[#1d1d1d] underline underline-offset-2"
+      className="text-[16px] tracking-[0.16px] text-[#1d1d1d]"
     >
-      <LangLetters text={children} revealedMount={revealedMount} mountStart={delay} mountStep={10} />
+      <LangLetters
+        text={children}
+        revealedMount={revealedMount}
+        mountStart={delay}
+        mountStep={10}
+        letterClassName="underline underline-offset-2"
+      />
     </a>
   );
 }
