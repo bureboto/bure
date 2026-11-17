@@ -203,7 +203,7 @@ export default function Project7() {
 
       <div className="grid items-center grid-cols-1 md:grid-cols-2 gap-6 pb-6">
         <ProjectMedia src={sg("4_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
-        <ProjectMedia src={sg("5_Singapore.gif")} alt="Nouns | ETHGlobal Singapore" />
+        <ProjectMedia src={sg("1_Singapore.jpg")} alt="Nouns | ETHGlobal Singapore" />
       </div>
       <div className="grid items-start grid-cols-1 md:grid-cols-2 gap-6 pb-10">
         <div className="flex flex-col gap-2">
