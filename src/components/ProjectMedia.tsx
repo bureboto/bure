@@ -1,7 +1,7 @@
 export default function ProjectMedia({
   src,
   alt,
-  className = "w-full h-auto",
+  className = "w-auto h-auto max-w-full",
 }: {
   src: string;
   alt: string;
