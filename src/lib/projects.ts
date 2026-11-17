@@ -61,7 +61,7 @@ export const projects: Project[] = [
       es: "Musho es un asistente de diseño con IA, que convierte tus prompts en sitios web, publicaciones para redes sociales, presentaciones y más — sin esfuerzo.",
       en: "Musho is an AI-powered design assistant, turning your prompts into websites, social media posts, slides, and more — effortlessly.",
     },
-    tags: ["Brand", "Motion"],
+    tags: ["Brand", "AI"],
   },
   {
     href: "/project4",
