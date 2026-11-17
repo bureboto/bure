@@ -5,6 +5,7 @@ import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import { LangLetters, LangText, useDelayedLanguage } from "@/lib/langTransition";
+import { useHoverPreview, HoverPreviewBox } from "@/lib/hoverPreview";
 
 const copy = {
   es: {
@@ -36,12 +37,24 @@ function yearOf(date: string) {
   return match ? match[0] : date;
 }
 
-function ProjectRow({ project, first }: { project: Project; first: boolean }) {
+function ProjectRow({
+  project,
+  first,
+  onRowMouseMove,
+  onRowMouseLeave,
+}: {
+  project: Project;
+  first: boolean;
+  onRowMouseMove: (e: React.MouseEvent, cover: string | undefined) => void;
+  onRowMouseLeave: () => void;
+}) {
   const service = project.tags[0] ?? "—";
   const industry = project.tags[1] ?? project.tags[0] ?? "—";
   return (
     <Link
       href={project.href}
+      onMouseMove={(e) => onRowMouseMove(e, project.cover)}
+      onMouseLeave={onRowMouseLeave}
       className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${CLICKABLE_ROW_CLASS} ${
         first ? "border-t-0" : ""
       }`}
@@ -70,6 +83,7 @@ export default function ProjectsContent() {
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
   const year = new Date().getFullYear();
+  const { containerRef, state, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
     <div className="flex w-full flex-1 flex-col gap-10 px-4 py-6 md:px-[120px] md:py-10">
@@ -95,10 +109,17 @@ export default function ProjectsContent() {
             <LangLetters text={t.tableHeaders.year} />
           </p>
         </div>
-        <div className="flex flex-col">
+        <div ref={containerRef} className="relative flex flex-col">
           {projects.map((project, i) => (
-            <ProjectRow key={project.href} project={project} first={i === 0} />
+            <ProjectRow
+              key={project.href}
+              project={project}
+              first={i === 0}
+              onRowMouseMove={onRowMouseMove}
+              onRowMouseLeave={onRowMouseLeave}
+            />
           ))}
+          <HoverPreviewBox {...state} />
         </div>
       </div>
 

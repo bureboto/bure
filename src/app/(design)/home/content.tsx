@@ -5,6 +5,7 @@ import { projects, type Project } from "@/lib/projects";
 import { useLanguage } from "@/lib/LanguageContext";
 import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import { LangLetters, LangText, LangParagraph, useDelayedLanguage } from "@/lib/langTransition";
+import { useHoverPreview, HoverPreviewBox } from "@/lib/hoverPreview";
 import HeaderContent from "@/components/HeaderContent";
 import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
 
@@ -126,10 +127,14 @@ function ProjectRow({
   project,
   first = false,
   delay,
+  onRowMouseMove,
+  onRowMouseLeave,
 }: {
   project: Project;
   first?: boolean;
   delay: number;
+  onRowMouseMove: (e: React.MouseEvent, cover: string | undefined) => void;
+  onRowMouseLeave: () => void;
 }) {
   const service = project.tags[0] ?? "—";
   const industry = project.tags[1] ?? project.tags[0] ?? "—";
@@ -137,6 +142,8 @@ function ProjectRow({
     <Block delay={delay} duration={300}>
       <Link
         href={project.href}
+        onMouseMove={(e) => onRowMouseMove(e, project.cover)}
+        onMouseLeave={onRowMouseLeave}
         className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${CLICKABLE_ROW_CLASS} ${
           first ? "border-t-0" : ""
         }`}
@@ -210,6 +217,7 @@ export default function HomeV2Content() {
   const { language } = useLanguage();
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
+  const { containerRef, state, onRowMouseMove, onRowMouseLeave } = useHoverPreview();
 
   return (
     <RevealProvider>
@@ -335,15 +343,18 @@ export default function HomeV2Content() {
                 <LangLetters text={t.tableHeaders.year} />
               </p>
             </Block>
-            <div className="flex flex-col">
+            <div ref={containerRef} className="relative flex flex-col">
               {tableProjects.map((project, i) => (
                 <ProjectRow
                   key={project.href}
                   project={project}
                   first={i === 0}
                   delay={520 + i * 50}
+                  onRowMouseMove={onRowMouseMove}
+                  onRowMouseLeave={onRowMouseLeave}
                 />
               ))}
+              <HoverPreviewBox {...state} />
             </div>
             <Block delay={520 + tableProjects.length * 50} duration={280} className="border-t border-[#909096] py-2 text-right">
               <UnderlineLink href="/projects" delay={0}>
