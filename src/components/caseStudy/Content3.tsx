@@ -13,7 +13,7 @@ export default function Content3({ title, columns }: { title: ReactNode; columns
   return (
     <>
       <SectionDivider />
-      <div className="flex flex-col gap-10 pt-16">
+      <div className="flex flex-col gap-10 py-16">
         <JumboTitle>{title}</JumboTitle>
         <div className="flex flex-col gap-10 md:flex-row">
           {columns.map((col, i) => (
