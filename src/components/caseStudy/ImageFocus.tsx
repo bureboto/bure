@@ -17,8 +17,11 @@ export default function ImageFocus({
   height?: number;
 }) {
   return (
-    <div className="flex items-center justify-center px-40 py-10">
-      <div className="relative flex w-full overflow-hidden" style={{ height, backgroundColor: bg }}>
+    <div className="flex items-center justify-center px-4 py-10 md:px-40">
+      <div
+        className="relative flex w-full overflow-hidden max-h-[400px] md:max-h-none"
+        style={{ height, backgroundColor: bg }}
+      >
         {images.map((image, i) => (
           <div key={i} className="relative flex-1">
             <Image src={image.src} alt={image.alt} fill className="object-cover" />
