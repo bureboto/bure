@@ -147,24 +147,24 @@ function ProjectRow({
         href={project.href}
         onMouseMove={(e) => onRowMouseMove(e, project.cover)}
         onMouseLeave={onRowMouseLeave}
-        className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${CLICKABLE_ROW_CLASS} ${
+        className={`flex items-start gap-4 border-t border-[#909096] py-2 xl:gap-0 xl:justify-between ${CLICKABLE_ROW_CLASS} ${
           first ? "border-t-0" : ""
         }`}
       >
-        <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[222px] md:text-[16px] md:tracking-[0.16px]">
+        <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px] xl:w-[222px]">
           {/* Per-character wrap can break long names mid-word — use the whole-block fade instead */}
           <LangText className="whitespace-normal">{project.name}</LangText>
         </p>
-        <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[137px]">
+        <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] xl:block xl:w-[137px]">
           <LangText className="whitespace-normal">{service}</LangText>
         </p>
         <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">
           <LangText className="whitespace-normal">{project.client ?? project.name}</LangText>
         </p>
-        <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] md:block">
+        <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] 2xl:block">
           <LangText className="whitespace-normal">{industry}</LangText>
         </p>
-        <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
+        <p className="w-[32px] shrink-0 text-right text-[12px] text-[#6e6e73] md:w-[48px] md:text-[16px] md:tracking-[0.16px]">
           <LangLetters text={yearOf(project.date)} />
         </p>
       </Link>
@@ -338,20 +338,20 @@ export default function HomeV2Content() {
             </p>
           </div>
           <div className="flex flex-1 flex-col">
-            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
-              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">
+            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 xl:gap-0 xl:justify-between md:px-4">
+              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] xl:w-[222px]">
                 <LangLetters text={t.tableHeaders.title} />
               </p>
-              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">
+              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] xl:block xl:w-[137px]">
                 <LangLetters text={t.tableHeaders.service} />
               </p>
               <p className="flex-1 text-[12px] text-[#6e6e73]">
                 <LangLetters text={t.tableHeaders.client} />
               </p>
-              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">
+              <p className="hidden flex-1 text-[12px] text-[#6e6e73] 2xl:block">
                 <LangLetters text={t.tableHeaders.industry} />
               </p>
-              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">
+              <p className="w-[32px] shrink-0 text-right text-[12px] text-[#6e6e73] md:w-[48px]">
                 <LangLetters text={t.tableHeaders.year} />
               </p>
             </Block>
