@@ -14,7 +14,7 @@ export default function Content4({ title, items }: { title: ReactNode; items: Co
       <div className="flex flex-col gap-10 py-20">
         <JumboTitle>{title}</JumboTitle>
         {rows.map((row, r) => (
-          <div key={r} className="flex items-start gap-10">
+          <div key={r} className="flex flex-col items-start gap-10 md:flex-row">
             {row.map((item, i) => (
               <div key={i} className="flex-1 border-l border-[#6e6e73] pl-4">
                 <Subtitle24>{item.subtitle}</Subtitle24>

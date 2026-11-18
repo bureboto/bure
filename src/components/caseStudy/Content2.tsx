@@ -18,7 +18,7 @@ export default function Content2({
         <div className="flex flex-col gap-4">
           <JumboTitle>{title}</JumboTitle>
           {body && (
-            <div className="w-[480px]">
+            <div className="w-full md:w-[480px]">
               <BodyText>{body}</BodyText>
             </div>
           )}
@@ -47,7 +47,9 @@ export function Content2Item({
   first?: boolean;
 }) {
   return (
-    <div className={`flex items-start gap-20 ${first ? "" : "border-t border-[#6e6e73] pt-20"}`}>
+    <div
+      className={`flex flex-col items-start gap-10 md:flex-row md:gap-20 ${first ? "" : "border-t border-[#6e6e73] pt-10 md:pt-20"}`}
+    >
       <div className="flex flex-1 flex-col gap-6">{children}</div>
       <div className="flex flex-1 items-start">
         {/* eslint-disable-next-line @next/next/no-img-element */}

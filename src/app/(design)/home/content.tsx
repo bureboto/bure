@@ -7,6 +7,7 @@ import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import { LangLetters, LangText, LangParagraph, useDelayedLanguage } from "@/lib/langTransition";
 import { useHoverPreview, HoverPreviewBox } from "@/lib/hoverPreview";
 import HeaderContent from "@/components/HeaderContent";
+import { CV_HREF } from "@/components/CVLink";
 import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
 
 /** Rendered inside RevealProvider (unlike HomeV2Content, which renders it) so useRevealed() here reflects the real mount state. */
@@ -146,24 +147,24 @@ function ProjectRow({
         href={project.href}
         onMouseMove={(e) => onRowMouseMove(e, project.cover)}
         onMouseLeave={onRowMouseLeave}
-        className={`flex items-start gap-4 border-t border-[#909096] py-2 md:gap-0 md:justify-between ${CLICKABLE_ROW_CLASS} ${
+        className={`flex items-start gap-4 border-t border-[#909096] py-2 md:justify-between xl:gap-0 ${CLICKABLE_ROW_CLASS} ${
           first ? "border-t-0" : ""
         }`}
       >
-        <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:w-[222px] md:text-[16px] md:tracking-[0.16px]">
+        <p className="w-[180px] shrink-0 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px] xl:w-[222px]">
           {/* Per-character wrap can break long names mid-word — use the whole-block fade instead */}
           <LangText className="whitespace-normal">{project.name}</LangText>
         </p>
-        <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] md:block md:w-[137px]">
+        <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] xl:block xl:w-[137px]">
           <LangText className="whitespace-normal">{service}</LangText>
         </p>
-        <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">
+        <p className="flex-1 text-[12px] text-[#1d1d1d] md:hidden md:text-[16px] md:tracking-[0.16px] xl:block">
           <LangText className="whitespace-normal">{project.client ?? project.name}</LangText>
         </p>
-        <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] md:block">
+        <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] 2xl:block">
           <LangText className="whitespace-normal">{industry}</LangText>
         </p>
-        <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1 md:text-[16px] md:tracking-[0.16px]">
+        <p className="w-[32px] shrink-0 text-right text-[12px] text-[#6e6e73] md:w-[48px] md:text-[16px] md:tracking-[0.16px]">
           <LangLetters text={yearOf(project.date)} />
         </p>
       </Link>
@@ -176,7 +177,7 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
   return (
     <FadeIn delay={delay} duration={400} className="group">
       <Link href={project.href} className="flex flex-col gap-2">
-        <div className="relative h-[200px] w-full overflow-hidden rounded bg-[#1d1d1d]">
+        <div className="relative aspect-video w-full overflow-hidden rounded bg-[#1d1d1d]">
           {project.cover ? (
             project.cover.endsWith(".mp4") ? (
               <video
@@ -228,14 +229,14 @@ export default function HomeV2Content() {
         className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-0 md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
       >
         {/* Top — hero content */}
-        <div className="flex flex-col gap-6 md:[grid-area:top]">
+        <div className="flex flex-col gap-10 md:gap-6 md:[grid-area:top]">
           {/* Header — scoped to this column only on desktop (Figma node 3578:39752); mobile keeps the global header */}
           <div className="hidden md:block">
             <HeaderContent />
           </div>
 
           {/* Head */}
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex flex-col gap-0 text-[#1d1d1d]">
               <div className="flex items-start gap-0 whitespace-nowrap">
                 <p className="text-[80px] font-light leading-none">
@@ -251,13 +252,13 @@ export default function HomeV2Content() {
                 </p>
               </Block>
             </div>
-            <Pfp className="hidden h-[140px] w-[140px] md:block" delay={180} />
+            <Pfp className="hidden h-[140px] w-[140px] lg:block" delay={180} />
           </div>
 
-          <Pfp className="h-[160px] w-[160px] md:hidden" delay={180} />
+          <Pfp className="h-[160px] w-[160px] lg:hidden" delay={180} />
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
-          <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
+          <p className="text-[21px] leading-normal text-[#6e6e73] md:hidden">
             <HomeParagraph text={t.paragraph} />
           </p>
 
@@ -286,8 +287,8 @@ export default function HomeV2Content() {
             </div>
           </div>
 
-          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos right */}
-          <div className="flex items-start gap-6 md:hidden">
+          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos/CV right */}
+          <div className="flex items-start gap-6 py-10 md:hidden">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
@@ -305,6 +306,9 @@ export default function HomeV2Content() {
               <UnderlineLink href="mailto:hola@bure.art" delay={460}>
                 {t.cocinemos}
               </UnderlineLink>
+              <UnderlineLink href={CV_HREF[displayLanguage]} external delay={480}>
+                CV
+              </UnderlineLink>
             </div>
           </div>
         </div>
@@ -313,7 +317,7 @@ export default function HomeV2Content() {
         <div className="scrollbar-hidden flex flex-col md:[grid-area:right] md:h-full md:overflow-y-auto">
           <div
             id="projects"
-            className="grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:gap-x-4 md:gap-y-4 md:pt-6"
+            className="grid grid-cols-1 content-start gap-y-4 rounded-t-[4px] lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 lg:pt-6"
           >
             {featured.map((project, i) => {
               const row = Math.floor(i / 2);
@@ -321,7 +325,7 @@ export default function HomeV2Content() {
               return <ProjectCardV2 key={project.href} project={project} delay={row * 90 + col * 50} />;
             })}
           </div>
-          <footer className="mt-auto flex items-center justify-center pb-[24px] pt-4 text-[12px] text-[#111]">
+          <footer className="mt-auto hidden items-center justify-center pb-[24px] pt-4 text-[12px] text-[#111] md:flex">
             <LangText>{t.footer(year)}</LangText>
           </footer>
         </div>
@@ -334,20 +338,20 @@ export default function HomeV2Content() {
             </p>
           </div>
           <div className="flex flex-1 flex-col">
-            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:gap-0 md:justify-between md:px-4">
-              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] md:w-[222px]">
+            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:justify-between md:px-4 xl:gap-0">
+              <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] xl:w-[222px]">
                 <LangLetters text={t.tableHeaders.title} />
               </p>
-              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] md:block md:w-[137px]">
+              <p className="hidden shrink-0 text-[12px] text-[#6e6e73] xl:block xl:w-[137px]">
                 <LangLetters text={t.tableHeaders.service} />
               </p>
-              <p className="flex-1 text-[12px] text-[#6e6e73]">
+              <p className="flex-1 text-[12px] text-[#6e6e73] md:hidden xl:block">
                 <LangLetters text={t.tableHeaders.client} />
               </p>
-              <p className="hidden flex-1 text-[12px] text-[#6e6e73] md:block">
+              <p className="hidden flex-1 text-[12px] text-[#6e6e73] 2xl:block">
                 <LangLetters text={t.tableHeaders.industry} />
               </p>
-              <p className="shrink-0 text-right text-[12px] text-[#6e6e73] md:flex-1">
+              <p className="w-[32px] shrink-0 text-right text-[12px] text-[#6e6e73] md:w-[48px]">
                 <LangLetters text={t.tableHeaders.year} />
               </p>
             </Block>

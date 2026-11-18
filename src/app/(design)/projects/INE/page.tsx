@@ -5,7 +5,7 @@ import ContentGrid from "@/components/ContentGrid";
 import OtherProjects from "@/components/OtherProjects";
 import Breadcrumb from "@/components/caseStudy/Breadcrumb";
 import { HeroMeta, HeroTitle, HeroIntro, HeroDetail, HeroStats } from "@/components/caseStudy/Hero";
-import ImageFocus from "@/components/caseStudy/ImageFocus";
+import { ImagesFocus } from "@/components/caseStudy/Images";
 import DeliverablesScroll from "@/components/caseStudy/DeliverablesScroll";
 import DeliverablesFilmstrip from "@/components/caseStudy/DeliverablesFilmstrip";
 import ReadingProgressBar from "@/components/caseStudy/ReadingProgressBar";
@@ -208,7 +208,7 @@ export default function Project13() {
         </div>
       </div>
 
-      <ImageFocus images={[{ src: ine("INE-Intro.jpg"), alt: "INE PREP help center introduction" }]} />
+      <ImagesFocus image={{ src: ine("INE-Intro.jpg"), alt: "INE PREP help center introduction" }} />
 
       {/* Context */}
       <Divider />
