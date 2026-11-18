@@ -177,7 +177,7 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
   return (
     <FadeIn delay={delay} duration={400} className="group">
       <Link href={project.href} className="flex flex-col gap-2">
-        <div className="relative h-[200px] w-full overflow-hidden rounded bg-[#1d1d1d]">
+        <div className="relative h-[200px] w-full overflow-hidden rounded bg-[#1d1d1d] lg:aspect-video lg:h-auto">
           {project.cover ? (
             project.cover.endsWith(".mp4") ? (
               <video
@@ -317,7 +317,7 @@ export default function HomeV2Content() {
         <div className="scrollbar-hidden flex flex-col md:[grid-area:right] md:h-full md:overflow-y-auto">
           <div
             id="projects"
-            className="grid grid-cols-1 content-start gap-y-4 rounded-t-[4px] md:grid-cols-2 md:gap-x-4 md:gap-y-4 md:pt-6"
+            className="grid grid-cols-1 content-start gap-y-4 rounded-t-[4px] md:grid-cols-2 md:gap-x-4 md:gap-y-4 md:pt-6 lg:grid-cols-1"
           >
             {featured.map((project, i) => {
               const row = Math.floor(i / 2);
