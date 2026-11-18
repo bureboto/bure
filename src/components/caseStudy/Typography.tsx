@@ -43,12 +43,12 @@ export function LinkText({ children }: { children: ReactNode }) {
   return <p className="text-[16px] tracking-[0.16px] text-[#1d1d1d] underline underline-offset-2">{children}</p>;
 }
 
-/** Bordered stacked item used in Content-1, Content-2, and Content-4 (border-l Primary, 16px left padding). */
+/** Bordered stacked item used in Content-1, Content-2, and Content-4 (border-l black, 16px left padding). */
 export function ContentBorderedItem({ children }: { children: ReactNode }) {
-  return <div className="border-l border-[#1d1d1d] pl-4">{children}</div>;
+  return <div className="border-l border-black pl-4">{children}</div>;
 }
 
 /** Full-bleed divider — breaks out of ContentGrid's centered column to span the full viewport width, matching Figma's edge-to-edge section borders. */
 export function SectionDivider() {
-  return <hr className="w-screen ml-[calc(50%-50vw)] border-[#6e6e73]" />;
+  return <hr className="w-screen ml-[calc(50%-50vw)] border-black/20" />;
 }
