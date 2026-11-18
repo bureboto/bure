@@ -56,50 +56,15 @@ export default function HeaderContent() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="relative flex h-[56px] items-center justify-between md:h-[72px]">
-      <Link href="/home" aria-label="Bure">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/logo.svg" alt="Bure" width={77} height={20} />
-      </Link>
+    <>
+      <div className="relative flex h-[56px] items-center justify-between md:h-[72px]">
+        <Link href="/home" aria-label="Bure">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="Bure" width={77} height={20} />
+        </Link>
 
-      {/* Desktop nav */}
-      <div className="hidden items-center gap-4 md:flex">
-        <NavLinks />
-        {showCV && (
-          <CVLink className="rounded px-4 py-2 text-[16px] tracking-[0.16px] border border-black" />
-        )}
-        <a
-          href="https://www.linkedin.com/in/bureboto/"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="LinkedIn"
-          className="opacity-70 transition-opacity hover:opacity-100"
-        >
-          <LinkedInIcon />
-        </a>
-        <LanguageSwitch />
-      </div>
-
-      {/* Mobile hamburger */}
-      <button
-        type="button"
-        aria-label={menuOpen ? "Close menu" : "Open menu"}
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((v) => !v)}
-        className="flex h-8 w-8 items-center justify-center md:hidden"
-      >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          {menuOpen ? (
-            <path d="M6 6l12 12M18 6 6 18" stroke="#1f1f1f" strokeWidth="1.8" strokeLinecap="round" />
-          ) : (
-            <path d="M4 7h16M4 12h16M4 17h16" stroke="#1f1f1f" strokeWidth="1.8" strokeLinecap="round" />
-          )}
-        </svg>
-      </button>
-
-      {/* Mobile dropdown */}
-      {menuOpen && (
-        <div className="absolute right-0 top-full z-50 mt-2 flex w-48 flex-col gap-4 rounded-lg border border-black/10 bg-white p-5 shadow-lg md:hidden">
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-4 md:flex">
           <NavLinks />
           {showCV && (
             <CVLink className="rounded px-4 py-2 text-[16px] tracking-[0.16px] border border-black" />
@@ -113,9 +78,56 @@ export default function HeaderContent() {
           >
             <LinkedInIcon />
           </a>
-          <LanguageSwitch className="border-l-0 pl-0" />
+          <LanguageSwitch />
         </div>
-      )}
-    </div>
+
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+          className="flex h-8 w-8 items-center justify-center md:hidden"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {menuOpen ? (
+              <path d="M6 6l12 12M18 6 6 18" stroke="#1f1f1f" strokeWidth="1.8" strokeLinecap="round" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" stroke="#1f1f1f" strokeWidth="1.8" strokeLinecap="round" />
+            )}
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile accordion — sits below the header, full-bleed, pushes content down when it opens */}
+      <div
+        className={`grid w-screen ml-[calc(50%-50vw)] border-y border-[#6e6e73] transition-[grid-template-rows,border-color] duration-300 ease-out md:hidden ${
+          menuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr] border-transparent"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="flex items-start justify-between gap-4 p-4">
+            <div className="flex flex-col items-start gap-4">
+              <NavLinks />
+            </div>
+            <div className="flex items-center gap-4">
+              {showCV && (
+                <CVLink className="rounded px-4 py-2 text-[16px] tracking-[0.16px] border border-black" />
+              )}
+              <a
+                href="https://www.linkedin.com/in/bureboto/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="opacity-70 transition-opacity hover:opacity-100"
+              >
+                <LinkedInIcon />
+              </a>
+              <LanguageSwitch />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

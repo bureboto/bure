@@ -257,7 +257,7 @@ export default function HomeV2Content() {
           <Pfp className="h-[160px] w-[160px] md:hidden" delay={180} />
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
-          <p className="text-[16px] leading-[18.5px] tracking-[0.16px] text-[#6e6e73] md:hidden">
+          <p className="text-[21px] leading-normal text-[#6e6e73] md:hidden">
             <HomeParagraph text={t.paragraph} />
           </p>
 
