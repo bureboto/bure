@@ -7,6 +7,7 @@ import { CLICKABLE_ROW_CLASS } from "@/lib/listRow";
 import { LangLetters, LangText, LangParagraph, useDelayedLanguage } from "@/lib/langTransition";
 import { useHoverPreview, HoverPreviewBox } from "@/lib/hoverPreview";
 import HeaderContent from "@/components/HeaderContent";
+import { CV_HREF } from "@/components/CVLink";
 import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
 
 /** Rendered inside RevealProvider (unlike HomeV2Content, which renders it) so useRevealed() here reflects the real mount state. */
@@ -228,7 +229,7 @@ export default function HomeV2Content() {
         className="grid w-full flex-1 grid-cols-1 gap-10 px-4 py-6 md:fixed md:inset-x-0 md:top-0 md:bottom-0 md:grid-cols-2 md:grid-rows-[auto_1fr] md:items-stretch md:gap-x-10 md:overflow-hidden md:px-10 md:py-0 md:[grid-template-areas:'top_right'_'bottom_right']"
       >
         {/* Top — hero content */}
-        <div className="flex flex-col gap-6 md:[grid-area:top]">
+        <div className="flex flex-col gap-10 md:gap-6 md:[grid-area:top]">
           {/* Header — scoped to this column only on desktop (Figma node 3578:39752); mobile keeps the global header */}
           <div className="hidden md:block">
             <HeaderContent />
@@ -286,8 +287,8 @@ export default function HomeV2Content() {
             </div>
           </div>
 
-          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos right */}
-          <div className="flex items-start gap-6 md:hidden">
+          {/* Links — mobile: México/Full about me left, LinkedIn/Cocinemos/CV right */}
+          <div className="flex items-start gap-6 py-10 md:hidden">
             <div className="flex flex-1 flex-col items-start gap-4">
               <Block delay={200} duration={280}>
                 <p className="text-[18px] text-[#6e6e73]">
@@ -304,6 +305,9 @@ export default function HomeV2Content() {
               </UnderlineLink>
               <UnderlineLink href="mailto:hola@bure.art" delay={460}>
                 {t.cocinemos}
+              </UnderlineLink>
+              <UnderlineLink href={CV_HREF[displayLanguage]} external delay={480}>
+                CV
               </UnderlineLink>
             </div>
           </div>
