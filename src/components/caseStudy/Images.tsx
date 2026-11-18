@@ -21,10 +21,16 @@ function Slot({ image, aspect = "h-[400px]" }: { image: ImageSlot; aspect?: stri
 /** Images/Image-Focus: a single full-width image with a caption below. */
 export function ImagesFocus({ image }: { image: ImageSlot }) {
   return (
-    <div className="flex flex-col items-center gap-2 px-40 py-10">
+    <div className="flex flex-col items-center gap-2 px-4 py-10 md:px-40">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={image.src} alt={image.alt} className="w-full h-auto max-h-[800px] object-contain" />
-      <Caption caption={image.caption} />
+      <img
+        src={image.src}
+        alt={image.alt}
+        className="h-auto max-h-[400px] w-full object-contain md:max-h-[800px]"
+      />
+      {image.caption && (
+        <p className="w-full text-[12px] text-[#6e6e73] md:text-[11px]">{image.caption}</p>
+      )}
     </div>
   );
 }
