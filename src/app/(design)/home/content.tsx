@@ -158,7 +158,7 @@ function ProjectRow({
         <p className="hidden shrink-0 text-[16px] tracking-[0.16px] text-[#1d1d1d] xl:block xl:w-[137px]">
           <LangText className="whitespace-normal">{service}</LangText>
         </p>
-        <p className="flex-1 text-[12px] text-[#1d1d1d] md:text-[16px] md:tracking-[0.16px]">
+        <p className="flex-1 text-[12px] text-[#1d1d1d] md:hidden md:text-[16px] md:tracking-[0.16px] xl:block">
           <LangText className="whitespace-normal">{project.client ?? project.name}</LangText>
         </p>
         <p className="hidden flex-1 text-[16px] tracking-[0.16px] text-[#6e6e73] 2xl:block">
@@ -345,7 +345,7 @@ export default function HomeV2Content() {
               <p className="hidden shrink-0 text-[12px] text-[#6e6e73] xl:block xl:w-[137px]">
                 <LangLetters text={t.tableHeaders.service} />
               </p>
-              <p className="flex-1 text-[12px] text-[#6e6e73]">
+              <p className="flex-1 text-[12px] text-[#6e6e73] md:hidden xl:block">
                 <LangLetters text={t.tableHeaders.client} />
               </p>
               <p className="hidden flex-1 text-[12px] text-[#6e6e73] 2xl:block">
