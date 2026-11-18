@@ -57,14 +57,14 @@ export default function HeaderContent() {
 
   return (
     <>
-      <div className="relative flex h-[56px] items-center justify-between md:h-[72px]">
+      <div className="relative flex h-[56px] items-center justify-between min-[1080px]:h-[72px]">
         <Link href="/home" aria-label="Bure">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.svg" alt="Bure" width={77} height={20} />
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 min-[1080px]:flex">
           <NavLinks />
           {showCV && (
             <CVLink className="rounded px-4 py-2 text-[16px] tracking-[0.16px] border border-black" />
@@ -87,7 +87,7 @@ export default function HeaderContent() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((v) => !v)}
-          className="flex h-8 w-8 items-center justify-center md:hidden"
+          className="flex h-8 w-8 items-center justify-center min-[1080px]:hidden"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             {menuOpen ? (
@@ -101,7 +101,7 @@ export default function HeaderContent() {
 
       {/* Mobile accordion — sits below the header, full-bleed, pushes content down when it opens */}
       <div
-        className={`grid w-screen ml-[calc(50%-50vw)] border-y border-[#6e6e73] transition-[grid-template-rows,border-color] duration-300 ease-out md:hidden ${
+        className={`grid w-screen ml-[calc(50%-50vw)] border-y border-[#6e6e73] transition-[grid-template-rows,border-color] duration-300 ease-out min-[1080px]:hidden ${
           menuOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr] border-transparent"
         }`}
       >
