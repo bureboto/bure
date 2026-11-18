@@ -147,7 +147,7 @@ function ProjectRow({
         href={project.href}
         onMouseMove={(e) => onRowMouseMove(e, project.cover)}
         onMouseLeave={onRowMouseLeave}
-        className={`flex items-start gap-4 border-t border-[#909096] py-2 xl:gap-0 xl:justify-between ${CLICKABLE_ROW_CLASS} ${
+        className={`flex items-start gap-4 border-t border-[#909096] py-2 md:justify-between xl:gap-0 ${CLICKABLE_ROW_CLASS} ${
           first ? "border-t-0" : ""
         }`}
       >
@@ -177,7 +177,7 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
   return (
     <FadeIn delay={delay} duration={400} className="group">
       <Link href={project.href} className="flex flex-col gap-2">
-        <div className="relative h-[200px] w-full overflow-hidden rounded bg-[#1d1d1d] lg:aspect-video lg:h-auto">
+        <div className="relative aspect-video w-full overflow-hidden rounded bg-[#1d1d1d] lg:aspect-auto lg:h-[200px]">
           {project.cover ? (
             project.cover.endsWith(".mp4") ? (
               <video
@@ -317,7 +317,7 @@ export default function HomeV2Content() {
         <div className="scrollbar-hidden flex flex-col md:[grid-area:right] md:h-full md:overflow-y-auto">
           <div
             id="projects"
-            className="grid grid-cols-1 content-start gap-y-4 rounded-t-[4px] md:grid-cols-2 md:gap-x-4 md:gap-y-4 md:pt-6 lg:grid-cols-1"
+            className="grid grid-cols-1 content-start gap-y-4 rounded-t-[4px] lg:grid-cols-2 lg:gap-x-4 lg:gap-y-4 lg:pt-6"
           >
             {featured.map((project, i) => {
               const row = Math.floor(i / 2);
@@ -338,7 +338,7 @@ export default function HomeV2Content() {
             </p>
           </div>
           <div className="flex flex-1 flex-col">
-            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 xl:gap-0 xl:justify-between md:px-4">
+            <Block delay={480} duration={280} className="flex items-start gap-4 pb-1 md:justify-between md:px-4 xl:gap-0">
               <p className="w-[180px] shrink-0 text-[12px] text-[#6e6e73] xl:w-[222px]">
                 <LangLetters text={t.tableHeaders.title} />
               </p>
