@@ -236,7 +236,7 @@ export default function HomeV2Content() {
           </div>
 
           {/* Head */}
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="flex flex-col gap-0 text-[#1d1d1d]">
               <div className="flex items-start gap-0 whitespace-nowrap">
                 <p className="text-[80px] font-light leading-none">
@@ -252,10 +252,10 @@ export default function HomeV2Content() {
                 </p>
               </Block>
             </div>
-            <Pfp className="hidden h-[140px] w-[140px] md:block" delay={180} />
+            <Pfp className="hidden h-[140px] w-[140px] lg:block" delay={180} />
           </div>
 
-          <Pfp className="h-[160px] w-[160px] md:hidden" delay={180} />
+          <Pfp className="h-[160px] w-[160px] lg:hidden" delay={180} />
 
           {/* Paragraph — mobile only, sits between PFP and the link block */}
           <p className="text-[21px] leading-normal text-[#6e6e73] md:hidden">
