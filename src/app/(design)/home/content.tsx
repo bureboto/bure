@@ -313,7 +313,7 @@ export default function HomeV2Content() {
         <div className="scrollbar-hidden flex flex-col md:[grid-area:right] md:h-full md:overflow-y-auto">
           <div
             id="projects"
-            className="grid grid-cols-2 content-start gap-x-2 gap-y-4 rounded-t-[4px] md:gap-x-4 md:gap-y-4 md:pt-6"
+            className="grid grid-cols-1 content-start gap-y-4 rounded-t-[4px] md:grid-cols-2 md:gap-x-4 md:gap-y-4 md:pt-6"
           >
             {featured.map((project, i) => {
               const row = Math.floor(i / 2);
@@ -321,7 +321,7 @@ export default function HomeV2Content() {
               return <ProjectCardV2 key={project.href} project={project} delay={row * 90 + col * 50} />;
             })}
           </div>
-          <footer className="mt-auto flex items-center justify-center pb-[24px] pt-4 text-[12px] text-[#111]">
+          <footer className="mt-auto hidden items-center justify-center pb-[24px] pt-4 text-[12px] text-[#111] md:flex">
             <LangText>{t.footer(year)}</LangText>
           </footer>
         </div>

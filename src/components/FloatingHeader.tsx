@@ -15,7 +15,7 @@ export default function FloatingHeader() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 px-12 pb-5 transition-all duration-300 ${
+      className={`fixed bottom-0 left-0 right-0 z-50 hidden px-12 pb-5 transition-all duration-300 md:block ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       }`}
     >
