@@ -177,7 +177,7 @@ function ProjectCardV2({ project, delay }: { project: Project; delay: number }) 
   return (
     <FadeIn delay={delay} duration={400} className="group">
       <Link href={project.href} className="flex flex-col gap-2">
-        <div className="relative aspect-video w-full overflow-hidden rounded bg-[#1d1d1d] lg:aspect-auto lg:h-[200px]">
+        <div className="relative aspect-video w-full overflow-hidden rounded bg-[#1d1d1d]">
           {project.cover ? (
             project.cover.endsWith(".mp4") ? (
               <video
