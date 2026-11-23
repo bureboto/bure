@@ -36,14 +36,18 @@ export default function Content2({
  * Every row except the first in a Content2 group carries its own top
  * divider (border-t pt-20) — pass `first` on the one right after Intro,
  * which relies solely on Content2's own gap for spacing.
+ * Pass `media` instead of `image` for a custom Right column (stacked or
+ * layered images, placeholders).
  */
 export function Content2Item({
   children,
   image,
+  media,
   first = false,
 }: {
   children: ReactNode;
-  image: { src: string; alt: string };
+  image?: { src: string; alt: string };
+  media?: ReactNode;
   first?: boolean;
 }) {
   return (
@@ -52,8 +56,11 @@ export function Content2Item({
     >
       <div className="flex flex-1 flex-col gap-6">{children}</div>
       <div className="flex flex-1 items-start">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={image.src} alt={image.alt} className="w-full h-auto max-h-[800px] object-contain" />
+        {media ??
+          (image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={image.src} alt={image.alt} className="w-full h-auto max-h-[800px] object-contain" />
+          ))}
       </div>
     </div>
   );
