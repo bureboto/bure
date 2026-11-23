@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const tabs = [
   { label: "ADN", href: "/elpulsodelasdivisas/brand/adn" },
   { label: "Moodboard", href: "/elpulsodelasdivisas/brand/moodboard" },
+  { label: "Brand Kit", href: "/elpulsodelasdivisas/brand/brand-kit" },
 ];
 
 export default function BrandTabs() {
