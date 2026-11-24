@@ -8,14 +8,14 @@ const navItems = [
   { href: "/", label: "About" },
   { href: "/archive", label: "Archive" },
   { href: "/pieces", label: "Pieces" },
-  { href: "mailto:hola@bure.art", label: "Contact" },
+  { href: "mailto:bureboto@gmail.com", label: "Contact" },
 ];
 
 export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full px-[28px] pt-5">
+    <header className="w-full px-[28px]">
       <div className="flex min-h-[60px] flex-wrap items-center justify-between gap-y-2">
         <Link href="/" aria-label="Bure">
           {/* eslint-disable-next-line @next/next/no-img-element */}
