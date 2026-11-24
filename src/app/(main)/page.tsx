@@ -1,48 +1,153 @@
-export default function Home() {
+"use client";
+
+import { useLanguage } from "@/lib/LanguageContext";
+
+type TableRow = { event: string; place: string; year: string };
+
+const copy = {
+  es: {
+    bio: {
+      intro: "(México, 1992)\nartista multidisciplinario desde 2007.",
+      body: "Formado en diseño, el graffiti y ha llevado la estructura de la letra hacia una abstracción orgánica y cromática, apoyado de los contrastes, peso, color y línea.",
+      closing: "Gusto por explorar formatos para el ",
+      closingBold: "estudio de la forma.",
+    },
+    contact: "Contact",
+    paragraph1: "Hay formas que sostienen la realidad y casi nunca vemos. Mi trabajo consiste en encontrarlas y hacerlas visibles.",
+    paragraph1b: "Empecé pintando letras en 2007.\nCon los años la letra dejé de leerla y empecé a ver su estructura, sus curvas, pesos y tensiones.",
+    paragraph1c: "De ahí nacen mis composiciones abstractas, orgánicas y cromáticas, con degradados radiales dando la sensación de movimiento con luces y sombras.",
+    paragraph1d: "Trabajo con contrastes: gordo y delgado, grotesco y sutil, claro y oscuro, complejo y simple. Son fuerzas que ordenan nuestro entorno y en las que rara vez nos detenemos a observar.",
+    inspiration: "Mi inspiración es el día a día, la calle, la naturaleza, las personas.\n\nA veces dejo que el trazo fluya y voy revelando la forma. Otras parto de una letra o de un paisaje y lo desarmo hasta que aparece algo nuevo.",
+    quote: "En todos los formatos busco lo mismo: ",
+    quoteBold: "hacer visible lo invisible.",
+    intro1: "Ha participado en festivales como Meeting of Styles de 2019 a 2025, en Quintana Roo, Guadalajara y el Estado de México.",
+    intro2: "Presentó la exposición Luces y sombras en la Casa Taller Alfredo Zalce, en Morelia (2022), y formó parte de una exhibición de arte digital, Bueno Art Gallery, Nueva York (2023).",
+    tableHeaders: { event: "Evento", place: "Lugar", year: "Año" },
+    tableRows: [
+      { event: "Meeting of styles", place: "MX", year: "2015, 2019-2024" },
+      { event: "Bueno Galery NYC", place: "New York, US", year: "Abril, 2023" },
+      { event: "Solo show “Luces y Sombras”", place: "Morelia, Casa Zalce, MX", year: "Noviembre, 2022" },
+    ] as TableRow[],
+  },
+  en: {
+    bio: {
+      intro: "(Mexico, 1992)\nmultidisciplinary artist since 2007.",
+      body: "Trained in design and graffiti, taking the structure of the letter toward an organic, chromatic abstraction, supported by contrasts, weight, color and line.",
+      closing: "I enjoy exploring formats for the ",
+      closingBold: "study of form.",
+    },
+    contact: "Contact",
+    paragraph1: "There are forms that hold up reality and we almost never see them. My work is about finding them and making them visible.",
+    paragraph1b: "I started painting letters in 2007.\nOver the years I stopped reading the letter and began to see its structure, its curves, weights and tensions.",
+    paragraph1c: "From there my abstract, organic and chromatic compositions are born, with radial gradients giving a sense of movement through light and shadow.",
+    paragraph1d: "I work with contrasts: thick and thin, grotesque and subtle, light and dark, complex and simple. These are forces that order our surroundings and that we rarely stop to notice.",
+    inspiration: "My inspiration is everyday life, the street, nature, people.\n\nSometimes I let the stroke flow and let the form reveal itself. Other times I start from a letter or a landscape and take it apart until something new appears.",
+    quote: "In every format I look for the same thing: ",
+    quoteBold: "making the invisible visible.",
+    intro1: "They have taken part in festivals like Meeting of Styles from 2019 to 2025, in Quintana Roo, Guadalajara and the State of Mexico.",
+    intro2: "They presented the exhibition Luces y sombras (Lights and Shadows) at Casa Taller Alfredo Zalce, in Morelia (2022), and took part in a digital art exhibition, Bueno Art Gallery, New York (2023).",
+    tableHeaders: { event: "Event", place: "Place", year: "Year" },
+    tableRows: [
+      { event: "Meeting of styles", place: "MX", year: "2015, 2019-2024" },
+      { event: "Bueno Galery NYC", place: "New York, US", year: "April 2023" },
+      { event: "Solo show “Luces y Sombras”", place: "Morelia, Casa Zalce, MX", year: "November 2022" },
+    ] as TableRow[],
+  },
+};
+
+function Paragraphs({ text, className = "" }: { text: string; className?: string }) {
   return (
-    <div className="px-[28px] flex-1 flex flex-col min-h-0">
-      <div className="w-full flex-1 min-h-0 grid grid-cols-1 md:grid-cols-2 gap-14 md:items-center">
-        <div className="relative w-full h-[340px] md:h-full md:self-stretch overflow-hidden">
+    <>
+      {text.split("\n").map((line, i) => (
+        <p key={i} className={className}>
+          {line}
+        </p>
+      ))}
+    </>
+  );
+}
+
+export default function Home() {
+  const { language } = useLanguage();
+  const t = copy[language];
+
+  return (
+    <div className="flex flex-1 flex-col gap-8 px-[28px] pb-10">
+      {/* 1 — Bio + photo */}
+      <div className="flex flex-col gap-8 md:flex-row md:items-stretch">
+        <div className="relative h-[284px] w-full md:h-auto md:flex-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/textura-home.svg"
-            alt=""
-            className="absolute inset-0 w-full h-full"
-            style={{ objectFit: "fill" }}
-          />
+          <img src="/About.jpg" alt="Bure" className="absolute inset-0 h-full w-full object-cover" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 items-start">
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.svg" alt="Bure" width={77} height={20} />
-          </div>
-          <div className="flex flex-col gap-4">
-            <p className="text-base md:text-[17px] text-black/70">
-              Soy Bure, artista visual, nacido en 1992, dedicado al estudio de las formas y a hacer visibles las formas invisibles.
+        <div className="flex flex-col items-start justify-center gap-0 md:flex-1 md:flex-row md:gap-8">
+          <div className="flex w-full flex-col justify-center text-[#1d1d1d] md:w-[314px] md:shrink-0">
+            <p className="whitespace-nowrap">
+              <span className="text-[48px] font-light leading-none md:text-[80px]">Bure</span>
+              <span className="text-[20px] md:text-[28px]">®</span>
             </p>
-            <p className="text-base md:text-[17px] text-black/70">
-              Crecí en Nezahualcóyotl, Estado de México. Estoy explorando el diseño, el arte, el graffiti, la musica y en general la vida :)
-            </p>
-          </div>
-
-          <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col gap-4 text-[0.8rem] text-black/60">
+            <div className="mt-2 flex flex-col gap-4 text-[21px] text-[#1d1d1d]">
+              <Paragraphs text={t.bio.intro} />
+              <p>{t.bio.body}</p>
               <p>
-                Hago graffiti desde el 2007 y, al ingresar a la universidad en el 2010, tuve la necesidad de converger las formas del graffiti y el diseño. A lo largo de estos años he experimentado con distintas técnicas y soportes que van desde los acrílicos, óleo, aerosol y vitralismo, hasta medios digitales para ilustración y motion graphics.
-              </p>
-              <p>He expuesto y pintado en lugares como Nueva York, Italia, España y Francia, wow todo muy lejos de mi colonia.</p>
-              <p>
-                Mi obra se enmarca en un estilo abstracto, orgánico y cromático. Me encanta jugar con los contraste de pesos, colores y trazos. Mi obra ha evolucionado del graffiti hacia composiciones que ya no son del todo graffiti, me da curiosidad saber a donde mas caminará esto. Nunca dejo de explorar mi estilo.
+                {t.bio.closing}
+                <strong className="font-bold">{t.bio.closingBold}</strong>
               </p>
             </div>
-            <div className="flex flex-col gap-4 text-[0.8rem] text-black/60">
-              <p>
-                Busco expresar la forma, encontrando inspiración en las letras, en mi entorno y en los aspectos conscientes y subconscientes de nuestra realidad (si suena loco, pero no lo es tanto si prestas un poco de atencion).
-              </p>
-              <p>
-                El estilo visual de mi obra es versátil y dinámico. A través de luces, sombras y contrastes, creo una sensación de profundidad y movimiento en mis composiciones. Los contrastes intensos y la armonía cromática son elementos recurrentes que dan una dimensión a mi obra.
-              </p>
+            <a
+              href="mailto:hola@bure.art"
+              className="mt-4 text-[16px] tracking-[0.16px] text-[#1d1d1d] underline underline-offset-2"
+            >
+              {t.contact}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 2 — Body copy, quote, exhibitions table */}
+      <div className="flex flex-col gap-10 md:flex-row md:items-end">
+        {/* Left: two paragraph columns */}
+        <div className="flex flex-1 flex-col gap-10 md:flex-row md:items-end">
+          <div className="flex flex-1 flex-col gap-2 text-[16px] tracking-[0.16px] text-[#1d1d1d]">
+            <p>{t.paragraph1}</p>
+            <Paragraphs text={t.paragraph1b} />
+            <p className="text-[12px] tracking-normal">{t.paragraph1c}</p>
+            <p className="text-[12px] tracking-normal">{t.paragraph1d}</p>
+          </div>
+          <div className="flex flex-1 flex-col gap-4">
+            <p className="text-[12px] text-[#1d1d1d]">
+              <Paragraphs text={t.inspiration} />
+            </p>
+            <div className="w-full max-w-[320px] border-l border-[#909096] pl-4 text-[16px] tracking-[0.16px] text-[#1d1d1d]">
+              {t.quote}
+              <strong className="font-bold">{t.quoteBold}</strong>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: intro + exhibitions table */}
+        <div className="flex flex-1 flex-col gap-4">
+          <div className="flex flex-col gap-2 text-[12px] text-[#1d1d1d] md:flex-row md:gap-10">
+            <p className="flex-1">{t.intro1}</p>
+            <p className="flex-1">{t.intro2}</p>
+          </div>
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-10 text-[9px] text-[#909096]">
+              <p className="flex-1">{t.tableHeaders.event}</p>
+              <p className="flex-1">{t.tableHeaders.place}</p>
+              <p className="flex-1">{t.tableHeaders.year}</p>
+            </div>
+            <div className="flex flex-col">
+              {t.tableRows.map((row, i) => (
+                <div
+                  key={i}
+                  className={`flex gap-10 py-1 text-[12px] text-[#1d1d1d] ${i > 0 ? "border-t border-[#6e6e73]" : ""}`}
+                >
+                  <p className="flex-1">{row.event}</p>
+                  <p className="flex-1">{row.place}</p>
+                  <p className="flex-1">{row.year}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
