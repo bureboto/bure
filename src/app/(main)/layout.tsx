@@ -3,6 +3,7 @@ import "../globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import { LangTransitionProvider } from "@/lib/langTransition";
 
 export const metadata: Metadata = {
   title: "Bure",
@@ -14,9 +15,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="es" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-white text-black">
         <LanguageProvider>
-          <Header />
-          <main className="flex-1 flex flex-col">{children}</main>
-          <Footer />
+          <LangTransitionProvider>
+            <Header />
+            <main className="flex-1 flex flex-col">{children}</main>
+            <Footer />
+          </LangTransitionProvider>
         </LanguageProvider>
       </body>
     </html>

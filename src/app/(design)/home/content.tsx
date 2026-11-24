@@ -8,7 +8,7 @@ import { LangLetters, LangText, LangParagraph, useDelayedLanguage } from "@/lib/
 import { useHoverPreview, HoverPreviewBox } from "@/lib/hoverPreview";
 import HeaderContent from "@/components/HeaderContent";
 import { CV_HREF } from "@/components/CVLink";
-import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "./reveal";
+import { RevealProvider, Letters, Block, FadeIn, LinesText, useRevealed } from "@/lib/reveal";
 
 /** Rendered inside RevealProvider (unlike HomeV2Content, which renders it) so useRevealed() here reflects the real mount state. */
 function HomeParagraph({ text }: { text: string }) {
