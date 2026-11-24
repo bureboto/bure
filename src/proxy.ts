@@ -18,6 +18,7 @@ const DESIGN_PATHS = [
   "/projects",
   "/robopets",
   "/elpulsodelasdivisas",
+  "/pulso",
 ];
 
 export function proxy(request: NextRequest) {
