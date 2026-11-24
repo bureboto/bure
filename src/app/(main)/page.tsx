@@ -72,21 +72,18 @@ export default function Home() {
   const t = copy[language];
 
   return (
-    <div className="flex flex-1 flex-col gap-8 px-[28px] pb-10">
-      {/* 1 — Bio + photo */}
+    <div className="flex flex-1 flex-col justify-between gap-8 px-[28px] pb-10 md:gap-5">
+      {/* 1 — Bio + photo. DOM order matches the mobile frame (text, then
+          image); md:order flips the visual order back to image-left for
+          desktop, where the two sit directly next to each other. */}
       <div className="flex flex-col gap-8 md:flex-row md:items-stretch">
-        <div className="relative h-[284px] w-full md:h-auto md:flex-1">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/About.jpg" alt="Bure" className="absolute inset-0 h-full w-full object-cover" />
-        </div>
-
-        <div className="flex flex-col items-start justify-center gap-0 md:flex-1 md:flex-row md:gap-8">
+        <div className="flex w-full md:order-2 md:w-auto md:flex-1 md:self-stretch">
           <div className="flex w-full flex-col justify-center text-[#1d1d1d] md:w-[314px] md:shrink-0">
             <p className="whitespace-nowrap">
               <span className="text-[48px] font-light leading-none md:text-[80px]">Bure</span>
               <span className="text-[20px] md:text-[28px]">®</span>
             </p>
-            <div className="mt-2 flex flex-col gap-4 text-[21px] text-[#1d1d1d]">
+            <div className="mt-2 flex flex-col gap-4 text-[21px] text-[#1d1d1d] md:gap-2 md:text-[19px]">
               <Paragraphs text={t.bio.intro} />
               <p>{t.bio.body}</p>
               <p>
@@ -102,12 +99,17 @@ export default function Home() {
             </a>
           </div>
         </div>
+
+        <div className="relative h-[284px] w-full md:order-1 md:h-auto md:flex-1">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/About.jpg" alt="Bure" className="absolute inset-0 h-full w-full object-cover" />
+        </div>
       </div>
 
       {/* 2 — Body copy, quote, exhibitions table */}
-      <div className="flex flex-col gap-10 md:flex-row md:items-end">
+      <div className="flex flex-col gap-10 md:flex-row md:items-end md:gap-6">
         {/* Left: two paragraph columns */}
-        <div className="flex flex-1 flex-col gap-10 md:flex-row md:items-end">
+        <div className="flex flex-1 flex-col gap-10 md:flex-row md:items-end md:gap-6">
           <div className="flex flex-1 flex-col gap-2 text-[16px] tracking-[0.16px] text-[#1d1d1d]">
             <p>{t.paragraph1}</p>
             <Paragraphs text={t.paragraph1b} />
