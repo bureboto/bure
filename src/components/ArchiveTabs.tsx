@@ -28,7 +28,7 @@ export default function ArchiveTabs() {
   const { language } = useLanguage();
   const displayLanguage = useDelayedLanguage(language);
   const t = copy[displayLanguage];
-  const [mode, setMode] = useState<Mode>("random");
+  const [mode, setMode] = useState<Mode>("order");
   // orden estable en el server; se re-mezcla en el cliente tras montar
   // para evitar mismatches de hidratación, y de nuevo en cada recarga.
   const [randomPieces, setRandomPieces] = useState(pieces);
@@ -38,9 +38,9 @@ export default function ArchiveTabs() {
   const grouped = piecesByYearDesc();
 
   return (
-    <RevealProvider>
-      <div className="flex-1">
-        <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-[28px] box-border">
+    <div className="flex-1">
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-[28px] box-border">
+        <RevealProvider>
           <Block duration={280} className="flex items-center gap-6 py-6 text-sm">
             <button
               onClick={() => setMode("random")}
@@ -55,9 +55,14 @@ export default function ArchiveTabs() {
               <LangText>{t.order}</LangText>
             </button>
           </Block>
-        </div>
+        </RevealProvider>
+      </div>
 
-        <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-[28px] pb-12 box-border">
+      {/* Keyed by mode so switching tabs remounts a fresh RevealProvider —
+          otherwise content mounted after the initial page-load reveal
+          flip would just appear instantly with no entrance animation. */}
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-[28px] pb-12 box-border">
+        <RevealProvider key={mode}>
           {mode === "random" ? (
             <FadeIn delay={120} duration={500}>
               <Masonry pieces={randomPieces} respectSpan={false} />
@@ -81,8 +86,8 @@ export default function ArchiveTabs() {
               })}
             </div>
           )}
-        </div>
+        </RevealProvider>
       </div>
-    </RevealProvider>
+    </div>
   );
 }
