@@ -134,10 +134,14 @@ export default function BrandKit() {
               paragraphs={[
                 "Todo lo que diseñemos de aquí en adelante parte de este documento.",
                 "Encontrarás el logo, los colores, la tipografía, los iconos, los layouts y ejemplos de cómo usarlos.",
-                // TODO: link to the downloadable brand kit file once it exists.
-                <span key="dl" className="underline underline-offset-2">
+                <a
+                  key="dl"
+                  href="/design/elpulsodelasdivisas/Pulso_BrandKit.zip"
+                  download
+                  className="underline underline-offset-2 hover:text-[#1d1d1d] transition-colors"
+                >
                   Descarga Brand kit
-                </span>,
+                </a>,
               ]}
             />
           </HeroIntro>
