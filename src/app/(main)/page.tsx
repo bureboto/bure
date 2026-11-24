@@ -85,7 +85,7 @@ export default function Home() {
               </div>
               <Block delay={760} duration={300}>
                 <a
-                  href="mailto:hola@bure.art"
+                  href="mailto:bureboto@gmail.com"
                   className="mt-4 inline-block text-[16px] tracking-[0.16px] text-[#1d1d1d] underline underline-offset-2"
                 >
                   <LangText>{t.contact}</LangText>
