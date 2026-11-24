@@ -8,7 +8,7 @@ type Tab = { label: string; href: string; disabled?: boolean };
 const tabs: Tab[] = [
   { label: "ADN", href: "/elpulsodelasdivisas/brand/adn" },
   { label: "Moodboard", href: "/elpulsodelasdivisas/brand/moodboard" },
-  { label: "Brand Kit", href: "/elpulsodelasdivisas/brand/brand-kit" },
+  { label: "Brand Kit", href: "/pulso/brandkit" },
   { label: "Motions", href: "/elpulsodelasdivisas/brand/motions", disabled: true },
 ];
 
