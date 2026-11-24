@@ -242,20 +242,13 @@ export default function BrandKit() {
           </ItemText>
         </Content2Item>
 
-        <Content2Item
-          media={
-            <div className="flex w-full flex-col gap-4">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img("Logo_5")} alt="Tamaños mínimos del logo" className="w-full h-auto object-contain" />
-              <BodyText>Tamaño mínimo: isotipo 16 px · logotipo 20 px · texto 20 px.</BodyText>
-            </div>
-          }
-        >
+        <Content2Item image={{ src: img("Logo_5"), alt: "Tamaños mínimos del logo" }}>
           <ItemText title="Tamaños mínimos" focus="Si el logo no se lee, no sirve.">
             <Body
               paragraphs={[
                 "Debajo de cierto tamaño, los detalles del isotipo se pierden y el texto deja de leerse con claridad, sobre todo en el celular, que es donde más nos consumen.",
                 "Respetar el tamaño mínimo asegura que la marca se reconozca igual en una portada de podcast que en la foto de perfil de WhatsApp.",
+                "Tamaño mínimo: isotipo 16 px · logotipo 20 px · texto 20 px.",
               ]}
             />
           </ItemText>
