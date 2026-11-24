@@ -10,12 +10,14 @@ function ArtworkCard({ artwork, delay }: { artwork: (typeof artworks)[number]; d
       {/* Dummy gris claro hasta que haya imagen real de la pieza */}
       <div className="h-[280px] w-full bg-[#f0f0f5] lg:h-[350px]" />
       <div className="flex flex-col gap-2 text-[12px] text-[#1d1d1d]">
-        <p>
-          {artwork.title}, {artwork.year}
-        </p>
-        <div>
-          <p>{artwork.medium}</p>
-          <p>{artwork.dimensions}</p>
+        <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
+          <p className="font-bold lg:flex-1">
+            {artwork.title}, {artwork.year}
+          </p>
+          <div className="lg:flex-1">
+            <p>{artwork.medium}</p>
+            <p>{artwork.dimensions}</p>
+          </div>
         </div>
         {artwork.moreHref && (
           <a href={artwork.moreHref} className="underline underline-offset-2">
