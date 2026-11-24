@@ -60,7 +60,7 @@ function RuleGroup({ heading, rules }: { heading: string; rules: { title: string
   return (
     <div className="flex flex-col gap-2 text-[#1d1d1d]">
       <p className="text-[21px] font-bold">{heading}</p>
-      <div className="flex flex-col gap-4 text-[16px] leading-[18.5px] tracking-[0.16px]">
+      <div className="flex flex-col gap-4 border-l border-[#909096] pl-4 text-[16px] leading-[18.5px] tracking-[0.16px]">
         {rules.map((rule, i) => (
           <div key={rule.title} className="flex flex-col gap-2">
             <p className="font-bold">
