@@ -1,4 +1,4 @@
-import { MAD_ARTIST_IDS, MAD_LABEL, PLACEHOLDER_RELEASES, type Release } from "./releases";
+import { MAD_ARTIST_IDS, MAD_LABEL, MAD_RELEASE_IDS, PLACEHOLDER_RELEASES, type Release } from "./releases";
 
 // Spotify Web API, Client Credentials flow (no user login needed).
 // Requires SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in the environment.
@@ -14,7 +14,8 @@ type SpotifyAlbum = {
   artists: { name: string }[];
   images: { url: string; width: number | null }[];
   external_urls: { spotify: string };
-  label?: string; // only on the full album object, not in artist album lists
+  label?: string; // only on the full album object; withheld for dev-mode apps
+  copyrights?: { text: string; type: string }[];
 };
 
 async function getAccessToken(): Promise<string | null> {
@@ -75,8 +76,12 @@ async function getAlbum(albumId: string, token: string): Promise<SpotifyAlbum | 
   return (await res.json()) as SpotifyAlbum;
 }
 
+// Spotify withholds `label` from apps in development mode, so also match the
+// ℗/© lines (e.g. "℗ 2024 Mad Cactus"), plus any IDs listed by hand.
 function isMadCactus(album: SpotifyAlbum) {
-  return (album.label ?? "").toLowerCase().includes(MAD_LABEL);
+  if (MAD_RELEASE_IDS.includes(album.id)) return true;
+  const texts = [album.label ?? "", ...(album.copyrights ?? []).map((c) => c.text)];
+  return texts.some((t) => t.toLowerCase().includes(MAD_LABEL));
 }
 
 function toRelease(album: SpotifyAlbum): Release {
@@ -99,8 +104,11 @@ export async function getMadReleases(): Promise<Release[]> {
     const albums = (await Promise.all(MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)))).flat();
     const ids = [...new Set(albums.map((a) => a.id))];
     const full = await Promise.all(ids.map((id) => getAlbum(id, token)));
-    const labels = [...new Set(full.map((a) => a?.label ?? "(none)"))];
-    console.log(`[mad/spotify] ${ids.length} albums found; labels: ${labels.join(" | ")}`);
+    for (const a of full) {
+      if (!a) continue;
+      const rights = (a.copyrights ?? []).map((c) => c.text).join(" / ") || "(no copyrights)";
+      console.log(`[mad/spotify] ${a.id} "${a.name}" label=${a.label ?? "(none)"} rights=${rights} match=${isMadCactus(a)}`);
+    }
     const releases = full
       .filter((a): a is SpotifyAlbum => a !== null && isMadCactus(a))
       .map(toRelease)
