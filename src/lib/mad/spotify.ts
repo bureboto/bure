@@ -1,4 +1,4 @@
-import { MAD_ARTIST_IDS, PLACEHOLDER_RELEASES, type Release } from "./releases";
+import { MAD_ARTIST_IDS, MAD_LABEL, PLACEHOLDER_RELEASES, type Release } from "./releases";
 
 // Spotify Web API, Client Credentials flow (no user login needed).
 // Requires SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in the environment.
@@ -14,6 +14,7 @@ type SpotifyAlbum = {
   artists: { name: string }[];
   images: { url: string; width: number | null }[];
   external_urls: { spotify: string };
+  label?: string; // only on the full album object, not in artist album lists
 };
 
 async function getAccessToken(): Promise<string | null> {
@@ -51,6 +52,23 @@ async function getArtistAlbums(artistId: string, token: string): Promise<Spotify
   return data.items ?? [];
 }
 
+// The artist-albums list omits the label, so fetch each full album to read it.
+async function getAlbum(albumId: string, token: string): Promise<SpotifyAlbum | null> {
+  const res = await fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+    next: { revalidate: DAY, tags: ["mad-releases"] },
+  });
+  if (!res.ok) {
+    console.error("[mad/spotify] album request failed", albumId, res.status);
+    return null;
+  }
+  return (await res.json()) as SpotifyAlbum;
+}
+
+function isMadCactus(album: SpotifyAlbum) {
+  return (album.label ?? "").toLowerCase().includes(MAD_LABEL);
+}
+
 function toRelease(album: SpotifyAlbum): Release {
   // Spotify lists images largest first; the 640px one is plenty for a grid tile.
   return {
@@ -69,8 +87,12 @@ export async function getMadReleases(): Promise<Release[]> {
     if (!token) return PLACEHOLDER_RELEASES;
 
     const albums = (await Promise.all(MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)))).flat();
-    const unique = [...new Map(albums.map((a) => [a.id, a])).values()];
-    const releases = unique.map(toRelease).sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
+    const ids = [...new Set(albums.map((a) => a.id))];
+    const full = await Promise.all(ids.map((id) => getAlbum(id, token)));
+    const releases = full
+      .filter((a): a is SpotifyAlbum => a !== null && isMadCactus(a))
+      .map(toRelease)
+      .sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
     return releases.length ? releases : PLACEHOLDER_RELEASES;
   } catch (err) {
     console.error("[mad/spotify] failed to load releases", err);
