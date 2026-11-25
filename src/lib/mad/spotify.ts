@@ -31,25 +31,35 @@ async function getAccessToken(): Promise<string | null> {
     body: "grant_type=client_credentials",
   });
   if (!res.ok) {
-    console.error("[mad/spotify] token request failed", res.status);
+    console.error("[mad/spotify] token request failed", res.status, await res.text());
     return null;
   }
   const data = (await res.json()) as { access_token: string };
   return data.access_token;
 }
 
+// Spotify caps page size for apps in development mode, so page through in
+// small batches instead of asking for 50 at once.
+const PAGE_SIZE = 10;
+const MAX_PAGES = 10;
+
 async function getArtistAlbums(artistId: string, token: string): Promise<SpotifyAlbum[]> {
-  const url = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album,single&limit=50`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: DAY, tags: ["mad-releases"] },
-  });
-  if (!res.ok) {
-    console.error("[mad/spotify] albums request failed", artistId, res.status);
-    return [];
+  const items: SpotifyAlbum[] = [];
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const url = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album,single&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`;
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+      next: { revalidate: DAY, tags: ["mad-releases"] },
+    });
+    if (!res.ok) {
+      console.error("[mad/spotify] albums request failed", artistId, res.status, await res.text());
+      break;
+    }
+    const data = (await res.json()) as { items: SpotifyAlbum[]; next: string | null };
+    items.push(...(data.items ?? []));
+    if (!data.next) break;
   }
-  const data = (await res.json()) as { items: SpotifyAlbum[] };
-  return data.items ?? [];
+  return items;
 }
 
 // The artist-albums list omits the label, so fetch each full album to read it.
@@ -59,7 +69,7 @@ async function getAlbum(albumId: string, token: string): Promise<SpotifyAlbum | 
     next: { revalidate: DAY, tags: ["mad-releases"] },
   });
   if (!res.ok) {
-    console.error("[mad/spotify] album request failed", albumId, res.status);
+    console.error("[mad/spotify] album request failed", albumId, res.status, await res.text());
     return null;
   }
   return (await res.json()) as SpotifyAlbum;
@@ -89,6 +99,8 @@ export async function getMadReleases(): Promise<Release[]> {
     const albums = (await Promise.all(MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)))).flat();
     const ids = [...new Set(albums.map((a) => a.id))];
     const full = await Promise.all(ids.map((id) => getAlbum(id, token)));
+    const labels = [...new Set(full.map((a) => a?.label ?? "(none)"))];
+    console.log(`[mad/spotify] ${ids.length} albums found; labels: ${labels.join(" | ")}`);
     const releases = full
       .filter((a): a is SpotifyAlbum => a !== null && isMadCactus(a))
       .map(toRelease)
