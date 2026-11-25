@@ -4,9 +4,14 @@ import type { Release } from "@/lib/mad/releases";
 const SHADES = ["bg-[#5e5e5e]", "bg-[#383838]"];
 const MD_SHADES = ["md:bg-[#5e5e5e]", "md:bg-[#383838]"];
 
-function formatDate(iso: string) {
-  if (!iso) return "";
-  return new Date(`${iso}T00:00:00`).toLocaleDateString("es-MX", { day: "numeric", month: "short", year: "numeric" });
+// Spotify dates come as "YYYY", "YYYY-MM" or "YYYY-MM-DD" depending on precision.
+function formatDate(date: string) {
+  const [y, m, d] = date.split("-").map(Number);
+  if (!y) return "";
+  if (!m) return String(y);
+  const opts: Intl.DateTimeFormatOptions = { month: "short", year: "numeric", timeZone: "UTC" };
+  if (d) opts.day = "numeric";
+  return new Date(Date.UTC(y, m - 1, d || 1)).toLocaleDateString("es-MX", opts);
 }
 
 // Figma 391:2263 / 391:2350: edge-to-edge grid of square release covers,
@@ -30,7 +35,7 @@ export default function ReleaseGrid({ releases }: { releases: Release[] }) {
               <span className="absolute inset-0 flex flex-col justify-end bg-black/70 p-4 text-[16px] leading-tight opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                 <span>{r.title}</span>
                 <span className="text-[#9a9a9a]">{r.artist}</span>
-                {r.releaseDate && <span className="mt-2 text-[12px] text-[#9a9a9a]">{formatDate(r.releaseDate)}</span>}
+                {formatDate(r.releaseDate) && <span className="mt-2 text-[12px] text-[#9a9a9a]">{formatDate(r.releaseDate)}</span>}
               </span>
             </Tag>
           </li>
