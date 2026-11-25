@@ -1,4 +1,4 @@
-import { MAD_ARTIST_IDS, MAD_LABEL, MAD_RELEASE_IDS, PLACEHOLDER_RELEASES, type Release } from "./releases";
+import { MAD_ARTIST_IDS, MAD_EXCLUDED_ARTISTS, MAD_LABEL, MAD_RELEASE_IDS, PLACEHOLDER_RELEASES, type Release } from "./releases";
 
 // Spotify Web API, Client Credentials flow (no user login needed).
 // Requires SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in the environment.
@@ -128,6 +128,10 @@ function isMadCactus(album: SpotifyAlbum) {
   return texts.some((t) => t.toLowerCase().includes(MAD_LABEL));
 }
 
+function isExcluded(album: SpotifyAlbum) {
+  return album.artists.some((a) => MAD_EXCLUDED_ARTISTS.includes(a.name.trim().toLowerCase()));
+}
+
 function toRelease(album: SpotifyAlbum): Release {
   // Spotify lists images largest first; the 640px one is plenty for a grid tile.
   return {
@@ -161,10 +165,11 @@ export async function getMadReleases(): Promise<Release[]> {
     for (const a of extra) if (a && isMadCactus(a)) byId.set(a.id, a);
 
     console.log(
-      `[mad/spotify] ${fromSearch.length} from label search, ${extraIds.length} other roster albums checked, ${byId.size} releases shown`,
+      `[mad/spotify] ${fromSearch.length} from label search, ${extraIds.length} other roster albums checked, ${byId.size} matched before exclusions`,
     );
 
     const releases = [...byId.values()]
+      .filter((a) => !isExcluded(a))
       .map(toRelease)
       .sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
     return releases.length ? releases : PLACEHOLDER_RELEASES;
