@@ -43,6 +43,7 @@ async function getAccessToken(): Promise<string | null> {
 // small batches instead of asking for 50 at once.
 const PAGE_SIZE = 10;
 const MAX_PAGES = 10;
+const SEARCH_MAX_PAGES = 50; // up to 500 label releases
 
 async function getArtistAlbums(artistId: string, token: string): Promise<SpotifyAlbum[]> {
   const items: SpotifyAlbum[] = [];
@@ -67,7 +68,7 @@ async function getArtistAlbums(artistId: string, token: string): Promise<Spotify
 async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
   const items: SpotifyAlbum[] = [];
   const q = encodeURIComponent(`label:"${MAD_LABEL}"`);
-  for (let page = 0; page < MAX_PAGES; page++) {
+  for (let page = 0; page < SEARCH_MAX_PAGES; page++) {
     const url = `https://api.spotify.com/v1/search?q=${q}&type=album&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`;
     const res = await fetch(url, {
       headers: { Authorization: `Bearer ${token}` },
@@ -85,16 +86,38 @@ async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
 }
 
 // The artist-albums list omits the label, so fetch each full album to read it.
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// Retries on 429 (rate limit), waiting as long as Spotify's Retry-After asks.
 async function getAlbum(albumId: string, token: string): Promise<SpotifyAlbum | null> {
-  const res = await fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: DAY, tags: ["mad-releases"] },
-  });
-  if (!res.ok) {
-    console.error("[mad/spotify] album request failed", albumId, res.status, await res.text());
-    return null;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const res = await fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+      next: { revalidate: DAY, tags: ["mad-releases"] },
+    });
+    if (res.status === 429) {
+      const wait = Math.min(Number(res.headers.get("retry-after")) || 2, 15);
+      await sleep(wait * 1000);
+      continue;
+    }
+    if (!res.ok) {
+      console.error("[mad/spotify] album request failed", albumId, res.status, await res.text());
+      return null;
+    }
+    return (await res.json()) as SpotifyAlbum;
   }
-  return (await res.json()) as SpotifyAlbum;
+  console.error("[mad/spotify] album request gave up after retries", albumId);
+  return null;
+}
+
+// Fetch full albums a few at a time to stay under Spotify's rate limit.
+async function getAlbumsThrottled(ids: string[], token: string, concurrency = 4) {
+  const out: (SpotifyAlbum | null)[] = [];
+  for (let i = 0; i < ids.length; i += concurrency) {
+    const batch = await Promise.all(ids.slice(i, i + concurrency).map((id) => getAlbum(id, token)));
+    out.push(...batch);
+  }
+  return out;
 }
 
 // Spotify withholds `label` from apps in development mode, so also match the
@@ -126,18 +149,22 @@ export async function getMadReleases(): Promise<Release[]> {
       searchLabelAlbums(token),
       ...MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)),
     ]);
-    const albums = [...fromSearch, ...fromArtists.flat()];
-    const searchIds = new Set(fromSearch.map((a) => a.id));
-    const ids = [...new Set(albums.map((a) => a.id))];
-    const full = await Promise.all(ids.map((id) => getAlbum(id, token)));
-    for (const a of full) {
-      if (!a) continue;
-      const rights = (a.copyrights ?? []).map((c) => c.text).join(" / ") || "(no copyrights)";
-      const src = searchIds.has(a.id) ? "search" : "artist";
-      console.log(`[mad/spotify] ${a.id} "${a.name}" (${src}) rights=${rights} match=${isMadCactus(a)}`);
-    }
-    const releases = full
-      .filter((a): a is SpotifyAlbum => a !== null && isMadCactus(a))
+
+    // Label search results are already tagged Mad Cactus by Spotify: trust them
+    // (some carry the artist's name in the copyright line, not the label's).
+    const byId = new Map(fromSearch.map((a) => [a.id, a]));
+
+    // Roster albums the search missed: these may be on other labels, so check
+    // the copyright text on the full album object.
+    const extraIds = [...new Set(fromArtists.flat().map((a) => a.id))].filter((id) => !byId.has(id));
+    const extra = await getAlbumsThrottled(extraIds, token);
+    for (const a of extra) if (a && isMadCactus(a)) byId.set(a.id, a);
+
+    console.log(
+      `[mad/spotify] ${fromSearch.length} from label search, ${extraIds.length} other roster albums checked, ${byId.size} releases shown`,
+    );
+
+    const releases = [...byId.values()]
       .map(toRelease)
       .sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
     return releases.length ? releases : PLACEHOLDER_RELEASES;
