@@ -9,6 +9,7 @@ export type Release = {
   artist: string;
   releaseDate: string; // "YYYY", "YYYY-MM" or "YYYY-MM-DD" (Spotify precision)
   cover?: string; // image URL; empty tile when missing
+  video?: string; // looping video (e.g. the Spotify Canvas) shown instead of the cover
   url?: string; // Spotify link
 };
 
@@ -35,6 +36,11 @@ export const MAD_EXCLUDED_ARTISTS = ["joelene"];
 // Spotify album IDs (from open.spotify.com/album/<id>) that are Mad Cactus
 // releases but don't say so in their label/copyright text.
 export const MAD_RELEASE_IDS: string[] = [];
+
+// Looping videos to show instead of the cover, keyed by Spotify album ID.
+// Spotify's API doesn't expose Canvas videos, so these are uploaded by hand
+// (MP4, ideally square or 9:16, a few MB at most).
+export const MAD_RELEASE_VIDEOS: Record<string, string> = {};
 
 export const PLACEHOLDER_RELEASES: Release[] = Array.from({ length: 16 }, (_, i) => ({
   id: `placeholder-${i + 1}`,

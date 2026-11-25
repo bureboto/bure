@@ -1,4 +1,12 @@
-import { MAD_ARTIST_IDS, MAD_EXCLUDED_ARTISTS, MAD_LABEL, MAD_RELEASE_IDS, PLACEHOLDER_RELEASES, type Release } from "./releases";
+import {
+  MAD_ARTIST_IDS,
+  MAD_EXCLUDED_ARTISTS,
+  MAD_LABEL,
+  MAD_RELEASE_IDS,
+  MAD_RELEASE_VIDEOS,
+  PLACEHOLDER_RELEASES,
+  type Release,
+} from "./releases";
 
 // Spotify Web API, Client Credentials flow (no user login needed).
 // Requires SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in the environment.
@@ -140,6 +148,7 @@ function toRelease(album: SpotifyAlbum): Release {
     artist: album.artists.map((a) => a.name).join(", "),
     releaseDate: album.release_date,
     cover: album.images[0]?.url,
+    video: MAD_RELEASE_VIDEOS[album.id],
     url: album.external_urls.spotify,
   };
 }

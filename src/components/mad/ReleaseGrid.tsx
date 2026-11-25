@@ -29,7 +29,19 @@ export default function ReleaseGrid({ releases }: { releases: Release[] }) {
               {...(r.url ? { href: r.url, target: "_blank", rel: "noopener noreferrer" } : {})}
               className="group absolute inset-0 block"
             >
-              {r.cover && (
+              {r.video ? (
+                <video
+                  src={r.video}
+                  poster={r.cover}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={`${r.title} — ${r.artist}`}
+                  className="absolute inset-0 size-full object-cover"
+                />
+              ) : r.cover && (
                 <Image src={r.cover} alt={`${r.title} — ${r.artist}`} fill sizes="(min-width: 768px) 25vw, 50vw" className="object-cover" />
               )}
               <span className="absolute inset-0 flex flex-col justify-end bg-black/70 p-4 text-[16px] leading-tight opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
