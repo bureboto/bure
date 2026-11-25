@@ -63,6 +63,27 @@ async function getArtistAlbums(artistId: string, token: string): Promise<Spotify
   return items;
 }
 
+// Search by label: returns albums Spotify tags with that label, regardless of artist.
+async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
+  const items: SpotifyAlbum[] = [];
+  const q = encodeURIComponent(`label:"${MAD_LABEL}"`);
+  for (let page = 0; page < MAX_PAGES; page++) {
+    const url = `https://api.spotify.com/v1/search?q=${q}&type=album&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`;
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+      next: { revalidate: DAY, tags: ["mad-releases"] },
+    });
+    if (!res.ok) {
+      console.error("[mad/spotify] label search failed", res.status, await res.text());
+      break;
+    }
+    const data = (await res.json()) as { albums: { items: SpotifyAlbum[]; next: string | null } };
+    items.push(...(data.albums?.items ?? []).filter(Boolean));
+    if (!data.albums?.next) break;
+  }
+  return items;
+}
+
 // The artist-albums list omits the label, so fetch each full album to read it.
 async function getAlbum(albumId: string, token: string): Promise<SpotifyAlbum | null> {
   const res = await fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
@@ -101,13 +122,19 @@ export async function getMadReleases(): Promise<Release[]> {
     const token = await getAccessToken();
     if (!token) return PLACEHOLDER_RELEASES;
 
-    const albums = (await Promise.all(MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)))).flat();
+    const [fromSearch, ...fromArtists] = await Promise.all([
+      searchLabelAlbums(token),
+      ...MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)),
+    ]);
+    const albums = [...fromSearch, ...fromArtists.flat()];
+    const searchIds = new Set(fromSearch.map((a) => a.id));
     const ids = [...new Set(albums.map((a) => a.id))];
     const full = await Promise.all(ids.map((id) => getAlbum(id, token)));
     for (const a of full) {
       if (!a) continue;
       const rights = (a.copyrights ?? []).map((c) => c.text).join(" / ") || "(no copyrights)";
-      console.log(`[mad/spotify] ${a.id} "${a.name}" label=${a.label ?? "(none)"} rights=${rights} match=${isMadCactus(a)}`);
+      const src = searchIds.has(a.id) ? "search" : "artist";
+      console.log(`[mad/spotify] ${a.id} "${a.name}" (${src}) rights=${rights} match=${isMadCactus(a)}`);
     }
     const releases = full
       .filter((a): a is SpotifyAlbum => a !== null && isMadCactus(a))
