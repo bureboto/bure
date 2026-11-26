@@ -1,0 +1,58 @@
+import Image from "next/image";
+import type { Release } from "@/lib/mad/releases";
+
+const SHADES = ["bg-[#5e5e5e]", "bg-[#383838]"];
+const MD_SHADES = ["md:bg-[#5e5e5e]", "md:bg-[#383838]"];
+
+// Spotify dates come as "YYYY", "YYYY-MM" or "YYYY-MM-DD" depending on precision.
+function formatDate(date: string) {
+  const [y, m, d] = date.split("-").map(Number);
+  if (!y) return "";
+  if (!m) return String(y);
+  const opts: Intl.DateTimeFormatOptions = { month: "short", year: "numeric", timeZone: "UTC" };
+  if (d) opts.day = "numeric";
+  return new Date(Date.UTC(y, m - 1, d || 1)).toLocaleDateString("es-MX", opts);
+}
+
+// Figma 391:2263 / 391:2350: edge-to-edge grid of square release covers,
+// 2 columns on mobile and 4 on desktop, checkerboard grey while empty.
+export default function ReleaseGrid({ releases }: { releases: Release[] }) {
+  return (
+    <ul className="grid grid-cols-2 md:grid-cols-4">
+      {releases.map((r, i) => {
+        // Checkerboard placeholder: rows alternate, so parity depends on column count.
+        const shade = `${SHADES[(i + Math.floor(i / 2)) % 2]} ${MD_SHADES[(i + Math.floor(i / 4)) % 2]}`;
+        const Tag = r.url ? "a" : "div";
+        return (
+          <li key={r.id} className={`relative aspect-square ${shade}`}>
+            <Tag
+              {...(r.url ? { href: r.url, target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="group absolute inset-0 block"
+            >
+              {r.video ? (
+                <video
+                  src={r.video}
+                  poster={r.cover}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={`${r.title} — ${r.artist}`}
+                  className="absolute inset-0 size-full object-cover"
+                />
+              ) : r.cover && (
+                <Image src={r.cover} alt={`${r.title} — ${r.artist}`} fill sizes="(min-width: 768px) 25vw, 50vw" className="object-cover" />
+              )}
+              <span className="absolute inset-0 flex flex-col justify-end bg-black/70 p-4 text-[16px] leading-tight opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                <span>{r.title}</span>
+                <span className="text-[#9a9a9a]">{r.artist}</span>
+                {formatDate(r.releaseDate) && <span className="mt-2 text-[12px] text-[#9a9a9a]">{formatDate(r.releaseDate)}</span>}
+              </span>
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}

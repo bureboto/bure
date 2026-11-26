@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const DESIGN_HOSTS = ["design.bure.art", "www.design.bure.art"];
+const MAD_HOSTS = ["mad.bure.art", "www.mad.bure.art"];
+const MAD_PREFIX = "/mad";
 const DESIGN_PATHS = [
   "/home",
   "/about-me",
@@ -21,11 +23,25 @@ const DESIGN_PATHS = [
   "/pulso",
 ];
 
+function matchesHost(hostname: string, hosts: string[]) {
+  return hosts.some((host) => hostname === host || hostname.startsWith(`${host}:`));
+}
+
 export function proxy(request: NextRequest) {
   const hostname = request.headers.get("host") ?? "";
-  const isDesignHost = DESIGN_HOSTS.some(
-    (host) => hostname === host || hostname.startsWith(`${host}:`)
-  );
+
+  // mad.bure.art → Mad Cactus label site, served from the (mad) route group under /mad.
+  if (matchesHost(hostname, MAD_HOSTS)) {
+    const { pathname } = request.nextUrl;
+    if (pathname === MAD_PREFIX || pathname.startsWith(`${MAD_PREFIX}/`)) {
+      return NextResponse.next();
+    }
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === "/" ? MAD_PREFIX : `${MAD_PREFIX}${pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  const isDesignHost = matchesHost(hostname, DESIGN_HOSTS);
 
   if (!isDesignHost) {
     return NextResponse.next();
