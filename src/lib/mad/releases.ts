@@ -42,6 +42,13 @@ export const MAD_ARTIST_IDS = [
 // Cactus (another label shares the name). Matched by name, case-insensitive.
 export const MAD_EXCLUDED_ARTISTS = ["joelene"];
 
+// Spotify artist IDs left off the Artists page (their releases still show).
+export const MAD_HIDDEN_ARTIST_IDS = [
+  "5zSxx6PnuYW7RFr3yigt4f", // Goblin - X
+  "50LOKfAouoQzuQqQWfrjMZ", // Journey 7 (with a space; Journey7 stays)
+  "2Ri1n1WMJKVqcB8PXBZORT", // Sersei
+];
+
 // Spotify album IDs (from open.spotify.com/album/<id>) that are Mad Cactus
 // releases but don't say so in their label/copyright text.
 export const MAD_RELEASE_IDS: string[] = [];

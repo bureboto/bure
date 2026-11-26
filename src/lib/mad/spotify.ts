@@ -2,6 +2,7 @@ import { cache } from "react";
 import {
   MAD_ARTIST_IDS,
   MAD_EXCLUDED_ARTISTS,
+  MAD_HIDDEN_ARTIST_IDS,
   MAD_LABEL,
   MAD_RELEASE_IDS,
   MAD_RELEASE_VIDEOS,
@@ -212,6 +213,7 @@ export async function getMadArtists(): Promise<Artist[]> {
     for (const a of albums) for (const ar of a.artists) counts.set(ar.id, (counts.get(ar.id) ?? 0) + 1);
 
     const ids = [...leads].filter((id) => {
+      if (MAD_HIDDEN_ARTIST_IDS.includes(id)) return false;
       const name = albums.flatMap((a) => a.artists).find((ar) => ar.id === id)?.name ?? "";
       const n = name.trim().toLowerCase();
       return n !== "various artists" && !MAD_EXCLUDED_ARTISTS.includes(n);
