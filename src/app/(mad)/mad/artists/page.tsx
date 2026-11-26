@@ -7,8 +7,10 @@ import { getMadArtists } from "@/lib/mad/spotify";
 
 export const metadata: Metadata = { title: "Artists — Mad Cactus" };
 
-// Re-fetch from Spotify at most once a day (ISR).
-export const revalidate = 86400;
+// Re-render hourly so a render that hit a Spotify rate limit heals quickly.
+// Spotify itself is still called at most about once a day: successful
+// responses are cached for a day in src/lib/mad/spotify.ts.
+export const revalidate = 3600;
 
 export default async function MadArtists() {
   const artists = await getMadArtists();

@@ -97,17 +97,31 @@ async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-// GET a Spotify API path, cached for a day. Retries on 429 (rate limit),
-// waiting as long as Spotify's Retry-After asks, and on transient 5xx errors.
+// When Spotify rate-limits us with a long Retry-After, stop calling it in
+// this process until then: waiting would only stall the build or request
+// (Next gives each static page 60s), and every extra call extends the ban.
+let spotifyBlockedUntil = 0;
+const MAX_WAIT_S = 5;
+
+// GET a Spotify API path, cached for a day. Short retries on 429 (rate limit)
+// and transient 5xx errors; gives up fast when Spotify asks for a long pause.
 async function spotifyGet<T>(path: string, token: string): Promise<T | null> {
-  for (let attempt = 0; attempt < 4; attempt++) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (Date.now() < spotifyBlockedUntil) return null;
     const res = await fetch(`https://api.spotify.com/v1${path}`, {
       headers: { Authorization: `Bearer ${token}` },
       next: { revalidate: DAY, tags: ["mad-releases"] },
     });
     if (res.status === 429 || res.status >= 500) {
-      const wait = Math.min(Number(res.headers.get("retry-after")) || 2 ** attempt, 15);
-      await sleep(wait * 1000);
+      const retryAfter = Number(res.headers.get("retry-after")) || 2 ** attempt;
+      if (retryAfter > MAX_WAIT_S) {
+        if (Date.now() >= spotifyBlockedUntil) {
+          console.error(`[mad/spotify] ${res.status}, Spotify asks to wait ${retryAfter}s; pausing Spotify calls`);
+        }
+        spotifyBlockedUntil = Date.now() + retryAfter * 1000;
+        return null;
+      }
+      await sleep(retryAfter * 1000);
       continue;
     }
     if (!res.ok) {
