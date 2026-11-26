@@ -1,6 +1,6 @@
 // Mad Cactus catalog. Each tile in the home grid is one release cover.
-// Releases come from Spotify (see ./spotify.ts): a label search plus the
-// albums of every artist in MAD_ARTIST_IDS, filtered to the Mad Cactus label.
+// Releases come from Spotify (see ./spotify.ts): a search for the Mad Cactus
+// label, plus any albums listed by hand in MAD_RELEASE_IDS.
 // PLACEHOLDER_RELEASES keep the grid filled when Spotify credentials are
 // missing or the API call fails. The artist roster is derived from releases.
 
@@ -22,21 +22,8 @@ export type Artist = {
   releaseCount: number; // Mad Cactus releases they appear on
 };
 
-// Only releases whose Spotify label or ℗/© text contains this (case-insensitive)
-// are shown, since roster artists also release on other labels.
+// Label name searched on Spotify (label:"...") to find the catalog.
 export const MAD_LABEL = "mad cactus";
-
-// Spotify artist IDs: the part after /artist/ in an open.spotify.com link.
-// The label search in ./spotify.ts finds most releases on its own; this list
-// is a backstop for anything the search misses.
-export const MAD_ARTIST_IDS = [
-  "2VQkqhOnfK4FDNoIJklQ8e", // Abscot
-  "3vPgVN7X6Kul05jylKTSLS", // lickthepaper
-  "333xTovyP8Mj9sK4fIUpgu", // dreamvibes
-  "0D4Wk6S4YE9fbVSozQ6vq2", // sugar
-  "2XZY2dx8EPrdxOXfNj1tfX", // suerte
-  "6PrOoECINzfKEUyMRv6fWI", // l3af
-];
 
 // Artists whose releases come up under the label search but are not on Mad
 // Cactus (another label shares the name). Matched by name, case-insensitive.
@@ -49,8 +36,8 @@ export const MAD_HIDDEN_ARTIST_IDS = [
   "2Ri1n1WMJKVqcB8PXBZORT", // Sersei
 ];
 
-// Spotify album IDs (from open.spotify.com/album/<id>) that are Mad Cactus
-// releases but don't say so in their label/copyright text.
+// Spotify album IDs (from open.spotify.com/album/<id>) of Mad Cactus releases
+// that the label search misses. Added to the catalog as-is.
 export const MAD_RELEASE_IDS: string[] = [];
 
 // Looping videos to show instead of the cover, keyed by Spotify album ID.

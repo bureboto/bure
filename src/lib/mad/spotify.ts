@@ -1,7 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import {
-  MAD_ARTIST_IDS,
   MAD_EXCLUDED_ARTISTS,
   MAD_HIDDEN_ARTIST_IDS,
   MAD_LABEL,
@@ -62,22 +61,7 @@ async function getAccessToken(): Promise<string | null> {
 // Spotify caps page size for apps in development mode, so page through in
 // small batches instead of asking for 50 at once.
 const PAGE_SIZE = 10;
-const MAX_PAGES = 10;
 const SEARCH_MAX_PAGES = 50; // up to 500 label releases
-
-async function getArtistAlbums(artistId: string, token: string): Promise<SpotifyAlbum[]> {
-  const items: SpotifyAlbum[] = [];
-  for (let page = 0; page < MAX_PAGES; page++) {
-    const data = await spotifyGet<{ items: SpotifyAlbum[]; next: string | null }>(
-      `/artists/${artistId}/albums?include_groups=album,single&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`,
-      token,
-    );
-    if (!data) break;
-    items.push(...(data.items ?? []));
-    if (!data.next) break;
-  }
-  return items;
-}
 
 // Search by label: returns albums Spotify tags with that label, regardless of artist.
 async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
@@ -88,7 +72,8 @@ async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
       `/search?q=${q}&type=album&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`,
       token,
     );
-    if (!data) break;
+    // A missing page means a partial catalog: fail so it isn't cached.
+    if (!data) throw new Error(`Spotify label search failed at page ${page}`);
     items.push(...(data.albums?.items ?? []).filter(Boolean));
     if (!data.albums?.next) break;
   }
@@ -134,7 +119,6 @@ async function spotifyGet<T>(path: string, token: string): Promise<T | null> {
   return null;
 }
 
-// The artist-albums list omits the label, so fetch each full album to read it.
 const getAlbum = (id: string, token: string) => spotifyGet<SpotifyAlbum>(`/albums/${id}`, token);
 const getArtist = (id: string, token: string) => spotifyGet<SpotifyArtist>(`/artists/${id}`, token);
 
@@ -145,14 +129,6 @@ async function throttled<T>(ids: string[], get: (id: string) => Promise<T | null
     out.push(...(await Promise.all(ids.slice(i, i + concurrency).map(get))));
   }
   return out;
-}
-
-// Spotify withholds `label` from apps in development mode, so also match the
-// ℗/© lines (e.g. "℗ 2024 Mad Cactus"), plus any IDs listed by hand.
-function isMadCactus(album: SpotifyAlbum) {
-  if (MAD_RELEASE_IDS.includes(album.id)) return true;
-  const texts = [album.label ?? "", ...(album.copyrights ?? []).map((c) => c.text)];
-  return texts.some((t) => t.toLowerCase().includes(MAD_LABEL));
 }
 
 function isExcluded(album: SpotifyAlbum) {
@@ -172,33 +148,26 @@ function toRelease(album: SpotifyAlbum): Release {
   };
 }
 
-// Builds the full Mad Cactus album list: label search plus the roster
-// backstop (a couple hundred Spotify calls). Expensive, so it's only run via
-// the cached wrapper below.
+// Builds the full Mad Cactus album list: the label search (a handful of
+// Spotify calls) plus any releases listed by hand in MAD_RELEASE_IDS. Only
+// run via the cached wrapper below. Throws on any failure so a partial
+// catalog never gets cached.
 async function buildMadAlbums(): Promise<SpotifyAlbum[]> {
   const token = await getAccessToken();
   if (!token) throw new Error("Spotify credentials missing or token request failed");
 
-  const [fromSearch, ...fromArtists] = await Promise.all([
-    searchLabelAlbums(token),
-    ...MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)),
-  ]);
-  // Don't let an empty/failed run get cached for a day.
+  const fromSearch = await searchLabelAlbums(token);
   if (!fromSearch.length) throw new Error("Spotify label search returned nothing");
-
-  // Label search results are already tagged Mad Cactus by Spotify: trust them
-  // (some carry the artist's name in the copyright line, not the label's).
   const byId = new Map(fromSearch.map((a) => [a.id, a]));
 
-  // Roster albums the search missed: these may be on other labels, so check
-  // the copyright text on the full album object.
-  const extraIds = [...new Set(fromArtists.flat().map((a) => a.id))].filter((id) => !byId.has(id));
-  const extra = await throttled(extraIds, (id) => getAlbum(id, token));
-  for (const a of extra) if (a && isMadCactus(a)) byId.set(a.id, a);
+  const manualIds = MAD_RELEASE_IDS.filter((id) => !byId.has(id));
+  const manual = await throttled(manualIds, (id) => getAlbum(id, token));
+  manual.forEach((a, i) => {
+    if (!a) throw new Error(`Spotify album ${manualIds[i]} failed`);
+    byId.set(a.id, a);
+  });
 
-  console.log(
-    `[mad/spotify] ${fromSearch.length} from label search, ${extraIds.length} other roster albums checked, ${byId.size} matched before exclusions`,
-  );
+  console.log(`[mad/spotify] catalog: ${fromSearch.length} from label search, ${manual.length} listed by hand`);
 
   return [...byId.values()]
     .filter((a) => !isExcluded(a))
@@ -208,7 +177,7 @@ async function buildMadAlbums(): Promise<SpotifyAlbum[]> {
 // The computed catalog is cached for a day and shared by every page and
 // request (home, artists, dashboards), so Spotify is hit about once a day
 // rather than on each visit. Bump the key after changing the build logic.
-const getCachedMadAlbums = unstable_cache(buildMadAlbums, ["mad-albums-v1"], {
+const getCachedMadAlbums = unstable_cache(buildMadAlbums, ["mad-albums-v2"], {
   revalidate: DAY,
   tags: ["mad-releases"],
 });
