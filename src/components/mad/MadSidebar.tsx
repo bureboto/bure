@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { LoginButton, MadHomeLink, MadNavLinks } from "./MadNav";
+import { LoginLink, MadHomeLink, MadNavLinks, SendDemoButton } from "./MadNav";
 
-// Desktop menu (Figma 391:2251): black full-height column with logo,
+// Desktop menu (Figma 391:2251, 397:3394): black full-height column with logo,
 // vertical wordmark and nav pinned to the bottom.
 export default function MadSidebar() {
   return (
@@ -16,7 +16,8 @@ export default function MadSidebar() {
 
       <nav className="flex flex-col items-start gap-4 text-[16px] leading-none">
         <MadNavLinks />
-        <LoginButton />
+        <LoginLink />
+        <SendDemoButton />
       </nav>
     </aside>
   );

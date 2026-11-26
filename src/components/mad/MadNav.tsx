@@ -1,15 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSyncExternalStore } from "react";
 
 // Section paths as seen on mad.bure.art. Elsewhere (Vercel previews, the main
 // domain) the same pages live under /mad, which src/proxy.ts maps for us.
-export const MAD_NAV: { path: string | null; label: string }[] = [
+export const MAD_NAV: { path: string; label: string }[] = [
   { path: "/", label: "Releases" },
   { path: "/artists", label: "Artists" },
-  { path: null, label: "Contact" }, // no page yet
+  { path: "/contact", label: "Contact" },
 ];
 
 const subscribe = () => () => {};
@@ -42,13 +43,6 @@ export function MadNavLinks({ className = "", onNavigate }: { className?: string
   return (
     <>
       {MAD_NAV.map((item) => {
-        if (!item.path) {
-          return (
-            <a key={item.label} href="#contact" className={`${className} hover:text-white`}>
-              {item.label}
-            </a>
-          );
-        }
         const active = item.path === "/" ? section === "/" : section.startsWith(item.path);
         return (
           <Link
@@ -56,7 +50,7 @@ export function MadNavLinks({ className = "", onNavigate }: { className?: string
             href={href(item.path)}
             onClick={onNavigate}
             aria-current={active ? "page" : undefined}
-            className={`${className} hover:text-white ${active ? "text-white underline underline-offset-4" : ""}`}
+            className={`${className} hover:text-white ${active ? "underline underline-offset-4" : ""}`}
           >
             {item.label}
           </Link>
@@ -75,14 +69,25 @@ export function MadHomeLink({ className, children }: { className?: string; child
   );
 }
 
-export function LoginButton() {
+// "Login" — opens the artist login in a new tab (Figma 397:3402).
+export function LoginLink({ className = "" }: { className?: string }) {
   const href = useMadHref();
   return (
-    <Link
-      href={href("/login")}
-      className="rounded-[4px] border border-white px-3 py-2 text-[16px] leading-none text-[#e0e0e0] transition-colors hover:bg-white hover:text-black"
-    >
+    <a href={href("/login")} target="_blank" rel="noopener" className={`${className} hover:text-white`}>
       Login
-    </Link>
+    </a>
+  );
+}
+
+// "Send demo" button (Figma 397:3403). No destination yet.
+export function SendDemoButton() {
+  return (
+    <a
+      href="#send-demo"
+      className="flex items-center justify-center gap-[10px] rounded-[4px] border border-white px-3 py-2 text-[16px] leading-none tracking-normal text-[#e0e0e0] transition-colors hover:bg-white/10"
+    >
+      <Image src="/mad/disc.svg" alt="" width={24} height={24} />
+      Send demo
+    </a>
   );
 }
