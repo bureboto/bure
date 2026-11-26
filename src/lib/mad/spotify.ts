@@ -32,6 +32,7 @@ type SpotifyAlbum = {
 type SpotifyArtist = {
   id: string;
   name: string;
+  followers?: { total: number }; // may be withheld for development-mode apps
   images: { url: string; width: number | null }[];
   external_urls: { spotify: string };
 };
@@ -233,5 +234,36 @@ export async function getMadArtists(): Promise<Artist[]> {
   } catch (err) {
     console.error("[mad/spotify] failed to load artists", err);
     return [];
+  }
+}
+
+export type ArtistProfile = {
+  id: string;
+  name: string;
+  image?: string;
+  url: string;
+  followers?: number; // Spotify followers, when Spotify provides them
+  releases: Release[]; // Mad Cactus releases they appear on, newest first
+};
+
+// One artist's profile for their dashboard: Spotify name, picture and
+// followers, plus every Mad Cactus release they're credited on.
+export async function getMadArtistProfile(artistId: string): Promise<ArtistProfile | null> {
+  try {
+    const catalog = await getMadAlbums();
+    if (!catalog) return null;
+    const artist = await getArtist(artistId, catalog.token);
+    if (!artist) return null;
+    return {
+      id: artist.id,
+      name: artist.name,
+      image: artist.images[0]?.url,
+      url: artist.external_urls.spotify,
+      followers: artist.followers?.total,
+      releases: catalog.albums.filter((a) => a.artists.some((ar) => ar.id === artistId)).map(toRelease),
+    };
+  } catch (err) {
+    console.error("[mad/spotify] failed to load artist profile", artistId, err);
+    return null;
   }
 }
