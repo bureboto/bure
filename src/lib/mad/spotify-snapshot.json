@@ -1,0 +1,562 @@
+{
+ "note": "Last known good Spotify data, captured from the live pages on 2026-11-26. Used only when Spotify is unavailable.",
+ "releases": [
+  {
+   "id": "1kX3MajwnU4fOCDmIBT8bd",
+   "title": "Mother Sauce",
+   "artist": "Abscot",
+   "releaseDate": "2026-10-15",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2731473fec8bda3270a3db116e5",
+   "url": "https://open.spotify.com/album/1kX3MajwnU4fOCDmIBT8bd"
+  },
+  {
+   "id": "3DYHiSqB2sqRHDyYMefTCP",
+   "title": "Sickness for Thickness",
+   "artist": "LickThePaper, SQUARE.EYES",
+   "releaseDate": "2026-08-27",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27361b520d0a7a9301f5425251d",
+   "url": "https://open.spotify.com/album/3DYHiSqB2sqRHDyYMefTCP"
+  },
+  {
+   "id": "1SbaEblkJGZRSkhDBjYZf1",
+   "title": "Receive The Pain(痛みを受け取れ)",
+   "artist": "Yokai Live",
+   "releaseDate": "2026-04-24",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273075b6b9ead90f5159bc5e2d8",
+   "url": "https://open.spotify.com/album/1SbaEblkJGZRSkhDBjYZf1"
+  },
+  {
+   "id": "39xMQMxaTVoeNSa0ytBz6Z",
+   "title": "Cheery Roots",
+   "artist": "Abscot",
+   "releaseDate": "2026-02-26",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273f7b7c434a107ebb9de6b4186",
+   "url": "https://open.spotify.com/album/39xMQMxaTVoeNSa0ytBz6Z"
+  },
+  {
+   "id": "3fydndFgbgozLnCQZrDiaB",
+   "title": "Dark Mirror",
+   "artist": "DreamVibes!, Sugar Glider",
+   "releaseDate": "2026-01-08",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27371991429a06e90e5dee28e5d",
+   "url": "https://open.spotify.com/album/3fydndFgbgozLnCQZrDiaB"
+  },
+  {
+   "id": "15aNUDaYMUXLT7rZKGuJOv",
+   "title": "Mad Samurais, Vol. 1",
+   "artist": "Various Artists",
+   "releaseDate": "2025-11-28",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273deaa37aaa112bc3476ad9dc9",
+   "url": "https://open.spotify.com/album/15aNUDaYMUXLT7rZKGuJOv"
+  },
+  {
+   "id": "1QR51efwHW5WWNKIN6UqRK",
+   "title": "Satellite Lover",
+   "artist": "Yokai Live",
+   "releaseDate": "2025-10-10",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2734703005e83b44e2921a9ae8c",
+   "url": "https://open.spotify.com/album/1QR51efwHW5WWNKIN6UqRK"
+  },
+  {
+   "id": "4hau7iXGdFuDaUfW3VsSlH",
+   "title": "time travel felt weird",
+   "artist": "Fractal Joke, Aynix.x",
+   "releaseDate": "2025-09-30",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2737075ef0d14526ada14d28289",
+   "url": "https://open.spotify.com/album/4hau7iXGdFuDaUfW3VsSlH"
+  },
+  {
+   "id": "2jPnXkTHU5siGjULvfuuzp",
+   "title": "Días Buenos Días Malos",
+   "artist": "Sugar Glider, Siit",
+   "releaseDate": "2025-08-29",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27345d5f038430e55b55c1b8003",
+   "url": "https://open.spotify.com/album/2jPnXkTHU5siGjULvfuuzp"
+  },
+  {
+   "id": "4gNvG0hqcpnLsToOpjdxqs",
+   "title": "Kinetic Doubt",
+   "artist": "DreamVibes!",
+   "releaseDate": "2025-08-01",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27399ca21a212f85c0a050fe74a",
+   "url": "https://open.spotify.com/album/4gNvG0hqcpnLsToOpjdxqs"
+  },
+  {
+   "id": "7fKXS10u4fk7WOGE7X0daX",
+   "title": "Traumacore",
+   "artist": "Liminar",
+   "releaseDate": "2025-07-25",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273e9202cb2fdfe838e17cf0a29",
+   "url": "https://open.spotify.com/album/7fKXS10u4fk7WOGE7X0daX"
+  },
+  {
+   "id": "48hKYzhJl9rmRbHBtrT348",
+   "title": "Hallucigenia",
+   "artist": "DreamVibes!, Intelligence",
+   "releaseDate": "2025-07-11",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273a50456c25e2f3af3a1cd0301",
+   "url": "https://open.spotify.com/album/48hKYzhJl9rmRbHBtrT348"
+  },
+  {
+   "id": "3EpVgHpckxxlIylNXO8eIF",
+   "title": "Phase Fade",
+   "artist": "LickThePaper",
+   "releaseDate": "2025-06-27",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273c2ab16a98f1d661d00dcaccd",
+   "url": "https://open.spotify.com/album/3EpVgHpckxxlIylNXO8eIF"
+  },
+  {
+   "id": "5NlZS3hOqgrAxPhduHTuE6",
+   "title": "Unsheathed",
+   "artist": "LickThePaper, Dystracted",
+   "releaseDate": "2025-05-29",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273c5440f250d8259e623e50e75",
+   "url": "https://open.spotify.com/album/5NlZS3hOqgrAxPhduHTuE6"
+  },
+  {
+   "id": "6V893PoN9nrMFvaTyFVF54",
+   "title": "KBOOM",
+   "artist": "Suerte Lo-Fi",
+   "releaseDate": "2025-03-28",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273aca70715d8c9efbce67caa6b",
+   "url": "https://open.spotify.com/album/6V893PoN9nrMFvaTyFVF54"
+  },
+  {
+   "id": "1DnrARQkeByj1IX0JKUIbk",
+   "title": "Lux Et Tenebrae",
+   "artist": "DreamVibes!",
+   "releaseDate": "2025-03-07",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273ae09c019e194ed5397e6c06a",
+   "url": "https://open.spotify.com/album/1DnrARQkeByj1IX0JKUIbk"
+  },
+  {
+   "id": "1YZe45ZJ9MNARxkWpzL7vQ",
+   "title": "lowsesh #5",
+   "artist": "LickThePaper",
+   "releaseDate": "2025-03-06",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2732397bf729999e74b0f81515c",
+   "url": "https://open.spotify.com/album/1YZe45ZJ9MNARxkWpzL7vQ"
+  },
+  {
+   "id": "6nplZ2elrQgQjJLGjcBVk1",
+   "title": "666",
+   "artist": "L3AF",
+   "releaseDate": "2025-02-27",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2739eb38b1a85736894a2ec1c72",
+   "url": "https://open.spotify.com/album/6nplZ2elrQgQjJLGjcBVk1"
+  },
+  {
+   "id": "64KMxOVI6z7HT3pchAcrXv",
+   "title": "Cutting Patterns",
+   "artist": "LickThePaper",
+   "releaseDate": "2025-02-11",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273994cfd5e13e3925e7913fd68",
+   "url": "https://open.spotify.com/album/64KMxOVI6z7HT3pchAcrXv"
+  },
+  {
+   "id": "4ojoWeOqZO2NNt3CR7A479",
+   "title": "Memento",
+   "artist": "Abscot",
+   "releaseDate": "2025-01-30",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273e5e68f2f81aaa34e71101862",
+   "url": "https://open.spotify.com/album/4ojoWeOqZO2NNt3CR7A479"
+  },
+  {
+   "id": "3S0ZrNaEYPjrKIgtWbXb91",
+   "title": "Parasite (VIP)",
+   "artist": "DreamVibes!",
+   "releaseDate": "2025-01-10",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2733e57599831a7ab6dac2aed17",
+   "url": "https://open.spotify.com/album/3S0ZrNaEYPjrKIgtWbXb91"
+  },
+  {
+   "id": "39bfcnKGkoPaw6blD1QvE2",
+   "title": "Sundown Currents",
+   "artist": "Liminar",
+   "releaseDate": "2024-12-26",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273640309b008eaf02c6197a693",
+   "url": "https://open.spotify.com/album/39bfcnKGkoPaw6blD1QvE2"
+  },
+  {
+   "id": "2YeJUoolmSYePulAjtH7jI",
+   "title": "Eclipse",
+   "artist": "Emdiei, LickThePaper",
+   "releaseDate": "2024-12-06",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273d39c074b2ed9a20f983e7dc4",
+   "url": "https://open.spotify.com/album/2YeJUoolmSYePulAjtH7jI"
+  },
+  {
+   "id": "7kce6Ar7gYU2wlGlTDEHwg",
+   "title": "LessReck",
+   "artist": "Abscot, Liminar",
+   "releaseDate": "2024-10-31",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2736c2d0413f8787e27a9f5dca8",
+   "url": "https://open.spotify.com/album/7kce6Ar7gYU2wlGlTDEHwg"
+  },
+  {
+   "id": "7AGPwTwDvTtcixG4roTplh",
+   "title": "Low-Fi Session #4",
+   "artist": "LickThePaper",
+   "releaseDate": "2024-09-27",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27331715be3f31ce7c341b994e6",
+   "url": "https://open.spotify.com/album/7AGPwTwDvTtcixG4roTplh"
+  },
+  {
+   "id": "3PgWlWenRzDDa58TbGqAWX",
+   "title": "Boom Bap",
+   "artist": "Tezla, DreamVibes!",
+   "releaseDate": "2024-08-30",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27391cf82c2b30d3c00c809b5d1",
+   "url": "https://open.spotify.com/album/3PgWlWenRzDDa58TbGqAWX"
+  },
+  {
+   "id": "0lhfQAf2osINGaSEWH00Uo",
+   "title": "Free Your Mind",
+   "artist": "L3AF",
+   "releaseDate": "2024-08-22",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2736a99c63f2f0ac57ab57841f3",
+   "url": "https://open.spotify.com/album/0lhfQAf2osINGaSEWH00Uo"
+  },
+  {
+   "id": "68QkMGIDjGVs4XHNf5veQY",
+   "title": "MAD MOVES",
+   "artist": "Suerte Lo-Fi",
+   "releaseDate": "2024-07-26",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27373b4365996b5f9ad4854baf6",
+   "url": "https://open.spotify.com/album/68QkMGIDjGVs4XHNf5veQY"
+  },
+  {
+   "id": "04A1fl73QdvoElgQOOgHAg",
+   "title": "Additives",
+   "artist": "Abscot",
+   "releaseDate": "2024-07-11",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273b71f1bcaaaaddb254182a2df",
+   "url": "https://open.spotify.com/album/04A1fl73QdvoElgQOOgHAg"
+  },
+  {
+   "id": "189aKmCau6tbJerWqxYhWg",
+   "title": "Chromacore",
+   "artist": "Liminar, LickThePaper",
+   "releaseDate": "2024-04-26",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273b7d68aabb40cc7199126dbc8",
+   "url": "https://open.spotify.com/album/189aKmCau6tbJerWqxYhWg"
+  },
+  {
+   "id": "0ht9pDJOhllhexZ5sFEoc0",
+   "title": "Rewind",
+   "artist": "LickThePaper",
+   "releaseDate": "2024-04-12",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27343509cb2ceef9c99fc891790",
+   "url": "https://open.spotify.com/album/0ht9pDJOhllhexZ5sFEoc0"
+  },
+  {
+   "id": "7hnbub5eXoJsqD2qYOnF0G",
+   "title": "Natural Diffuser",
+   "artist": "DreamVibes!",
+   "releaseDate": "2024-02-29",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27397e2a523e28b2ac92d7549ce",
+   "url": "https://open.spotify.com/album/7hnbub5eXoJsqD2qYOnF0G"
+  },
+  {
+   "id": "68yhjL8iRkjiYSNOY1iP0r",
+   "title": "Creepers",
+   "artist": "Abscot",
+   "releaseDate": "2024-02-16",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2730628f624602966fa67a2e787",
+   "url": "https://open.spotify.com/album/68yhjL8iRkjiYSNOY1iP0r"
+  },
+  {
+   "id": "6ENQemwhuvLSFSa89DJXlg",
+   "title": "Vampire",
+   "artist": "LickThePaper",
+   "releaseDate": "2024-01-26",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2736cce6b2099b5c41c38c5242c",
+   "url": "https://open.spotify.com/album/6ENQemwhuvLSFSa89DJXlg"
+  },
+  {
+   "id": "7d8LntDCUC81cYGwMUzPK1",
+   "title": "Liminal Echoes",
+   "artist": "Liminar",
+   "releaseDate": "2024-01-05",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2733de29f5ae2227eab5239483b",
+   "url": "https://open.spotify.com/album/7d8LntDCUC81cYGwMUzPK1"
+  },
+  {
+   "id": "5UDePavw7LQAdkJ9cMIrvi",
+   "title": "Despondent Frame",
+   "artist": "Abscot",
+   "releaseDate": "2023-12-05",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273481b4a3479817436143cdcde",
+   "url": "https://open.spotify.com/album/5UDePavw7LQAdkJ9cMIrvi"
+  },
+  {
+   "id": "6xIuGoc3keunc2ae6TALHj",
+   "title": "Bonkers (Slowmo)",
+   "artist": "DreamVibes!",
+   "releaseDate": "2023-11-24",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273f73860d33fa0a4e1f4b5b036",
+   "url": "https://open.spotify.com/album/6xIuGoc3keunc2ae6TALHj"
+  },
+  {
+   "id": "6KOs4abeyvsv6iafztWdLX",
+   "title": "Low-Fi Session #3",
+   "artist": "LickThePaper",
+   "releaseDate": "2023-11-21",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273d815980ba71fb5b51e9b8052",
+   "url": "https://open.spotify.com/album/6KOs4abeyvsv6iafztWdLX"
+  },
+  {
+   "id": "0dS2g0ZqoHWX3z5Jvt8jGp",
+   "title": "Bleu",
+   "artist": "LickThePaper",
+   "releaseDate": "2023-10-31",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273add6864c8aad6170425c497a",
+   "url": "https://open.spotify.com/album/0dS2g0ZqoHWX3z5Jvt8jGp"
+  },
+  {
+   "id": "7qIFXqUppsQ65UXVLS7v31",
+   "title": "333",
+   "artist": "LickThePaper",
+   "releaseDate": "2023-08-24",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2730903a72028f2da39b3fd59de",
+   "url": "https://open.spotify.com/album/7qIFXqUppsQ65UXVLS7v31"
+  },
+  {
+   "id": "4hCh0G67xU4Kok3auMZ6JW",
+   "title": "Low-Fi Session #2",
+   "artist": "LickThePaper",
+   "releaseDate": "2023-05-12",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27333a2e60b9335319e452255d7",
+   "url": "https://open.spotify.com/album/4hCh0G67xU4Kok3auMZ6JW"
+  },
+  {
+   "id": "4vpQtooWkK5rSvJqSPyCOd",
+   "title": "Low-Fi Session #1",
+   "artist": "LickThePaper",
+   "releaseDate": "2022-09-09",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27324d6d5ba0302b7d5c66a844a",
+   "url": "https://open.spotify.com/album/4vpQtooWkK5rSvJqSPyCOd"
+  },
+  {
+   "id": "4La5QWDl69nNqofZyyzbLv",
+   "title": "Cisne",
+   "artist": "LickThePaper, Suê, TREVO",
+   "releaseDate": "2022-05-24",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273ddcd8d3501420f16d0fe31ea",
+   "url": "https://open.spotify.com/album/4La5QWDl69nNqofZyyzbLv"
+  },
+  {
+   "id": "6ub1N0jgCDUGHYpGxk5Faq",
+   "title": "LickTheHop",
+   "artist": "LickThePaper",
+   "releaseDate": "2022-01-06",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273166d0e61aae11119918b7c5d",
+   "url": "https://open.spotify.com/album/6ub1N0jgCDUGHYpGxk5Faq"
+  },
+  {
+   "id": "0UGXK04IrwoeckfDKJvf6d",
+   "title": "Funk Rythm",
+   "artist": "LickThePaper, Suê",
+   "releaseDate": "2021-09-29",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27383893f9d7875a76f8b073a7b",
+   "url": "https://open.spotify.com/album/0UGXK04IrwoeckfDKJvf6d"
+  },
+  {
+   "id": "4FQgebpnaTnhIiNCiAQ1mF",
+   "title": "Dark Dreams",
+   "artist": "Goblin - X",
+   "releaseDate": "2021-08-15",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2732802083ef9e2eb30f6586bd1",
+   "url": "https://open.spotify.com/album/4FQgebpnaTnhIiNCiAQ1mF"
+  },
+  {
+   "id": "3ZbH8AMefFIySdi38groYH",
+   "title": "Plandemic",
+   "artist": "DreamVibes!, Odd Lottus",
+   "releaseDate": "2021-07-21",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273b04d94d43f76ed65501956c6",
+   "url": "https://open.spotify.com/album/3ZbH8AMefFIySdi38groYH"
+  },
+  {
+   "id": "38MJpMPTwPWH2QUkOwGq04",
+   "title": "Glowing In The Dark",
+   "artist": "Sugar Glider",
+   "releaseDate": "2021-07-02",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2739cb54d758f152f03060dc826",
+   "url": "https://open.spotify.com/album/38MJpMPTwPWH2QUkOwGq04"
+  },
+  {
+   "id": "6vkcgqKAKoO3hPu9HUttfa",
+   "title": "Synthetic Streets",
+   "artist": "LickThePaper",
+   "releaseDate": "2021-03-16",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2735480efc899f6fb1b8c6b3a79",
+   "url": "https://open.spotify.com/album/6vkcgqKAKoO3hPu9HUttfa"
+  },
+  {
+   "id": "6cB8tsFLas8p0B4Hog7z4y",
+   "title": "New World Sound",
+   "artist": "DreamVibes!, Almost Famous",
+   "releaseDate": "2021-01-05",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2730594fabda0e48f83fe1c71de",
+   "url": "https://open.spotify.com/album/6cB8tsFLas8p0B4Hog7z4y"
+  },
+  {
+   "id": "1s0LJRQwTeOTztfTRchNgC",
+   "title": "Do You Think About Me",
+   "artist": "LickThePaper",
+   "releaseDate": "2020-10-31",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273c33d4de7cd24d1bf83753c1e",
+   "url": "https://open.spotify.com/album/1s0LJRQwTeOTztfTRchNgC"
+  },
+  {
+   "id": "397Yh8XnYaQH1utodIHc0v",
+   "title": "Sunwave",
+   "artist": "Sersei",
+   "releaseDate": "2020-06-30",
+   "cover": "https://i.scdn.co/image/ab67616d0000b27315ba69355efa5643354cb667",
+   "url": "https://open.spotify.com/album/397Yh8XnYaQH1utodIHc0v"
+  },
+  {
+   "id": "1CxvvJrvSNZmOviLEo7F7l",
+   "title": "Mystique",
+   "artist": "DreamVibes!, Harmonyc",
+   "releaseDate": "2020-06-09",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273403734bd79dfd43e92bbdbfb",
+   "url": "https://open.spotify.com/album/1CxvvJrvSNZmOviLEo7F7l"
+  },
+  {
+   "id": "0z8jIobwYWvr3Nw5lxYL1E",
+   "title": "Mercury",
+   "artist": "Journey7",
+   "releaseDate": "2020-04-28",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273119207a4dfbc0a5cc2225d1c",
+   "url": "https://open.spotify.com/album/0z8jIobwYWvr3Nw5lxYL1E"
+  },
+  {
+   "id": "6eCWPs6O10fp7vxbcpvlUF",
+   "title": "Sand & Shadow",
+   "artist": "Odd Lottus",
+   "releaseDate": "2020-04-20",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273053a59a3fd321cddd8a51759",
+   "url": "https://open.spotify.com/album/6eCWPs6O10fp7vxbcpvlUF"
+  },
+  {
+   "id": "32y1NkW9hN2hOGnBPAlY52",
+   "title": "Too Much Salsa, Vol.1",
+   "artist": "Various Artists",
+   "releaseDate": "2020-03-03",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2738f4de968e66cf58e102624c7",
+   "url": "https://open.spotify.com/album/32y1NkW9hN2hOGnBPAlY52"
+  },
+  {
+   "id": "3EsDcFxlkadsbQC3W3AAfj",
+   "title": "Eyes on Fire",
+   "artist": "Journey 7, DreamVibes!",
+   "releaseDate": "2019-09-10",
+   "cover": "https://i.scdn.co/image/ab67616d0000b2736fa7d597fbbaeafad43377e2",
+   "url": "https://open.spotify.com/album/3EsDcFxlkadsbQC3W3AAfj"
+  },
+  {
+   "id": "3GAqd2yYdOyaStySc56uXD",
+   "title": "She",
+   "artist": "DreamVibes!",
+   "releaseDate": "2018-03-03",
+   "cover": "https://i.scdn.co/image/ab67616d0000b273380b7d184fb8d03bd37e9106",
+   "url": "https://open.spotify.com/album/3GAqd2yYdOyaStySc56uXD"
+  }
+ ],
+ "artists": [
+  {
+   "id": "3vPgVN7X6Kul05jylKTSLS",
+   "name": "LickThePaper",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb967a0b0d47353b33ad4c25ce",
+   "url": "https://open.spotify.com/artist/3vPgVN7X6Kul05jylKTSLS",
+   "releaseCount": 20
+  },
+  {
+   "id": "333xTovyP8Mj9sK4fIUpgu",
+   "name": "DreamVibes!",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb12016ab531c7087c2d734a82",
+   "url": "https://open.spotify.com/artist/333xTovyP8Mj9sK4fIUpgu",
+   "releaseCount": 13
+  },
+  {
+   "id": "2VQkqhOnfK4FDNoIJklQ8e",
+   "name": "Abscot",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb82bdc4eff635c392e76a36ad",
+   "url": "https://open.spotify.com/artist/2VQkqhOnfK4FDNoIJklQ8e",
+   "releaseCount": 7
+  },
+  {
+   "id": "1JTAzvtc5JUcLsRLdwWW4D",
+   "name": "Liminar",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb0883a6e491630d51bd28776d",
+   "url": "https://open.spotify.com/artist/1JTAzvtc5JUcLsRLdwWW4D",
+   "releaseCount": 5
+  },
+  {
+   "id": "0D4Wk6S4YE9fbVSozQ6vq2",
+   "name": "Sugar Glider",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb2eb865f91a2c475b02edc525",
+   "url": "https://open.spotify.com/artist/0D4Wk6S4YE9fbVSozQ6vq2",
+   "releaseCount": 3
+  },
+  {
+   "id": "6PrOoECINzfKEUyMRv6fWI",
+   "name": "L3AF",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb451cc2f78fe02f1bcf3f9e09",
+   "url": "https://open.spotify.com/artist/6PrOoECINzfKEUyMRv6fWI",
+   "releaseCount": 2
+  },
+  {
+   "id": "0gQgLNvkvkWwnxp5v2xyZK",
+   "name": "Odd Lottus",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb9bfbd848a1ee18f866df17a9",
+   "url": "https://open.spotify.com/artist/0gQgLNvkvkWwnxp5v2xyZK",
+   "releaseCount": 2
+  },
+  {
+   "id": "2XZY2dx8EPrdxOXfNj1tfX",
+   "name": "Suerte Lo-Fi",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb696ec0346f755a8831bd4560",
+   "url": "https://open.spotify.com/artist/2XZY2dx8EPrdxOXfNj1tfX",
+   "releaseCount": 2
+  },
+  {
+   "id": "4L4Zc1kXrvPRPtTNruk8rk",
+   "name": "Yokai Live",
+   "image": "https://i.scdn.co/image/ab6761610000e5ebbbe74dce52563e5a01880ea7",
+   "url": "https://open.spotify.com/artist/4L4Zc1kXrvPRPtTNruk8rk",
+   "releaseCount": 2
+  },
+  {
+   "id": "2mL5O1uOL0NsA6dNh3alcI",
+   "name": "Emdiei",
+   "image": "https://i.scdn.co/image/ab67616d0000b27370478bb691d3120c12011d76",
+   "url": "https://open.spotify.com/artist/2mL5O1uOL0NsA6dNh3alcI",
+   "releaseCount": 1
+  },
+  {
+   "id": "1BkGDO7n52vexrwwHUOjHZ",
+   "name": "Fractal Joke",
+   "image": "https://i.scdn.co/image/ab6761610000e5ebdc31b7c8529f9b8cfcabe4dc",
+   "url": "https://open.spotify.com/artist/1BkGDO7n52vexrwwHUOjHZ",
+   "releaseCount": 1
+  },
+  {
+   "id": "2hzKByE3XkspFM80GlPhcW",
+   "name": "Journey7",
+   "image": "https://i.scdn.co/image/ab67616d0000b273119207a4dfbc0a5cc2225d1c",
+   "url": "https://open.spotify.com/artist/2hzKByE3XkspFM80GlPhcW",
+   "releaseCount": 1
+  },
+  {
+   "id": "0XhEIsG9a4rtZm2zv2SXNJ",
+   "name": "Tezla",
+   "image": "https://i.scdn.co/image/ab6761610000e5eb873c92a5b9993d032547457b",
+   "url": "https://open.spotify.com/artist/0XhEIsG9a4rtZm2zv2SXNJ",
+   "releaseCount": 1
+  }
+ ]
+}

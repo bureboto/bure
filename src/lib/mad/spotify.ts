@@ -10,6 +10,14 @@ import {
   type Artist,
   type Release,
 } from "./releases";
+import snapshot from "./spotify-snapshot.json";
+
+// Last known good Spotify data (captured from the live pages), used whenever
+// Spotify can't be reached, e.g. during a rate-limit ban, so pages keep their
+// covers and pictures instead of falling back to grey placeholders.
+const SNAPSHOT_RELEASES: Release[] = snapshot.releases.map((r) => ({ ...r, video: MAD_RELEASE_VIDEOS[r.id] }));
+const SNAPSHOT_ARTISTS: Artist[] = snapshot.artists.filter((a) => !MAD_HIDDEN_ARTIST_IDS.includes(a.id));
+const fallbackReleases = () => (SNAPSHOT_RELEASES.length ? SNAPSHOT_RELEASES : PLACEHOLDER_RELEASES);
 
 // Spotify Web API, Client Credentials flow (no user login needed).
 // Requires SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in the environment.
@@ -194,12 +202,12 @@ const getMadAlbums = cache(async (): Promise<{ albums: SpotifyAlbum[]; token: st
 export async function getMadReleases(): Promise<Release[]> {
   try {
     const catalog = await getMadAlbums();
-    if (!catalog) return PLACEHOLDER_RELEASES;
+    if (!catalog) return fallbackReleases();
     const releases = catalog.albums.map(toRelease);
-    return releases.length ? releases : PLACEHOLDER_RELEASES;
+    return releases.length ? releases : fallbackReleases();
   } catch (err) {
-    console.error("[mad/spotify] failed to load releases", err);
-    return PLACEHOLDER_RELEASES;
+    console.error("[mad/spotify] failed to load releases, using snapshot", err);
+    return fallbackReleases();
   }
 }
 
@@ -209,7 +217,7 @@ export async function getMadReleases(): Promise<Release[]> {
 export async function getMadArtists(): Promise<Artist[]> {
   try {
     const catalog = await getMadAlbums();
-    if (!catalog) return [];
+    if (!catalog) return SNAPSHOT_ARTISTS;
     const { albums, token } = catalog;
 
     const leads = new Set(albums.map((a) => a.artists[0]?.id).filter(Boolean));
@@ -224,6 +232,9 @@ export async function getMadArtists(): Promise<Artist[]> {
     });
 
     const artists = await throttled(ids, (id) => getArtist(id, token));
+    // If Spotify dropped any artist (rate limit), use the snapshot instead of
+    // publishing an incomplete roster.
+    if (artists.some((a) => a === null) && SNAPSHOT_ARTISTS.length) return SNAPSHOT_ARTISTS;
     return artists
       .filter((a): a is SpotifyArtist => a !== null)
       .map((a) => ({
@@ -235,8 +246,8 @@ export async function getMadArtists(): Promise<Artist[]> {
       }))
       .sort((a, b) => b.releaseCount - a.releaseCount || a.name.localeCompare(b.name));
   } catch (err) {
-    console.error("[mad/spotify] failed to load artists", err);
-    return [];
+    console.error("[mad/spotify] failed to load artists, using snapshot", err);
+    return SNAPSHOT_ARTISTS;
   }
 }
 
@@ -254,9 +265,8 @@ export type ArtistProfile = {
 export async function getMadArtistProfile(artistId: string): Promise<ArtistProfile | null> {
   try {
     const catalog = await getMadAlbums();
-    if (!catalog) return null;
-    const artist = await getArtist(artistId, catalog.token);
-    if (!artist) return null;
+    const artist = catalog ? await getArtist(artistId, catalog.token) : null;
+    if (!catalog || !artist) return snapshotProfile(artistId);
     return {
       id: artist.id,
       name: artist.name,
@@ -266,7 +276,21 @@ export async function getMadArtistProfile(artistId: string): Promise<ArtistProfi
       releases: catalog.albums.filter((a) => a.artists.some((ar) => ar.id === artistId)).map(toRelease),
     };
   } catch (err) {
-    console.error("[mad/spotify] failed to load artist profile", artistId, err);
-    return null;
+    console.error("[mad/spotify] failed to load artist profile, using snapshot", artistId, err);
+    return snapshotProfile(artistId);
   }
+}
+
+// Profile from the snapshot. Releases are matched by artist name since the
+// snapshot only keeps the credited names.
+function snapshotProfile(artistId: string): ArtistProfile | null {
+  const a = snapshot.artists.find((x) => x.id === artistId);
+  if (!a) return null;
+  return {
+    id: a.id,
+    name: a.name,
+    image: a.image,
+    url: a.url,
+    releases: SNAPSHOT_RELEASES.filter((r) => r.artist.split(", ").includes(a.name)),
+  };
 }
