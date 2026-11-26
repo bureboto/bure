@@ -95,15 +95,15 @@ async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 // GET a Spotify API path, cached for a day. Retries on 429 (rate limit),
-// waiting as long as Spotify's Retry-After asks.
+// waiting as long as Spotify's Retry-After asks, and on transient 5xx errors.
 async function spotifyGet<T>(path: string, token: string): Promise<T | null> {
   for (let attempt = 0; attempt < 4; attempt++) {
     const res = await fetch(`https://api.spotify.com/v1${path}`, {
       headers: { Authorization: `Bearer ${token}` },
       next: { revalidate: DAY, tags: ["mad-releases"] },
     });
-    if (res.status === 429) {
-      const wait = Math.min(Number(res.headers.get("retry-after")) || 2, 15);
+    if (res.status === 429 || res.status >= 500) {
+      const wait = Math.min(Number(res.headers.get("retry-after")) || 2 ** attempt, 15);
       await sleep(wait * 1000);
       continue;
     }
