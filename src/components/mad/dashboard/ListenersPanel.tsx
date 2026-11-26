@@ -40,7 +40,7 @@ export default function ListenersPanel({ stats }: { stats: Record<ListenerRange,
             </button>
           ))}
         </div>
-        <p className="text-[12px] leading-none tracking-[-0.24px]">{s.period}</p>
+        {s.period && <p className="text-[12px] leading-none tracking-[-0.24px]">{s.period}</p>}
         <div className="flex flex-col gap-6 pr-6 @lg:grid @lg:grid-cols-3 @lg:gap-x-6 @lg:pr-0">
           <div className="flex flex-col gap-1 font-bold @lg:gap-2">
             <p className="text-[40px] leading-none tracking-[-0.8px]">{fmt(s.total)}</p>
