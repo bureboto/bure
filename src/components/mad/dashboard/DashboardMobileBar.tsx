@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import LogoutLink from "./LogoutLink";
 import NewReleaseButton from "./NewReleaseButton";
 
 // Mobile dashboard menu (Figma 393:3148), pinned to the bottom of the screen
@@ -16,10 +17,7 @@ export default function DashboardMobileBar() {
           id="mad-dashboard-menu"
           className="flex flex-col items-start gap-6 border-b border-[#333] bg-black p-6 text-[16px] font-bold leading-none text-white"
         >
-          <a href="#logout" className="flex items-center gap-4">
-            <Image src="/mad/logout.svg" alt="" width={24} height={24} />
-            Log out
-          </a>
+          <LogoutLink />
         </nav>
       )}
       <div className="flex h-20 items-center justify-between bg-black p-4 pb-[max(16px,env(safe-area-inset-bottom))]">

@@ -76,12 +76,13 @@ export function MadHomeLink({ className, children }: { className?: string; child
 }
 
 export function LoginButton() {
+  const href = useMadHref();
   return (
-    <a
-      href="#login"
+    <Link
+      href={href("/login")}
       className="rounded-[4px] border border-white px-3 py-2 text-[16px] leading-none text-[#e0e0e0] transition-colors hover:bg-white hover:text-black"
     >
       Login
-    </a>
+    </Link>
   );
 }
