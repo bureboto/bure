@@ -1,6 +1,6 @@
 export const MAD_NAV = [
   { href: "/", label: "Releases" },
-  { href: "#artists", label: "Artists" },
+  { href: "/artists", label: "Artists" },
   { href: "#contact", label: "Contact" },
 ];
 

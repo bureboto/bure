@@ -1,7 +1,8 @@
 // Mad Cactus catalog. Each tile in the home grid is one release cover.
 // Releases come from Spotify (see ./spotify.ts): a label search plus the
-// albums of every artist in MAD_ARTIST_IDS, filtered to the Mad Cactus label; PLACEHOLDER_RELEASES keep the grid filled when Spotify
-// credentials are missing or the API call fails.
+// albums of every artist in MAD_ARTIST_IDS, filtered to the Mad Cactus label.
+// PLACEHOLDER_RELEASES keep the grid filled when Spotify credentials are
+// missing or the API call fails. The artist roster is derived from releases.
 
 export type Release = {
   id: string;
@@ -11,6 +12,14 @@ export type Release = {
   cover?: string; // image URL; empty tile when missing
   video?: string; // looping video (e.g. the Spotify Canvas) shown instead of the cover
   url?: string; // Spotify link
+};
+
+export type Artist = {
+  id: string;
+  name: string;
+  image?: string; // Spotify profile picture
+  url: string; // Spotify artist page
+  releaseCount: number; // Mad Cactus releases they appear on
 };
 
 // Only releases whose Spotify label or ℗/© text contains this (case-insensitive)

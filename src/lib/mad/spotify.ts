@@ -1,3 +1,4 @@
+import { cache } from "react";
 import {
   MAD_ARTIST_IDS,
   MAD_EXCLUDED_ARTISTS,
@@ -5,6 +6,7 @@ import {
   MAD_RELEASE_IDS,
   MAD_RELEASE_VIDEOS,
   PLACEHOLDER_RELEASES,
+  type Artist,
   type Release,
 } from "./releases";
 
@@ -19,11 +21,18 @@ type SpotifyAlbum = {
   name: string;
   release_date: string;
   album_type: string;
-  artists: { name: string }[];
+  artists: { id: string; name: string }[];
   images: { url: string; width: number | null }[];
   external_urls: { spotify: string };
   label?: string; // only on the full album object; withheld for dev-mode apps
   copyrights?: { text: string; type: string }[];
+};
+
+type SpotifyArtist = {
+  id: string;
+  name: string;
+  images: { url: string; width: number | null }[];
+  external_urls: { spotify: string };
 };
 
 async function getAccessToken(): Promise<string | null> {
@@ -56,16 +65,11 @@ const SEARCH_MAX_PAGES = 50; // up to 500 label releases
 async function getArtistAlbums(artistId: string, token: string): Promise<SpotifyAlbum[]> {
   const items: SpotifyAlbum[] = [];
   for (let page = 0; page < MAX_PAGES; page++) {
-    const url = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album,single&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`;
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-      next: { revalidate: DAY, tags: ["mad-releases"] },
-    });
-    if (!res.ok) {
-      console.error("[mad/spotify] albums request failed", artistId, res.status, await res.text());
-      break;
-    }
-    const data = (await res.json()) as { items: SpotifyAlbum[]; next: string | null };
+    const data = await spotifyGet<{ items: SpotifyAlbum[]; next: string | null }>(
+      `/artists/${artistId}/albums?include_groups=album,single&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`,
+      token,
+    );
+    if (!data) break;
     items.push(...(data.items ?? []));
     if (!data.next) break;
   }
@@ -77,29 +81,24 @@ async function searchLabelAlbums(token: string): Promise<SpotifyAlbum[]> {
   const items: SpotifyAlbum[] = [];
   const q = encodeURIComponent(`label:"${MAD_LABEL}"`);
   for (let page = 0; page < SEARCH_MAX_PAGES; page++) {
-    const url = `https://api.spotify.com/v1/search?q=${q}&type=album&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`;
-    const res = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-      next: { revalidate: DAY, tags: ["mad-releases"] },
-    });
-    if (!res.ok) {
-      console.error("[mad/spotify] label search failed", res.status, await res.text());
-      break;
-    }
-    const data = (await res.json()) as { albums: { items: SpotifyAlbum[]; next: string | null } };
+    const data = await spotifyGet<{ albums: { items: SpotifyAlbum[]; next: string | null } }>(
+      `/search?q=${q}&type=album&limit=${PAGE_SIZE}&offset=${page * PAGE_SIZE}`,
+      token,
+    );
+    if (!data) break;
     items.push(...(data.albums?.items ?? []).filter(Boolean));
     if (!data.albums?.next) break;
   }
   return items;
 }
 
-// The artist-albums list omits the label, so fetch each full album to read it.
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-// Retries on 429 (rate limit), waiting as long as Spotify's Retry-After asks.
-async function getAlbum(albumId: string, token: string): Promise<SpotifyAlbum | null> {
+// GET a Spotify API path, cached for a day. Retries on 429 (rate limit),
+// waiting as long as Spotify's Retry-After asks.
+async function spotifyGet<T>(path: string, token: string): Promise<T | null> {
   for (let attempt = 0; attempt < 4; attempt++) {
-    const res = await fetch(`https://api.spotify.com/v1/albums/${albumId}`, {
+    const res = await fetch(`https://api.spotify.com/v1${path}`, {
       headers: { Authorization: `Bearer ${token}` },
       next: { revalidate: DAY, tags: ["mad-releases"] },
     });
@@ -109,21 +108,24 @@ async function getAlbum(albumId: string, token: string): Promise<SpotifyAlbum | 
       continue;
     }
     if (!res.ok) {
-      console.error("[mad/spotify] album request failed", albumId, res.status, await res.text());
+      console.error("[mad/spotify] request failed", path, res.status, await res.text());
       return null;
     }
-    return (await res.json()) as SpotifyAlbum;
+    return (await res.json()) as T;
   }
-  console.error("[mad/spotify] album request gave up after retries", albumId);
+  console.error("[mad/spotify] request gave up after retries", path);
   return null;
 }
 
-// Fetch full albums a few at a time to stay under Spotify's rate limit.
-async function getAlbumsThrottled(ids: string[], token: string, concurrency = 4) {
-  const out: (SpotifyAlbum | null)[] = [];
+// The artist-albums list omits the label, so fetch each full album to read it.
+const getAlbum = (id: string, token: string) => spotifyGet<SpotifyAlbum>(`/albums/${id}`, token);
+const getArtist = (id: string, token: string) => spotifyGet<SpotifyArtist>(`/artists/${id}`, token);
+
+// Run requests a few at a time to stay under Spotify's rate limit.
+async function throttled<T>(ids: string[], get: (id: string) => Promise<T | null>, concurrency = 4) {
+  const out: (T | null)[] = [];
   for (let i = 0; i < ids.length; i += concurrency) {
-    const batch = await Promise.all(ids.slice(i, i + concurrency).map((id) => getAlbum(id, token)));
-    out.push(...batch);
+    out.push(...(await Promise.all(ids.slice(i, i + concurrency).map(get))));
   }
   return out;
 }
@@ -153,37 +155,81 @@ function toRelease(album: SpotifyAlbum): Release {
   };
 }
 
+// All Mad Cactus albums, newest first. Wrapped in React cache() so the home and
+// artists pages share one pass per render.
+const getMadAlbums = cache(async (): Promise<{ albums: SpotifyAlbum[]; token: string } | null> => {
+  const token = await getAccessToken();
+  if (!token) return null;
+
+  const [fromSearch, ...fromArtists] = await Promise.all([
+    searchLabelAlbums(token),
+    ...MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)),
+  ]);
+
+  // Label search results are already tagged Mad Cactus by Spotify: trust them
+  // (some carry the artist's name in the copyright line, not the label's).
+  const byId = new Map(fromSearch.map((a) => [a.id, a]));
+
+  // Roster albums the search missed: these may be on other labels, so check
+  // the copyright text on the full album object.
+  const extraIds = [...new Set(fromArtists.flat().map((a) => a.id))].filter((id) => !byId.has(id));
+  const extra = await throttled(extraIds, (id) => getAlbum(id, token));
+  for (const a of extra) if (a && isMadCactus(a)) byId.set(a.id, a);
+
+  console.log(
+    `[mad/spotify] ${fromSearch.length} from label search, ${extraIds.length} other roster albums checked, ${byId.size} matched before exclusions`,
+  );
+
+  const albums = [...byId.values()]
+    .filter((a) => !isExcluded(a))
+    .sort((a, b) => b.release_date.localeCompare(a.release_date));
+  return { albums, token };
+});
+
 export async function getMadReleases(): Promise<Release[]> {
   try {
-    const token = await getAccessToken();
-    if (!token) return PLACEHOLDER_RELEASES;
-
-    const [fromSearch, ...fromArtists] = await Promise.all([
-      searchLabelAlbums(token),
-      ...MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)),
-    ]);
-
-    // Label search results are already tagged Mad Cactus by Spotify: trust them
-    // (some carry the artist's name in the copyright line, not the label's).
-    const byId = new Map(fromSearch.map((a) => [a.id, a]));
-
-    // Roster albums the search missed: these may be on other labels, so check
-    // the copyright text on the full album object.
-    const extraIds = [...new Set(fromArtists.flat().map((a) => a.id))].filter((id) => !byId.has(id));
-    const extra = await getAlbumsThrottled(extraIds, token);
-    for (const a of extra) if (a && isMadCactus(a)) byId.set(a.id, a);
-
-    console.log(
-      `[mad/spotify] ${fromSearch.length} from label search, ${extraIds.length} other roster albums checked, ${byId.size} matched before exclusions`,
-    );
-
-    const releases = [...byId.values()]
-      .filter((a) => !isExcluded(a))
-      .map(toRelease)
-      .sort((a, b) => b.releaseDate.localeCompare(a.releaseDate));
+    const catalog = await getMadAlbums();
+    if (!catalog) return PLACEHOLDER_RELEASES;
+    const releases = catalog.albums.map(toRelease);
     return releases.length ? releases : PLACEHOLDER_RELEASES;
   } catch (err) {
     console.error("[mad/spotify] failed to load releases", err);
     return PLACEHOLDER_RELEASES;
+  }
+}
+
+// Label roster, derived from the releases: every artist listed first on at
+// least one Mad Cactus release (so guest features alone don't count), with
+// their Spotify profile picture. Sorted by number of releases they appear on.
+export async function getMadArtists(): Promise<Artist[]> {
+  try {
+    const catalog = await getMadAlbums();
+    if (!catalog) return [];
+    const { albums, token } = catalog;
+
+    const leads = new Set(albums.map((a) => a.artists[0]?.id).filter(Boolean));
+    const counts = new Map<string, number>();
+    for (const a of albums) for (const ar of a.artists) counts.set(ar.id, (counts.get(ar.id) ?? 0) + 1);
+
+    const ids = [...leads].filter((id) => {
+      const name = albums.flatMap((a) => a.artists).find((ar) => ar.id === id)?.name ?? "";
+      const n = name.trim().toLowerCase();
+      return n !== "various artists" && !MAD_EXCLUDED_ARTISTS.includes(n);
+    });
+
+    const artists = await throttled(ids, (id) => getArtist(id, token));
+    return artists
+      .filter((a): a is SpotifyArtist => a !== null)
+      .map((a) => ({
+        id: a.id,
+        name: a.name,
+        image: a.images[0]?.url,
+        url: a.external_urls.spotify,
+        releaseCount: counts.get(a.id) ?? 0,
+      }))
+      .sort((a, b) => b.releaseCount - a.releaseCount || a.name.localeCompare(b.name));
+  } catch (err) {
+    console.error("[mad/spotify] failed to load artists", err);
+    return [];
   }
 }
