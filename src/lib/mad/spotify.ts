@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import {
   MAD_ARTIST_IDS,
@@ -157,16 +158,19 @@ function toRelease(album: SpotifyAlbum): Release {
   };
 }
 
-// All Mad Cactus albums, newest first. Wrapped in React cache() so the home and
-// artists pages share one pass per render.
-const getMadAlbums = cache(async (): Promise<{ albums: SpotifyAlbum[]; token: string } | null> => {
+// Builds the full Mad Cactus album list: label search plus the roster
+// backstop (a couple hundred Spotify calls). Expensive, so it's only run via
+// the cached wrapper below.
+async function buildMadAlbums(): Promise<SpotifyAlbum[]> {
   const token = await getAccessToken();
-  if (!token) return null;
+  if (!token) throw new Error("Spotify credentials missing or token request failed");
 
   const [fromSearch, ...fromArtists] = await Promise.all([
     searchLabelAlbums(token),
     ...MAD_ARTIST_IDS.map((id) => getArtistAlbums(id, token)),
   ]);
+  // Don't let an empty/failed run get cached for a day.
+  if (!fromSearch.length) throw new Error("Spotify label search returned nothing");
 
   // Label search results are already tagged Mad Cactus by Spotify: trust them
   // (some carry the artist's name in the copyright line, not the label's).
@@ -182,9 +186,25 @@ const getMadAlbums = cache(async (): Promise<{ albums: SpotifyAlbum[]; token: st
     `[mad/spotify] ${fromSearch.length} from label search, ${extraIds.length} other roster albums checked, ${byId.size} matched before exclusions`,
   );
 
-  const albums = [...byId.values()]
+  return [...byId.values()]
     .filter((a) => !isExcluded(a))
     .sort((a, b) => b.release_date.localeCompare(a.release_date));
+}
+
+// The computed catalog is cached for a day and shared by every page and
+// request (home, artists, dashboards), so Spotify is hit about once a day
+// rather than on each visit. Bump the key after changing the build logic.
+const getCachedMadAlbums = unstable_cache(buildMadAlbums, ["mad-albums-v1"], {
+  revalidate: DAY,
+  tags: ["mad-releases"],
+});
+
+// All Mad Cactus albums, newest first, plus a token for follow-up calls.
+// Wrapped in React cache() so one render shares a single lookup.
+const getMadAlbums = cache(async (): Promise<{ albums: SpotifyAlbum[]; token: string } | null> => {
+  if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) return null;
+  const [albums, token] = await Promise.all([getCachedMadAlbums(), getAccessToken()]);
+  if (!token) return null;
   return { albums, token };
 });
 
