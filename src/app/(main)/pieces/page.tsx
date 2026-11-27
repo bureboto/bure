@@ -16,7 +16,7 @@ function ArtworkCard({ artwork, delay }: { artwork: (typeof artworks)[number]; d
           </p>
           <div className="lg:flex-1">
             <p>{artwork.medium}</p>
-            <p>{artwork.dimensions}</p>
+            {artwork.dimensions && <p>{artwork.dimensions}</p>}
           </div>
         </div>
         {artwork.moreHref && (
